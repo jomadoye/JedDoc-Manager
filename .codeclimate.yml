@@ -1,0 +1,28 @@
+engines:
+  duplications:
+    enabled: false
+    config:
+      languages:
+        #mass_threshold: 30
+        - javascript
+  eslint:
+    enabled: true
+    # ... CONFIG CONTENT ...
+    checks:
+      angular/controller-as:
+        enabled: false
+  fixme:
+    enabled: true
+ratings:
+  paths:
+    - "public/js/*"
+languages:
+  JavaScript: true
+exclude_paths:
+- .travis.yml
+- .eslintrc
+- jasmine/assets/*
+- jasmine/lib/**/*
+- karma.conf.js
+- server.js
+- gulpfile.js
