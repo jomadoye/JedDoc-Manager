@@ -1,4 +1,5 @@
 const path = require('path');
+
 module.exports = {
   entry: './client/index.js',
   output: {
@@ -11,4 +12,4 @@ module.exports = {
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   }
-}
+};
