@@ -30,7 +30,7 @@ const Route = (app) => {
   // User routes
   app
     .route('/api/users')
-    .get(usersController.list);
+    .get(isAdmin, usersController.list);
 
   app
     .route('/api/users/:userId')
@@ -41,24 +41,25 @@ const Route = (app) => {
   // User-Document routes
   app
     .route('/api/users/:userId/documents')
-    .post(documentsController.create)
-    .get(documentsController.getUserDocuments);
+    .post(isAdminOrOwner, documentsController.create)
+    .get(isAdminOrOwner, documentsController.getUserDocuments);
 
   app
     .route('/api/users/:userId/documents/:documentId')
-    .put(documentsController.update)
-    .delete(documentsController.destroy);
+    .put(isAdminOrOwner, documentsController.update)
+    .delete(isAdminOrOwner, documentsController.destroy);
 
   // Documents routes
   app
     .route('/api/documents/:documentId')
-    .get(documentsController.retrieve)
-    .put(documentsController.updateDirect)
-    .delete(documentsController.destroyDirect);
+    .get(isAdminOrOwner, documentsController.retrieve)
+    .put(isAdminOrOwner, documentsController.update)
+    .delete(isAdminOrOwner, documentsController.destroy);
 
   app
     .route('/api/documents')
-    .get(isAdmin, documentsController.list);
+    .get(isAdmin, documentsController.list)
+    .post(documentsController.create);
 
   // Roles routes
   app

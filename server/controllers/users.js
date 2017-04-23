@@ -83,7 +83,7 @@ export default {
       .then((user) => {
         if (!user) {
           return res.status(404)
-            .send({
+            .json({
               success: false,
               message: 'User not found',
             });

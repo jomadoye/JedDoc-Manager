@@ -7,6 +7,9 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       required: true,
+      validate: {
+        notEmpty: true,
+      },
     },
     email: {
       type: DataTypes.STRING,

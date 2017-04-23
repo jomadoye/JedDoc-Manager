@@ -33,6 +33,13 @@ export default {
     password: faker.internet.password(),
   },
 
+  fakeUserAdmin: {
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    roleId: 1,
+  },
+
   newUser: {
     username: 'jerry',
     email: 'jerry@andela.com',

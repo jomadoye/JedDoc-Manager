@@ -72,7 +72,7 @@ describe('User authentication API', () => {
         });
     });
 
-    it('should not authenthenticate users with wrong username or email', (done) => {
+    it('should not auth users with wrong username or email', (done) => {
       chai.request(server)
         .post('/users/login')
         .send({
