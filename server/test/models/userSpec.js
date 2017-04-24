@@ -13,8 +13,10 @@ const badEmail = helperUsers.badEmail;
 const emptyEmail = helperUsers.emptyEmail;
 const emptyPassword = helperUsers.emptyPassword;
 const emptyUsername = helperUsers.emptyUsername;
+const emptyFullname = helperUsers.emptyFullname;
 const should = chai.should();
-const notNullAttrs = [
+const userModelField = [
+  'fullname',
   'username',
   'email',
   'password',
@@ -52,9 +54,9 @@ describe('Users Model', () => {
   });
 
   describe('User validations', () => {
-    notNullAttrs.forEach((attr) => {
-      it(`should requires ${attr} field to create a user`, () => {
-        userData[attr] = null;
+    userModelField.forEach((field) => {
+      it(`should requires ${field} field to create a user`, () => {
+        userData[field] = null;
         return userData.save()
           .catch(err =>
             (/notNull/.test(err.message))
@@ -129,6 +131,17 @@ describe('Users Model', () => {
   describe('Username validation', () => {
     it('should ensure username cannot be empty', () => {
       User.create(emptyUsername)
+        .catch(error =>
+          (/Validation error: Validation notEmpty failed/
+            .test(error.message))
+          .should.eql(true),
+        );
+    });
+  });
+
+  describe('Fullname validation', () => {
+    it('should ensure fullname cannot be empty', () => {
+      User.create(emptyFullname)
         .catch(error =>
           (/Validation error: Validation notEmpty failed/
             .test(error.message))

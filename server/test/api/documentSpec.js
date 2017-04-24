@@ -13,12 +13,16 @@ const emptyBodyDocument = helperDocuments.emptyBodyDocument;
 const emptyTitleDocument = helperDocuments.emptyTitleDocument;
 const noBodyDocument = helperDocuments.noBodyDocument;
 const noTitleDocument = helperDocuments.noTitleDocument;
+const unUniqueTitleDocument = helperDocuments.unUniqueTitleDocument;
+const fakeDocument = helperDocuments.fakeDocument;
 const invalidUserId = helperUsers.invalidUserId;
+const basicUser = helperUsers.basicUser;
 chai.use(chaiHttp);
 
 describe('Document API', () => {
   let userData;
   let document;
+  let basicUserData;
   before((done) => {
     chai.request(server)
       .post('/users')
@@ -26,6 +30,13 @@ describe('Document API', () => {
       .end((err, res) => {
         userData = res.body;
         document1.userId = userData.user.id;
+        chai.request(server)
+          .post('/users')
+          .send(basicUser)
+          .end((err, res) => {
+            basicUserData = res.body;
+            document1.userId = userData.user.id;
+          });
         done();
       });
   });
@@ -42,6 +53,25 @@ describe('Document API', () => {
           res.body.message.should.eql('Document created successfully.');
           res.body.success.should.eql(true);
           should.exist(res.body.success);
+          done();
+        });
+    });
+
+    it('should create a new document with valid credentials', (done) => {
+      chai.request(server)
+        .post('/api/documents')
+        .set('x-access-token', userData.token)
+        .send(fakeDocument)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('Document created successfully.');
+          res.body.success.should.eql(true);
+          res.body.document.should.have.property('id');
+          res.body.document.should.have.property('userId');
+          res.body.document.should.have.property('title');
+          res.body.document.should.have.property('body');
+          res.body.document.should.have.property('updatedAt');
+          res.body.document.should.have.property('createdAt');
           done();
         });
     });
@@ -68,7 +98,7 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should
-          .eql('An error occured while creating this document.');
+            .eql('An error occured while creating this document.');
           res.body.success.should.eql(false);
           done();
         });
@@ -82,7 +112,7 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should
-          .eql('An error occured while creating this document.');
+            .eql('An error occured while creating this document.');
           res.body.success.should.eql(false);
           done();
         });
@@ -96,8 +126,23 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should
-          .eql('An error occured while creating this document.');
+            .eql('An error occured while creating this document.');
           res.body.success.should.eql(false);
+          done();
+        });
+    });
+
+    it('should not create a document with unUnique title', (done) => {
+      chai.request(server)
+        .post('/api/documents')
+        .set('x-access-token', userData.token)
+        .send(unUniqueTitleDocument)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.success.should.eql(false);
+          res.body.message.should
+            .eql('An error occured while creating this document.');
           done();
         });
     });
@@ -225,7 +270,7 @@ describe('Document API', () => {
         });
     });
 
-    it('should not list all documents', (done) => {
+    it('should list all documents if admin', (done) => {
       chai.request(server)
         .get('/api/documents')
         .set('x-access-token', userData.token)
@@ -344,6 +389,18 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should.eql('Error encountered while deleting user');
+          res.body.success.should.eql(false);
+          done();
+        });
+    });
+
+    it('should not delete document if not Admin or owner', (done) => {
+      chai.request(server)
+        .delete(`/api/documents/${document.document.id}`)
+        .set('x-access-token', basicUserData.token)
+        .end((err, res) => {
+          res.should.have.status(403);
+          res.body.message.should.eql('unauthorized to perform this request');
           res.body.success.should.eql(false);
           done();
         });

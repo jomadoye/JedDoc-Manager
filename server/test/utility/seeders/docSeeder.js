@@ -6,7 +6,7 @@ export default [{
   access: 'private',
   userId: 1,
 }, {
-  title: faker.lorem.words(),
+  title: 'Fake title document',
   body: faker.lorem.sentence(),
   access: 'public',
   userId: 1,

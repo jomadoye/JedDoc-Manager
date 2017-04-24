@@ -7,9 +7,12 @@ import server from '../../app';
 process.env.NODE_ENV = 'test';
 const newUser = helperUsers.newUser;
 const fakeUser = helperUsers.fakeUser;
+const fakeUser3 = helperUsers.fakeUser3;
+const fakeUser4 = helperUsers.fakeUser4;
 const noUsername = helperUsers.noUsername;
 const noEmail = helperUsers.noEmail;
 const noPassword = helperUsers.noPassword;
+const noFullname = helperUsers.noFullname;
 const unUniqueUsername = helperUsers.unUniqueUsername;
 const updateUsername = helperUsers.updateUsername;
 const updateUsername1 = helperUsers.updateUsername1;
@@ -49,6 +52,25 @@ describe('User API', () => {
             .eql('notNull Violation');
           res.body.errors[0].should.have.property('message')
             .eql('username cannot be null');
+          done();
+        });
+    });
+
+    it('should not create a user without fullname field', (done) => {
+      chai.request(server)
+        .post('/users')
+        .send(noFullname)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('errors');
+          res.body.errors[0].should.have.property('path');
+          res.body.errors[0].should.have.property('path')
+            .eql('fullname');
+          res.body.errors[0].should.have.property('type')
+            .eql('notNull Violation');
+          res.body.errors[0].should.have.property('message')
+            .eql('fullname cannot be null');
           done();
         });
     });
@@ -140,6 +162,43 @@ describe('User API', () => {
           res.body.should.have.property('message');
           res.body.should.have.property('message')
             .eql('User successfully created');
+          done();
+        });
+    });
+
+    it('should ensure new users have a role of basic ', (done) => {
+      chai.request(server)
+        .post('/users')
+        .send(fakeUser3)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message');
+          res.body.should.have.property('message')
+            .eql('User successfully created');
+          res.body.user.should.have.property('roleId').eql(3);
+          done();
+        });
+    });
+
+    it('should create a new user with valid credentials', (done) => {
+      chai.request(server)
+        .post('/users')
+        .send(fakeUser4)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('success');
+          res.body.should.have.property('message');
+          res.body.should.have.property('token');
+          res.body.user.should.have.property('id');
+          res.body.user.should.have.property('roleId');
+          res.body.user.should.have.property('fullname');
+          res.body.user.should.have.property('username');
+          res.body.user.should.have.property('email');
+          res.body.user.should.have.property('password');
+          res.body.user.should.have.property('updatedAt');
+          res.body.user.should.have.property('createdAt');
           done();
         });
     });

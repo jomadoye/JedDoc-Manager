@@ -16,6 +16,7 @@ export default {
         email: req.body.email,
         password: req.body.password,
         roleId: req.body.roleId,
+        fullname: req.body.fullname,
       })
       .then((user) => {
         const token = jwt.sign({
@@ -94,6 +95,7 @@ export default {
             username: req.body.username || user.username,
             email: req.body.email || user.email,
             password: req.body.password || user.password,
+            fullname: req.body.fullname || user.fullname,
           })
           .then(() => res.status(200)
             .json({

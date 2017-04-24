@@ -20,4 +20,16 @@ export default {
     body: faker.lorem.sentence(),
     access: 'public',
   },
+
+  fakeDocument: {
+    title: faker.lorem.word(),
+    body: faker.lorem.sentence(),
+    access: 'public',
+  },
+
+  unUniqueTitleDocument: {
+    title: 'Fake title document',
+    body: faker.lorem.sentence(),
+    access: 'public',
+  },
 };
