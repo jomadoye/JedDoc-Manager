@@ -52,12 +52,6 @@ export default {
               success: true,
               message: 'Document successfuly updated',
               document,
-            }))
-          .catch(error => res.status(400)
-            .json({
-              success: false,
-              message: 'Error encountered while updating',
-              error,
             }));
       })
       .catch(error => res.status(400)
@@ -89,12 +83,6 @@ export default {
             .json({
               success: true,
               message: 'Document deleted successfully.',
-            }))
-          .catch(error => res.status(400)
-            .json({
-              success: false,
-              message: 'Error encountered while deleting user',
-              error,
             }));
       })
       .catch(error => res.status(400)
@@ -135,27 +123,6 @@ export default {
         }));
   },
 
-  search(req, res) {
-    return Document
-      .find({
-        where: {
-          title: req.query.documenttitle,
-        },
-      })
-      .then((document) => {
-        if (!document) {
-          return res.status(404)
-            .send({
-              message: 'Document Not Found',
-            });
-        }
-        return res.status(201)
-          .send(document);
-      })
-      .catch(error => res.status(400)
-        .send(error));
-  },
-
   list(req, res) {
     const limit = req.query.limit || null;
     const offset = req.query.offset || 0;
@@ -193,28 +160,32 @@ export default {
             });
         }
         return Document
-            .findAll({
-              where: {
-                userId: req.params.userId,
-              },
-            })
-            .then((document) => {
-              if (!document) {
-                return res.status(404)
-                  .json({
-                    success: false,
-                    message: 'User documents Not Found',
-                  });
-              }
-              return res.status(201)
-                .send(document);
-            })
-            .catch(error => res.status(400)
+          .findAll({
+            where: {
+              userId: req.params.userId,
+            },
+          })
+          .then((document) => {
+            if (!document) {
+              return res.status(404)
+                .json({
+                  success: false,
+                  message: 'User has no document.',
+                });
+            }
+            return res.status(201)
               .json({
-                success: false,
-                message: 'Error retrieving document',
-                error,
-              }));
+                success: true,
+                message: 'This is the user document(s).',
+                document,
+              });
+          })
+          .catch(error => res.status(400)
+            .json({
+              success: false,
+              message: 'Error retrieving document',
+              error,
+            }));
       })
       .catch(error => res.status(400)
         .json({

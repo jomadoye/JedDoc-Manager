@@ -56,7 +56,6 @@ describe('Users Model', () => {
       it(`should requires ${attr} field to create a user`, () => {
         userData[attr] = null;
         return userData.save()
-          .then(user => should.not.exist(user))
           .catch(err =>
             (/notNull/.test(err.message))
             .should.eql(true),

@@ -145,6 +145,44 @@ describe('User API', () => {
     });
   });
 
+  describe('Search User by username', () => {
+    it('should search for a user by username', (done) => {
+      chai.request(server)
+        .get(`/api/search/users/${userData.user.username}`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('This is your user.');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should not find user if username does not exist', (done) => {
+      chai.request(server)
+        .get(`/api/search/users/${userData.user.username}notExist`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.message.should.eql('User not found.');
+          res.body.success.should.eql(false);
+          done();
+        });
+    });
+
+    it('should not find user if not admin', (done) => {
+      chai.request(server)
+        .get(`/api/search/users/${userData.user.username}`)
+        .set('x-access-token', basicUser.token)
+        .end((err, res) => {
+          res.should.have.status(403);
+          res.body.message.should.eql('Admin access is required');
+          res.body.success.should.eql(false);
+          done();
+        });
+    });
+  });
+
   describe('/GET User', () => {
     it('should not GET all the users if no token provided', (done) => {
       chai.request(server)
@@ -162,22 +200,23 @@ describe('User API', () => {
         });
     });
 
-    it('should not GET all the users if the token provided is invalid', (done) => {
-      chai.request(server)
-        .get('/api/users')
-        .set('x-access-token', invalidToken)
-        .end((err, res) => {
-          res.should.have.status(403);
-          res.body.should.be.a('Object');
-          res.body.should.have.property('success');
-          res.body.should.have.property('message');
-          res.body.should.have.property('success')
-            .eql(false);
-          res.body.should.have.property('message')
-            .eql('Incorrect token.');
-          done();
-        });
-    });
+    it('should not GET all the users if the token provided is invalid',
+      (done) => {
+        chai.request(server)
+          .get('/api/users')
+          .set('x-access-token', invalidToken)
+          .end((err, res) => {
+            res.should.have.status(403);
+            res.body.should.be.a('Object');
+            res.body.should.have.property('success');
+            res.body.should.have.property('message');
+            res.body.should.have.property('success')
+              .eql(false);
+            res.body.should.have.property('message')
+              .eql('Incorrect token.');
+            done();
+          });
+      });
 
     it('should not GET a user by Id if no token provided', (done) => {
       chai.request(server)
@@ -195,22 +234,23 @@ describe('User API', () => {
         });
     });
 
-    it('should not GET a user by Id if the token provided is invalid', (done) => {
-      chai.request(server)
-        .get(`/api/users/${userData.id}`)
-        .set('x-access-token', invalidToken)
-        .end((err, res) => {
-          res.should.have.status(403);
-          res.body.should.be.a('Object');
-          res.body.should.have.property('success');
-          res.body.should.have.property('message');
-          res.body.should.have.property('success')
-            .eql(false);
-          res.body.should.have.property('message')
-            .eql('Incorrect token.');
-          done();
-        });
-    });
+    it('should not GET a user by Id if the token provided is invalid',
+      (done) => {
+        chai.request(server)
+          .get(`/api/users/${userData.id}`)
+          .set('x-access-token', invalidToken)
+          .end((err, res) => {
+            res.should.have.status(403);
+            res.body.should.be.a('Object');
+            res.body.should.have.property('success');
+            res.body.should.have.property('message');
+            res.body.should.have.property('success')
+              .eql(false);
+            res.body.should.have.property('message')
+              .eql('Incorrect token.');
+            done();
+          });
+      });
 
     it('should GET users when limit and offset are set', (done) => {
       chai.request(server)

@@ -46,6 +46,12 @@ export default {
     password: 'password',
     roleId: 1,
   },
+  newUserAdmin: {
+    username: 'adminJed',
+    email: 'adminJed@andela.com',
+    password: 'adminJed',
+    roleId: 1,
+  },
   noUsername: {
     email: 'jed@andela.com',
     password: 'jedidiah',

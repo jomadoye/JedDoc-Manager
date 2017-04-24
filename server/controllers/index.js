@@ -1,9 +1,9 @@
 import users from './users';
 import documents from './documents';
-import roles from './roles';
+import search from './search';
 
 export default {
   users,
   documents,
-  roles,
+  search,
 };

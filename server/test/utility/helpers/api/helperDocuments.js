@@ -16,7 +16,7 @@ export default {
     role: 1,
   },
   document1: {
-    title: 'public seed document test',
+    title: 'public seed document',
     body: faker.lorem.sentence(),
     access: 'public',
   },

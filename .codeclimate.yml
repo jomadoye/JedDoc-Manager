@@ -21,8 +21,5 @@ languages:
 exclude_paths:
 - .travis.yml
 - .eslintrc
-- jasmine/assets/*
-- jasmine/lib/**/*
-- karma.conf.js
 - server.js
 - gulpfile.js

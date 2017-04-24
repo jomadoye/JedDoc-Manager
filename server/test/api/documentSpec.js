@@ -103,6 +103,34 @@ describe('Document API', () => {
     });
   });
 
+  describe('Search Document by title', () => {
+    it('should search for a document by title', (done) => {
+      chai.request(server)
+        .get(`/api/search/documents/${document.document.title}`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('This is your document.');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should not find doc if title does not exist', (done) => {
+      chai.request(server)
+        .get(`/api/search/documents/${document.document.title}notExist`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          console.log('hitter');
+          console.log(document.document.title);
+          res.should.have.status(404);
+          res.body.message.should.eql('Document Not Found');
+          res.body.success.should.eql(false);
+          done();
+        });
+    });
+  });
+
   describe('/GET Documents', () => {
     it('should return error for unauthorized users without tokens', (done) => {
       chai.request(server)
@@ -196,15 +224,54 @@ describe('Document API', () => {
           done();
         });
     });
+
+    it('should not list all documents', (done) => {
+      chai.request(server)
+        .get('/api/documents')
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('Document is shown below');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should list al documents by a user', (done) => {
+      chai.request(server)
+        .get(`/api/users/${userData.user.id}/documents`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('This is the user document(s).');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
   });
 
   describe('/PUT Document', () => {
-    it('should update document', (done) => {
+    it('should update document title', (done) => {
       chai.request(server)
         .put(`/api/documents/${document.document.id}`)
         .set('x-access-token', userData.token)
         .send({
           title: 'updateTitle',
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.message.should.eql('Document successfuly updated');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should update document body', (done) => {
+      chai.request(server)
+        .put(`/api/documents/${document.document.id}`)
+        .set('x-access-token', userData.token)
+        .send({
+          body: 'updateBody',
         })
         .end((err, res) => {
           res.should.have.status(200);

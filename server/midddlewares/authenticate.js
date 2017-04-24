@@ -31,31 +31,33 @@ export default {
     models.Role.findById(req.decoded.data.roleId)
       .then((role) => {
         if (role.title === 'Administrator') {
-          next();
-        } else {
-          return res.status(403)
-            .send({
-              success: false,
-              message: 'Admin access is required',
-            });
+          return next();
         }
+        return res.status(403)
+          .send({
+            success: false,
+            message: 'Admin access is required',
+          });
       })
       .catch(error => res.status(400)
         .send(error));
   },
 
+  /**
   isOwner(req, res, next) {
     const itemId = req.params.userId;
     const userId = req.decoded.data.id;
     if (parseInt(itemId, 10) === userId) {
       return next();
     }
-    res.status(403)
+    return res.status(403)
       .json({
         success: false,
         message: 'unauthorized to perform this request',
       });
   },
+` */
+
   isAdminOrOwner(req, res, next) {
     models.Role.findById(req.decoded.data.roleId)
       .then((role) => {

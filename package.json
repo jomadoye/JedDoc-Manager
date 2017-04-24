@@ -8,8 +8,9 @@
     "start": "nodemon ./server/app",
     "build": "babel server -d dist/server",
     "db:test:seed": "NODE_ENV=test babel-node ./server/test/utility/seeders/seedDatabase",
-    "mocha:test": "NODE_ENV=test mocha \"./**/server/test/**/*Spec.js\" --compilers js:babel-register --timeout 60000",
-    "test": "NODE_ENV=test npm run db:test:seed && npm run mocha:test"
+    "mocha:test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha \"./**/server/test/**/*Spec.js\" --compilers js:babel-register --timeout 60000",
+    "test": "NODE_ENV=test npm run db:test:seed && npm run mocha:test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "coveralls": "^2.13.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -48,6 +50,7 @@
     "expect": "^1.20.2",
     "faker": "^4.1.0",
     "mocha": "^3.2.0",
+    "nyc": "^10.2.0",
     "supertest": "^3.0.0"
   },
   "bugs": {
