@@ -1,29 +1,20 @@
-import jwt from 'jsonwebtoken';
 import models from '../models';
+import UserControllerHelper from '../helpers/controllers/userControllerHelper';
 
 require('dotenv')
   .config();
 
 const User = models.User;
 const Document = models.Document;
-const secret = process.env.SECRET;
+const signJwtToken = UserControllerHelper.signJwtToken;
+
 
 export default {
   create(req, res) {
     return User
-      .create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        roleId: req.body.roleId,
-        fullname: req.body.fullname,
-      })
+      .create(req.body)
       .then((user) => {
-        const token = jwt.sign({
-          data: user,
-        }, secret, {
-          expiresIn: '24h',
-        });
+        const token = signJwtToken(user);
         res.status(201)
           .json({
             success: true,
@@ -180,11 +171,7 @@ export default {
                 message: 'Authentication failed, wrong password.',
               });
           }
-          const token = jwt.sign({
-            data: user,
-          }, secret, {
-            expiresIn: '24h',
-          });
+          const token = signJwtToken(user);
           return res.status(200)
             .json({
               success: true,
@@ -202,7 +189,6 @@ export default {
   },
 
   logout(req, res) {
-    // var token = req.headers['x-access-token'];
     res.setHeader['x-access-token'] = ' ';
     res.status(200)
       .json({

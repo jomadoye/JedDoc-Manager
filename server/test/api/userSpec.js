@@ -373,6 +373,18 @@ describe('User API', () => {
         });
     });
 
+    it('should update a user with correct credentials', (done) => {
+      chai.request(server)
+        .get(`/api/users/${userData.user.id}`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('Object');
+          res.body.username.should.eql('Omadoye Jedidiah');
+          done();
+        });
+    });
+
     it('should not update user if user does not exist ', (done) => {
       chai.request(server)
         .put(`/api/users/${invalidUserId}`)

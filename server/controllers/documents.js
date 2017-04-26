@@ -1,7 +1,15 @@
 import models from '../models';
+import DocumentControllerHelper
+from '../helpers/controllers/documentControllerHelper';
 
 const Document = models.Document;
 const User = models.User;
+const createQuery = DocumentControllerHelper.createQueryForList;
+const isDocumentList = DocumentControllerHelper.isDocumentList;
+const isGetUserDocuments = DocumentControllerHelper.isGetUserDocuments;
+const isRetrieveDocuments = DocumentControllerHelper.isRetrieveDocuments;
+const isDestroyDocuments = DocumentControllerHelper.isDestroyDocuments;
+const isUpdateDocuments = DocumentControllerHelper.isUpdateDocuments;
 
 export default {
   create(req, res) {
@@ -10,7 +18,7 @@ export default {
         title: req.body.title,
         body: req.body.body,
         access: req.body.access,
-        userId: req.params.userId,
+        userId: req.params.userId || req.decoded.data.id,
       })
       .then(document => res.status(201)
         .json({
@@ -34,25 +42,8 @@ export default {
         },
       })
       .then((document) => {
-        if (!document) {
-          return res.status(404)
-            .json({
-              success: false,
-              message: 'Document Not Found',
-            });
-        }
-        return document
-          .update({
-            title: req.body.title || document.title,
-            body: req.body.body || document.body,
-            access: req.body.access || document.access,
-          })
-          .then(() => res.status(200)
-            .json({
-              success: true,
-              message: 'Document successfuly updated',
-              document,
-            }));
+        const response = isUpdateDocuments(document, res, req);
+        return response;
       })
       .catch(error => res.status(400)
         .json({
@@ -70,20 +61,8 @@ export default {
         },
       })
       .then((document) => {
-        if (!document) {
-          return res.status(404)
-            .json({
-              success: false,
-              message: 'Document Not Found',
-            });
-        }
-        return document
-          .destroy()
-          .then(() => res.status(200)
-            .json({
-              success: true,
-              message: 'Document deleted successfully.',
-            }));
+        const response = isDestroyDocuments(document, res);
+        return response;
       })
       .catch(error => res.status(400)
         .json({
@@ -101,19 +80,8 @@ export default {
         },
       })
       .then((document) => {
-        if (!document) {
-          return res.status(404)
-            .json({
-              success: false,
-              message: 'Document Not Found',
-            });
-        }
-        return res.status(201)
-          .send({
-            success: true,
-            message: 'This is your document.',
-            document,
-          });
+        const response = isRetrieveDocuments(document, res);
+        return response;
       })
       .catch(error => res.status(400)
         .json({
@@ -124,26 +92,12 @@ export default {
   },
 
   list(req, res) {
-    const limit = req.query.limit || null;
-    const offset = req.query.offset || 0;
+    const query = createQuery(req);
     return Document
-      .findAll({
-        limit,
-        offset,
-      })
+      .findAll(query)
       .then((document) => {
-        if (!document) {
-          return res.status(404)
-            .send({
-              message: 'Documents Not Found',
-            });
-        }
-        return res.status(201)
-          .json({
-            success: true,
-            message: 'Document is shown below',
-            document,
-          });
+        const response = isDocumentList(document, res);
+        return response;
       })
       .catch(error => res.status(400)
         .send(error));
@@ -152,40 +106,8 @@ export default {
   getUserDocuments(req, res) {
     User.findById(req.params.userId)
       .then((user) => {
-        if (!user) {
-          return res.status(404)
-            .json({
-              success: false,
-              message: 'User not found',
-            });
-        }
-        return Document
-          .findAll({
-            where: {
-              userId: req.params.userId,
-            },
-          })
-          .then((document) => {
-            if (!document) {
-              return res.status(404)
-                .json({
-                  success: false,
-                  message: 'User has no document.',
-                });
-            }
-            return res.status(201)
-              .json({
-                success: true,
-                message: 'This is the user document(s).',
-                document,
-              });
-          })
-          .catch(error => res.status(400)
-            .json({
-              success: false,
-              message: 'Error retrieving document',
-              error,
-            }));
+        const response = isGetUserDocuments(user, res, req);
+        return response;
       })
       .catch(error => res.status(400)
         .json({

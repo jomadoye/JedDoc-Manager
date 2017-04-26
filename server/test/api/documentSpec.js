@@ -282,7 +282,7 @@ describe('Document API', () => {
         });
     });
 
-    it('should list al documents by a user', (done) => {
+    it('should list all documents for a specific user', (done) => {
       chai.request(server)
         .get(`/api/users/${userData.user.id}/documents`)
         .set('x-access-token', userData.token)

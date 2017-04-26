@@ -57,8 +57,9 @@ const Route = (app) => {
     .delete(isAdminOrOwner, documentsController.destroy);
 
   app
+   // TODO Get all public documents
     .route('/api/documents')
-    .get(isAdmin, documentsController.list)
+    .get(documentsController.list)
     .post(documentsController.create);
 
   // Search routes

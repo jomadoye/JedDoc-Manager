@@ -151,7 +151,7 @@ export default {
     password: 'password',
   },
   updateUsername: {
-    username: 'Omadoye jedidiah',
+    username: 'Omadoye Jedidiah',
   },
   updateUsername1: {
     username: 'Omadoye dede',
