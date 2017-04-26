@@ -7,7 +7,9 @@ require('dotenv')
 const User = models.User;
 const Document = models.Document;
 const signJwtToken = UserControllerHelper.signJwtToken;
-
+const isUpdateUser = UserControllerHelper.isUpdateUser;
+const isDestroyUser = UserControllerHelper.isDestroyUser;
+const isLoginUser = UserControllerHelper.isLoginUser;
 
 export default {
   create(req, res) {
@@ -73,33 +75,8 @@ export default {
         }],
       })
       .then((user) => {
-        if (!user) {
-          return res.status(404)
-            .json({
-              success: false,
-              message: 'User not found',
-            });
-        }
-        return user
-          .update({
-            roleId: req.body.roleId || user.roleId,
-            username: req.body.username || user.username,
-            email: req.body.email || user.email,
-            password: req.body.password || user.password,
-            fullname: req.body.fullname || user.fullname,
-          })
-          .then(() => res.status(200)
-            .json({
-              success: true,
-              message: 'User updated successfully.',
-              user,
-            }))
-          .catch(error => res.status(400)
-            .json({
-              success: false,
-              message: 'Error updating user.',
-              error,
-            }));
+        const response = isUpdateUser(user, res, req);
+        return response;
       })
       .catch(error => res.status(400)
         .json({
@@ -113,26 +90,8 @@ export default {
     return User
       .findById(req.params.userId)
       .then((user) => {
-        if (!user) {
-          return res.status(404)
-            .json({
-              success: false,
-              message: 'User not found',
-            });
-        }
-        return user
-          .destroy()
-          .then(() => res.status(200)
-            .json({
-              success: true,
-              message: 'User deleted successfully.',
-            }))
-          .catch(error => res.status(400)
-            .json({
-              error,
-              success: false,
-              message: 'Error encountered when deleting user',
-            }));
+        const response = isDestroyUser(user, res);
+        return response;
       })
       .catch(error => res.status(400)
         .json({
@@ -150,35 +109,8 @@ export default {
         },
       })
       .then((user) => {
-        if (!user) {
-          return res.status(400)
-            .json({
-              success: false,
-              message: 'Authentication failed, user not found',
-            });
-        } else if (user) {
-          if (req.body.password === undefined) {
-            return res.status(400)
-              .json({
-                success: false,
-                message: 'Authentication failed, no password.',
-              });
-          }
-          if (!user.checkPassword(req.body.password)) {
-            return res.status(400)
-              .json({
-                success: false,
-                message: 'Authentication failed, wrong password.',
-              });
-          }
-          const token = signJwtToken(user);
-          return res.status(200)
-            .json({
-              success: true,
-              message: 'User logged in',
-              token,
-            });
-        }
+        const response = isLoginUser(user, res, req);
+        return response;
       })
       .catch(error => res.status(400)
         .json({
