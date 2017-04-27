@@ -4,7 +4,7 @@
   "description": "Jed document manager",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon --exec babel-node ./bin/www",
+    "start:dev": "nodemon --watch server --exec babel-node ./bin/www",
     "start": "nodemon ./server/app",
     "build": "babel server -d dist/server",
     "db:test:seed": "NODE_ENV=test babel-node ./server/test/utility/seeders/seedDatabase",
@@ -32,12 +32,16 @@
     "morgan": "^1.8.1",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "sequelize": "^3.30.4"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.2",
+    "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
@@ -51,7 +55,9 @@
     "faker": "^4.1.0",
     "mocha": "^3.2.0",
     "nyc": "^10.2.0",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "webpack": "^2.4.1",
+    "webpack-dev-middleware": "^1.10.2"
   },
   "bugs": {
     "url": "https://github.com/andela-jomadoye/JedDoc-Manager/issues"
