@@ -8,6 +8,8 @@ services:
 before_script:
   - psql -c 'create database jedDoc_test;' -U postgres
 script: npm test
+addons:
+  postgresql: "9.6"
 # after_script:
 #   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 after_success: npm run coverage
