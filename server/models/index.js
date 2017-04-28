@@ -8,11 +8,8 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + './../config/config')[env];
 var db        = {};
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+var databaseUrl = process.env[config.use_env_variable] || 'postgres://jedidiahomadoye:null@localhost:5432/jedDoc_test';
+var sequelize = new Sequelize(databaseUrl, config);
 
 fs
   .readdirSync(__dirname)
