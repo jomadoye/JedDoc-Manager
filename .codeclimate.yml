@@ -15,11 +15,7 @@ engines:
     enabled: true
 ratings:
   paths:
-    - "public/js/*"
+    - "server/*"
 languages:
   JavaScript: true
 exclude_paths:
-- .travis.yml
-- .eslintrc
-- server.js
-- gulpfile.js
