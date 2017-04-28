@@ -12,8 +12,6 @@ const isAdmin = authenticate.isAdmin;
 const isAdminOrOwner = authenticate.isAdminOrOwner;
 
 const Route = (app) => {
-  // TODO: Append /api via router
-
   app
     .route('/users/login')
     .post(usersController.login);
@@ -64,6 +62,7 @@ const Route = (app) => {
     .get(documentsController.list)
     .post(documentsController.create);
 
+  // FIXME: add filter to search
   // Search routes
   app
     .route('/api/search/users/:username')
