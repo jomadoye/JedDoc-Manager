@@ -12,6 +12,8 @@ const isAdmin = authenticate.isAdmin;
 const isAdminOrOwner = authenticate.isAdminOrOwner;
 
 const Route = (app) => {
+  // TODO: Append /api via router
+
   app
     .route('/users/login')
     .post(usersController.login);

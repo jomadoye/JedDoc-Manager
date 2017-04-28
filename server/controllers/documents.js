@@ -92,6 +92,7 @@ export default {
   },
 
   list(req, res) {
+    // TODO: Add role feature
     const query = createQuery(req);
     return Document
       .findAll(query)

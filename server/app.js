@@ -2,7 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 import path from 'path';
 import webpack from 'webpack';
-// import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackMiddleware from 'webpack-dev-middleware';
 import bodyParser from 'body-parser';
 import Route from './routes';
@@ -20,9 +20,11 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true,
 }));
 
-// app.use(webpackHotMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler));
 // Log requests to the console.
 app.use(logger('dev'));
+
+// FIXME: Use Express router to pass in the /api tag
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
@@ -30,6 +32,7 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }));
 
+// Setup routes.
 Route(app);
 // Setup a default route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => {
