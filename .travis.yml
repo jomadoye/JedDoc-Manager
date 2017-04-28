@@ -6,7 +6,7 @@ node_js:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database postgres;' -U postgres
+  - psql -c 'create database jedDoc_test;' -U postgres
 script: npm test
 addons:
   postgresql: "9.6"
