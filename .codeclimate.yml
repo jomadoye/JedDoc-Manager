@@ -11,6 +11,7 @@ engines:
 ratings:
   paths:
     - server/**
+    - server/**/*.js
 languages:
   JavaScript: true
 exclude_paths:
