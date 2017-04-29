@@ -5,10 +5,8 @@ node_js:
   - node
 services:
   - postgresql
-addons:
-  postgresql: "9.3"
-before_script:
-  - psql -c 'create database jedDoc_test;' -U postgres
+# before_script:
+#   - psql -c 'create database jedDoc_test;' -U postgres
 script: npm test
 # after_script:
 #   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
