@@ -10,8 +10,7 @@ engines:
     enabled: true
 ratings:
   paths:
-    - "server/**/*"
-    - "server/**/**/*"
+    - server/**
 languages:
   JavaScript: true
 exclude_paths:
