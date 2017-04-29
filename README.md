@@ -1,0 +1,1 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/andela-jomadoye/jeddoc-manager/badge.svg)](https://snyk.io/test/github/andela-jomadoye/jeddoc-manager)    [![Dependencies](https://david-dm.org/andela-jomadoye/JedDoc-Manager.svg)](https://david-dm.org/andela-jomadoye/JedDoc-Manager)
