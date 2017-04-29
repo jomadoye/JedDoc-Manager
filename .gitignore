@@ -18,6 +18,7 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
+.nyc_output/*
 
 #----------------------------------------------------------------------------
 # DIVSHOT
@@ -37,6 +38,7 @@ testem.log
 
 # Ignore bundler config.
 /.bundle
+.env
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
