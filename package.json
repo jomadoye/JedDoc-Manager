@@ -8,7 +8,7 @@
     "start": "nodemon ./server/app",
     "build": "babel server -d dist/server",
     "db:test:seed": "NODE_ENV=test babel-node ./server/test/utility/seeders/seedDatabase",
-    "mocha:test": "NODE_ENV=test nyc --reporter=html mocha \"./**/server/test/**/*Spec.js\" --compilers js:babel-register --timeout 10000",
+    "mocha:test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha \"./**/server/test/**/*Spec.js\" --compilers js:babel-register --timeout 10000",
     "test": "NODE_ENV=test npm run db:test:seed && npm run mocha:test",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
