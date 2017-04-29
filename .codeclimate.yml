@@ -1,0 +1,21 @@
+engines:
+  duplications:
+    enabled: false
+    config:
+      languages:
+        #mass_threshold: 30
+        - javascript
+  eslint:
+    enabled: true
+    # ... CONFIG CONTENT ...
+    checks:
+      angular/controller-as:
+        enabled: false
+  fixme:
+    enabled: true
+ratings:
+  paths:
+    - "server/*"
+languages:
+  JavaScript: true
+exclude_paths:
