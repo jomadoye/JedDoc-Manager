@@ -2,5 +2,4 @@
 machine:
   # Add some environment variables
   environment:
-    SECRET: ilovescotchyscotch
-    DATABASE_TEST_URL: postgres://lfbewixw:oyk5Tfs6Dx9mzUy7dfeS3-AiFr0gYTso@stampy.db.elephantsql.com:5432/lfbewixw
+    TEST: test
