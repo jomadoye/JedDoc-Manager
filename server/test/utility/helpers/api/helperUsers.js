@@ -60,6 +60,14 @@ export default {
     roleId: 1,
   },
 
+  fakeUserAdminForRoles: {
+    fullname: faker.name.findName(),
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    roleId: 1,
+  },
+
   newUser: {
     fullname: 'jerry anthony',
     username: 'jerry',
@@ -157,4 +165,5 @@ export default {
     username: 'Omadoye dede',
   },
   invalidUserId: '9999',
+  invalidToken: 'abc.efgh.hijk.lmonpq',
 };
