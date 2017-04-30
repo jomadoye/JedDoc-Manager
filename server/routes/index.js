@@ -71,7 +71,7 @@ const Route = (app) => {
 
   app
     .route('/api/roles/:roleId')
-    .put(isAdmin, rolesController.update)
+    // .put(isAdmin, rolesController.update)
     .get(isAdmin, rolesController.retrieve)
     .delete(isAdmin, rolesController.destroy);
 
