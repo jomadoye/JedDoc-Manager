@@ -4,6 +4,7 @@ import auth from '../midddlewares';
 const usersController = controller.users;
 const documentsController = controller.documents;
 const searchController = controller.search;
+const rolesController = controller.roles;
 const authenticate = auth.authenticate;
 
 
@@ -57,10 +58,22 @@ const Route = (app) => {
     .delete(isAdminOrOwner, documentsController.destroy);
 
   app
-   // TODO Get all public documents
+    // TODO Get all public documents
     .route('/api/documents')
     .get(documentsController.list)
     .post(documentsController.create);
+
+  // Roles routes
+  app
+    .route('/api/roles')
+    .get(isAdmin, rolesController.list)
+    .post(isAdmin, rolesController.create);
+
+  app
+    .route('/api/roles/:roleId')
+    .put(isAdmin, rolesController.update)
+    .get(isAdmin, rolesController.retrieve)
+    .delete(isAdmin, rolesController.destroy);
 
   // FIXME: add filter to search
   // Search routes
