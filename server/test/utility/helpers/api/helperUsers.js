@@ -75,6 +75,7 @@ export default {
     password: 'password',
     roleId: 1,
   },
+
   newUserAdmin: {
     fullname: 'Administrator jed',
     username: 'adminJed',
@@ -82,32 +83,38 @@ export default {
     password: 'adminJed',
     roleId: 1,
   },
+
   noUsername: {
     fullname: faker.name.findName(),
     email: 'jed@andela.com',
     password: 'jedidiah',
   },
+
   noFullname: {
     username: 'adminJed',
     email: 'jed@andela.com',
     password: 'jedidiah',
   },
+
   noEmail: {
     fullname: faker.name.findName(),
     username: 'jed',
     password: 'jedidiah',
   },
+
   noPassword: {
     fullname: faker.name.findName(),
     email: 'jed@andela.com',
     username: 'jed',
   },
+
   unUniqueUsername: {
     fullname: faker.name.findName(),
     email: 'jerry@andelab.com',
     username: 'jerry',
     password: 'password',
   },
+
   badEmail: {
     fullname: faker.name.findName(),
     email: 'badEmail',
@@ -128,42 +135,58 @@ export default {
     username: 'jerry',
     password: 'password',
   },
+
   emptyPassword: {
     fullname: faker.name.findName(),
     email: 'jerry@andelab.com',
     username: 'jerry',
     password: '',
   },
+
   emptyUsername: {
     fullname: faker.name.findName(),
     email: 'jerry@andelab.com',
     username: '',
     password: 'jedidiah',
   },
+
   emptyFullname: {
     fullname: '',
     email: 'jerry@andelab.com',
     username: '',
     password: 'jedidiah',
   },
+
   unUniqueUsername1: {
     fullname: faker.name.findName(),
     email: 'jerry@andelab.com',
     username: 'john doe',
     password: 'password',
   },
+
   unUniqueEmail: {
     fullname: faker.name.findName(),
     email: 'jerry@andela.com',
     username: 'jerry1',
     password: 'password',
   },
+
   updateUsername: {
     username: 'Omadoye Jedidiah',
   },
+
+  updateEmail: {
+    email: 'Omadoyejed@gmail.com',
+  },
+
+  updateFullname: {
+    fullname: 'Omadoye Jedidiah towu',
+  },
+
   updateUsername1: {
     username: 'Omadoye dede',
   },
+
   invalidUserId: '9999',
   invalidToken: 'abc.efgh.hijk.lmonpq',
 };

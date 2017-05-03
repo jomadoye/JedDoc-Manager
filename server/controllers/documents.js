@@ -2,8 +2,8 @@ import models from '../models';
 import DocumentControllerHelper
 from '../helpers/controllers/documentControllerHelper';
 
-const Document = models.Document;
-const User = models.User;
+const Document = models.Documents;
+const User = models.Users;
 const createQuery = DocumentControllerHelper.createQueryForList;
 const isDocumentList = DocumentControllerHelper.isDocumentList;
 const isGetUserDocuments = DocumentControllerHelper.isGetUserDocuments;
@@ -19,6 +19,7 @@ export default {
         body: req.body.body,
         access: req.body.access,
         userId: req.params.userId || req.decoded.data.id,
+        ownerRoleId: req.decoded.data.roleId,
       })
       .then(document => res.status(201)
         .json({
@@ -80,7 +81,7 @@ export default {
         },
       })
       .then((document) => {
-        const response = isRetrieveDocuments(document, res);
+        const response = isRetrieveDocuments(document, res, req);
         return response;
       })
       .catch(error => res.status(400)
@@ -92,7 +93,6 @@ export default {
   },
 
   list(req, res) {
-    // TODO: Add role feature
     const query = createQuery(req);
     return Document
       .findAll(query)

@@ -15,6 +15,7 @@ const noBodyDocument = helperDocuments.noBodyDocument;
 const noTitleDocument = helperDocuments.noTitleDocument;
 const unUniqueTitleDocument = helperDocuments.unUniqueTitleDocument;
 const fakeDocument = helperDocuments.fakeDocument;
+const fakeDocumentBasicUser = helperDocuments.fakeDocumentBasicUser;
 const invalidUserId = helperUsers.invalidUserId;
 const basicUser = helperUsers.basicUser;
 chai.use(chaiHttp);
@@ -22,6 +23,7 @@ chai.use(chaiHttp);
 describe('Document API', () => {
   let userData;
   let document;
+  let document2;
   let basicUserData;
   before((done) => {
     chai.request(server)
@@ -57,12 +59,32 @@ describe('Document API', () => {
         });
     });
 
-    it('should create a new document with valid credentials', (done) => {
+    it('should create a new document with valid credentials by admin', (done) => {
       chai.request(server)
         .post('/api/documents')
         .set('x-access-token', userData.token)
         .send(fakeDocument)
         .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('Document created successfully.');
+          res.body.success.should.eql(true);
+          res.body.document.should.have.property('id');
+          res.body.document.should.have.property('userId');
+          res.body.document.should.have.property('title');
+          res.body.document.should.have.property('body');
+          res.body.document.should.have.property('updatedAt');
+          res.body.document.should.have.property('createdAt');
+          done();
+        });
+    });
+
+    it('should create a new private document with valid credentials by basic users', (done) => {
+      chai.request(server)
+        .post('/api/documents')
+        .set('x-access-token', basicUserData.token)
+        .send(fakeDocumentBasicUser)
+        .end((err, res) => {
+          document2 = res.body;
           res.should.have.status(201);
           res.body.message.should.eql('Document created successfully.');
           res.body.success.should.eql(true);
@@ -166,8 +188,6 @@ describe('Document API', () => {
         .get(`/api/search/documents/${document.document.title}notExist`)
         .set('x-access-token', userData.token)
         .end((err, res) => {
-          console.log('hitter');
-          console.log(document.document.title);
           res.should.have.status(404);
           res.body.message.should.eql('Document Not Found');
           res.body.success.should.eql(false);
@@ -203,6 +223,54 @@ describe('Document API', () => {
     it('should get a document by Id', (done) => {
       chai.request(server)
         .get(`/api/documents/${document.document.id}`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('This is your document.');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should not get a non-existent document by Id', (done) => {
+      chai.request(server)
+        .get(`/api/documents/${invalidUserId}`)
+        .set('x-access-token', userData.token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.message.should.eql('Document Not Found');
+          res.body.success.should.eql(false);
+          done();
+        });
+    });
+
+    it('should not get a private document by Id if not admin or owner', (done) => {
+      chai.request(server)
+        .get(`/api/documents/${1}`)
+        .set('x-access-token', basicUserData.token)
+        .end((err, res) => {
+          res.should.have.status(403);
+          res.body.message.should.eql('You dont have permission to view this document');
+          res.body.success.should.eql(false);
+          done();
+        });
+    });
+
+    it('should get a private document by Id if owner', (done) => {
+      chai.request(server)
+        .get(`/api/documents/${5}`)
+        .set('x-access-token', basicUserData.token)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.eql('This is your document.');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should get a private document by Id if admin', (done) => {
+      chai.request(server)
+        .get(`/api/documents/${1}`)
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(201);
@@ -302,6 +370,7 @@ describe('Document API', () => {
         .set('x-access-token', userData.token)
         .send({
           title: 'updateTitle',
+          
         })
         .end((err, res) => {
           res.should.have.status(200);
@@ -343,7 +412,7 @@ describe('Document API', () => {
 
     it('should not update document with invalid Id', (done) => {
       chai.request(server)
-        .put('/api/documents/jed}')
+        .put('/api/documents/jed')
         .set('x-access-token', userData.token)
         .send({
           title: 'updateTitle',
@@ -396,12 +465,24 @@ describe('Document API', () => {
 
     it('should not delete document if not Admin or owner', (done) => {
       chai.request(server)
-        .delete(`/api/documents/${document.document.id}`)
+        .delete(`/api/documents/${1}`)
         .set('x-access-token', basicUserData.token)
         .end((err, res) => {
           res.should.have.status(403);
           res.body.message.should.eql('unauthorized to perform this request');
           res.body.success.should.eql(false);
+          done();
+        });
+    });
+
+    it('should delete document if owner', (done) => {
+      chai.request(server)
+        .delete(`/api/documents/${document2.document.id}`)
+        .set('x-access-token', basicUserData.token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.message.should.eql('Document deleted successfully.');
+          res.body.success.should.eql(true);
           done();
         });
     });

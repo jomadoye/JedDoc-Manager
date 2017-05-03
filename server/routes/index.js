@@ -43,17 +43,17 @@ const Route = (app) => {
   app
     .route('/api/users/:userId/documents')
     .post(isAdminOrOwner, documentsController.create)
-    .get(isAdminOrOwner, documentsController.getUserDocuments);
+    .get(documentsController.getUserDocuments);
 
-  app
-    .route('/api/users/:userId/documents/:documentId')
-    .put(isAdminOrOwner, documentsController.update)
-    .delete(isAdminOrOwner, documentsController.destroy);
+  // app
+  //   .route('/api/users/:userId/documents/:documentId')
+  //   .put(isAdminOrOwnerDocument, documentsController.update)
+  //   .delete(isAdminOrOwnerDocument, documentsController.destroy);
 
   // Documents routes
   app
     .route('/api/documents/:documentId')
-    .get(isAdminOrOwner, documentsController.retrieve)
+    .get(documentsController.retrieve)
     .put(isAdminOrOwner, documentsController.update)
     .delete(isAdminOrOwner, documentsController.destroy);
 
@@ -75,8 +75,6 @@ const Route = (app) => {
     .get(isAdmin, rolesController.retrieve)
     .delete(isAdmin, rolesController.destroy);
 
-  // FIXME: add filter to search
-  // Search routes
   app
     .route('/api/search/users/:username')
     .get(isAdmin, searchController.searchUsers);

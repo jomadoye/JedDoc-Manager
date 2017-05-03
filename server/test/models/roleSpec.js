@@ -6,7 +6,7 @@ process.env.NODE_ENV = 'test';
 
 const should = chai.should();
 const fakeRole = helperRoles.fakeRole;
-const Role = model.Role;
+const Role = model.Roles;
 
 describe('Role Model', () => {
   let role;

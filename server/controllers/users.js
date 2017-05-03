@@ -4,8 +4,8 @@ import UserControllerHelper from '../helpers/controllers/userControllerHelper';
 require('dotenv')
   .config();
 
-const User = models.User;
-const Document = models.Document;
+const User = models.Users;
+const Document = models.Documents;
 const signJwtToken = UserControllerHelper.signJwtToken;
 const isUpdateUser = UserControllerHelper.isUpdateUser;
 const isDestroyUser = UserControllerHelper.isDestroyUser;

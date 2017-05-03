@@ -28,7 +28,7 @@ export default {
   },
 
   isAdmin(req, res, next) {
-    models.Role.findById(req.decoded.data.roleId)
+    models.Roles.findById(req.decoded.data.roleId)
       .then((role) => {
         if (role.title === 'Administrator') {
           return next();
@@ -43,30 +43,19 @@ export default {
         .send(error));
   },
 
-  /**
-  isOwner(req, res, next) {
-    const itemId = req.params.userId;
-    const userId = req.decoded.data.id;
-    if (parseInt(itemId, 10) === userId) {
-      return next();
-    }
-    return res.status(403)
-      .json({
-        success: false,
-        message: 'unauthorized to perform this request',
-      });
-  },
-` */
-
   isAdminOrOwner(req, res, next) {
-    models.Role.findById(req.decoded.data.roleId)
-      .then((role) => {
-        if (role.title === 'Administrator') {
-          next();
-        } else {
-          const itemId = req.params.userId;
-          const userId = req.decoded.data.id;
-          if (parseInt(itemId, 10) === userId) {
+    const loggedInUserId = req.decoded.data.id;
+    const loggedInUserRoleId = req.decoded.data.roleId;
+    const documentId = req.params.documentId;
+    const userId = req.params.userId;
+    let documentUserId;
+    if (loggedInUserRoleId === 1) {
+      return next();
+    } else if (documentId) {
+      return models.Documents.findById(documentId)
+        .then((document) => {
+          documentUserId = document.userId;
+          if (loggedInUserId === documentUserId) {
             return next();
           }
           return res.status(403)
@@ -74,9 +63,15 @@ export default {
               success: false,
               message: 'unauthorized to perform this request',
             });
-        }
-      })
-      .catch(error => res.status(400)
-        .send(error));
+        })
+        .catch(error => res.send(error));
+    } else if (loggedInUserId === parseInt(userId, 10)) {
+      return next();
+    }
+    return res.status(403)
+      .json({
+        success: false,
+        message: 'unauthorized to perform this request',
+      });
   },
 };

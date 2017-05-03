@@ -15,6 +15,8 @@ const noPassword = helperUsers.noPassword;
 const noFullname = helperUsers.noFullname;
 const unUniqueUsername = helperUsers.unUniqueUsername;
 const updateUsername = helperUsers.updateUsername;
+const updateEmail = helperUsers.updateEmail;
+const updateFullname = helperUsers.updateFullname;
 const updateUsername1 = helperUsers.updateUsername1;
 const unUniqueEmail = helperUsers.unUniqueEmail;
 const invalidUserId = helperUsers.invalidUserId;
@@ -176,7 +178,8 @@ describe('User API', () => {
           res.body.should.have.property('message');
           res.body.should.have.property('message')
             .eql('User successfully created');
-          res.body.user.should.have.property('roleId').eql(3);
+          res.body.user.should.have.property('roleId')
+            .eql(3);
           done();
         });
     });
@@ -359,11 +362,39 @@ describe('User API', () => {
   });
 
   describe('/PUT User', () => {
-    it('should update a user', (done) => {
+    it('should update a user username', (done) => {
       chai.request(server)
         .put(`/api/users/${userData.user.id}`)
         .set('x-access-token', userData.token)
         .send(updateUsername)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('Object');
+          res.body.message.should.eql('User updated successfully.');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should update a user email', (done) => {
+      chai.request(server)
+        .put(`/api/users/${userData.user.id}`)
+        .set('x-access-token', userData.token)
+        .send(updateEmail)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('Object');
+          res.body.message.should.eql('User updated successfully.');
+          res.body.success.should.eql(true);
+          done();
+        });
+    });
+
+    it('should update a user fullName', (done) => {
+      chai.request(server)
+        .put(`/api/users/${userData.user.id}`)
+        .set('x-access-token', userData.token)
+        .send(updateFullname)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');

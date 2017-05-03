@@ -1,5 +1,4 @@
 import express from 'express';
-import logger from 'morgan';
 import path from 'path';
 import webpack from 'webpack';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -22,7 +21,6 @@ app.use(webpackMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler));
 // Log requests to the console.
-app.use(logger('dev'));
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());

@@ -4,7 +4,7 @@ import helperUsers from '../utility/helpers/api/helperUsers';
 
 process.env.NODE_ENV = 'test';
 
-const User = model.User;
+const User = model.Users;
 const fakeUser = helperUsers.fakeUser;
 const fakeUser1 = helperUsers.fakeUser1;
 const unUniqueEmail = helperUsers.unUniqueEmail;

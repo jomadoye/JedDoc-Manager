@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Document = sequelize.define('Document', {
+  const Document = sequelize.define('Documents', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,16 +18,21 @@ export default (sequelize, DataTypes) => {
       },
     },
     access: {
-      type: DataTypes.ENUM('public', 'private'),
+      type: DataTypes.ENUM('public', 'private', 'role'),
       allowNull: false,
       defaultValue: 'public',
       required: true,
+    },
+    ownerRoleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 3,
     },
   }, {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        Document.belongsTo(models.User, {
+        Document.belongsTo(models.Users, {
           foreignKey: 'userId',
           onDelete: 'CASCADE',
         });

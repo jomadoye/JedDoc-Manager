@@ -1,7 +1,7 @@
 import models from '../models';
 
-const User = models.User;
-const Document = models.Document;
+const User = models.Users;
+const Document = models.Documents;
 
 export default {
   searchUsers(req, res) {

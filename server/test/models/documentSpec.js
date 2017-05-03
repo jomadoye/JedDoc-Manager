@@ -6,8 +6,8 @@ import helperUsers from '../utility/helpers/api/helperUsers';
 process.env.NODE_ENV = 'test';
 
 const should = chai.should();
-const Document = model.Document;
-const User = model.User;
+const Document = model.Documents;
+const User = model.Users;
 const publicDocument = helperDocuments.publicDocument;
 const noTitleDocument = helperDocuments.noTitleDocument;
 const NoUniqueTitleDocument = helperDocuments.NoUniqueTitleDocument;

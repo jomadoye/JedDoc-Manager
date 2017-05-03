@@ -1,5 +1,5 @@
 const Role = require('../models')
-  .Role;
+  .Roles;
 
 module.exports = {
   create(req, res) {
