@@ -11,7 +11,7 @@
     "db:test:seed-development": "NODE_ENV=development babel-node ./server/test/utility/seeders/seedDatabase",
     "mocha:test": "NODE_ENV=test nyc --reporter=html mocha \"./**/server/test/**/*Spec.js\" --compilers js:babel-register --timeout 10000",
     "db:migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
-    "test": "NODE_ENV=test npm run db:migrat && npm run db:test:seed && npm run mocha:test",
+    "test": "NODE_ENV=test npm run db:migrate && npm run db:test:seed && npm run mocha:test",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
