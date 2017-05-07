@@ -20,12 +20,19 @@ export default {
   module: {
     loaders: [{
       test: /\.js$/,
-      include: path.join(__dirname, 'client'),
+      include: [
+        path.join(__dirname, 'client'),
+        path.join(__dirname, 'server/shared/'),
+      ],
       loader: ['react-hot-loader', 'babel-loader'],
       exclude: /node_modules/,
     }],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+  },
+  node: {
+    net: 'empty',
+    dns: 'empty',
   },
 };
