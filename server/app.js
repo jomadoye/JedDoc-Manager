@@ -27,10 +27,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
+app.use(express.static('client'));
 
 Route(app);
 // Setup a default route that sends back a welcome message in JSON format.
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.status(200)
     .sendFile(
       path.join(__dirname, '../client/index.html'));

@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../app';
-import helperUsers from '../utility/helpers/api/helperUsers';
+import helperUsers from '../../test-utility/helpers/api/helperUsers';
 
 process.env.NODE_ENV = 'test';
 
@@ -16,7 +16,7 @@ describe('User authentication API', () => {
       chai.request(server)
         .post('/users/login')
         .send({
-          username: 'john doe',
+          query: 'john doe',
           password: 'password',
         })
         .end((err, res) => {
@@ -50,7 +50,7 @@ describe('User authentication API', () => {
       chai.request(server)
         .post('/users/login')
         .send({
-          username: 'john doe',
+          query: 'john doe',
           password: 'wrongDassword',
         })
         .end((err, res) => {
@@ -76,7 +76,7 @@ describe('User authentication API', () => {
       chai.request(server)
         .post('/users/login')
         .send({
-          username: 'jane doe',
+          query: 'jane doe',
           password: 'passsword',
         })
         .end((err, res) => {
@@ -91,7 +91,7 @@ describe('User authentication API', () => {
       chai.request(server)
         .post('/users/login')
         .send({
-          username: 'john doe',
+          query: 'john doe',
         })
         .end((err, res) => {
           res.should.have.status(400);

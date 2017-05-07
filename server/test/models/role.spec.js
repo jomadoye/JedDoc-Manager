@@ -1,6 +1,6 @@
 import chai from 'chai';
 import model from '../../models';
-import helperRoles from '../utility/helpers/models/helperRoles';
+import helperRoles from '../../test-utility/helpers/models/helperRoles';
 
 process.env.NODE_ENV = 'test';
 

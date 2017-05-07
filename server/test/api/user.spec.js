@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import helperUsers from '../utility/helpers/api/helperUsers';
+import helperUsers from '../../test-utility/helpers/api/helperUsers';
 
 import server from '../../app';
 
@@ -20,6 +20,10 @@ const updateFullname = helperUsers.updateFullname;
 const updateUsername1 = helperUsers.updateUsername1;
 const unUniqueEmail = helperUsers.unUniqueEmail;
 const invalidUserId = helperUsers.invalidUserId;
+const emptyEmail = helperUsers.emptyEmail;
+const emptyFullname = helperUsers.emptyFullname;
+const emptyPassword = helperUsers.emptyPassword;
+const emptyUsername = helperUsers.emptyUsername;
 const invalidToken = 'aassccfftteteteteteet';
 
 const should = chai.should();
@@ -39,6 +43,59 @@ describe('User API', () => {
   });
 
   describe('Create User', () => {
+    it('should not create a user with empty username field', (done) => {
+      chai.request(server)
+        .post('/users')
+        .send(emptyUsername)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('username')
+            .eql('Username is required');
+          should.exist(res.body.username);
+          done();
+        });
+    });
+
+    it('should not create a user with empty email field', (done) => {
+      chai.request(server)
+        .post('/users')
+        .send(emptyEmail)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('email')
+            .eql('This Email is invalid');
+          done();
+        });
+    });
+
+    it('should not create a user with empty fullname field', (done) => {
+      chai.request(server)
+        .post('/users')
+        .send(emptyFullname)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('fullname')
+            .eql('Fullname is required');
+          done();
+        });
+    });
+
+    it('should not create a user with empty password field', (done) => {
+      chai.request(server)
+        .post('/users')
+        .send(emptyPassword)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('password')
+            .eql('Password is required');
+          done();
+        });
+    });
+
     it('should not create a user without username field', (done) => {
       chai.request(server)
         .post('/users')
@@ -122,14 +179,8 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('errors');
-          res.body.errors[0].should.have.property('path');
-          res.body.errors[0].should.have.property('path')
-            .eql('username');
-          res.body.errors[0].should.have.property('type')
-            .eql('unique violation');
-          res.body.errors[0].should.have.property('message')
-            .eql('username must be unique');
+          res.body.should.have.property('username')
+            .eql('This username already exists');
           done();
         });
     });
@@ -141,14 +192,8 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('errors');
-          res.body.errors[0].should.have.property('path');
-          res.body.errors[0].should.have.property('path')
-            .eql('email');
-          res.body.errors[0].should.have.property('type')
-            .eql('unique violation');
-          res.body.errors[0].should.have.property('message')
-            .eql('email must be unique');
+          res.body.should.have.property('email')
+            .eql('This email already exists');
           done();
         });
     });

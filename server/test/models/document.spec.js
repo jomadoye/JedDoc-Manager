@@ -1,7 +1,7 @@
 import chai from 'chai';
 import model from '../../models';
-import helperDocuments from '../utility/helpers/models/helperDocuments';
-import helperUsers from '../utility/helpers/api/helperUsers';
+import helperDocuments from '../../test-utility/helpers/models/helperDocuments';
+import helperUsers from '../../test-utility/helpers/api/helperUsers';
 
 process.env.NODE_ENV = 'test';
 

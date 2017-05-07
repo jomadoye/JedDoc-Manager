@@ -1,5 +1,6 @@
 import models from '../models';
 import UserControllerHelper from '../helpers/controllers/userControllerHelper';
+import commonValidations from '../shared/validations/signup/signupValidation';
 
 require('dotenv')
   .config();
@@ -10,23 +11,35 @@ const signJwtToken = UserControllerHelper.signJwtToken;
 const isUpdateUser = UserControllerHelper.isUpdateUser;
 const isDestroyUser = UserControllerHelper.isDestroyUser;
 const isLoginUser = UserControllerHelper.isLoginUser;
+const validateInput = UserControllerHelper.validateInput;
+// const validateInput = UserControllerHelper.validateInput;
 
 export default {
   create(req, res) {
-    return User
-      .create(req.body)
-      .then((user) => {
-        const token = signJwtToken(user);
-        res.status(201)
-          .json({
-            success: true,
-            message: 'User successfully created',
-            token,
-            user,
-          });
-      })
-      .catch(error => res.status(400)
-        .send(error));
+    validateInput(req.body, commonValidations)
+      .then(({
+        errors,
+        isValid,
+      }) => {
+        if (isValid === true) {
+          return User
+            .create(req.body)
+            .then((user) => {
+              const token = signJwtToken(user);
+              res.status(201)
+                .json({
+                  success: true,
+                  message: 'User successfully created',
+                  token,
+                  user,
+                });
+            })
+            .catch(error => res.status(400)
+              .send(error));
+        }
+        return res.status(400)
+          .send(errors);
+      });
   },
 
   list(req, res) {
@@ -62,6 +75,19 @@ export default {
             .send(user);
         }
       })
+      .catch(error => res.status(400)
+        .send(error));
+  },
+
+  isUserExist(req, res) {
+    return User.find({
+      attributes: ['username', 'email'],
+      where: {
+        $or: [{ email: req.params.query }, { username: req.params.query }],
+      },
+    }).then((user) => {
+      res.json({ user });
+    })
       .catch(error => res.status(400)
         .send(error));
   },
@@ -102,16 +128,15 @@ export default {
   },
 
   login(req, res) {
-    return User
-      .find({
-        where: {
-          username: req.body.username,
-        },
-      })
-      .then((user) => {
-        const response = isLoginUser(user, res, req);
-        return response;
-      })
+    const loginQuery = req.body.query;
+    return User.find({
+      where: {
+        $or: [{ email: loginQuery }, { username: loginQuery }],
+      },
+    }).then((user) => {
+      const response = isLoginUser(user, res, req);
+      return response;
+    })
       .catch(error => res.status(400)
         .json({
           success: false,

@@ -1,4 +1,4 @@
-import models from '../../../models';
+import models from '../../models';
 import roleSeeder from './roleSeeder';
 import userSeeder from './userSeeder';
 import documentSeeder from './docSeeder';

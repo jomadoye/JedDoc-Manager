@@ -5,7 +5,7 @@ const secret = process.env.SECRET;
 
 export default {
   verifyToken(req, res, next) {
-    const token = req.headers['x-access-token'] || req.headers.authorization;
+    const token = req.headers['x-access-token'] || req.headers.Authorization;
     if (token) {
       jwt.verify(token, secret, (err, decoded) => {
         if (err) {

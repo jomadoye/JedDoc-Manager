@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import helperUsers from '../utility/helpers/api/helperUsers';
-import helperDocuments from '../utility/helpers/api/helperDocuments';
+import helperUsers from '../../test-utility/helpers/api/helperUsers';
+import helperDocuments from '../../test-utility/helpers/api/helperDocuments';
 import server from '../../app';
 
 process.env.NODE_ENV = 'test';
@@ -59,7 +59,8 @@ describe('Document API', () => {
         });
     });
 
-    it('should create a new document with valid credentials by admin', (done) => {
+    it('should create a new document with valid credentials by admin',
+    (done) => {
       chai.request(server)
         .post('/api/documents')
         .set('x-access-token', userData.token)
@@ -78,7 +79,8 @@ describe('Document API', () => {
         });
     });
 
-    it('should create a new private document with valid credentials by basic users', (done) => {
+    it(`should create a new private document with valid credentials by basic
+     users`, (done) => {
       chai.request(server)
         .post('/api/documents')
         .set('x-access-token', basicUserData.token)
@@ -244,13 +246,15 @@ describe('Document API', () => {
         });
     });
 
-    it('should not get a private document by Id if not admin or owner', (done) => {
+    it('should not get a private document by Id if not admin or owner',
+    (done) => {
       chai.request(server)
         .get(`/api/documents/${1}`)
         .set('x-access-token', basicUserData.token)
         .end((err, res) => {
           res.should.have.status(403);
-          res.body.message.should.eql('You dont have permission to view this document');
+          res.body.message.should
+            .eql('You dont have permission to view this document');
           res.body.success.should.eql(false);
           done();
         });
@@ -370,7 +374,7 @@ describe('Document API', () => {
         .set('x-access-token', userData.token)
         .send({
           title: 'updateTitle',
-          
+
         })
         .end((err, res) => {
           res.should.have.status(200);

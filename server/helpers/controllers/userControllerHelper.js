@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
+import lodash from 'lodash';
 import models from '../../models';
+// import Validator from 'validatv/or';
+// import models from '../../models';
 
 require('dotenv')
   .config();
@@ -44,7 +47,7 @@ class UserControllerHelper {
           });
         return response;
       })
-      .catch(error => {
+      .catch((error) => {
         response = res.status(400)
           .json({
             success: false,
@@ -75,7 +78,7 @@ class UserControllerHelper {
           });
         return response;
       })
-      .catch(error => {
+      .catch((error) => {
         response = res.status(400)
           .json({
             error,
@@ -91,6 +94,7 @@ class UserControllerHelper {
     if (!user) {
       response = res.status(400)
         .json({
+          form: 'Invalid Credentials',
           success: false,
           message: 'Authentication failed, user not found',
         });
@@ -99,6 +103,7 @@ class UserControllerHelper {
       if (req.body.password === undefined) {
         response = res.status(400)
           .json({
+            form: 'Invalid Credentials',
             success: false,
             message: 'Authentication failed, no password.',
           });
@@ -107,6 +112,7 @@ class UserControllerHelper {
       if (!user.checkPassword(req.body.password)) {
         response = res.status(400)
           .json({
+            form: 'Invalid Credentials',
             success: false,
             message: 'Authentication failed, wrong password.',
           });
@@ -121,6 +127,29 @@ class UserControllerHelper {
         });
       return response;
     }
+  }
+
+  static validateInput(data, otherValidations) {
+    const { errors } = otherValidations(data);
+    const User = models.Users;
+    return User.find({
+      where: {
+        $or: [{ email: data.email }, { username: data.username }],
+      },
+    }).then((user) => {
+      if (user) {
+        if (user.username === data.username) {
+          errors.username = 'This username already exists';
+        }
+        if (user.email === data.email) {
+          errors.email = 'This email already exists';
+        }
+      }
+      return {
+        errors,
+        isValid: lodash.isEmpty(errors),
+      };
+    });
   }
 }
 

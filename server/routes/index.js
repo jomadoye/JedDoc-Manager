@@ -82,6 +82,10 @@ const Route = (app) => {
   app
     .route('/api/search/documents/:documentTitle')
     .get(searchController.searchDocuments);
+
+  app
+    .route('/users/validate/:query')
+    .get(usersController.isUserExist);
 };
 
 export default Route;

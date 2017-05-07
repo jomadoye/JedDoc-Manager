@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import helperUsers from '../utility/helpers/api/helperUsers';
-import helperRoles from '../utility/helpers/api/helperRoles';
+import helperUsers from '../../test-utility/helpers/api/helperUsers';
+import helperRoles from '../../test-utility/helpers/api/helperRoles';
 
 import server from '../../app';
 
@@ -40,6 +40,7 @@ describe('Role API', () => {
           res.body.success.should.eql(true);
           res.body.should.have.property('message')
             .eql('Role created successfully');
+          should.exist(res.body.message);
           done();
         });
     });
@@ -54,7 +55,8 @@ describe('Role API', () => {
           res.body.should.be.a('object');
           res.body.success.should.eql(false);
           res.body.message.should.eql('Error creating role');
-          res.body.error.errors[0].message.should.eql('Validation notEmpty failed');
+          res.body.error.errors[0].message.should
+            .eql('Validation notEmpty failed');
           res.body.error.errors[0].type.should.eql('Validation error');
           res.body.error.errors[0].path.should.eql('title');
           done();
