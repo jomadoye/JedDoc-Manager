@@ -1,18 +1,14 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, IndexRoute } from 'react-router';
+
 import App from './components/App';
-import Signup from './components/Signup';
-import Greeting from './components/Greetings';
-
-class AppRoutes extends React.Component {
-    render() {
-        return (
-            <div>
-                <Route exact path="/" component={App}/>
-                <Route path="/about" component={Signup}/>
-            </div>
-        )
-    }
-}
-
-export default AppRoutes;
+import SignupPage from './components/signup/SignupPage';
+import LoginPage from './components/login/LoginPage';
+import Greetings from './components/Greetings';
+export default (
+    <Route path="/" component={App}>
+        <IndexRoute component={Greetings} />
+        <Route path="signup" component={SignupPage}/>      
+        <Route path="login" component={LoginPage}/> 
+    </Route>
+)
