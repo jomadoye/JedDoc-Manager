@@ -1,15 +1,15 @@
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import { SET_CURRENT_USER } from '../actions/actionTypes';
 
-export function login(data) {
+export function login(userData) {
   return dispatch => {
-    return axios.post('/users/login', data).then((res) => {
+    return axios.post('/users/login', userData).then((res) => {
       const token = res.data.token;
       window.localStorage.setItem('jwtToken_JedDoc', token);
       setAuthorizationToken(token);
-      dispatch(setCurrentUser(jwt.decode(token).data));
+      dispatch(setCurrentUser(jwtDecode(token)));
     });
   }
 }

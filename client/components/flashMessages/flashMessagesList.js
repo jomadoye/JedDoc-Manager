@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import FlashMessage from './FlashMessage';
 import { deleteFlashMessage } from '../../actions/flashMessages'
 
 class FlashMessageList extends React.Component {
   render () {
-    const messages = this.props.messages.map(message => 
-      <FlashMessage key={ message.id } message={ message } 
-      deleteFlashMessage={ this.props.deleteFlashMessage } />
+    const signupToast = this.props.messages.map(message => {
+      const {id, type, text } = message;
+      Materialize.toast(`${text}`, 4000)
+      }
     );
     return (
       <div>
-      {messages}
+      { signupToast }
       </div>
     );
   }

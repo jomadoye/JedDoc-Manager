@@ -11,7 +11,7 @@ export default (state =initialState, action={}) => {
     case SET_CURRENT_USER:
       return {
         isAuthenticated: !lodash.isEmpty(action.user),
-        user: action.user,
+        user: action.user.data,
       }
     default: return state;
   }

@@ -1,6 +1,6 @@
 import React from 'react';
-import jwt from 'jsonwebtoken';
 import { render } from 'react-dom';
+import jwtDecode from 'jwt-decode';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import {Provider} from 'react-redux';
@@ -20,7 +20,7 @@ const store = createStore(
 );
 if (localStorage.jwtToken_JedDoc) {
   setAuthorizationToken(localStorage.jwtToken_JedDoc);
-  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken_JedDoc)));
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken_JedDoc)));
   // console.log(jwt.decode(localStorage.jwtToken_JedDoc));
 }
 render(

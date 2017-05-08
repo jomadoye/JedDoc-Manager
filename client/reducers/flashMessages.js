@@ -1,4 +1,3 @@
-import shortid from 'shortid';
 import lodash from 'lodash';
 import { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } from '../actions/actionTypes';
 
@@ -8,7 +7,7 @@ export default (state = [], action = {}) => {
       return [
         ...state,
         {
-          id: shortid.generate(),
+          id: 1,
           type: action.message.type,
           text: action.message.text
         }
