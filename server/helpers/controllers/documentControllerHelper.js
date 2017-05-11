@@ -7,8 +7,6 @@ class DocumentControllerHelper {
   static createQueryForList(req) {
     const limit = req.query.limit || null;
     const offset = req.query.offset || 0;
-    const userId = req.decoded.data.id;
-    const roleId = req.decoded.data.roleId;
     const query = {};
     if (limit || offset) {
       query.limit = {
@@ -18,23 +16,33 @@ class DocumentControllerHelper {
         offset,
       };
     }
-    if (roleId === 1) {
-      query.where = {};
+    const hasDecodedProperty =
+    Object.prototype.hasOwnProperty.call(req, 'decoded');
+    if (hasDecodedProperty) {
+      const userId = req.decoded.data.id;
+      const roleId = req.decoded.data.roleId;
+      if (roleId === 1) {
+        query.where = {};
+      } else {
+        query.where = {
+          $or: [{
+            access: 'public',
+          }, {
+            userId,
+          },
+          {
+            $and: [{
+              ownerRoleId: roleId,
+            }, {
+              access: 'role',
+            }],
+          },
+          ],
+        };
+      }
     } else {
       query.where = {
-        $or: [{
-          access: 'public',
-        }, {
-          userId,
-        },
-        {
-          $and: [{
-            ownerRoleId: roleId,
-          }, {
-            access: 'role',
-          }],
-        },
-        ],
+        access: 'public',
       };
     }
     return query;
@@ -80,28 +88,26 @@ class DocumentControllerHelper {
                 success: false,
                 message: 'User has no document.',
               });
-          } else {
-            if (req.decoded.data.id === 1) {
-              response = res.status(201)
+          } else if (req.decoded.data.id === 1) {
+            response = res.status(201)
                 .json({
                   success: true,
                   message: 'This is the user document(s).',
                   documents,
                 });
-            } else {
-              const authToViewDocuments = [];
-              documents.forEach((document) => {
-                if (document.access === 'public') {
-                  authToViewDocuments.push(document);
-                }
-              });
-              response = res.status(201)
+          } else {
+            const authToViewDocuments = [];
+            documents.forEach((document) => {
+              if (document.access === 'public') {
+                authToViewDocuments.push(document);
+              }
+            });
+            response = res.status(201)
                 .json({
                   success: true,
                   message: 'This is the user document(s).',
                   authToViewDocuments,
                 });
-            }
           }
           return response;
         })
