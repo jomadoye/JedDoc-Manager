@@ -130,7 +130,7 @@ export default {
   login(req, res) {
     const loginQuery = req.body.query;
     return User.find({
-      attributes: ['username', 'password', 'email', 'id'],
+      attributes: ['username', 'password', 'email', 'id', 'fullname'],
       where: {
         $or: [{ email: loginQuery }, { username: loginQuery }],
       },
