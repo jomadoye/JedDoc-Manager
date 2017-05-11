@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteFlashMessage } from '../../actions/flashMessages'
+import { deleteFlashMessage } from '../../actions/flashMessages';
 
 class FlashMessageList extends React.Component {
-  render () {
-    const signupToast = this.props.messages.map(message => {
-      const {id, type, text } = message;
-      Materialize.toast(`${text}`, 4000)
-      }
+  render() {
+    const signupToast = this.props.messages.map((message) => {
+      const { text } = message;
+      Materialize.toast(`${text}`, 4000);
+    },
     );
     return (
       <div>
@@ -19,12 +19,12 @@ class FlashMessageList extends React.Component {
 
 FlashMessageList.propTypes = {
   messages: React.PropTypes.array.isRequired,
-  deleteFlashMessage: React.PropTypes.func.isRequired
-}
-function mapStateToProps(state) {
- return {
-   messages: state.flashMessages
- };
+  deleteFlashMessage: React.PropTypes.func.isRequired,
 };
+function mapStateToProps(state) {
+  return {
+    messages: state.flashMessages,
+  };
+}
 
 export default connect(mapStateToProps, { deleteFlashMessage })(FlashMessageList);

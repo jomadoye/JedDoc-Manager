@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
           <LoginForm />
         </div>
       </div>
-    )
+    );
   }
 }
 

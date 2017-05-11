@@ -2,30 +2,22 @@ import React from 'react';
 import { render } from 'react-dom';
 import jwtDecode from 'jwt-decode';
 import { Router, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
 import routes from './routes';
-import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
-import {createStore, applyMiddleware, compose} from 'redux';
-import rootReducer from './reducers/rootReducer'
+// import scss from './components/assets/scss/app';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser } from './actions/loginActions';
+import configureStore from './store/configureStore';
 
-const store = createStore(
-    rootReducer,
-    // initialState
-    compose(
-      applyMiddleware(thunk),
-      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
-    )
-);
+const store = configureStore();
+
 if (localStorage.jwtToken_JedDoc) {
   setAuthorizationToken(localStorage.jwtToken_JedDoc);
   store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken_JedDoc)));
-  // console.log(jwt.decode(localStorage.jwtToken_JedDoc));
 }
 render(
     <Provider store={store}>
       <Router history={browserHistory} routes={routes}/>
     </Provider>,
-    document.getElementById('app')
+    document.getElementById('app'),
 );

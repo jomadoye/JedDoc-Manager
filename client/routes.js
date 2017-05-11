@@ -9,15 +9,17 @@ import Dashboard from './components/Dashboard/Dashboard';
 import NotFound from './components/General/NotFound';
 import VerifyToken from './utils/verifyToken';
 import CreateDocumentPage from './components/documents/CreateDocumentPage';
+import WelcomePage from './components/welcome/WelcomePage';
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={Greetings} />
-        <Route path="signup" component={SignupPage}/>      
-        <Route path="login" component={LoginPage}/> 
-        <Route path="logout" component={Greetings}/> 
-        <Route path="dashboard" component={Dashboard}/> 
-        <Route path="create-document" component={VerifyToken(CreateDocumentPage)}/> 
+        <IndexRoute component={WelcomePage} />
+        <Route path="signup" component={SignupPage}/>
+        <Route path="login" component={LoginPage}/>
+        <Route path="logout" component={Greetings}/>
+        <Route path="dashboard" component={VerifyToken(Dashboard)}/>
+        <Route path="create-document"
+            component={VerifyToken(CreateDocumentPage)}/>
         <Route path="*" component={NotFound} status={404}/>
     </Route>
-)
+);

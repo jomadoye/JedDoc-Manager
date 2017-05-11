@@ -1,13 +1,9 @@
 import axios from 'axios';
 
-export function userSignupRequest (userData) {
-  return dispatch => {
-    return axios.post('users', userData);
-  }
+export function userSignupRequest(userData) {
+  return dispatch => axios.post('users', userData);
 }
 
-export function isUserExists (query) {
-  return dispatch => {
-    return axios.get(`users/validate/${query}`);
-  }
+export function isUserExists(query) {
+  return dispatch => axios.get(`users/validate/${query}`);
 }
