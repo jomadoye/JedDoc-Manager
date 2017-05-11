@@ -58,10 +58,14 @@ const Route = (app) => {
     .delete(isAdminOrOwner, documentsController.destroy);
 
   app
-    // TODO Get all public documents
+    // TODO Get all authorized documents
     .route('/api/documents')
     .get(documentsController.list)
     .post(documentsController.create);
+  app
+    // TODO Get all public documents
+    .route('/documents')
+    .get(documentsController.list);
 
   // Roles routes
   app
