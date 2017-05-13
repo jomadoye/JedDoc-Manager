@@ -95,7 +95,12 @@ export default {
   list(req, res) {
     const query = createQuery(req);
     return Document
-      .findAll(query)
+      .findAll({
+        where: query.where,
+        offset: query.offset,
+        limit: query.limit,
+        include: [models.Users],
+      })
       .then((document) => {
         const response = isDocumentList(document, res);
         return response;
