@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
-import WelcomePageDocList from '../welcome/WelcomePageDocList';
+// import WelcomePageDocList from '../welcome/WelcomePageDocList';
+import CardDocumentView from '../common/CardDocumentView';
 
 class LoadDocuments extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    // this.loadCards = this.loadCards.bind(this);
-  }
+  //   // this.loadCards = this.loadCards.bind(this);
+  // }
 
   componentDidMount() {
     this.props.loadDocuments();
@@ -27,8 +28,8 @@ class LoadDocuments extends React.Component {
             <h4>View some sample created documents</h4>
           </div>
           {documents && documents.map((document, index) =>
-          index < 9 &&
-            <WelcomePageDocList key={document.id} document={document}/>,
+          index < 8 &&
+            <CardDocumentView key={document.id} document={document} myDocument={false} readOnly/>,
           )}
         </div>
       </div>
@@ -43,7 +44,7 @@ LoadDocuments.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadDocuments: () => dispatch(DocumentAction.loadDocument()),
+    loadDocuments: () => dispatch(DocumentAction.loadWelcomePageDocument()),
   };
 }
 

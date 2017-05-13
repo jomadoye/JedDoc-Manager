@@ -8,15 +8,23 @@ class Footer extends React.Component {
             <div className="row">
               <div className="col l6 s12">
                 <h5 className="white-text">Jed-Doc Manager</h5>
-                <p className="grey-text text-lighten-4">Your Real-Time document sharing and management application</p>
+                <p className="grey-text text-lighten-4">
+                    Your Real-Time document sharing and management application</p>
               </div>
               <div className="col l4 offset-l2 s12">
                 <h5 className="white-text">Informations</h5>
                 <ul>
-                  <li><a className="grey-text text-lighten-3" href="https://github.com/andela-jomadoye/JedDoc-Manager">Github</a></li>
-                  <li><a className="grey-text text-lighten-3" href="https://github.com/andela-jomadoye/JedDoc-Manager/issues">Submit Issues</a></li>
-                  <li><a className="grey-text text-lighten-3" href="https://github.com/andela-jomadoye/JedDoc-Manager/wiki">Contributing</a></li>
-                  <li><a className="grey-text text-lighten-3" href="https://slimjed.github.io/">Author</a></li>
+                  <li><a className="grey-text text-lighten-3"
+                    href="https://github.com/andela-jomadoye/JedDoc-Manager">
+                      Github</a></li>
+                  <li><a className="grey-text text-lighten-3"
+                    href="https://github.com/andela-jomadoye/JedDoc-Manager/issues">
+                      Submit Issues</a></li>
+                  <li><a className="grey-text text-lighten-3"
+                    href="https://github.com/andela-jomadoye/JedDoc-Manager/wiki">
+                      Contributing</a></li>
+                  <li><a className="grey-text text-lighten-3"
+                    href="https://slimjed.github.io/">Author</a></li>
                 </ul>
               </div>
             </div>

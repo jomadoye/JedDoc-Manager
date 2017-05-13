@@ -76,7 +76,7 @@ class NavigationBar extends React.Component {
     );
 
     const sideNavBar = (
-      <Link to="/" className="brand-logo">
+      <Link to="/dashboard" className="brand-logo">
         <i className="material-icons button-collapse" data-activates="slide-out">menu</i>
         J-Docs
        </Link>
@@ -111,8 +111,9 @@ class NavigationBar extends React.Component {
               <a href="#!email"><span className="white-text email">{ isAuthenticated && user.email}</span></a>
             </div>
           </li>
-          <li><a href="#!"><i className="material-icons">perm_media</i>My Profile</a></li>
-          <li><a href="create-document"><i className="material-icons">account_circle</i>My Documents</a></li>
+          <li><a href="my-profile"><i className="material-icons">perm_media</i>My Profile</a></li>
+          <li><a href="create-document"><i className="material-icons">account_circle</i>Create Document</a></li>
+          <li><a href="my-documents"><i className="material-icons">perm_media</i>My Documents</a></li>
           <li><a href="#!">Second Link</a></li>
           <li><div className="divider" /></li>
           <li><a className="subheader">Subheader</a></li>

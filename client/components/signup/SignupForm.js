@@ -76,8 +76,7 @@ class SignupForm extends React.Component {
   render() {
     const { errors } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
-        <h1>Join our community</h1>
+      <form onSubmit={this.onSubmit} className="center-align">
         <TextFieldGroup
         materialIcon="account_circle"
         error={errors.fullname}

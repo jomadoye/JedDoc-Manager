@@ -44,8 +44,7 @@ class LoginForm extends React.Component {
   render() {
     const { errors, query, password, isLoading } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
-        <h1>Login Page</h1>
+      <form onSubmit={this.onSubmit} className="center-align">
         {errors.form && <div className="alert alert-danger">
         { errors.form } </div> }
         <TextFieldGroup

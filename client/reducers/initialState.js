@@ -5,5 +5,9 @@ export default {
     user: {},
   },
   users: [],
-  PublicDocuments: [],
+  documents: {
+    PublicDocuments: [],
+    MyDocuments: [],
+    AuthToViewDocuments: [],
+  },
 };

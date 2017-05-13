@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Input } from 'react-materialize';
-import { createDocument } from '../../actions/documentAction';
+import { createDocument } from '../../../actions/documentAction';
 import { addFlashMessage, deleteFlashMessage }
-  from '../../actions/flashMessages';
+  from '../../../actions/flashMessages';
 
 class CreateDocumentForm extends React.Component {
   constructor(props) {
@@ -20,7 +20,6 @@ class CreateDocumentForm extends React.Component {
 
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
   }
 
   onSubmit(event) {
@@ -30,19 +29,18 @@ class CreateDocumentForm extends React.Component {
         type: 'error',
         text: res,
       });
+      if (res === 'Document created successfully.') {
+        this.setState({ title: ' ' });
+        this.setState({ body: ' ' });
+      }
     });
     this.props.deleteFlashMessage(1);
   }
 
   render() {
     const { title, body } = this.state;
-    // const { addFlashMessage } = this.props;
     return (
-      <div className="row">
-        <div className="row">
-          <h1>Create Document</h1>
-        </div>
-        <div className="row">
+        <div className="">
           <form onSubmit={this.onSubmit}>
             <div className="input-field">
               <i className="material-icons prefix">mode_edit</i>
@@ -71,7 +69,7 @@ class CreateDocumentForm extends React.Component {
                 <Input type="select"
                   name="access"
                   onChange={this.onChange}
-                  label="Materialize Select"
+                  label="Select a document access type"
                   defaultValue="public">
                   <option value="public">Public</option>
                   <option value="private">Private</option>
@@ -90,7 +88,6 @@ class CreateDocumentForm extends React.Component {
             </div>
           </form>
          </div>
-      </div>
     );
   }
 }
@@ -100,6 +97,5 @@ CreateDocumentForm.propTypes = {
   addFlashMessage: React.PropTypes.func.isRequired,
   deleteFlashMessage: React.PropTypes.func.isRequired,
 };
-// MapStateToProps
-// MapDispatchToProps
+
 export default connect(null, { createDocument, addFlashMessage, deleteFlashMessage })(CreateDocumentForm);
