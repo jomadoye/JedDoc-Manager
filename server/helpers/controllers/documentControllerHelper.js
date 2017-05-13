@@ -25,18 +25,10 @@ class DocumentControllerHelper {
         query.where = {};
       } else {
         query.where = {
-          $or: [{
-            access: 'public',
-          }, {
-            userId,
-          },
-          {
-            $and: [{
-              ownerRoleId: roleId,
-            }, {
-              access: 'role',
-            }],
-          },
+          $or: [
+            { access: 'public' },
+            { userId },
+            { $and: [{ ownerRoleId: roleId }, { access: 'role' }] },
           ],
         };
       }
@@ -80,6 +72,7 @@ class DocumentControllerHelper {
           where: {
             userId: req.params.userId,
           },
+          include: [models.Users],
         })
         .then((documents) => {
           if (!documents) {
@@ -88,7 +81,7 @@ class DocumentControllerHelper {
                 success: false,
                 message: 'User has no document.',
               });
-          } else if (req.decoded.data.id === 1) {
+          } else if (req.decoded.data.id === 1 || req.decoded.data.id === parseInt(req.params.userId, 10)) {
             response = res.status(201)
                 .json({
                   success: true,
