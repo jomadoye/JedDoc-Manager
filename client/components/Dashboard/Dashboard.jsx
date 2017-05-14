@@ -16,7 +16,6 @@ class Dashboard extends React.Component {
         <div className="row">
           <div className="col s12">
             <ul className="tabs">
-              {/*<li className="tab col s4"><a className="active" href="#test3">All Documents</a></li>*/}
               <li className="tab col s6"><a href="#test1">Public Documents</a></li>
               <li className="tab col s6"><a href="#test2">Role Documents</a></li>
             </ul>
@@ -35,13 +34,6 @@ class Dashboard extends React.Component {
               }
             })}
           </div>
-          {/*<div id="test3" className="col s12">
-            { documents && documents.map((document) => {
-              if (document.access === 'role' || document.access === 'public') {
-                return <CardDocumentView document={document} key={document.id} myDocument={false} readOnly/>;
-              }
-            })}
-          </div>*/}
         </div>
       </div>
     );
@@ -52,16 +44,25 @@ Dashboard.propTypes = {
   loadAuthorizedToViewDocument: React.PropTypes.func.isRequired,
 };
 
-// Dashboard.contextTypes = {
-//   router: React.PropTypes.object,
-// };
-
+/**
+ * mapDispatchToProps
+ *
+ * @param {any} dispatch
+ * @returns dispatch
+ */
 function mapDispatchToProps(dispatch) {
   return {
-    loadAuthorizedToViewDocument: () => dispatch(DocumentAction.loadAuthorizedToViewDocument()),
+    loadAuthorizedToViewDocument: () =>
+      dispatch(DocumentAction.loadAuthorizedToViewDocument()),
   };
 }
 
+/**
+ * mapStateToProps
+ *
+ * @param {any} state
+ * @returns {object}
+ */
 function mapStateToProps(state) {
   return {
     AuthToViewDocuments: state.documents.AuthorizeToViewDocuments,

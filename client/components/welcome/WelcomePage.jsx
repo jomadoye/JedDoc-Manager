@@ -42,12 +42,24 @@ LoadDocuments.propTypes = {
   loadDocuments: React.PropTypes.func.isRequired,
 };
 
+/**
+ * mapDispatchToProps
+ *
+ * @param {any} dispatch
+ * @returns dispatch
+ */
 function mapDispatchToProps(dispatch) {
   return {
     loadDocuments: () => dispatch(DocumentAction.loadWelcomePageDocument()),
   };
 }
 
+/**
+ * mapStateToProps
+ *
+ * @param {any} state
+ * @returns {object} state
+ */
 function mapStateToProps(state) {
   return {
     documents: state.documents.PublicDocuments,

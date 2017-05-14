@@ -35,6 +35,12 @@ export default function (ComposedComponent) {
     router: React.PropTypes.object.isRequired,
   };
 
+  /**
+   * mapStateToProps
+   *
+   * @param {any} state
+   * @returns {object} state
+   */
   function mapStateToProps(state) {
     return {
       isAuthenticated: state.login.isAuthenticated,

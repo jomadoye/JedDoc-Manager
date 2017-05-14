@@ -60,8 +60,6 @@ class SignupForm extends React.Component {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state)
         .then((response) => {
-          // this.setState({isLoading: false});
-          // browserHistory.push('/');
           this.props.addFlashMessage({
             type: 'success',
             text: 'You have signed up sucessfully, please SignIn',

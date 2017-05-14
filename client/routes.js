@@ -8,9 +8,11 @@ import Greetings from './components/General/Greetings.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import NotFound from './components/General/NotFound.jsx';
 import VerifyToken from './utils/verifyToken';
-import CreateDocumentPage from './components/documents/createDocumentsPage/CreateDocumentPage.jsx';
+import CreateDocumentPage from
+    './components/documents/createDocumentsPage/CreateDocumentPage.jsx';
 import WelcomePage from './components/welcome/WelcomePage.jsx';
-import MyDocumentsPage from './components/documents/myDocumentsPage/myDocumentsPage.jsx';
+import MyDocumentsPage from
+    './components/documents/myDocumentsPage/myDocumentsPage.jsx';
 import myProfilePage from './components/users/myProfilePage.jsx';
 
 export default (

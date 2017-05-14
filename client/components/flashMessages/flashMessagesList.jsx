@@ -6,7 +6,7 @@ class FlashMessageList extends React.Component {
   render() {
     const signupToast = this.props.messages.map((message) => {
       const { text } = message;
-      Materialize.toast(`${text}`, 4000);
+      return Materialize.toast(`${text}`, 4000);
     },
     );
     return (
@@ -21,10 +21,18 @@ FlashMessageList.propTypes = {
   messages: React.PropTypes.array.isRequired,
   deleteFlashMessage: React.PropTypes.func.isRequired,
 };
+
+/**
+ * mapStateToProps
+ *
+ * @param {any} state
+ * @returns {object} state
+ */
 function mapStateToProps(state) {
   return {
     messages: state.flashMessages,
   };
 }
 
-export default connect(mapStateToProps, { deleteFlashMessage })(FlashMessageList);
+export default connect(mapStateToProps, {
+  deleteFlashMessage })(FlashMessageList);

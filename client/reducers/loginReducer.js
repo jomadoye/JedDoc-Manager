@@ -1,5 +1,7 @@
 import lodash from 'lodash';
-import { SET_CURRENT_USER } from '../actions/actionTypes';
+import {
+  SET_CURRENT_USER,
+} from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default (state = initialState.isUser, action = {}) => {
@@ -9,6 +11,8 @@ export default (state = initialState.isUser, action = {}) => {
         isAuthenticated: !lodash.isEmpty(action.user),
         user: action.user.data,
       };
-    default: return state;
+    default:
+      return state;
   }
 };
+

@@ -98,4 +98,8 @@ CreateDocumentForm.propTypes = {
   deleteFlashMessage: React.PropTypes.func.isRequired,
 };
 
-export default connect(null, { createDocument, addFlashMessage, deleteFlashMessage })(CreateDocumentForm);
+export default
+  connect(null,
+    { createDocument,
+      addFlashMessage,
+      deleteFlashMessage })(CreateDocumentForm);

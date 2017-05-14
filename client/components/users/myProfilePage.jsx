@@ -89,8 +89,15 @@ myProfilePage.propTypes = {
   deleteFlashMessage: React.PropTypes.func.isRequired,
   loadUserProfile: React.PropTypes.func.isRequired,
   user: React.PropTypes.object.isRequired,
+  userId: React.PropTypes.number.isRequired,
 };
 
+/**
+ * mapStateToProps
+ *
+ * @param {any} state
+ * @returns {object} state
+ */
 function mapStateToProps(state) {
   const hasUserDetailsProperty = Object.prototype.hasOwnProperty
     .call(state.user, 'userDetails');
@@ -105,10 +112,18 @@ function mapStateToProps(state) {
     user: state.login.user,
   };
 }
+
+/**
+ * mapDispatchToProps
+ *
+ * @param {any} dispatch
+ * @returns dispatch
+ */
 function mapDispatchToProps(dispatch) {
   return {
     loadUserProfile: userId => dispatch(userAction.loadUserProfile(userId)),
-    updateUserProfile: (user, userId) => dispatch(userAction.updateUserProfile(user, userId)),
+    updateUserProfile: (user, userId) =>
+      dispatch(userAction.updateUserProfile(user, userId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
   };
 }

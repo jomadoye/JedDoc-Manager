@@ -15,6 +15,7 @@ class DashboardDocumentView extends React.Component {
   }
 
   handleView(event) {
+    event.preventDefault();
     const docID = this.props.document.id;
     const modal = `#viewDocument${docID}`;
     // let siblings = $(this).siblings(modal);
@@ -43,7 +44,7 @@ class DashboardDocumentView extends React.Component {
 
   render() {
     const { document, myDocument, readOnly } = this.props;
-    const viewDocument = '#viewDocument';
+    // const viewDocument = '#viewDocument';
     const link = '#modal1';
     return (
     <div>
@@ -110,17 +111,31 @@ DashboardDocumentView.propTypes = {
   MyDocuments: React.PropTypes.array.isRequired,
 };
 
+/**
+ * mapDispatchToProps
+ *
+ * @param {objecr} dispatch
+ * @returns dispatch
+ */
 function mapDispatchToProps(dispatch) {
   return {
-    deleteDocument: documentId => dispatch(DocumentAction.deleteDocument(documentId)),
+    deleteDocument: documentId =>
+      dispatch(DocumentAction.deleteDocument(documentId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
   };
 }
 
+/**
+ * mapStateToProps
+ *
+ * @param {object} state
+ * @returns {object}
+ */
 function mapStateToProps(state) {
   return {
     MyDocuments: state.documents.MyDocuments,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardDocumentView);
+export default
+connect(mapStateToProps, mapDispatchToProps)(DashboardDocumentView);

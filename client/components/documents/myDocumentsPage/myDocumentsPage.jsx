@@ -16,7 +16,7 @@ class MyDocumentPage extends React.Component {
         <div className="row">
           <div className="col s12">
               <ul className="tabs">
-                {/*<li className="tab col s3"><a href="#test4">All Documents</a></li>*/}
+                {/* <li className="tab col s3"><a href="#test4">All Documents</a></li>*/}
                 <li className="tab col s4"><a href="#test2">Public Documents</a></li>
                 <li className="tab col s4"><a href="#test1">Private Documents</a></li>
                 <li className="tab col s4"><a href="#test3">Role Documents</a></li>
@@ -38,7 +38,7 @@ class MyDocumentPage extends React.Component {
                 }
               })}
           </div>
-         
+
           <div id="test3" className="col s12">
             <br />
               { MyDocuments && MyDocuments.map((document) => {
@@ -47,7 +47,7 @@ class MyDocumentPage extends React.Component {
                 }
               })}
           </div>
-          {/*<div id="test4" className="col s12">
+          {/* <div id="test4" className="col s12">
             <br />
               { MyDocuments && MyDocuments.map(document =>
                     <CardDocumentView document={document} key={document.id} myDocument/>)}
@@ -58,12 +58,30 @@ class MyDocumentPage extends React.Component {
   }
 }
 
+MyDocumentPage.propTypes = {
+  loadUserDocuments: React.PropTypes.func.isRequired,
+  MyDocuments: React.PropTypes.array.isRequired,
+};
+
+/**
+ * mapDispatchToProps
+ *
+ * @param {any} dispatch
+ * @returns dipatch
+ */
 function mapDispatchToProps(dispatch) {
   return {
-    loadUserDocuments: userId => dispatch(DocumentAction.loadUserDocuments(userId)),
+    loadUserDocuments: userId =>
+      dispatch(DocumentAction.loadUserDocuments(userId)),
   };
 }
 
+/**
+ * mapStateToProps
+ *
+ * @param {any} state
+ * @returns {object} state
+ */
 function mapStateToProps(state) {
   return {
     MyDocuments: state.documents.MyDocuments,
