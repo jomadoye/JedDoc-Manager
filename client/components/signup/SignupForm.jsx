@@ -4,7 +4,7 @@ import React from 'react';
 // import { Button, Icon } from 'react-materialize';
 import signupValidation
   from '../../../server/shared/validations/signup/signupValidation';
-import TextFieldGroup from '../common/TextFieldGroup';
+import TextFieldGroup from '../common/TextFieldGroup.jsx';
 
 
 class SignupForm extends React.Component {

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
 // import WelcomePageDocList from '../welcome/WelcomePageDocList';
-import CardDocumentView from '../common/CardDocumentView';
+import CardDocumentView from '../common/CardDocumentView.jsx';
 
 class LoadDocuments extends React.Component {
   // constructor(props) {

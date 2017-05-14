@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
-import CardDocumentView from '../common/CardDocumentView';
+import CardDocumentView from '../common/CardDocumentView.jsx';
 
 class Dashboard extends React.Component {
   componentWillMount() {

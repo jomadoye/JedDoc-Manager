@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SignupForm from './SignupForm';
+import SignupForm from './SignupForm.jsx';
 import { userSignupRequest, isUserExists } from '../../actions/signupActions';
 import { addFlashMessage } from '../../actions/flashMessages';
 

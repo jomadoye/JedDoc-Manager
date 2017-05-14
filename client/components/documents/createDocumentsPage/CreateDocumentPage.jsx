@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateDocumentForm from './CreateDocumentForm';
+import CreateDocumentForm from './CreateDocumentForm.jsx';
 
 class CreateDocumentPage extends React.Component {
   render() {
