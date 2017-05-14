@@ -13,6 +13,19 @@ class DashboardDocumentView extends React.Component {
   }
   componentDidMount() {
     $('.modal').modal();
+    $('.button-collapse').sideNav();
+    $('ul.tabs').tabs();
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false,
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left',
+      stopPropagation: false, // Stops event propagation
+    },
+  );
   }
 
   handleView(event) {
