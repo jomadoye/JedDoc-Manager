@@ -50,7 +50,6 @@
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.5",
     "sequelize": "^3.30.4",
-    "simplemde": "^1.11.2",
     "style-loader": "^0.17.0",
     "validator": "^7.0.0"
   },
