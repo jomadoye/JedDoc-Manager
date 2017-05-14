@@ -9,6 +9,7 @@ class DashboardDocumentView extends React.Component {
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleView = this.handleView.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
   componentDidMount() {
     $('.modal').modal();
@@ -18,12 +19,14 @@ class DashboardDocumentView extends React.Component {
     event.preventDefault();
     const docID = this.props.document.id;
     const modal = `#viewDocument${docID}`;
-    // let siblings = $(this).siblings(modal);
-    // console.log(siblings);
-
-    // console.log(event);
     $(modal).modal('open');
-     // $(this).siblings(modal).modal('open');;
+  }
+
+  handleEdit(event) {
+    event.preventDefault();
+    const docID = this.props.document.id;
+    const modal = `#editDocument${docID}`;
+    $(modal).modal('open');
   }
 
   handleDelete() {
@@ -44,19 +47,29 @@ class DashboardDocumentView extends React.Component {
 
   render() {
     const { document, myDocument, readOnly } = this.props;
-    // const viewDocument = '#viewDocument';
-    const link = '#modal1';
     return (
     <div>
       <div className="col s3">
       {myDocument && <div>
-        <a className=" modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleView} key={document.id}><i className="material-icons">visibility</i></a>
+          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleView} key={document.id}><i className="material-icons">visibility</i></a>
           &nbsp;&nbsp;
             <a className="btn-floating btn-small waves-effect waves-light red" onClick={this.handleDelete}><i className="material-icons">delete</i></a>
           &nbsp;&nbsp;
-          <a className="btn-floating btn-small waves-effect waves-light red" href={link}><i className="material-icons">mode_edit</i></a>
+          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleEdit} key={document.id + 1000}><i className="material-icons">mode_edit</i></a>
           <div id={`viewDocument${document.id}`} className="modal modal-fixed-footer">
             <div className="modal-content">
+              <h4 className="center-align">{document.title}</h4>
+              <hr />
+              <p>{document.body}</p>
+              <h4>Author: {document.User.fullname}</h4>
+            </div>
+            <div className="modal-footer">
+              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+            </div>
+          </div>
+          <div id={`editDocument${document.id}`} className="modal modal-fixed-footer">
+            <div className="modal-content">
+              <h5 className="center-align">This is my edit document modal</h5>
               <h4 className="center-align">{document.title}</h4>
               <hr />
               <p>{document.body}</p>
