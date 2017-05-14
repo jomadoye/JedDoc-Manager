@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addFlashMessage } from '../actions/flashMessages';
 
@@ -27,12 +27,12 @@ export default function (ComposedComponent) {
   }
 
   VerifyToken.propTypes = {
-    isAuthenticated: React.PropTypes.bool.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    addFlashMessage: PropTypes.func.isRequired,
   };
 
   VerifyToken.contextTypes = {
-    router: React.PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
   };
 
   /**

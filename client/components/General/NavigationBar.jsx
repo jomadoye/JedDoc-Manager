@@ -134,7 +134,7 @@ NavigationBar.propTypes = {
 };
 
 NavigationBar.contextTypes = {
-  router: React.PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 /**
