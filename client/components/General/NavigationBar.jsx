@@ -21,13 +21,13 @@ class NavigationBar extends React.Component {
       <div>
         <ul id="dropdown1" className="dropdown-content">
           <li>
-            <Link to="#">
+            <Link to="my-documents">
               my-docs
               <i className="material-icons right">perm_media</i>
             </Link>
           </li>
           <li>
-            <Link to="#">
+            <Link to="my-profile">
               Profile
               <i className="material-icons right">account_circle</i>
             </Link>
@@ -114,6 +114,7 @@ class NavigationBar extends React.Component {
           <li><a href="my-profile"><i className="material-icons">account_circle</i>My Profile</a></li>
           <li><a href="create-document"><i className="material-icons">add</i>Create Document</a></li>
           <li><a href="my-documents"><i className="material-icons">perm_media</i>My Documents</a></li>
+          <li><a onClick={this.logout}><i className="material-icons">power_settings_new</i>Log-out</a></li>
           <li><a href="#!">Second Link</a></li>
           <li><div className="divider" /></li>
           <li><a className="subheader">Subheader</a></li>
