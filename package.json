@@ -41,6 +41,7 @@
     "morgan": "^1.8.1",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
