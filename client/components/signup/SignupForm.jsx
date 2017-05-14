@@ -1,7 +1,4 @@
-import React from 'react';
-// import { browserHistory } from 'react-router';
-// import classnames from 'classnames';
-// import { Button, Icon } from 'react-materialize';
+import React, { PropTypes } from 'react';
 import signupValidation
   from '../../../server/shared/validations/signup/signupValidation';
 import TextFieldGroup from '../common/TextFieldGroup.jsx';
@@ -124,9 +121,9 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
-  isUserExists: React.PropTypes.func.isRequired,
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  isUserExists: PropTypes.func.isRequired,
 };
 
 SignupForm.contextTypes = {

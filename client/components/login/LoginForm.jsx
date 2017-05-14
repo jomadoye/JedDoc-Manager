@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TextFieldGroup from '../common/TextFieldGroup.jsx';
 import validateInput
@@ -77,10 +77,10 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  login: React.PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 LoginForm.contextTypes = {
-  router: React.PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 export default connect(null, { login })(LoginForm);

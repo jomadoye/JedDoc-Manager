@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
 // import WelcomePageDocList from '../welcome/WelcomePageDocList';
@@ -38,8 +38,8 @@ class LoadDocuments extends React.Component {
 }
 
 LoadDocuments.propTypes = {
-  documents: React.PropTypes.array,
-  loadDocuments: React.PropTypes.func.isRequired,
+  documents: PropTypes.array,
+  loadDocuments: PropTypes.func.isRequired,
 };
 
 /**

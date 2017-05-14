@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
@@ -129,12 +129,12 @@ class DashboardDocumentView extends React.Component {
 }
 
 DashboardDocumentView.propTypes = {
-  document: React.PropTypes.object.isRequired,
-  myDocument: React.PropTypes.bool,
-  readOnly: React.PropTypes.bool,
-  deleteDocument: React.PropTypes.func.isRequired,
-  deleteFlashMessage: React.PropTypes.func.isRequired,
-  MyDocuments: React.PropTypes.array.isRequired,
+  document: PropTypes.object.isRequired,
+  myDocument: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  deleteDocument: PropTypes.func.isRequired,
+  deleteFlashMessage: PropTypes.func.isRequired,
+  MyDocuments: PropTypes.array.isRequired,
 };
 
 /**

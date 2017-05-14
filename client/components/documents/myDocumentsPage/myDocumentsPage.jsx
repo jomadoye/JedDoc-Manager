@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../../actions/documentAction';
 import CardDocumentView from '../../common/CardDocumentView.jsx';
@@ -59,8 +59,8 @@ class MyDocumentPage extends React.Component {
 }
 
 MyDocumentPage.propTypes = {
-  loadUserDocuments: React.PropTypes.func.isRequired,
-  MyDocuments: React.PropTypes.array.isRequired,
+  loadUserDocuments: PropTypes.func.isRequired,
+  MyDocuments: PropTypes.array.isRequired,
 };
 
 /**

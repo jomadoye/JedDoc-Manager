@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
@@ -129,8 +129,8 @@ class NavigationBar extends React.Component {
 }
 
 NavigationBar.propTypes = {
-  login: React.PropTypes.object.isRequired,
-  logout: React.PropTypes.func.isRequired,
+  login: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 NavigationBar.contextTypes = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
@@ -18,8 +18,8 @@ class FlashMessageList extends React.Component {
 }
 
 FlashMessageList.propTypes = {
-  messages: React.PropTypes.array.isRequired,
-  deleteFlashMessage: React.PropTypes.func.isRequired,
+  messages: PropTypes.array.isRequired,
+  deleteFlashMessage: PropTypes.func.isRequired,
 };
 
 /**

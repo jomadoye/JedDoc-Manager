@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
 import CardDocumentView from '../common/CardDocumentView.jsx';
@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-  loadAuthorizedToViewDocument: React.PropTypes.func.isRequired,
+  loadAuthorizedToViewDocument: PropTypes.func.isRequired,
 };
 
 /**

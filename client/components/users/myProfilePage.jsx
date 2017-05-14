@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as userAction from '../../actions/userAction';
 import * as loginAction from '../../actions/loginActions';
@@ -95,13 +95,13 @@ class myProfilePage extends React.Component {
 }
 
 myProfilePage.propTypes = {
-  updateUserProfile: React.PropTypes.func.isRequired,
-  deleteFlashMessage: React.PropTypes.func.isRequired,
-  loadUserProfile: React.PropTypes.func.isRequired,
-  user: React.PropTypes.object.isRequired,
-  userId: React.PropTypes.number.isRequired,
-  deleteUserAccount: React.PropTypes.func.isRequired,
-  logout: React.PropTypes.func.isRequired,
+  updateUserProfile: PropTypes.func.isRequired,
+  deleteFlashMessage: PropTypes.func.isRequired,
+  loadUserProfile: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired,
+  deleteUserAccount: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 myProfilePage.contextTypes = {

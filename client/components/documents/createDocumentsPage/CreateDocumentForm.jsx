@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Row, Input } from 'react-materialize';
 import { createDocument } from '../../../actions/documentAction';
@@ -93,9 +93,9 @@ class CreateDocumentForm extends React.Component {
 }
 
 CreateDocumentForm.propTypes = {
-  createDocument: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
-  deleteFlashMessage: React.PropTypes.func.isRequired,
+  createDocument: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  deleteFlashMessage: PropTypes.func.isRequired,
 };
 
 export default
