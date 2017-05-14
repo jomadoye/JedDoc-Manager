@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   LOAD_USER_PROFILE_SUCCESS,
   UPDATE_USER_PROFILE_SUCCESS,
+  DELETE_USER_PROFILE_SUCCESS,
 } from '../actions/actionTypes';
 import {
   addFlashMessage,
@@ -32,6 +33,18 @@ export function updateUserProfileSuccess(user) {
   return {
     type: UPDATE_USER_PROFILE_SUCCESS,
     updatedUser: user,
+  };
+}
+
+/**
+ * This function deletes a user account
+ *
+ * @export
+ * @returns {object}
+ */
+export function deleteUserAccountSuccess() {
+  return {
+    type: DELETE_USER_PROFILE_SUCCESS,
   };
 }
 
@@ -76,5 +89,16 @@ export function updateUserProfile(user, userId) {
         const message = {};
         message.text = response;
         dispatch(addFlashMessage(message));
+      });
+}
+
+export function deleteUserAccount(userId) {
+  return dispatch => axios.delete(`/api/users/${userId}`)
+      .then((res) => {
+        console.log(res);
+        dispatch(deleteUserAccountSuccess());
+      })
+      .catch((error) => {
+        console.log(error);
       });
 }

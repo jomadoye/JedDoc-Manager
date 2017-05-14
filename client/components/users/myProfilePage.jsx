@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as userAction from '../../actions/userAction';
+import * as loginAction from '../../actions/loginActions';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
 class myProfilePage extends React.Component {
@@ -15,6 +16,7 @@ class myProfilePage extends React.Component {
     this.updateUserState = this.updateUserState.bind(this);
     this.updateUserProfile = this.updateUserProfile.bind(this);
     this.setupUpdateUser = this.setupUpdateUser.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   updateUserState(event) {
     const field = event.target.name;
@@ -35,6 +37,11 @@ class myProfilePage extends React.Component {
     event.preventDefault();
     this.setState({ isUpdateingUser: false, showSubmitButton: true });
     // this.context.router.push('/courses');
+  }
+  handleDelete(event) {
+    event.preventDefault();
+    this.props.deleteUserAccount(this.props.userId);
+    this.props.logout();
   }
   render() {
     const { isUpdateingUser, showSubmitButton } = this.state;
@@ -75,6 +82,9 @@ class myProfilePage extends React.Component {
                   {showSubmitButton && <button className="btn waves-effect waves-light" type="submit" name="action">Submit
                     <i className="material-icons right">send</i>
                   </button>}
+                  <button className="btn waves-effect waves-light" onClick={this.handleDelete} name="action">Delete User
+                    <i className="material-icons right">delete_forever</i>
+                  </button>
               </div>
             </form>
           </div>
@@ -90,6 +100,12 @@ myProfilePage.propTypes = {
   loadUserProfile: React.PropTypes.func.isRequired,
   user: React.PropTypes.object.isRequired,
   userId: React.PropTypes.number.isRequired,
+  deleteUserAccount: React.PropTypes.func.isRequired,
+  logout: React.PropTypes.func.isRequired,
+};
+
+myProfilePage.contextTypes = {
+  router: React.PropTypes.object.isRequired,
 };
 
 /**
@@ -122,9 +138,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     loadUserProfile: userId => dispatch(userAction.loadUserProfile(userId)),
+    logout: () => dispatch(loginAction.logout()),
     updateUserProfile: (user, userId) =>
       dispatch(userAction.updateUserProfile(user, userId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
+    deleteUserAccount: userId => dispatch(userAction.deleteUserAccount(userId)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(myProfilePage);
