@@ -11,7 +11,7 @@ import VerifyToken from './utils/verifyToken';
 import CreateDocumentPage from './components/documents/createDocumentsPage/CreateDocumentPage';
 import WelcomePage from './components/welcome/WelcomePage';
 import MyDocumentsPage from './components/documents/myDocumentsPage/myDocumentsPage';
-import EditMyDocumentPage from './components/documents/myDocumentsPage/EditMyDocument/EditMyDocumentPage';
+import myProfilePage from './components/users/myProfilePage';
 
 export default (
     <Route path="/" component={App}>
@@ -20,10 +20,10 @@ export default (
         <Route path="login" component={LoginPage}/>
         <Route path="logout" component={Greetings}/>
         <Route path="dashboard" component={VerifyToken(Dashboard)}/>
+        <Route path="my-profile"
+            component={VerifyToken(myProfilePage)}/>
         <Route path="create-document"
             component={VerifyToken(CreateDocumentPage)}/>
-        <Route path="edit-document"
-            component={VerifyToken(EditMyDocumentPage)}/>
         <Route path="my-documents"
             component={VerifyToken(MyDocumentsPage)}/>
         <Route path="*" component={NotFound} status={404}/>
