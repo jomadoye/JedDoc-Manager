@@ -42,9 +42,9 @@ class NavigationBar extends React.Component {
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li>
-            <Link to="create-document">
-              Create Document
-              <i className="material-icons right">add</i>
+            <Link to="dashboard">
+              Dashboard
+              <i className="material-icons right">view_module</i>
             </Link>
           </li>
           <li>
