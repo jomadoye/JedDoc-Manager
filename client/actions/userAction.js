@@ -72,6 +72,9 @@ export function updateUserProfile(user, userId) {
         dispatch(updateUserProfileSuccess(updatedUser));
       })
       .catch((error) => {
-        console.log(error);
+        const response = error.response.data.message;
+        const message = {};
+        message.text = response;
+        dispatch(addFlashMessage(message));
       });
 }

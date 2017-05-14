@@ -164,6 +164,6 @@ export function deleteDocument(documentId) {
         dispatch(deleteUserDocumentSuccess(message));
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
 }
