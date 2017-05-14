@@ -98,7 +98,7 @@ class DashboardDocumentView extends React.Component {
         </div>}
         <div className="card small">
           <div className="card-image waves-effect waves-block waves-light">
-            <img className="activator" src="http://materializecss.com/images/office.jpg" />
+            <img className="activator" src="https://unsplash.it/200/300/?random" />
           </div>
           <div className="card-content">
             <span className="card-title activator grey-text text-darken-4">{ document.title }</span>
