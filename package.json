@@ -12,7 +12,7 @@
     "db:test:seed-development": "NODE_ENV=development babel-node ./server/test-utility/seeders/seedDatabase",
     "mocha:test": "NODE_ENV=test nyc --reporter=html mocha \"./**/server/test/**/*.spec.js\" --compilers js:babel-register --timeout 10000",
     "db:migrate": "NODE_ENV=development sequelize db:migrate:undo:all && sequelize db:migrate",
-    "test": "NODE_ENV=test npm run db:test:seed && npm run mocha:test",
+    "test": "snyk test && NODE_ENV=test npm run db:test:seed && npm run mocha:test",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -50,6 +50,7 @@
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.5",
     "sequelize": "^3.30.4",
+    "snyk": "^1.30.0",
     "style-loader": "^0.17.0",
     "validator": "^7.0.0"
   },
