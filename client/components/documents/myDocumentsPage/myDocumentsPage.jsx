@@ -19,9 +19,7 @@ class MyDocumentPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if (this.state.documents.length !== nextProps.documents.MyDocuments.length) {
-      this.setState({ documents: [...nextProps.documents.MyDocuments] });
-    // }
+    this.setState({ documents: [...nextProps.documents.MyDocuments] });
   }
 
   render() {
@@ -32,7 +30,6 @@ class MyDocumentPage extends React.Component {
         <div className="row">
           <div className="col s12">
               <ul className="tabs">
-                {/* <li className="tab col s3"><a href="#test4">All Documents</a></li>*/}
                 <li className="tab col s4"><a href="#test2">Public Documents</a></li>
                 <li className="tab col s4"><a href="#test1">Private Documents</a></li>
                 <li className="tab col s4"><a href="#test3">Role Documents</a></li>

@@ -89,7 +89,6 @@ class DashboardDocumentView extends React.Component {
               <h4 className="center-align">{document.title}</h4>
               <hr />
               <p>{document.body}</p>
-              <h4>Author: {document.User.fullname}</h4>
             </div>
             <div className="modal-footer">
               <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
@@ -173,12 +172,11 @@ class DashboardDocumentView extends React.Component {
               <img className="activator" src="https://unsplash.it/200/300/?random" />
             </div>
             <div className="card-content">
-              <span className="card-title activator grey-text text-darken-4">{ document.title }</span>
-              <span className="">Author: { document.User.fullname }</span>
+              <span className="card-title activator grey-text text-darken-4">{ document.title.length > 20 ? `${document.title.substring(0, 15)}...` : document.title }</span>
             </div>
             <div className="card-reveal">
-              <span className="card-title grey-text text-darken-4">{ document.title }<i className="material-icons right">close</i></span>
-              <p>{`${document.body.substring(0, 150)}...`}</p>
+              <span className="card-title grey-text text-darken-4">{ document.title.length > 20 ? `${document.title.substring(0, 15)}...` : document.title }<i className="material-icons right">close</i></span>
+              <p>{ document.body.length > 100 ? `${document.body.substring(0, 150)}...` : document.body }</p>
             </div>
           </div>
         </div>
