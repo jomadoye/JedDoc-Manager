@@ -63,7 +63,7 @@ class DashboardDocumentView extends React.Component {
     const { document, myDocument, readOnly } = this.props;
     return (
     <div>
-      <div className="col s3">
+      <div className="col l3 s6 m4">
       {myDocument && <div>
           <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleView} key={document.id}><i className="material-icons">visibility</i></a>
           &nbsp;&nbsp;
@@ -110,17 +110,19 @@ class DashboardDocumentView extends React.Component {
             </div>
           </div>
         </div>}
-        <div className="card small">
-          <div className="card-image waves-effect waves-block waves-light">
-            <img className="activator" src="https://unsplash.it/200/300/?random" />
-          </div>
-          <div className="card-content">
-            <span className="card-title activator grey-text text-darken-4">{ document.title }</span>
-            <span className="">Author: { document.User.fullname }</span>
-          </div>
-          <div className="card-reveal">
-            <span className="card-title grey-text text-darken-4">{ document.title }<i className="material-icons right">close</i></span>
-            <p>{`${document.body.substring(0, 150)}...`}</p>
+        <div className="">
+          <div className="card small">
+            <div className="card-image waves-effect waves-block waves-light">
+              <img className="activator" src="https://unsplash.it/200/300/?random" />
+            </div>
+            <div className="card-content">
+              <span className="card-title activator grey-text text-darken-4">{ document.title }</span>
+              <span className="">Author: { document.User.fullname }</span>
+            </div>
+            <div className="card-reveal">
+              <span className="card-title grey-text text-darken-4">{ document.title }<i className="material-icons right">close</i></span>
+              <p>{`${document.body.substring(0, 150)}...`}</p>
+            </div>
           </div>
         </div>
       </div>
