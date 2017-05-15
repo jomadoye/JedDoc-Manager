@@ -5,12 +5,27 @@ import * as DocumentAction from '../../../actions/documentAction';
 import CardDocumentView from '../../common/CardDocumentView.jsx';
 
 class MyDocumentPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      documents: [...props.documents.MyDocuments],
+    };
+  }
+
   componentDidMount() {
     const { UserId } = this.props;
     this.props.loadUserDocuments(UserId);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.documents.length !== nextProps.documents.MyDocuments.length) {
+      this.setState({ documents: [...nextProps.documents.MyDocuments] });
+    }
+  }
+
   render() {
-    const { MyDocuments } = this.props;
+    const MyDocuments = this.state.documents;
     return (
       <div className="container">
         <br />
@@ -48,11 +63,6 @@ class MyDocumentPage extends React.Component {
                 }
               })}
           </div>
-          {/* <div id="test4" className="col s12">
-            <br />
-              { MyDocuments && MyDocuments.map(document =>
-                    <CardDocumentView document={document} key={document.id} myDocument/>)}
-          </div>*/}
         </div>
       </div>
     );
@@ -61,7 +71,7 @@ class MyDocumentPage extends React.Component {
 
 MyDocumentPage.propTypes = {
   loadUserDocuments: PropTypes.func.isRequired,
-  MyDocuments: PropTypes.array.isRequired,
+  documents: PropTypes.object.isRequired,
 };
 
 /**
@@ -85,7 +95,7 @@ function mapDispatchToProps(dispatch) {
  */
 function mapStateToProps(state) {
   return {
-    MyDocuments: state.documents.MyDocuments,
+    documents: state.documents,
     UserId: state.login.user.id,
   };
 }

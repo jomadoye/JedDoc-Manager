@@ -1,3 +1,4 @@
+import findIndex from 'lodash/findIndex';
 import initialState from './initialState';
 import {
   LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS,
@@ -32,10 +33,12 @@ function documentReducer(state = initialState.documents, action) {
         });
       }
 
-    case DELETE_USER_DOCUMENT_SUCCESS:
-      {
-        return Object.assign({}, state);
-      }
+    case DELETE_USER_DOCUMENT_SUCCESS: {
+      const index = findIndex(state.MyDocuments, { id: action.documentId });
+      const stateCopy = Object.assign({}, state);
+      stateCopy.MyDocuments.splice(index, 1);
+      return stateCopy;
+    }
 
     case UPDATE_USER_DOCUMENT_SUCCESS:
       {

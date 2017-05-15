@@ -89,10 +89,10 @@ export function loadUserDocumentSuccess(documents) {
  * @param {string} message A response message
  * @returns {object}
  */
-export function deleteUserDocumentSuccess(message) {
+export function deleteUserDocumentSuccess(documentId) {
   return {
     type: DELETE_USER_DOCUMENT_SUCCESS,
-    message,
+    documentId,
   };
 }
 
@@ -176,7 +176,7 @@ export function deleteDocument(documentId) {
         const message = {};
         message.text = response;
         dispatch(addFlashMessage(message));
-        dispatch(deleteUserDocumentSuccess(message));
+        dispatch(deleteUserDocumentSuccess(documentId));
       })
       .catch((error) => {
         console.log(error.response);
@@ -201,6 +201,6 @@ export function updateDocument(document, documentId) {
         dispatch(updateUserDocumentSuccess(res.data.document));
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
 }
