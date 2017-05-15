@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Row, Input } from 'react-materialize';
 import * as DocumentAction from '../../actions/documentAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
@@ -11,6 +12,15 @@ class DashboardDocumentView extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleView = this.handleView.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleDocumentOnchange = this.handleDocumentOnchange.bind(this);
+    this.handleEditDocumentSubmit = this.handleEditDocumentSubmit.bind(this);
+
+    this.state = {
+      title: this.props.document.title,
+      body: this.props.document.body,
+      access: this.props.document.access,
+      isLoading: false,
+    };
   }
   componentDidMount() {
     $('.modal').modal();
@@ -59,8 +69,22 @@ class DashboardDocumentView extends React.Component {
     this.setState({ MyDocuments: documents });
   }
 
+  handleDocumentOnchange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(`${event.target.name}  ${event.target.value}`);
+  }
+
+  handleEditDocumentSubmit(event) {
+    event.preventDefault();
+    const document = this.state;
+    const documentId = this.props.document.id;
+    this.props.updateDocument(document, documentId);
+    this.props.deleteFlashMessage(1);
+  }
+
   render() {
     const { document, myDocument, readOnly } = this.props;
+    const { title, body } = this.state;
     return (
     <div>
       <div className="col l3 s6 m4">
@@ -83,11 +107,59 @@ class DashboardDocumentView extends React.Component {
           </div>
           <div id={`editDocument${document.id}`} className="modal modal-fixed-footer">
             <div className="modal-content">
-              <h5 className="center-align">This is my edit document modal</h5>
+              {/* <h5 className="center-align">This is my edit document modal</h5>
               <h4 className="center-align">{document.title}</h4>
               <hr />
               <p>{document.body}</p>
-              <h4>Author: {document.User.fullname}</h4>
+              <h4>Author: {document.User.fullname}</h4>*/}
+              <div className="">
+                <form onSubmit={this.handleEditDocumentSubmit}>
+                  <div className="input-field">
+                    <i className="material-icons prefix">mode_edit</i>
+                    <label>Document title</label>
+                    <input
+                    onChange={this.handleDocumentOnchange}
+                    name="title"
+                    value={title}
+                    type="text" />
+                  </div>
+
+                  <div className="input-field">
+                    <i className="material-icons prefix">question_answer</i>
+                    <textarea
+                    className="materialize-textarea"
+                    onChange={this.handleDocumentOnchange}
+                    name="body"
+                    value={body}
+                    id="icon_prefix2"
+                    />
+                    <label htmlFor="icon_prefix2">Document body</label>
+                  </div>
+
+                  <div className="input-field">
+                    <Row>
+                      <Input type="select"
+                        name="access"
+                        onChange={this.handleDocumentOnchange}
+                        label="Select a document access type"
+                        defaultValue="public">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                        <option value="role">Role</option>
+                      </Input>
+                    </Row>
+                  </div>
+
+                  <div className="container">
+                    <button
+                      type="submit"
+                      className="btn waves-effect waves-light btn-large">
+                      Edit Document
+                      <i className="material-icons right">send</i>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
             <div className="modal-footer">
               <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
@@ -138,6 +210,7 @@ DashboardDocumentView.propTypes = {
   deleteDocument: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
   MyDocuments: PropTypes.array.isRequired,
+  updateDocument: PropTypes.func.isRequired,
 };
 
 /**
@@ -150,6 +223,8 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteDocument: documentId =>
       dispatch(DocumentAction.deleteDocument(documentId)),
+    updateDocument: (document, documentId) =>
+      dispatch(DocumentAction.updateDocument(document, documentId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
   };
 }

@@ -4,6 +4,7 @@ import {
   LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
   LOAD_USER_DOCUMENT_SUCCESS,
   DELETE_USER_DOCUMENT_SUCCESS,
+  UPDATE_USER_DOCUMENT_SUCCESS,
 } from './actionTypes';
 import {
   addFlashMessage,
@@ -96,6 +97,20 @@ export function deleteUserDocumentSuccess(message) {
 }
 
 /**
+ * This function updates a document
+ *
+ * @export
+ * @param {string} message
+ * @returns
+ */
+export function updateUserDocumentSuccess(document) {
+  return {
+    type: UPDATE_USER_DOCUMENT_SUCCESS,
+    document,
+  };
+}
+
+/**
  * This function ensures the documents were sucessfully loaded
  *
  * @export
@@ -162,6 +177,28 @@ export function deleteDocument(documentId) {
         message.text = response;
         dispatch(addFlashMessage(message));
         dispatch(deleteUserDocumentSuccess(message));
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+}
+
+/**
+ * This function updates a document
+ *
+ * @export
+ * @param {object} document
+ * @param {number} documentId
+ * @returns dispatch
+ */
+export function updateDocument(document, documentId) {
+  return dispatch => axios.put(`/api/documents/${documentId}`, document)
+      .then((res) => {
+        const response = res.data.message;
+        const message = {};
+        message.text = response;
+        dispatch(addFlashMessage(message));
+        dispatch(updateUserDocumentSuccess(res.data.document));
       })
       .catch((error) => {
         console.log(error.response);

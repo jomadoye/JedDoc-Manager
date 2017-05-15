@@ -4,6 +4,7 @@ import {
   LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
   LOAD_USER_DOCUMENT_SUCCESS,
   DELETE_USER_DOCUMENT_SUCCESS,
+  UPDATE_USER_DOCUMENT_SUCCESS,
 } from '../actions/actionTypes';
 
 export default
@@ -32,6 +33,11 @@ function documentReducer(state = initialState.documents, action) {
       }
 
     case DELETE_USER_DOCUMENT_SUCCESS:
+      {
+        return Object.assign({}, state);
+      }
+
+    case UPDATE_USER_DOCUMENT_SUCCESS:
       {
         return Object.assign({}, state);
       }
