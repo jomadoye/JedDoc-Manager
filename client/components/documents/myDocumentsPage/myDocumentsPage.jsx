@@ -19,9 +19,9 @@ class MyDocumentPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.documents.length !== nextProps.documents.MyDocuments.length) {
+    // if (this.state.documents.length !== nextProps.documents.MyDocuments.length) {
       this.setState({ documents: [...nextProps.documents.MyDocuments] });
-    }
+    // }
   }
 
   render() {

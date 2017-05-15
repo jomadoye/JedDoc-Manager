@@ -103,10 +103,11 @@ export function deleteUserDocumentSuccess(documentId) {
  * @param {string} message
  * @returns
  */
-export function updateUserDocumentSuccess(document) {
+export function updateUserDocumentSuccess(document, documentId) {
   return {
     type: UPDATE_USER_DOCUMENT_SUCCESS,
     document,
+    documentId,
   };
 }
 
@@ -198,7 +199,7 @@ export function updateDocument(document, documentId) {
         const message = {};
         message.text = response;
         dispatch(addFlashMessage(message));
-        dispatch(updateUserDocumentSuccess(res.data.document));
+        dispatch(updateUserDocumentSuccess(res.data.document, documentId));
       })
       .catch((error) => {
         console.log(error);

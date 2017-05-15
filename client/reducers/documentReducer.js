@@ -40,10 +40,14 @@ function documentReducer(state = initialState.documents, action) {
       return stateCopy;
     }
 
-    case UPDATE_USER_DOCUMENT_SUCCESS:
-      {
-        return Object.assign({}, state);
-      }
+    case UPDATE_USER_DOCUMENT_SUCCESS: {
+      const documemts = state.MyDocuments.filter(document =>
+        document.id !== action.document.id);
+      return { MyDocuments: [
+        ...documemts,
+        Object.assign({}, action.document),
+      ] };
+    }
 
     default:
       {

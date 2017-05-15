@@ -55,18 +55,9 @@ class DashboardDocumentView extends React.Component {
 
   handleDelete() {
     event.preventDefault();
-    let myindex;
     const documentId = this.props.document.id;
     this.props.deleteDocument(documentId);
     this.props.deleteFlashMessage(1);
-    const documents = this.props.MyDocuments.map(a => Object.assign({}, a));
-    documents.forEach((document, index) => {
-      if (document.id === documentId) {
-        myindex = index;
-      }
-    });
-    documents.splice(myindex, 1);
-    this.setState({ MyDocuments: documents });
   }
 
   handleDocumentOnchange(event) {
@@ -106,11 +97,6 @@ class DashboardDocumentView extends React.Component {
           </div>
           <div id={`editDocument${document.id}`} className="modal modal-fixed-footer">
             <div className="modal-content">
-              {/* <h5 className="center-align">This is my edit document modal</h5>
-              <h4 className="center-align">{document.title}</h4>
-              <hr />
-              <p>{document.body}</p>
-              <h4>Author: {document.User.fullname}</h4>*/}
               <div className="">
                 <form onSubmit={this.handleEditDocumentSubmit}>
                   <div className="input-field">
@@ -208,7 +194,7 @@ DashboardDocumentView.propTypes = {
   readOnly: PropTypes.bool,
   deleteDocument: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
-  MyDocuments: PropTypes.array.isRequired,
+  documents: PropTypes.object.isRequired,
   updateDocument: PropTypes.func.isRequired,
 };
 
@@ -236,9 +222,9 @@ function mapDispatchToProps(dispatch) {
  */
 function mapStateToProps(state) {
   return {
-    MyDocuments: state.documents.MyDocuments,
+    documents: state.documents,
   };
 }
 
 export default
-connect(mapStateToProps, mapDispatchToProps)(DashboardDocumentView);
+  connect(mapStateToProps, mapDispatchToProps)(DashboardDocumentView);
