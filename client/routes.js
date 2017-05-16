@@ -18,6 +18,8 @@ import createRolePage from './components/roles/createRolePage.jsx';
 import manageRolesPage from './components/roles/manageRolesPage.jsx';
 import viewUsersPage from './components/users/viewUsersPage.jsx';
 import manageUsersPage from './components/users/manageUsersPage.jsx';
+import manageDocumentPage from
+    './components/documents/manageDocumentsPage/manageDocumentsPage.jsx';
 
 export default (
     <Route path="/" component={App}>
@@ -28,6 +30,8 @@ export default (
         <Route path="dashboard" component={VerifyToken(Dashboard)}/>
         <Route path="my-profile"
             component={VerifyToken(myProfilePage)}/>
+        <Route path="manage-documents"
+            component={VerifyToken(manageDocumentPage)}/>
         <Route path="create-role"
             component={VerifyToken(createRolePage)}/>
         <Route path="manage-roles"

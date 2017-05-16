@@ -9,6 +9,7 @@ export default {
     PublicDocuments: [],
     MyDocuments: [],
     AuthToViewDocuments: [],
+    allDocuments: [],
   },
   role: [],
 };

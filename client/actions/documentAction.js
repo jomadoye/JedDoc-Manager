@@ -5,6 +5,9 @@ import {
   LOAD_USER_DOCUMENT_SUCCESS,
   DELETE_USER_DOCUMENT_SUCCESS,
   UPDATE_USER_DOCUMENT_SUCCESS,
+  LOAD_ALL_DOCUMENTS_SUCCESS,
+  DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
+  UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
 } from './actionTypes';
 import {
   addFlashMessage,
@@ -97,6 +100,20 @@ export function deleteUserDocumentSuccess(documentId) {
 }
 
 /**
+ * This function ensures an admin deletes a user successfully
+ *
+ * @export
+ * @param {number} documentId
+ * @returns dispatch
+ */
+export function deleteDocumentByAdminSuccess(documentId) {
+  return {
+    type: DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
+    documentId,
+  };
+}
+
+/**
  * This function updates a document
  *
  * @export
@@ -104,6 +121,21 @@ export function deleteUserDocumentSuccess(documentId) {
  * @returns
  */
 export function updateUserDocumentSuccess(document, documentId) {
+  return {
+    type: UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
+    document,
+    documentId,
+  };
+}
+
+/**
+ * This function ensures an admin updates a document sucessfully
+ *
+ * @export
+ * @param {string} message
+ * @returns
+ */
+export function updateDocumentByAdminSuccess(document, documentId) {
   return {
     type: UPDATE_USER_DOCUMENT_SUCCESS,
     document,
@@ -178,6 +210,7 @@ export function deleteDocument(documentId) {
         message.text = response;
         dispatch(addFlashMessage(message));
         dispatch(deleteUserDocumentSuccess(documentId));
+        dispatch(deleteDocumentByAdminSuccess(documentId));
       })
       .catch((error) => {
         console.log(error.response);
@@ -200,6 +233,37 @@ export function updateDocument(document, documentId) {
         message.text = response;
         dispatch(addFlashMessage(message));
         dispatch(updateUserDocumentSuccess(res.data.document, documentId));
+        dispatch(updateDocumentByAdminSuccess(res.data.document, documentId));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+
+/**
+ * This function ensures document are loaded sucessfully
+ *
+ * @export
+ * @param {string} documents
+ * @returns {object}
+ */
+export function loadAllDocumentsSuccess(documents) {
+  return {
+    type: LOAD_ALL_DOCUMENTS_SUCCESS,
+    allDocuments: documents,
+  };
+}
+
+/**
+ * Thie function loads all documents for admin
+ *
+ * @export
+ * @returns dispatch
+ */
+export function loadAllDocuments() {
+  return dispatch => axios.get('/api/documents/')
+      .then((res) => {
+        dispatch(loadAllDocumentsSuccess(res.data.document));
       })
       .catch((error) => {
         console.log(error);

@@ -6,6 +6,9 @@ import {
   LOAD_USER_DOCUMENT_SUCCESS,
   DELETE_USER_DOCUMENT_SUCCESS,
   UPDATE_USER_DOCUMENT_SUCCESS,
+  LOAD_ALL_DOCUMENTS_SUCCESS,
+  DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
+  UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
 } from '../actions/actionTypes';
 
 export default
@@ -33,6 +36,13 @@ function documentReducer(state = initialState.documents, action) {
         });
       }
 
+    case LOAD_ALL_DOCUMENTS_SUCCESS:
+      {
+        return Object.assign({}, state, {
+          allDocuments: action.allDocuments,
+        });
+      }
+
     case DELETE_USER_DOCUMENT_SUCCESS: {
       const index = findIndex(state.MyDocuments, { id: action.documentId });
       const stateCopy = Object.assign({}, state);
@@ -40,10 +50,26 @@ function documentReducer(state = initialState.documents, action) {
       return stateCopy;
     }
 
+    case DELETE_DOCUMENT_BY_ADMIN_SUCCESS: {
+      const index = findIndex(state.allDocuments, { id: action.documentId });
+      const stateCopy = Object.assign({}, state);
+      stateCopy.allDocuments.splice(index, 1);
+      return stateCopy;
+    }
+
     case UPDATE_USER_DOCUMENT_SUCCESS: {
       const documemts = state.MyDocuments.filter(document =>
         document.id !== action.document.id);
       return { MyDocuments: [
+        ...documemts,
+        Object.assign({}, action.document),
+      ] };
+    }
+
+    case UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS: {
+      const documemts = state.allDocuments.filter(document =>
+        document.id !== action.document.id);
+      return { allDocuments: [
         ...documemts,
         Object.assign({}, action.document),
       ] };
