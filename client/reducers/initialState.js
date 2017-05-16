@@ -10,4 +10,5 @@ export default {
     MyDocuments: [],
     AuthToViewDocuments: [],
   },
+  role: [],
 };

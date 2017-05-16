@@ -14,6 +14,10 @@ import WelcomePage from './components/welcome/WelcomePage.jsx';
 import MyDocumentsPage from
     './components/documents/myDocumentsPage/myDocumentsPage.jsx';
 import myProfilePage from './components/users/myProfilePage.jsx';
+import createRolePage from './components/roles/createRolePage.jsx';
+import manageRolesPage from './components/roles/manageRolesPage.jsx';
+import viewUsersPage from './components/users/viewUsersPage.jsx';
+import manageUsersPage from './components/users/manageUsersPage.jsx';
 
 export default (
     <Route path="/" component={App}>
@@ -24,6 +28,14 @@ export default (
         <Route path="dashboard" component={VerifyToken(Dashboard)}/>
         <Route path="my-profile"
             component={VerifyToken(myProfilePage)}/>
+        <Route path="create-role"
+            component={VerifyToken(createRolePage)}/>
+        <Route path="manage-roles"
+            component={VerifyToken(manageRolesPage)}/>
+        <Route path="view-users"
+            component={VerifyToken(viewUsersPage)}/>
+        <Route path="manage-users"
+            component={VerifyToken(manageUsersPage)}/>
         <Route path="create-document"
             component={VerifyToken(CreateDocumentPage)}/>
         <Route path="my-documents"

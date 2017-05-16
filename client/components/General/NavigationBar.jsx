@@ -115,6 +115,10 @@ class NavigationBar extends React.Component {
           <li><a href="my-profile"><i className="material-icons">account_circle</i>My Profile</a></li>
           <li><a href="create-document"><i className="material-icons">add</i>Create Document</a></li>
           <li><a href="my-documents"><i className="material-icons">perm_media</i>My Documents</a></li>
+          <li><a href="create-role"><i className="material-icons">add</i>Create Roles</a></li>
+          <li><a href="manage-roles"><i className="material-icons">settings</i>Manage Roles</a></li>
+          <li><a href="view-users"><i className="material-icons">visibility</i>View Users</a></li>
+          <li><a href="manage-users"><i className="material-icons">settings</i>Manage Users</a></li>
           <li><a onClick={this.logout}><i className="material-icons">power_settings_new</i>Log-out</a></li>
           <li><a href="#!">Second Link</a></li>
           <li><div className="divider" /></li>

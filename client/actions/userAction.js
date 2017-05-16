@@ -3,9 +3,12 @@ import {
   LOAD_USER_PROFILE_SUCCESS,
   UPDATE_USER_PROFILE_SUCCESS,
   DELETE_USER_PROFILE_SUCCESS,
+  LOAD_ALL_USERS_SUCCESS,
+  DELETE_SINGLE_USER_SUCCESS,
 } from '../actions/actionTypes';
 import {
   addFlashMessage,
+  deleteFlashMessage,
 } from '../actions/flashMessages';
 
 /**
@@ -92,11 +95,83 @@ export function updateUserProfile(user, userId) {
       });
 }
 
+/**
+ * This function deletes a user
+ *
+ * @export
+ * @param {number} userId
+ * @returns dispatch
+ */
 export function deleteUserAccount(userId) {
   return dispatch => axios.delete(`/api/users/${userId}`)
       .then((res) => {
         console.log(res);
         dispatch(deleteUserAccountSuccess());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+
+/**
+ * This function ensures users are loaded sucessfully
+ *
+ * @export
+ * @param {object} users
+ * @returns {object}
+ */
+export function loadAllUsersSuccess(users) {
+  return {
+    type: LOAD_ALL_USERS_SUCCESS,
+    users,
+  };
+}
+
+/**
+ * The function loads all users
+ *
+ * @export
+ * @returns dispatch
+ */
+export function loadAllUsers() {
+  return dispatch => axios.get('/api/users')
+      .then((res) => {
+        dispatch(loadAllUsersSuccess(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+
+/**
+ * This function ensure to delete a user sucessfully
+ *
+ * @export
+ * @param {number} userId
+ * @returns {object}
+ */
+export function deleteSingleUserAccountSuccess(userId) {
+  return {
+    type: DELETE_SINGLE_USER_SUCCESS,
+    userId,
+  };
+}
+
+/**
+ * This function deletes a user
+ *
+ * @export
+ * @param {number} userId
+ * @returns dispatch
+ */
+export function deleteSingleUserAccount(userId) {
+  return dispatch => axios.delete(`/api/users/${userId}`)
+      .then((res) => {
+        const message = {};
+        message.text = res.data.message;
+        dispatch(addFlashMessage(message));
+        dispatch(deleteFlashMessage(1));
+        dispatch(deleteSingleUserAccountSuccess(userId));
       })
       .catch((error) => {
         console.log(error);
