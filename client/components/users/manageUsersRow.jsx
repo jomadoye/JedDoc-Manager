@@ -37,7 +37,6 @@ class ManageUsersRow extends React.Component {
       email: this.state.email,
       roleId: this.state.roleId,
     };
-    console.log(user);
     this.props.updateUserProfile(user, this.props.user.id);
   }
   handleEditModal(event) {
@@ -56,7 +55,8 @@ class ManageUsersRow extends React.Component {
         <td>{user.username}</td>
         <td>{user.email}</td>
         <td>{user.roleId}</td>
-        <td><a className="waves-effect waves-light btn" onClick={this.handleEditModal}>Edit User</a>
+        <td><a className="waves-effect waves-light btn"
+          onClick={this.handleEditModal}>Edit User</a>
           <div id={`modal-${user.id}`} className="modal">
             <div className="modal-content">
               <div className="row">
@@ -107,7 +107,8 @@ class ManageUsersRow extends React.Component {
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
-                    <button className="btn waves-effect waves-light" type="submit" name="action">Edit User
+                    <button className="btn waves-effect waves-light"
+                      type="submit" name="action">Edit User
                       <i className="material-icons right">send</i>
                     </button>
                   </div>
@@ -116,7 +117,9 @@ class ManageUsersRow extends React.Component {
             </div>
             </div>
             <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+              <a href="#!"
+                className="modal-action modal-closewaves-effect waves-green btn-flat">
+                Agree</a>
             </div>
         </div></td>
         <td><button
