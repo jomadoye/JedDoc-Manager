@@ -103,6 +103,7 @@ export function updateUserProfile(user, userId) {
         dispatch(addFlashMessage(message));
         dispatch(updateUserProfileSuccess(updatedUser));
         dispatch(updateUserProfileByAdminSuccess(updatedUser.user, userId));
+        dispatch(deleteFlashMessage(1));
       })
       .catch((error) => {
         const response = error.response.data.message;

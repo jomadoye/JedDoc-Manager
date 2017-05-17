@@ -18,6 +18,7 @@ class ManageUsersRow extends React.Component {
     this.handleEditModal = this.handleEditModal.bind(this);
     this.handleUserEditOnchange = this.handleUserEditOnchange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDisplayUserRole = this.handleDisplayUserRole.bind(this);
   }
   componentDidMount() {
     $('.modal').modal();
@@ -38,6 +39,7 @@ class ManageUsersRow extends React.Component {
       roleId: this.state.roleId,
     };
     this.props.updateUserProfile(user, this.props.user.id);
+    this.props.deleteFlashMessage(1);
   }
   handleEditModal(event) {
     event.preventDefault();
@@ -45,9 +47,20 @@ class ManageUsersRow extends React.Component {
     const modal = `#modal-${userId}`;
     $(modal).modal('open');
   }
+  handleDisplayUserRole(id) {
+    if (id === 1) {
+      return 'Administrator';
+    } else if (id === 2) {
+      return 'Tester';
+    } else if (id === 3) {
+      return 'Regular User';
+    }
+    return 'User';
+  }
   render() {
     const { user, index } = this.props;
     const { fullname, email, username, roleId } = this.state;
+
     return (
       <tr key={user.id}>
         <td>{index + 1}</td>
@@ -55,6 +68,7 @@ class ManageUsersRow extends React.Component {
         <td>{user.username}</td>
         <td>{user.email}</td>
         <td>{user.roleId}</td>
+        <td>{this.handleDisplayUserRole(user.roleId)}</td>
         <td><a className="waves-effect waves-light btn"
           onClick={this.handleEditModal}>Edit User</a>
           <div id={`modal-${user.id}`} className="modal">

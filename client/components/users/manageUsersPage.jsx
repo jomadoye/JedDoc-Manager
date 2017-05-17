@@ -22,6 +22,7 @@ class ManageUsersPage extends React.Component {
               <th>UserName</th>
               <th>Email</th>
               <th>Role Id</th>
+              <th>Role</th>
               <th>Edit User</th>
               <th>Delete User</th>
           </tr>

@@ -19,6 +19,9 @@ class myProfilePage extends React.Component {
     this.setupUpdateUser = this.setupUpdateUser.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ user: nextProps.user });
+  }
   updateUserState(event) {
     const field = event.target.name;
     const user = Object.assign({}, this.state.user);
