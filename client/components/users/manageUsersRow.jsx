@@ -36,6 +36,7 @@ ManageUsersRow.propTypes = {
   user: PropTypes.object.isRequired,
   deleteSingleUserAccount: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 /**
