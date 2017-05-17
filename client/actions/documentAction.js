@@ -122,7 +122,7 @@ export function deleteDocumentByAdminSuccess(documentId) {
  */
 export function updateUserDocumentSuccess(document, documentId) {
   return {
-    type: UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
+    type: UPDATE_USER_DOCUMENT_SUCCESS,
     document,
     documentId,
   };
@@ -137,7 +137,7 @@ export function updateUserDocumentSuccess(document, documentId) {
  */
 export function updateDocumentByAdminSuccess(document, documentId) {
   return {
-    type: UPDATE_USER_DOCUMENT_SUCCESS,
+    type: UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
     document,
     documentId,
   };
@@ -151,13 +151,13 @@ export function updateDocumentByAdminSuccess(document, documentId) {
  */
 export function loadWelcomePageDocument() {
   return dispatch => axios.get('/documents', document)
-      .then((documents) => {
-        const document = documents.data.document;
-        dispatch(loadWelcomePageDocumentSuccess(document));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((documents) => {
+      const document = documents.data.document;
+      dispatch(loadWelcomePageDocumentSuccess(document));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 /**
@@ -168,13 +168,13 @@ export function loadWelcomePageDocument() {
  */
 export function loadAuthorizedToViewDocument() {
   return dispatch => axios.get('/api/documents')
-      .then((documents) => {
-        const document = documents.data.document;
-        dispatch(loadAuthorizedToViewDocumentSuccess(document));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((documents) => {
+      const document = documents.data.document;
+      dispatch(loadAuthorizedToViewDocumentSuccess(document));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 /**
@@ -186,13 +186,13 @@ export function loadAuthorizedToViewDocument() {
  */
 export function loadUserDocuments(userId) {
   return dispatch => axios.get(`/api/users/${userId}/documents`)
-      .then((documents) => {
-        const document = documents.data.documents;
-        dispatch(loadUserDocumentSuccess(document));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((documents) => {
+      const document = documents.data.documents;
+      dispatch(loadUserDocumentSuccess(document));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 /**
@@ -204,17 +204,17 @@ export function loadUserDocuments(userId) {
  */
 export function deleteDocument(documentId) {
   return dispatch => axios.delete(`/api/documents/${documentId}`)
-      .then((res) => {
-        const response = res.data.message;
-        const message = {};
-        message.text = response;
-        dispatch(addFlashMessage(message));
-        dispatch(deleteUserDocumentSuccess(documentId));
-        dispatch(deleteDocumentByAdminSuccess(documentId));
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+    .then((res) => {
+      const response = res.data.message;
+      const message = {};
+      message.text = response;
+      dispatch(addFlashMessage(message));
+      dispatch(deleteUserDocumentSuccess(documentId));
+      dispatch(deleteDocumentByAdminSuccess(documentId));
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 }
 
 /**
@@ -227,17 +227,17 @@ export function deleteDocument(documentId) {
  */
 export function updateDocument(document, documentId) {
   return dispatch => axios.put(`/api/documents/${documentId}`, document)
-      .then((res) => {
-        const response = res.data.message;
-        const message = {};
-        message.text = response;
-        dispatch(addFlashMessage(message));
-        dispatch(updateUserDocumentSuccess(res.data.document, documentId));
-        dispatch(updateDocumentByAdminSuccess(res.data.document, documentId));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((res) => {
+      const response = res.data.message;
+      const message = {};
+      message.text = response;
+      dispatch(addFlashMessage(message));
+      dispatch(updateUserDocumentSuccess(res.data.document, documentId));
+      dispatch(updateDocumentByAdminSuccess(res.data.document, documentId));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 /**
@@ -262,10 +262,10 @@ export function loadAllDocumentsSuccess(documents) {
  */
 export function loadAllDocuments() {
   return dispatch => axios.get('/api/documents/')
-      .then((res) => {
-        dispatch(loadAllDocumentsSuccess(res.data.document));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((res) => {
+      dispatch(loadAllDocumentsSuccess(res.data.document));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
