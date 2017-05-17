@@ -1,14 +1,59 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import TextFieldGroup from '../common/TextFieldGroup.jsx';
+import validateInput
+ from '../../../server/shared/validations/login/loginValidation';
+import { login } from '../../actions/loginActions';
 import LoginForm from './LoginForm.jsx';
 
 class LoginPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: '',
+      password: '',
+      errors: {},
+      isLoading: false,
+    };
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+  isValid() {
+    const { errors, isValid } = validateInput(this.state);
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+  onSubmit(event) {
+    event.preventDefault();
+    if (this.isValid()) {
+      this.setState({ errors: {}, isLoading: true });
+      this.props.login(this.state).then(() => {
+        this.context.router.push('dashboard');
+      }).catch((err) => {
+        console.log(err);
+        const response = err.response.data;
+        this.setState({ errors: response, isLoading: false });
+      });
+    }
+  }
+
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
   render() {
     return (
       <div>
         <h1 className="center-align welcome-message">Login Page</h1>
         <div className="row">
           <div className="col s8 offset-s2">
-            <LoginForm />
+            <LoginForm
+            state={this.state}
+            onsubmit={this.onSubmit}
+            onchange={this.onChange}/>
           </div>
         </div>
       </div>
@@ -16,4 +61,12 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage;
+LoginPage.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+LoginPage.contextTypes = {
+  router: PropTypes.object.isRequired,
+};
+
+export default connect(null, { login })(LoginPage);
