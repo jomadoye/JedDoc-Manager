@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SignupForm from './SignupForm.jsx';
-import { userSignupRequest, isUserExists } from '../../actions/signupActions';
-import { addFlashMessage } from '../../actions/flashMessages';
+import * as SignupActions from '../../actions/signupActions';
+import * as FlashMessageActions from '../../actions/flashMessages';
 
 class SignupPage extends React.Component {
   render() {
@@ -31,9 +31,20 @@ SignupPage.propTypes = {
   isUserExists: PropTypes.func.isRequired,
 };
 
-export default connect(
-  // MapStateToProp
-  null,
-  // MapDispatchToProps
-  { userSignupRequest, addFlashMessage, isUserExists },
-)(SignupPage);
+/**
+ * This function maps the dispatch to the props
+ *
+ * @param {any} dispatch
+ * @returns dispatch
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    userSignupRequest: userData =>
+      dispatch(SignupActions.userSignupRequest(userData)),
+    isUserExists: query =>
+      dispatch(SignupActions.isUserExists(query)),
+    addFlashMessage: message =>
+      dispatch(FlashMessageActions.addFlashMessage(message)),
+  };
+}
+export default connect(null, mapDispatchToProps)(SignupPage);

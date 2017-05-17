@@ -57,7 +57,7 @@ class SignupForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state)
-        .then((response) => {
+        .then(() => {
           this.props.addFlashMessage({
             type: 'success',
             text: 'You have signed up sucessfully, please SignIn',
@@ -111,7 +111,9 @@ class SignupForm extends React.Component {
         />
 
         <div className="container">
-          <button disabled={this.state.isLoading || this.state.invalid} className="btn waves-effect waves-light btn-large">
+          <button
+            disabled={this.state.isLoading || this.state.invalid}
+            className="btn waves-effect waves-light btn-large">
             Sign up
             <i className="material-icons right">send</i>
           </button>
