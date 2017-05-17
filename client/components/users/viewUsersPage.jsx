@@ -12,6 +12,7 @@ class viewUsersPage extends React.Component {
   componentWillMount() {
     this.props.loadAllUsers();
   }
+
   render() {
     const { allUsers } = this.props;
     return (
@@ -25,6 +26,7 @@ class viewUsersPage extends React.Component {
               <th>UserName</th>
               <th>Email</th>
               <th>Role Id</th>
+              <th>Edit User</th>
               <th>Delete User</th>
           </tr>
         </thead>

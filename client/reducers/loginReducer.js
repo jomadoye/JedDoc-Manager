@@ -6,6 +6,7 @@ import {
   DELETE_USER_PROFILE_SUCCESS,
   LOAD_ALL_USERS_SUCCESS,
   DELETE_SINGLE_USER_SUCCESS,
+  UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS,
 } from '../actions/actionTypes';
 import initialState from './initialState';
 
@@ -35,6 +36,17 @@ export default (state = initialState.isUser, action = {}) => {
       {
         return Object.assign({}, state, {
           allUsers: action.users,
+        });
+      }
+
+    case UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS:
+      {
+        const users = state.allUsers.filter(user =>
+          user.id !== action.userId);
+        return Object.assign({}, state, { allUsers: [
+          ...users,
+          Object.assign({}, action.updatedUser),
+        ],
         });
       }
 

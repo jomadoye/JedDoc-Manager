@@ -5,6 +5,7 @@ import {
   DELETE_USER_PROFILE_SUCCESS,
   LOAD_ALL_USERS_SUCCESS,
   DELETE_SINGLE_USER_SUCCESS,
+  UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS,
 } from '../actions/actionTypes';
 import {
   addFlashMessage,
@@ -36,6 +37,21 @@ export function updateUserProfileSuccess(user) {
   return {
     type: UPDATE_USER_PROFILE_SUCCESS,
     updatedUser: user,
+  };
+}
+
+/**
+ * This function ensure the admin updated a user sucessfully
+ *
+ * @export
+ * @param {onject} user
+ * @returns dispatch
+ */
+export function updateUserProfileByAdminSuccess(user, userId) {
+  return {
+    type: UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS,
+    updatedUser: user,
+    userId,
   };
 }
 
@@ -86,6 +102,7 @@ export function updateUserProfile(user, userId) {
         message.text = response;
         dispatch(addFlashMessage(message));
         dispatch(updateUserProfileSuccess(updatedUser));
+        dispatch(updateUserProfileByAdminSuccess(updatedUser.user, userId));
       })
       .catch((error) => {
         const response = error.response.data.message;
