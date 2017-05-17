@@ -3,15 +3,22 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as RoleActions from '../../actions/roleActions';
 import ManageRoleRow from '../roles/manageRoleRow.jsx';
+import { deleteFlashMessage } from '../../actions/flashMessages';
+import ManageRoleTableHead from './manageRoleTableHead.jsx';
 
 class manageRolesPage extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.handleDelete = this.handleDelete.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   componentWillMount() {
     this.props.loadUserRoles();
+  }
+  handleDelete(roleId) {
+    event.preventDefault();
+    this.props.DeleteUserRoles(roleId);
+    this.props.deleteFlashMessage(1);
   }
   render() {
     const { roles } = this.props;
@@ -19,15 +26,13 @@ class manageRolesPage extends React.Component {
       <div className="container">
         <h1> welcome to manage role page for Admin</h1>
         <table className="striped">
-        <thead>
-          <tr>
-            <th>Role ID</th>
-            <th>Role Title</th>
-            <th>Delete Role</th>
-          </tr>
-        </thead>
-          <tbody>
-        {roles && roles.map(role => <ManageRoleRow key={role.id} role={role}/>)}
+          <ManageRoleTableHead />
+        <tbody>
+        {roles && roles.map(role => <ManageRoleRow
+          handleDelete={this.handleDelete}
+          key={role.id}
+          role={role}/>,
+        )}
         </tbody>
       </table>
       </div>
@@ -38,6 +43,9 @@ class manageRolesPage extends React.Component {
 manageRolesPage.propTypes = {
   loadUserRoles: PropTypes.func.isRequired,
   roles: PropTypes.array,
+  roleId: PropTypes.number,
+  DeleteUserRoles: PropTypes.func.isRequired,
+  deleteFlashMessage: PropTypes.func.isRequired,
 };
 
 /**
@@ -49,7 +57,8 @@ manageRolesPage.propTypes = {
 function mapDispatchToProps(dispatch) {
   return {
     loadUserRoles: () => dispatch(RoleActions.loadUserRoles()),
-    // deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
+    DeleteUserRoles: roleId => dispatch(RoleActions.DeleteUserRoles(roleId)),
+    deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
   };
 }
 
