@@ -78,7 +78,8 @@ class NavigationBar extends React.Component {
 
     const sideNavBar = (
       <Link to="/dashboard" className="brand-logo">
-        <i className="material-icons button-collapse" data-activates="slide-out">menu</i>
+        <i className="material-icons button-collapse"
+        data-activates="slide-out">menu</i>
         J-Docs
        </Link>
     );
@@ -107,27 +108,38 @@ class NavigationBar extends React.Component {
               <div className="background">
                 <img src="../../public/assets/SideBarBackgroundImg.png" />
               </div>
-              <a href="#!user"><img className="circle" src="../../public/assets/q.png"/></a>
-              <a href="#!name"><span className="white-text name">{ isAuthenticated && user.fullname }</span></a>
-              <a href="#!email"><span className="white-text email">{ isAuthenticated && user.email}</span></a>
+              <a href="#!user"><img className="circle"
+                src="../../public/assets/q.png"/></a>
+              <a href="#!name"><span className="white-text name">
+                  { isAuthenticated && user.fullname }</span></a>
+              <a href="#!email"><span className="white-text email">
+                  { isAuthenticated && user.email}</span></a>
             </div>
           </li>
-          <li><a href="my-profile"><i className="material-icons">account_circle</i>My Profile</a></li>
-          <li><a href="create-document"><i className="material-icons">add</i>Create Document</a></li>
-          <li><a href="my-documents"><i className="material-icons">perm_media</i>My Documents</a></li>
+          <li><a href="my-profile"><i className="material-icons">
+              account_circle</i>My Profile</a></li>
+          <li><a href="create-document"><i className="material-icons">
+              add</i>Create Document</a></li>
+          <li><a href="my-documents"><i className="material-icons">
+              perm_media</i>My Documents</a></li>
           {user && user.roleId === 1 &&
           <div>
-            <li><a href="create-role"><i className="material-icons">add</i>Create Roles</a></li>
-            <li><a href="view-users"><i className="material-icons">visibility</i>View Users</a></li>
-            <li><a href="manage-roles"><i className="material-icons">settings</i>Manage Roles</a></li>
-            <li><a href="manage-users"><i className="material-icons">settings</i>Manage Users</a></li>
-            <li><a href="manage-documents"><i className="material-icons">settings</i>Manage Documents</a></li>
+            <li><a href="create-role"><i className="material-icons">
+                add</i>Create Roles</a></li>
+            <li><a href="manage-roles"><i className="material-icons">
+                settings</i>Manage Roles</a></li>
+            <li><a href="manage-users"><i className="material-icons">
+                settings</i>Manage Users</a></li>
+            <li><a href="manage-documents"><i className="material-icons">
+                settings</i>Manage Documents</a></li>
           </div>}
-          <li><a onClick={this.logout}><i className="material-icons">power_settings_new</i>Log-out</a></li>
+          <li><a onClick={this.logout}><i className="material-icons">
+              power_settings_new</i>Log-out</a></li>
           <li><a href="#!">Second Link</a></li>
           <li><div className="divider" /></li>
           <li><a className="subheader">Subheader</a></li>
-          <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>
+          <li><a className="waves-effect" href="#!">
+            Third Link With Waves</a></li>
         </ul>
       </div>
 
