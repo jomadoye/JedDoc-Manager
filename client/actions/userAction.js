@@ -151,14 +151,24 @@ export function loadAllUsersSuccess(users) {
  * @export
  * @returns dispatch
  */
-export function loadAllUsers() {
-  return dispatch => axios.get('/api/users')
+export function loadAllUsers(limit, offset) {
+  if (limit || offset) {
+    return dispatch => axios.get(`/api/users?limit=${limit}&offset=${offset}`)
       .then((res) => {
         dispatch(loadAllUsersSuccess(res.data));
       })
       .catch((error) => {
         console.log(error);
       });
+  } else {
+    return dispatch => axios.get('/api/users')
+        .then((res) => {
+          dispatch(loadAllUsersSuccess(res.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  }
 }
 
 /**

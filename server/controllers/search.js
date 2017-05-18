@@ -40,7 +40,6 @@ export default {
 
   searchDocuments(req, res) {
     const query = req.query.q.split(' ');
-    console.log(query);
     return Document
       .findAll({
         where: {
