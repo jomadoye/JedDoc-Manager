@@ -9,12 +9,8 @@ class DocumentControllerHelper {
     const offset = req.query.offset || 0;
     const query = {};
     if (limit || offset) {
-      query.limit = {
-        limit,
-      };
-      query.offset = {
-        offset,
-      };
+      query.limit = limit;
+      query.offset = offset;
     }
     const hasDecodedProperty =
     Object.prototype.hasOwnProperty.call(req, 'decoded');
@@ -60,6 +56,8 @@ class DocumentControllerHelper {
 
   static isGetUserDocuments(user, res, req) {
     let response = {};
+    const limit = req.query.limit || null;
+    const offset = req.query.offset || 0;
     if (!user) {
       response = res.status(404)
         .json({
@@ -72,6 +70,8 @@ class DocumentControllerHelper {
           where: {
             userId: req.params.userId,
           },
+          limit,
+          offset,
           include: [models.Users],
         })
         .then((documents) => {
