@@ -184,15 +184,25 @@ export function loadAuthorizedToViewDocument() {
  * @param {object} userId An array of documents
  * @returns dispatch
  */
-export function loadUserDocuments(userId) {
+export function loadUserDocuments(userId, limit, offset) {
+  if (limit) {
+    return dispatch => axios.get(`/api/users/${userId}/documents?limit=${limit}&offset=${offset}`)
+      .then((documents) => {
+        const document = documents.data.documents;
+        dispatch(loadUserDocumentSuccess(document));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return dispatch => axios.get(`/api/users/${userId}/documents`)
-    .then((documents) => {
-      const document = documents.data.documents;
-      dispatch(loadUserDocumentSuccess(document));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((documents) => {
+        const document = documents.data.documents;
+        dispatch(loadUserDocumentSuccess(document));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 }
 
 /**

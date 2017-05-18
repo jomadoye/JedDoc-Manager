@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../../actions/documentAction';
 import CardDocumentView from '../../common/CardDocumentView.jsx';
+import PaginationNav from '../../common/PaginationNav.jsx';
 
 class MyDocumentPage extends React.Component {
   constructor(props) {
@@ -10,16 +11,37 @@ class MyDocumentPage extends React.Component {
 
     this.state = {
       documents: [...props.documents.MyDocuments],
+      selected: 1,
+      page: 1,
+      isPageLoad: false,
     };
+    this.handlePagination = this.handlePagination.bind(this);
   }
 
   componentDidMount() {
     const { UserId } = this.props;
     this.props.loadUserDocuments(UserId);
   }
-
   componentWillReceiveProps(nextProps) {
     this.setState({ documents: [...nextProps.documents.MyDocuments] });
+    if (this.props !== nextProps.props) {
+      const { isPageLoad } = this.state;
+      const { MyDocuments } = nextProps.documents;
+      const { UserId } = this.props;
+      if (!isPageLoad) {
+        if (MyDocuments) {
+          const page = Math.ceil(MyDocuments.length / 5);
+          this.props.loadUserDocuments(UserId, 5, 0);
+          this.setState({ page });
+          this.setState({ isPageLoad: true });
+        }
+      }
+    }
+  }
+  handlePagination(limit, offset, event) {
+    const { UserId } = this.props;
+    this.props.loadUserDocuments(UserId, limit, offset);
+    this.setState({ selected: event.target.innerHTML });
   }
 
   render() {
@@ -36,6 +58,13 @@ class MyDocumentPage extends React.Component {
         roleDocuments.push(document);
       }
     });
+    const { selected, page } = this.state;
+    const isActive = 'active';
+    const notActive = 'waves-effect';
+    let pageArray;
+    if (page) {
+      pageArray = new Array(page).fill('pages');
+    }
     return (
       <div className="container">
         <br />
@@ -74,6 +103,28 @@ class MyDocumentPage extends React.Component {
                 key={document.id}
                  myDocument/>)}
           </div>
+          <div className="center-align">
+            <ul className="pagination">
+              {
+              <div>
+                <li className="waves-effect"><a href="#!">
+                  <i className="material-icons">chevron_left</i></a></li>
+                {page && pageArray && pageArray.map((pages, index) =>
+                (<PaginationNav
+                  key={index}
+                  selected={selected}
+                  index={index}
+                  isActive={isActive}
+                  notActive={notActive}
+                  handlePagination={this.handlePagination}
+                  />))
+                }
+                <li className="waves-effect"><a href="#!">
+                  <i className="material-icons">chevron_right</i></a></li>
+              </div>
+              }
+            </ul>
+          </div>
         </div>
       </div>
     );
@@ -94,8 +145,8 @@ MyDocumentPage.propTypes = {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    loadUserDocuments: userId =>
-      dispatch(DocumentAction.loadUserDocuments(userId)),
+    loadUserDocuments: (userId, limit, offset) =>
+      dispatch(DocumentAction.loadUserDocuments(userId, limit, offset)),
   };
 }
 
