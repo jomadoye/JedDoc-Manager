@@ -34,7 +34,6 @@ class LoginPage extends React.Component {
       this.props.login(this.state).then(() => {
         this.context.router.push('dashboard');
       }).catch((err) => {
-        console.log(err);
         const response = err.response.data;
         this.setState({ errors: response, isLoading: false });
       });

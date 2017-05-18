@@ -166,7 +166,17 @@ export function loadWelcomePageDocument() {
  * @export
  * @returns dispatch
  */
-export function loadAuthorizedToViewDocument() {
+export function loadAuthorizedToViewDocument(limit, offset) {
+  if (limit) {
+    return dispatch => axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
+      .then((documents) => {
+        const document = documents.data.document;
+        dispatch(loadAuthorizedToViewDocumentSuccess(document));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return dispatch => axios.get('/api/documents')
     .then((documents) => {
       const document = documents.data.document;

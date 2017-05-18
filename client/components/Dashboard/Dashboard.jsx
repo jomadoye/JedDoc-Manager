@@ -3,14 +3,62 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
 import CardDocumentView from '../common/CardDocumentView.jsx';
+import PaginationNav from '../common/PaginationNav.jsx';
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      AuthToViewDocuments: props.documents.AuthToViewDocuments,
+      selected: 1,
+      page: 1,
+      isPageLoad: false,
+    };
+    this.handlePagination = this.handlePagination.bind(this);
+  }
   componentWillMount() {
     this.props.loadAuthorizedToViewDocument();
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ AuthToViewDocuments: nextProps.documents.AuthorizeToViewDocuments });
+    if (this.props !== nextProps.props) {
+      const { isPageLoad } = this.state;
+      const { AuthorizeToViewDocuments } = nextProps.documents;
+      if (!isPageLoad) {
+        if (AuthorizeToViewDocuments) {
+          const page = Math.ceil(AuthorizeToViewDocuments.length / 5);
+          this.props.loadAuthorizedToViewDocument(5, 0);
+          this.setState({ page });
+          this.setState({ isPageLoad: true });
+        }
+      }
+    }
+  }
+  handlePagination(limit, offset, event) {
+    this.props.loadAuthorizedToViewDocument(limit, offset);
+    this.setState({ selected: event.target.innerHTML });
+  }
   render() {
-    const { AuthToViewDocuments } = this.props;
-    const documents = AuthToViewDocuments;
+    const { AuthToViewDocuments } = this.state;
+    const publicDocuments = [];
+    const roleDocuments = [];
+    if (AuthToViewDocuments) {
+      AuthToViewDocuments.map((document) => {
+        if (document.access === 'public') {
+          publicDocuments.push(document);
+        } else if (document.access === 'role') {
+          roleDocuments.push(document);
+        }
+      });
+    }
+    const { selected, page } = this.state;
+    const isActive = 'active';
+    const notActive = 'waves-effect';
+    let pageArray;
+    if (page) {
+      pageArray = new Array(page).fill('pages');
+    }
     return (
       <div className="container">
         <br />
@@ -22,20 +70,42 @@ class Dashboard extends React.Component {
             </ul>
           </div>
           <div id="test1" className="col s12">
-            { documents && documents.map((document) => {
-              if (document.access === 'public') {
-                return <CardDocumentView document={document} key={document.id} myDocument={false} readOnly/>;
-              }
-            })}
+            { AuthToViewDocuments && publicDocuments.map(document =>
+                <CardDocumentView
+                document={document}
+                key={document.id}
+                 readOnly/>)}
           </div>
           <div id="test2" className="col s12">
-            { documents && documents.map((document) => {
-              if (document.access === 'role') {
-                return <CardDocumentView document={document} key={document.id} myDocument={false} readOnly/>;
-              }
-            })}
+            { AuthToViewDocuments && roleDocuments.map(document =>
+                <CardDocumentView
+                document={document}
+                key={document.id}
+                 readOnly/>)}
           </div>
         </div>
+        <div className="center-align">
+            <ul className="pagination">
+              {
+              <div>
+                <li className="waves-effect"><a href="#!">
+                  <i className="material-icons">chevron_left</i></a></li>
+                {page && pageArray && pageArray.map((pages, index) =>
+                (<PaginationNav
+                  key={index}
+                  selected={selected}
+                  index={index}
+                  isActive={isActive}
+                  notActive={notActive}
+                  handlePagination={this.handlePagination}
+                  />))
+                }
+                <li className="waves-effect"><a href="#!">
+                  <i className="material-icons">chevron_right</i></a></li>
+              </div>
+              }
+            </ul>
+          </div>
       </div>
     );
   }
@@ -43,6 +113,8 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   loadAuthorizedToViewDocument: PropTypes.func.isRequired,
+  AuthToViewDocuments: PropTypes.array,
+  documents: PropTypes.object.isRequired,
 };
 
 /**
@@ -53,8 +125,8 @@ Dashboard.propTypes = {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    loadAuthorizedToViewDocument: () =>
-      dispatch(DocumentAction.loadAuthorizedToViewDocument()),
+    loadAuthorizedToViewDocument: (limit, offset) =>
+      dispatch(DocumentAction.loadAuthorizedToViewDocument(limit, offset)),
   };
 }
 
@@ -66,7 +138,7 @@ function mapDispatchToProps(dispatch) {
  */
 function mapStateToProps(state) {
   return {
-    AuthToViewDocuments: state.documents.AuthorizeToViewDocuments,
+    documents: state.documents,
   };
 }
 
