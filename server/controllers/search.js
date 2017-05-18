@@ -5,10 +5,13 @@ const Document = models.Documents;
 
 export default {
   searchUsers(req, res) {
+    const query = req.query.q.split(' ');
     return User
-      .find({
+      .findAll({
         where: {
-          username: req.params.username,
+          username: {
+            $any: query,
+          },
         },
         include: [{
           model: Document,
@@ -36,10 +39,26 @@ export default {
   },
 
   searchDocuments(req, res) {
+    const query = req.query.q.split(' ');
+    console.log(query);
     return Document
-      .find({
+      .findAll({
         where: {
-          title: req.params.documentTitle,
+          $or: [{
+            title: {
+              $iLike: {
+                $any: query,
+              },
+            },
+          },
+          {
+            body: {
+              $iLike: {
+                $any: query,
+              },
+            },
+          },
+          ],
         },
       })
       .then((document) => {

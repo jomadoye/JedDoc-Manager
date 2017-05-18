@@ -80,11 +80,11 @@ const Route = (app) => {
     .delete(isAdmin, rolesController.destroy);
 
   app
-    .route('/api/search/users/:username')
+    .route('/api/search/users')
     .get(isAdmin, searchController.searchUsers);
 
   app
-    .route('/api/search/documents/:documentTitle')
+    .route('/api/search/documents')
     .get(searchController.searchDocuments);
 
   app
