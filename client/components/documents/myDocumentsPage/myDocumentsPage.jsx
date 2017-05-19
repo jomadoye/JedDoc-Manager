@@ -129,6 +129,7 @@ class MyDocumentPage extends React.Component {
                   isActive={isActive}
                   notActive={notActive}
                   handlePagination={this.handlePagination}
+                  isSearchDocument
                   />))
                 }
                 <li className="waves-effect"><a href="#!">

@@ -8,9 +8,16 @@ import PropTypes from 'prop-types';
  * @param {...props} { props }
  * return HTML
  */
-export default function PaginationNav({ index, selected, isActive, notActive, handlePagination }) {
-  const limit = 5;
-  const offset = index * 5;
+export default function PaginationNav({ index, selected, isActive, notActive, handlePagination, isSearchDocument }) {
+  let limit = 5;
+  let offset = 0;
+  if (isSearchDocument === true) {
+    limit = 8;
+    offset = index * 8;
+  } else {
+    limit = 5;
+    offset = index * 5;
+  }
   return (
     <li key={index}
     className={selected === `${index + 1}` ? isActive : notActive}><a
@@ -24,5 +31,6 @@ PaginationNav.propTypes = {
   isActive: PropTypes.string.isRequired,
   notActive: PropTypes.string.isRequired,
   handlePagination: PropTypes.func.isRequired,
+  isSearchDocument: PropTypes.bool,
 };
 
