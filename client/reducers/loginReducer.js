@@ -7,6 +7,7 @@ import {
   LOAD_ALL_USERS_SUCCESS,
   DELETE_SINGLE_USER_SUCCESS,
   UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS,
+  SEARCH_USER_BY_USERNAME_SUCCESS,
 } from '../actions/actionTypes';
 import initialState from './initialState';
 
@@ -33,6 +34,13 @@ export default (state = initialState.isUser, action = {}) => {
       }
 
     case LOAD_ALL_USERS_SUCCESS:
+      {
+        return Object.assign({}, state, {
+          allUsers: action.users,
+        });
+      }
+
+    case SEARCH_USER_BY_USERNAME_SUCCESS:
       {
         return Object.assign({}, state, {
           allUsers: action.users,

@@ -20,7 +20,7 @@ export default function PaginationNav({ index, selected, isActive, notActive, ha
 
 PaginationNav.propTypes = {
   index: PropTypes.number.isRequired,
-  selected: PropTypes.number.isRequired,
+  selected: PropTypes.string.isRequired,
   isActive: PropTypes.string.isRequired,
   notActive: PropTypes.string.isRequired,
   handlePagination: PropTypes.func.isRequired,

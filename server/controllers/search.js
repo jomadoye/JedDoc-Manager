@@ -5,7 +5,9 @@ const Document = models.Documents;
 
 export default {
   searchUsers(req, res) {
-    const query = req.query.q.split(' ').map(searchWord => `%${searchWord}%`);
+    const query = req.query.q.trim().split(' ').map(searchWord => `%${searchWord}%`);
+    const limit = req.query.limit || null;
+    const offset = req.query.offset || 0;
     return User
       .findAll({
         where: {
@@ -13,6 +15,8 @@ export default {
             $ilike: { $any: query },
           },
         },
+        limit,
+        offset,
         include: [{
           model: Document,
           as: 'documents',

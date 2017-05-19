@@ -14,7 +14,10 @@ class ManageUsersPage extends React.Component {
       selected: 1,
       page: 1,
       isPageLoad: false,
+      search: ' ',
     };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
     this.props.loadAllUsers();
@@ -37,10 +40,19 @@ class ManageUsersPage extends React.Component {
     this.props.loadAllUsers(limit, offset);
     this.setState({ selected: event.target.innerHTML });
   }
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.searchUserByUsername(this.state.search, 5, 0);
+  }
+  onChange(event) {
+    event.preventDefault();
+    this.setState({ search: event.target.value });
+  }
 
   render() {
     const { allUsers } = this.props;
-    const { selected, page } = this.state;
+    const { selected, page, search } = this.state;
+    const selectedUsers = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
     let pageArray;
@@ -75,7 +87,7 @@ class ManageUsersPage extends React.Component {
               <li className="waves-effect"><a href="#!"><i className="material-icons">chevron_left</i></a></li>
               {page && pageArray && pageArray.map((pages, index) => (<PaginationNav
                  key={index}
-                 selected={selected}
+                 selected={selectedUsers}
                  index={index}
                  isActive={isActive}
                  notActive={notActive}
@@ -87,6 +99,28 @@ class ManageUsersPage extends React.Component {
             }
           </ul>
         </div>
+
+        <div className="fixed-action-btn horizontal click-to-toggle">
+          <a className="btn-floating btn-large red">
+            <i className="material-icons  teal lighten-3">search</i>
+          </a>
+          <ul>
+            <form onSubmit={this.onSubmit}>
+              <div className="row">
+                <div className="input-field">
+                  <input
+                  placeholder="Placeholder"
+                  id="first_name"
+                  value={search}
+                  onChange={this.onChange}
+                  type="text"
+                  className="validate"/>
+                  <label htmlFor="first_name">Search Users</label>
+                </div>
+              </div>
+            </form>
+          </ul>
+        </div>
       </div>
     );
   }
@@ -94,6 +128,7 @@ class ManageUsersPage extends React.Component {
 
 ManageUsersPage.propTypes = {
   loadAllUsers: PropTypes.func.isRequired,
+  searchUserByUsername: PropTypes.func.isRequired,
   allUsers: PropTypes.array,
 };
 
@@ -105,7 +140,10 @@ ManageUsersPage.propTypes = {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    loadAllUsers: (limit, offset) => dispatch(UserActions.loadAllUsers(limit, offset)),
+    loadAllUsers: (limit, offset) =>
+      dispatch(UserActions.loadAllUsers(limit, offset)),
+    searchUserByUsername: (searchQuery, limit, offset) =>
+      dispatch(UserActions.searchUserByUsername(searchQuery, limit, offset)),
   };
 }
 

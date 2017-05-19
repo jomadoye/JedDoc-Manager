@@ -6,6 +6,7 @@ import {
   LOAD_ALL_USERS_SUCCESS,
   DELETE_SINGLE_USER_SUCCESS,
   UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS,
+  SEARCH_USER_BY_USERNAME_SUCCESS,
 } from '../actions/actionTypes';
 import {
   addFlashMessage,
@@ -64,6 +65,19 @@ export function updateUserProfileByAdminSuccess(user, userId) {
 export function deleteUserAccountSuccess() {
   return {
     type: DELETE_USER_PROFILE_SUCCESS,
+  };
+}
+
+/**
+ * This function ensures the user was searched successfully
+ *
+ * @export
+ * @returns object
+ */
+export function searchUserByUsernameSuccess(searchedUsers) {
+  return {
+    type: SEARCH_USER_BY_USERNAME_SUCCESS,
+    users: searchedUsers,
   };
 }
 
@@ -160,7 +174,7 @@ export function loadAllUsers(limit, offset) {
       .catch((error) => {
         console.log(error);
       });
-  } else {
+  } 
     return dispatch => axios.get('/api/users')
         .then((res) => {
           dispatch(loadAllUsersSuccess(res.data));
@@ -168,7 +182,7 @@ export function loadAllUsers(limit, offset) {
         .catch((error) => {
           console.log(error);
         });
-  }
+  
 }
 
 /**
@@ -200,6 +214,25 @@ export function deleteSingleUserAccount(userId) {
         dispatch(addFlashMessage(message));
         dispatch(deleteFlashMessage(1));
         dispatch(deleteSingleUserAccountSuccess(userId));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+
+/**
+ * This function search a user by username
+ *
+ * @export
+ * @param {string} searchQuery
+ * @returns
+ */
+export function searchUserByUsername(searchQuery, limit, offset) {
+  return dispatch => axios.get(`/api/search/users?q=${searchQuery}&limit=${limit}&offset=${offset}`)
+  // return dispatch => axios.get(`/api/search/users?q=jed&limit=5&offset=0`)
+      .then((res) => {
+        console.log(res)
+        dispatch(searchUserByUsernameSuccess(res.data.user));
       })
       .catch((error) => {
         console.log(error);
