@@ -9,6 +9,7 @@ import {
   LOAD_ALL_DOCUMENTS_SUCCESS,
   DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
   UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
+  SEARCH_DOCUMENTS_BY_TITLE_SUCCESS,
 } from '../actions/actionTypes';
 
 export default
@@ -33,6 +34,12 @@ function documentReducer(state = initialState.documents, action) {
       {
         return Object.assign({}, state, {
           MyDocuments: action.MyDocuments,
+        });
+      }
+    case SEARCH_DOCUMENTS_BY_TITLE_SUCCESS:
+      {
+        return Object.assign({}, state, {
+          MyDocuments: action.searchDocuments,
         });
       }
 

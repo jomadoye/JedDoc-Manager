@@ -5,14 +5,18 @@ const Document = models.Documents;
 
 export default {
   searchUsers(req, res) {
-    const query = req.query.q.trim().split(' ').map(searchWord => `%${searchWord}%`);
+    const query = req.query.q.trim()
+      .split(' ')
+      .map(searchWord => `%${searchWord}%`);
     const limit = req.query.limit || null;
     const offset = req.query.offset || 0;
     return User
       .findAll({
         where: {
           username: {
-            $ilike: { $any: query },
+            $ilike: {
+              $any: query,
+            },
           },
         },
         limit,
@@ -43,26 +47,22 @@ export default {
   },
 
   searchDocuments(req, res) {
-    const query = req.query.q.split(' ');
+    const query = req.query.q.trim()
+      .split(' ')
+      .map(searchWord => `%${searchWord}%`);
+    const limit = req.query.limit || null;
+    const offset = req.query.offset || 0;
     return Document
       .findAll({
         where: {
-          $or: [{
-            title: {
-              $iLike: {
-                $any: query,
-              },
+          title: {
+            $ilike: {
+              $any: query,
             },
           },
-          {
-            body: {
-              $iLike: {
-                $any: query,
-              },
-            },
-          },
-          ],
         },
+        limit,
+        offset,
       })
       .then((document) => {
         if (!document) {

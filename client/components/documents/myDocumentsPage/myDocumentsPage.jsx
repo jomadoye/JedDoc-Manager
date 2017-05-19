@@ -14,8 +14,11 @@ class MyDocumentPage extends React.Component {
       selected: 1,
       page: 1,
       isPageLoad: false,
+      search: ' ',
     };
     this.handlePagination = this.handlePagination.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -30,8 +33,8 @@ class MyDocumentPage extends React.Component {
       const { UserId } = this.props;
       if (!isPageLoad) {
         if (MyDocuments) {
-          const page = Math.ceil(MyDocuments.length / 5);
-          this.props.loadUserDocuments(UserId, 5, 0);
+          const page = Math.ceil(MyDocuments.length / 8);
+          this.props.loadUserDocuments(UserId, 8, 0);
           this.setState({ page });
           this.setState({ isPageLoad: true });
         }
@@ -42,6 +45,14 @@ class MyDocumentPage extends React.Component {
     const { UserId } = this.props;
     this.props.loadUserDocuments(UserId, limit, offset);
     this.setState({ selected: event.target.innerHTML });
+  }
+  onChange(event) {
+    event.preventDefault();
+    this.setState({ search: event.target.value });
+  }
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.searchDocumentsByTitle(this.state.search, 5, 0);
   }
 
   render() {
@@ -58,7 +69,8 @@ class MyDocumentPage extends React.Component {
         roleDocuments.push(document);
       }
     });
-    const { selected, page } = this.state;
+    const { selected, page, search } = this.state;
+    const selectedDocuments = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
     let pageArray;
@@ -112,7 +124,7 @@ class MyDocumentPage extends React.Component {
                 {page && pageArray && pageArray.map((pages, index) =>
                 (<PaginationNav
                   key={index}
-                  selected={selected}
+                  selected={selectedDocuments}
                   index={index}
                   isActive={isActive}
                   notActive={notActive}
@@ -125,6 +137,27 @@ class MyDocumentPage extends React.Component {
               }
             </ul>
           </div>
+          <div className="fixed-action-btn horizontal click-to-toggle">
+          <a className="btn-floating btn-large red">
+            <i className="material-icons  teal lighten-3">search</i>
+          </a>
+          <ul>
+            <form onSubmit={this.onSubmit}>
+              <div className="row">
+                <div className="input-field">
+                  <input
+                  placeholder="Placeholder"
+                  id="first_name"
+                  value={search}
+                  onChange={this.onChange}
+                  type="text"
+                  className="validate"/>
+                  <label htmlFor="first_name">Search Users</label>
+                </div>
+              </div>
+            </form>
+          </ul>
+        </div>
         </div>
       </div>
     );
@@ -133,6 +166,7 @@ class MyDocumentPage extends React.Component {
 
 MyDocumentPage.propTypes = {
   loadUserDocuments: PropTypes.func.isRequired,
+  searchDocumentsByTitle: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
   UserId: PropTypes.number.isRequired,
 };
@@ -147,6 +181,8 @@ function mapDispatchToProps(dispatch) {
   return {
     loadUserDocuments: (userId, limit, offset) =>
       dispatch(DocumentAction.loadUserDocuments(userId, limit, offset)),
+    searchDocumentsByTitle: (searchQuery, limit, offset) =>
+      dispatch(DocumentAction.searchDocumentsByTitle(searchQuery, limit, offset)),
   };
 }
 

@@ -8,6 +8,7 @@ import {
   LOAD_ALL_DOCUMENTS_SUCCESS,
   DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
   UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
+  SEARCH_DOCUMENTS_BY_TITLE_SUCCESS,
 } from './actionTypes';
 import {
   addFlashMessage,
@@ -275,6 +276,20 @@ export function loadAllDocumentsSuccess(documents) {
 }
 
 /**
+ *
+ *
+ * @export
+ * @param {any} documents
+ * @returns
+ */
+export function searchDocumentsByTitleSuccess(documents) {
+  return {
+    type: SEARCH_DOCUMENTS_BY_TITLE_SUCCESS,
+    searchDocuments: documents,
+  };
+}
+
+/**
  * Thie function loads all documents for admin
  *
  * @export
@@ -284,6 +299,25 @@ export function loadAllDocuments() {
   return dispatch => axios.get('/api/documents/')
     .then((res) => {
       dispatch(loadAllDocumentsSuccess(res.data.document));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+/**
+ * This function searches a document by title
+ *
+ * @export
+ * @param {string} query
+ * @param {number} limit
+ * @param {number} offset
+ * @returns
+ */
+export function searchDocumentsByTitle(query, limit, offset) {
+  return dispatch => axios.get(`/api/search/documents?q=${query}&limit=${limit}&offset=${offset}`)
+    .then((res) => {
+      dispatch(searchDocumentsByTitleSuccess(res.data.document));
     })
     .catch((error) => {
       console.log(error);
