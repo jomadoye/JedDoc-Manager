@@ -55,9 +55,12 @@ class DashboardDocumentView extends React.Component {
 
   handleDelete() {
     event.preventDefault();
-    const documentId = this.props.document.id;
-    this.props.deleteDocument(documentId);
-    this.props.deleteFlashMessage(1);
+    const confirmDelete = confirm('Are you sure you want to delete this Document');
+    if (confirmDelete === true) {
+      const documentId = this.props.document.id;
+      this.props.deleteDocument(documentId);
+      this.props.deleteFlashMessage(1);
+    }
   }
 
   handleDocumentOnchange(event) {

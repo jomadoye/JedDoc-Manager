@@ -44,8 +44,11 @@ class myProfilePage extends React.Component {
   }
   handleDelete(event) {
     event.preventDefault();
-    this.props.deleteUserAccount(this.props.userId);
-    this.props.logout();
+    const confirmDelete = confirm('Are you sure you want to delete this account!!!');
+    if (confirmDelete === true) {
+      this.props.deleteUserAccount(this.props.userId);
+      this.props.logout();
+    }
   }
   render() {
     const { isUpdateingUser, showSubmitButton } = this.state;
