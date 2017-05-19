@@ -5,12 +5,12 @@ const Document = models.Documents;
 
 export default {
   searchUsers(req, res) {
-    const query = req.query.q.split(' ');
+    const query = req.query.q.split(' ').map(searchWord => `%${searchWord}%`);
     return User
       .findAll({
         where: {
           username: {
-            $any: query,
+            $ilike: { $any: query },
           },
         },
         include: [{
