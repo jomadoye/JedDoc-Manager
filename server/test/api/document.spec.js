@@ -187,7 +187,7 @@ describe('Document API', () => {
 
     it('should not find doc if title does not exist', (done) => {
       chai.request(server)
-        .get(`/api/search/documents/?q=${document.document.title}notExist`)
+        .get('/api/search/documents/?q=notExist')
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.body.document.length.should.eql(0);
