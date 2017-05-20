@@ -13,7 +13,7 @@ class myProfilePage extends React.Component {
       user: {
         username: this.props.user.username,
         fullname: this.props.user.fullname,
-        password: '*******',
+        password: '',
         email: this.props.user.email,
       },
       isUpdateingUser: true,

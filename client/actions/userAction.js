@@ -7,6 +7,7 @@ import {
   DELETE_SINGLE_USER_SUCCESS,
   UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS,
   SEARCH_USER_BY_USERNAME_SUCCESS,
+  UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS,
 } from '../actions/actionTypes';
 import {
   addFlashMessage,
@@ -110,24 +111,19 @@ export function loadUserProfile(userId) {
  * @param {number} roleId the user to update, roleId
  * @returns dispatch
  */
-export function updateUserProfile(user, userId, roleId) {
+export function updateUserProfile(user, userId) {
   return dispatch => axios.put(`/api/users/${userId}`, user)
       .then((updatedUserDetails) => {
         const updatedUser = updatedUserDetails.data;
         const response = updatedUser.message;
         const message = {};
         message.text = response;
-        if (roleId === 1) {
-          dispatch(addFlashMessage(message));
-          dispatch(updateUserProfileByAdminSuccess(updatedUser.user, userId));
-          dispatch(deleteFlashMessage(1));
-        } else {
-          dispatch(addFlashMessage(message));
-          dispatch(updateUserProfileSuccess(updatedUser));
-          dispatch(deleteFlashMessage(1));
-        }
+        dispatch(addFlashMessage(message));
+        dispatch(updateUserProfileSuccess(updatedUser));
+        dispatch(deleteFlashMessage(1));
       })
       .catch((error) => {
+        console.log(error);
         const response = error.response.data.message;
         const message = {};
         message.text = response;
@@ -208,6 +204,22 @@ export function deleteSingleUserAccountSuccess(userId) {
 }
 
 /**
+ * This function ensure the admin can edit a user account successfully
+ *
+ * @export
+ * @param {object} updatedUser
+ * @param {number} userId
+ * @returns dispatch
+ */
+export function updateSingleUserAccountByAdminSuccess(updatedUser, userId) {
+  return {
+    type: UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS,
+    userId,
+    updatedUser,
+  };
+}
+
+/**
  * This function deletes a user
  *
  * @export
@@ -222,6 +234,28 @@ export function deleteSingleUserAccount(userId) {
         dispatch(addFlashMessage(message));
         dispatch(deleteFlashMessage(1));
         dispatch(deleteSingleUserAccountSuccess(userId));
+      })
+      .catch((error) => {
+        throw error;
+      });
+}
+
+/**
+ * This function allows the admin edit a user profile
+ *
+ * @export
+ * @param {object} user
+ * @param {user} userId
+ * @returns dispatch
+ */
+export function updateSingleUserAccountByAdmin(updatedUser, userId) {
+  return dispatch => axios.put(`/api/users/${userId}`, updatedUser)
+      .then((res) => {
+        const message = {};
+        message.text = res.data.message;
+        dispatch(addFlashMessage(message));
+        dispatch(deleteFlashMessage(1));
+        dispatch(updateSingleUserAccountByAdminSuccess(updatedUser, userId));
       })
       .catch((error) => {
         throw error;

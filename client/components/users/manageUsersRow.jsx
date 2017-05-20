@@ -38,8 +38,7 @@ class ManageUsersRow extends React.Component {
       email: this.state.email,
       roleId: this.state.roleId,
     };
-    this.props.updateUserProfile(user, this.props.user.id,
-      this.props.roleId);
+    this.props.updateSingleUserAccountByAdmin(user, this.props.user.id);
     this.props.deleteFlashMessage(1);
   }
   handleEditModal(event) {
@@ -152,7 +151,7 @@ ManageUsersRow.propTypes = {
   deleteFlashMessage: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   roleId: PropTypes.number.isRequired,
-  updateUserProfile: PropTypes.func.isRequired,
+  updateSingleUserAccountByAdmin: PropTypes.func.isRequired,
 };
 
 /**
@@ -162,13 +161,6 @@ ManageUsersRow.propTypes = {
  * @returns {object} state
  */
 function mapStateToProps(state) {
-  const hasUserDetailsProperty = Object.prototype.hasOwnProperty
-    .call(state.user, 'userDetails');
-  if (hasUserDetailsProperty) {
-    return {
-      roleId: state.login.user.roleId,
-    };
-  }
   return {
     roleId: state.login.user.roleId,
   };
@@ -184,8 +176,8 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteSingleUserAccount: userId =>
       dispatch(UserActions.deleteSingleUserAccount(userId)),
-    updateUserProfile: (user, userId, roleId) =>
-      dispatch(UserActions.updateUserProfile(user, userId, roleId)),
+    updateSingleUserAccountByAdmin: (user, userId) =>
+      dispatch(UserActions.updateSingleUserAccountByAdmin(user, userId)),
     deleteFlashMessage: () => dispatch(deleteFlashMessage()),
 
   };
