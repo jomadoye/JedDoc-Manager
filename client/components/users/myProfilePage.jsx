@@ -10,7 +10,12 @@ class myProfilePage extends React.Component {
     super(props);
     this.props.loadUserProfile(this.props.userId);
     this.state = {
-      user: this.props.user,
+      user: {
+        username: this.props.user.username,
+        fullname: this.props.user.fullname,
+        password: '*******',
+        email: this.props.user.email,
+      },
       isUpdateingUser: true,
       showSubmitButton: false,
     };

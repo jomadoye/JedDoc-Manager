@@ -66,6 +66,7 @@ export default {
   retrieve(req, res) {
     return User
       .findById(req.params.userId, {
+        attributes: ['username', 'email', 'fullname', 'id', 'roleId'],
         include: [{
           model: Document,
           as: 'documents',
