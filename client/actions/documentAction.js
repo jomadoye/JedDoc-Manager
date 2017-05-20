@@ -255,15 +255,19 @@ export function deleteDocument(documentId) {
  * @param {number} documentId
  * @returns dispatch
  */
-export function updateDocument(document, documentId) {
+export function updateDocument(document, documentId, roleId) {
   return dispatch => axios.put(`/api/documents/${documentId}`, document)
     .then((res) => {
       const response = res.data.message;
       const message = {};
       message.text = response;
-      dispatch(addFlashMessage(message));
-      dispatch(updateUserDocumentSuccess(res.data.document, documentId));
-      dispatch(updateDocumentByAdminSuccess(res.data.document, documentId));
+      if (roleId === 1) {
+        dispatch(addFlashMessage(message));
+        dispatch(updateDocumentByAdminSuccess(res.data.document, documentId));
+      } else {
+        dispatch(addFlashMessage(message));
+        dispatch(updateUserDocumentSuccess(res.data.document, documentId));
+      }
     })
     .catch((error) => {
       throw error;

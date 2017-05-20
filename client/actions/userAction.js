@@ -107,19 +107,25 @@ export function loadUserProfile(userId) {
  * @export
  * @param {object} user the user to update
  * @param {number} userId the user to update, Id
+ * @param {number} roleId the user to update, roleId
  * @returns dispatch
  */
-export function updateUserProfile(user, userId) {
+export function updateUserProfile(user, userId, roleId) {
   return dispatch => axios.put(`/api/users/${userId}`, user)
       .then((updatedUserDetails) => {
         const updatedUser = updatedUserDetails.data;
         const response = updatedUser.message;
         const message = {};
         message.text = response;
-        dispatch(addFlashMessage(message));
-        dispatch(updateUserProfileSuccess(updatedUser));
-        dispatch(updateUserProfileByAdminSuccess(updatedUser.user, userId));
-        dispatch(deleteFlashMessage(1));
+        if (roleId === 1) {
+          dispatch(addFlashMessage(message));
+          dispatch(updateUserProfileByAdminSuccess(updatedUser.user, userId));
+          dispatch(deleteFlashMessage(1));
+        } else {
+          dispatch(addFlashMessage(message));
+          dispatch(updateUserProfileSuccess(updatedUser));
+          dispatch(deleteFlashMessage(1));
+        }
       })
       .catch((error) => {
         const response = error.response.data.message;

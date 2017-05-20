@@ -33,9 +33,9 @@ class myProfilePage extends React.Component {
   updateUserProfile(event) {
     event.preventDefault();
     this.setState({ isUpdateingUser: true, showSubmitButton: false });
-    this.props.updateUserProfile(this.state.user, this.props.user.id);
+    this.props.updateUserProfile(this.state.user, this.props.user.id,
+    this.props.roleId);
     this.props.deleteFlashMessage(1);
-    // this.context.router.push('/courses');
   }
   setupUpdateUser(event) {
     event.preventDefault();
@@ -107,6 +107,7 @@ myProfilePage.propTypes = {
   loadUserProfile: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   userId: PropTypes.number.isRequired,
+  roleId: PropTypes.number.isRequired,
   deleteUserAccount: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
 };
@@ -127,12 +128,14 @@ function mapStateToProps(state) {
   if (hasUserDetailsProperty) {
     return {
       userId: state.login.user.id,
+      roleId: state.login.user.roleId,
       user: state.user.userDetails,
     };
   }
   return {
     userId: state.login.user.id,
     user: state.login.user,
+    roleId: state.login.user.roleId,
   };
 }
 
@@ -146,8 +149,8 @@ function mapDispatchToProps(dispatch) {
   return {
     loadUserProfile: userId => dispatch(userAction.loadUserProfile(userId)),
     logout: () => dispatch(loginAction.logout()),
-    updateUserProfile: (user, userId) =>
-      dispatch(userAction.updateUserProfile(user, userId)),
+    updateUserProfile: (user, userId, roleId) =>
+      dispatch(userAction.updateUserProfile(user, userId, roleId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
     deleteUserAccount: userId => dispatch(userAction.deleteUserAccount(userId)),
   };

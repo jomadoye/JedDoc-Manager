@@ -71,7 +71,8 @@ class DashboardDocumentView extends React.Component {
     event.preventDefault();
     const document = this.state;
     const documentId = this.props.document.id;
-    this.props.updateDocument(document, documentId);
+    this.props.updateDocument(document, documentId,
+      this.props.currentUser.roleId);
     this.props.deleteFlashMessage(1);
   }
 
@@ -196,6 +197,7 @@ DashboardDocumentView.propTypes = {
   deleteDocument: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
   updateDocument: PropTypes.func.isRequired,
 };
 
@@ -209,8 +211,8 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteDocument: documentId =>
       dispatch(DocumentAction.deleteDocument(documentId)),
-    updateDocument: (document, documentId) =>
-      dispatch(DocumentAction.updateDocument(document, documentId)),
+    updateDocument: (document, documentId, roleId) =>
+      dispatch(DocumentAction.updateDocument(document, documentId, roleId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
   };
 }
@@ -224,6 +226,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     documents: state.documents,
+    currentUser: state.login.user,
   };
 }
 

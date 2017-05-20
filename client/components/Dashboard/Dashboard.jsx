@@ -53,6 +53,7 @@ class Dashboard extends React.Component {
       });
     }
     const { selected, page } = this.state;
+    const selectedDocuments = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
     let pageArray;
@@ -93,7 +94,7 @@ class Dashboard extends React.Component {
                 {page && pageArray && pageArray.map((pages, index) =>
                 (<PaginationNav
                   key={index}
-                  selected={selected}
+                  selected={selectedDocuments}
                   index={index}
                   isActive={isActive}
                   notActive={notActive}
