@@ -3088,4 +3088,148 @@ describe('Reducers', () => {
         role: [],
       });
   });
+
+  it('should handle UPDATE_SINGLE_USER_BY_ADMIN_SUCCESSactions', () => {
+    const state = reducers({
+      flashMessages: [],
+      login: {
+        isAuthenticated: true,
+        user: {
+          id: 3,
+          username: 'q',
+          fullname: 'q',
+          roleId: 1,
+          email: 'qq1be@email.com'
+        },
+        allUsers: [{
+          id: 21,
+          fullname: 'Leonora Effertz',
+          username: 'Morris53',
+          email: 'Shaniya7@hotmail.com',
+          roleId: 2,
+          password: '$2a$08$JmtETt9VP2aVfT8r..qd5uFyw79U3KLhzE/FW6S3lYkjwq7DjPIEG',
+          createdAt: '2017-05-20T17:36:54.518Z',
+          updatedAt: '2017-05-20T17:36:54.528Z'
+        }, {
+          id: 1,
+          fullname: 'Meaghan Mann',
+          username: 'Brandon_Bergstrom21',
+          email: 'Verna.Wolff@hotmail.com',
+          roleId: 3,
+          password: '$2a$08$QmAIB2Nm/1iZZEmI3hEbye31ptAP4ktLMWurdskdTIXqo3QizXUWi',
+          createdAt: '2017-05-20T17:36:54.518Z',
+          updatedAt: '2017-05-20T17:36:54.529Z'
+        }, {
+          id: 2,
+          fullname: 'jonathan doe',
+          username: 'john doe',
+          email: 'Watson74@hotmail.com',
+          roleId: 3,
+          password: '$2a$08$n0drriErlmSby9BMRNdiCu/F9OnV7l49poVJ0ELvTYN0aU62pKKGa',
+          createdAt: '2017-05-20T17:36:54.518Z',
+          updatedAt: '2017-05-20T17:36:54.529Z'
+        }, {
+          id: 20,
+          fullname: 'Katrina',
+          username: 'Amy.DuBuque',
+          email: 'Eugenia.Nienow24@gmail.com',
+          roleId: 1,
+          password: '$2a$08$6srGdPMfYjKifUor2WfP2eFnto4EBxjuan6YMKXuti5IJTr0uB12y',
+          createdAt: '2017-05-20T17:36:54.518Z',
+          updatedAt: '2017-05-20T17:41:47.660Z'
+        }, {
+          id: 3,
+          fullname: 'q',
+          username: 'ggq',
+          email: 'qq1be@email.com',
+          roleId: 1,
+          password: '$2a$08$MpLOYfieiI64tF/AT6IoHOUZvfZfEmLU2zXC5BmEFWNDywTDkLVUy',
+          createdAt: '2017-05-20T17:41:12.520Z',
+          updatedAt: '2017-05-20T17:45:29.614Z'
+        }]
+      },
+      documents: {
+        PublicDocuments: [],
+        MyDocuments: [],
+        AuthToViewDocuments: [],
+        allDocuments: []
+      },
+      user: [],
+      role: []
+    }, {
+      type: 'UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS',
+      userId: 21,
+      updatedUser: {
+        fullname: 'Leonora Effertz',
+        username: 'Morris53j',
+        email: 'Shaniya7@hotmail.com',
+        roleId: 2
+      }
+    });
+    expect(state)
+      .toEqual({
+        flashMessages: [],
+        login: {
+          isAuthenticated: true,
+          user: {
+            id: 3,
+            username: 'q',
+            fullname: 'q',
+            roleId: 1,
+            email: 'qq1be@email.com'
+          },
+          allUsers: [{
+            id: 1,
+            fullname: 'Meaghan Mann',
+            username: 'Brandon_Bergstrom21',
+            email: 'Verna.Wolff@hotmail.com',
+            roleId: 3,
+            password: '$2a$08$QmAIB2Nm/1iZZEmI3hEbye31ptAP4ktLMWurdskdTIXqo3QizXUWi',
+            createdAt: '2017-05-20T17:36:54.518Z',
+            updatedAt: '2017-05-20T17:36:54.529Z'
+          }, {
+            id: 2,
+            fullname: 'jonathan doe',
+            username: 'john doe',
+            email: 'Watson74@hotmail.com',
+            roleId: 3,
+            password: '$2a$08$n0drriErlmSby9BMRNdiCu/F9OnV7l49poVJ0ELvTYN0aU62pKKGa',
+            createdAt: '2017-05-20T17:36:54.518Z',
+            updatedAt: '2017-05-20T17:36:54.529Z'
+          }, {
+            id: 20,
+            fullname: 'Katrina',
+            username: 'Amy.DuBuque',
+            email: 'Eugenia.Nienow24@gmail.com',
+            roleId: 1,
+            password: '$2a$08$6srGdPMfYjKifUor2WfP2eFnto4EBxjuan6YMKXuti5IJTr0uB12y',
+            createdAt: '2017-05-20T17:36:54.518Z',
+            updatedAt: '2017-05-20T17:41:47.660Z'
+          }, {
+            id: 3,
+            fullname: 'q',
+            username: 'ggq',
+            email: 'qq1be@email.com',
+            roleId: 1,
+            password: '$2a$08$MpLOYfieiI64tF/AT6IoHOUZvfZfEmLU2zXC5BmEFWNDywTDkLVUy',
+            createdAt: '2017-05-20T17:41:12.520Z',
+            updatedAt: '2017-05-20T17:45:29.614Z'
+          }, {
+            fullname: 'Leonora Effertz',
+            username: 'Morris53j',
+            email: 'Shaniya7@hotmail.com',
+            roleId: 2
+          }]
+        },
+        documents: {
+          PublicDocuments: [],
+          MyDocuments: [],
+          AuthToViewDocuments: [],
+          allDocuments: []
+        },
+        user: [],
+        role: []
+      });
+  });
+
 });
