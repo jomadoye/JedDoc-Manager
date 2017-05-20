@@ -99,7 +99,9 @@ export default {
         where: query.where,
         offset: query.offset,
         limit: query.limit,
-        include: [models.Users],
+        include: [{
+          model: models.Users,
+          attributes: ['fullname'] }],
       })
       .then((document) => {
         const response = isDocumentList(document, res);

@@ -25,7 +25,14 @@ export default {
           return User
             .create(req.body)
             .then((user) => {
-              const token = signJwtToken(user);
+              const secureUserDetails = {
+                id: user.id,
+                username: user.username,
+                fullname: user.fullname,
+                roleId: user.roleId,
+                email: user.email,
+              };
+              const token = signJwtToken(secureUserDetails);
               res.status(201)
                 .json({
                   success: true,
