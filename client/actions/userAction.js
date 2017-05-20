@@ -45,7 +45,8 @@ export function updateUserProfileSuccess(user) {
  * This function ensure the admin updated a user sucessfully
  *
  * @export
- * @param {onject} user
+ * @param {object} user
+ * @param {number} userId
  * @returns dispatch
  */
 export function updateUserProfileByAdminSuccess(user, userId) {
@@ -72,7 +73,8 @@ export function deleteUserAccountSuccess() {
  * This function ensures the user was searched successfully
  *
  * @export
- * @returns object
+ * @param {string} searchedUsers
+ * @returns dispatch
  */
 export function searchUserByUsernameSuccess(searchedUsers) {
   return {
@@ -95,7 +97,7 @@ export function loadUserProfile(userId) {
         dispatch(loadUserProfileSuccess(userDetails));
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
 }
 
@@ -136,12 +138,11 @@ export function updateUserProfile(user, userId) {
  */
 export function deleteUserAccount(userId) {
   return dispatch => axios.delete(`/api/users/${userId}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         dispatch(deleteUserAccountSuccess());
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
 }
 
@@ -163,6 +164,8 @@ export function loadAllUsersSuccess(users) {
  * The function loads all users
  *
  * @export
+ * @param {number} limit
+ * @param {number} offset
  * @returns dispatch
  */
 export function loadAllUsers(limit, offset) {
@@ -172,17 +175,16 @@ export function loadAllUsers(limit, offset) {
         dispatch(loadAllUsersSuccess(res.data));
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
-  } 
-    return dispatch => axios.get('/api/users')
+  }
+  return dispatch => axios.get('/api/users')
         .then((res) => {
           dispatch(loadAllUsersSuccess(res.data));
         })
         .catch((error) => {
-          console.log(error);
+          throw error;
         });
-  
 }
 
 /**
@@ -216,25 +218,27 @@ export function deleteSingleUserAccount(userId) {
         dispatch(deleteSingleUserAccountSuccess(userId));
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
 }
 
 /**
- * This function search a user by username
+ * throw error;
  *
  * @export
  * @param {string} searchQuery
- * @returns
+ * @param {number} limit
+ * @param {number} offset
+ * @returns dispatch
  */
 export function searchUserByUsername(searchQuery, limit, offset) {
-  return dispatch => axios.get(`/api/search/users?q=${searchQuery}&limit=${limit}&offset=${offset}`)
-  // return dispatch => axios.get(`/api/search/users?q=jed&limit=5&offset=0`)
+  return dispatch =>
+    axios.get(`/api/search/users?q=${searchQuery}
+    &limit=${limit}&offset=${offset}`)
       .then((res) => {
-        console.log(res)
         dispatch(searchUserByUsernameSuccess(res.data.user));
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
 }

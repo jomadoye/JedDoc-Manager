@@ -81,7 +81,8 @@ class DocumentControllerHelper {
                 success: false,
                 message: 'User has no document.',
               });
-          } else if (req.decoded.data.id === 1 || req.decoded.data.id === parseInt(req.params.userId, 10)) {
+          } else if (req.decoded.data.id === 1 ||
+          req.decoded.data.id === parseInt(req.params.userId, 10)) {
             response = res.status(201)
                 .json({
                   success: true,

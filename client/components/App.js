@@ -1,7 +1,8 @@
 import React from 'react';
-import NavigationBar from './General/NavigationBar';
-import FlashMessageList from './flashMessages/flashMessagesList';
-import Footer from './General/footer';
+import PropTypes from 'prop-types';
+import NavigationBar from './General/NavigationBar.jsx';
+import FlashMessageList from './flashMessages/flashMessagesList.jsx';
+import Footer from './General/footer.jsx';
 import '../public/scss/app.scss';
 
 class App extends React.Component {
@@ -18,5 +19,8 @@ class App extends React.Component {
     );
   }
 }
+App.propTypes = {
+  children: PropTypes.object.isRequired,
+};
 
 export default App;

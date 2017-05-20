@@ -90,8 +90,8 @@ export function loadUserDocumentSuccess(documents) {
  * This function ensures the documents were sucessfully deleted
  *
  * @export
- * @param {string} message A response message
- * @returns {object}
+ * @param {number} documentId
+ * @returns dispatch
  */
 export function deleteUserDocumentSuccess(documentId) {
   return {
@@ -118,8 +118,9 @@ export function deleteDocumentByAdminSuccess(documentId) {
  * This function updates a document
  *
  * @export
- * @param {string} message
- * @returns
+ * @param {object} document
+ * @param {number} documentId
+ * @returns dispatch
  */
 export function updateUserDocumentSuccess(document, documentId) {
   return {
@@ -133,8 +134,9 @@ export function updateUserDocumentSuccess(document, documentId) {
  * This function ensures an admin updates a document sucessfully
  *
  * @export
- * @param {string} message
- * @returns
+ * @param {object} document
+ * @param {number} documentId
+ * @returns dispatch
  */
 export function updateDocumentByAdminSuccess(document, documentId) {
   return {
@@ -157,7 +159,7 @@ export function loadWelcomePageDocument() {
       dispatch(loadWelcomePageDocumentSuccess(document));
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 }
 
@@ -165,17 +167,20 @@ export function loadWelcomePageDocument() {
  * This function ensures the documents were sucessfully loaded
  *
  * @export
+ * @param {number} limit
+ * @param {number} offset
  * @returns dispatch
  */
 export function loadAuthorizedToViewDocument(limit, offset) {
   if (limit) {
-    return dispatch => axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
+    return dispatch =>
+      axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
       .then((documents) => {
         const document = documents.data.document;
         dispatch(loadAuthorizedToViewDocumentSuccess(document));
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
   }
   return dispatch => axios.get('/api/documents')
@@ -184,7 +189,7 @@ export function loadAuthorizedToViewDocument(limit, offset) {
       dispatch(loadAuthorizedToViewDocumentSuccess(document));
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 }
 
@@ -192,18 +197,22 @@ export function loadAuthorizedToViewDocument(limit, offset) {
  * This function ensures the documents were sucessfully loaded
  *
  * @export
- * @param {object} userId An array of documents
+ * @param {number} userId
+ * @param {number} limit
+ * @param {number} offset
  * @returns dispatch
  */
 export function loadUserDocuments(userId, limit, offset) {
   if (limit) {
-    return dispatch => axios.get(`/api/users/${userId}/documents?limit=${limit}&offset=${offset}`)
+    return dispatch =>
+      axios.get(`/api/users/${userId}/documents?
+      limit=${limit}&offset=${offset}`)
       .then((documents) => {
         const document = documents.data.documents;
         dispatch(loadUserDocumentSuccess(document));
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
   }
   return dispatch => axios.get(`/api/users/${userId}/documents`)
@@ -212,7 +221,7 @@ export function loadUserDocuments(userId, limit, offset) {
         dispatch(loadUserDocumentSuccess(document));
       })
       .catch((error) => {
-        console.log(error);
+        throw error;
       });
 }
 
@@ -234,7 +243,7 @@ export function deleteDocument(documentId) {
       dispatch(deleteDocumentByAdminSuccess(documentId));
     })
     .catch((error) => {
-      console.log(error.response);
+      throw error;
     });
 }
 
@@ -257,7 +266,7 @@ export function updateDocument(document, documentId) {
       dispatch(updateDocumentByAdminSuccess(res.data.document, documentId));
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 }
 
@@ -276,11 +285,11 @@ export function loadAllDocumentsSuccess(documents) {
 }
 
 /**
- *
+ * This function ensure the document is searched sucessfully
  *
  * @export
- * @param {any} documents
- * @returns
+ * @param {object} documents
+ * @returns action
  */
 export function searchDocumentsByTitleSuccess(documents) {
   return {
@@ -301,7 +310,7 @@ export function loadAllDocuments() {
       dispatch(loadAllDocumentsSuccess(res.data.document));
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 }
 
@@ -312,14 +321,16 @@ export function loadAllDocuments() {
  * @param {string} query
  * @param {number} limit
  * @param {number} offset
- * @returns
+ * @returns dispatch
  */
 export function searchDocumentsByTitle(query, limit, offset) {
-  return dispatch => axios.get(`/api/search/documents?q=${query}&limit=${limit}&offset=${offset}`)
+  return dispatch =>
+    axios.get(`/api/search/documents?q=${query}
+    &limit=${limit}&offset=${offset}`)
     .then((res) => {
       dispatch(searchDocumentsByTitleSuccess(res.data.document));
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 }

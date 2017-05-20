@@ -23,7 +23,7 @@ export function setCurrentUser(user) {
  * This function logins in the user
  *
  * @export
- * @param {object} user the dato of the prospective user
+ * @param {object} userData the dato of the prospective user
  * @returns {object}
  */
 export function login(userData) {

@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addFlashMessage } from '../actions/flashMessages';
 
+/**
+ * This function verifies the token being used on the  frontend
+ *
+ * @export
+ * @param {ReactComponent} ComposedComponent
+ * @returns {ReactComponent}
+ */
 export default function (ComposedComponent) {
   class VerifyToken extends React.Component {
     componentWillMount() {

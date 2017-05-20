@@ -86,7 +86,7 @@ export function loadUserRoles() {
       dispatch(loadUserRolesSuccess(res.data.roles));
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 }
 
@@ -120,6 +120,6 @@ export function DeleteUserRoles(roleId) {
       dispatch(deleteUserRolesSuccess(roleId));
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 }

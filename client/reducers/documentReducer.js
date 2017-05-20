@@ -14,6 +14,9 @@ import {
 
 export default
 
+/**
+ * This function is the document reducer
+ */
 function documentReducer(state = initialState.documents, action) {
   switch (action.type) {
     case LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS:
