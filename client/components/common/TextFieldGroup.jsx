@@ -8,6 +8,7 @@ const TextFieldGroup = ({ field, value, label, error,
           <div className="input-field col s8 offset-m2">
             <i className="material-icons prefix">{materialIcon}</i>
             <input
+              id={field}
               type={type}
               name={field}
               value={value}

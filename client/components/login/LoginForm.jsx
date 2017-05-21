@@ -33,7 +33,9 @@ export default function LoginForm({ state, onsubmit, onchange }) {
       onChange={onchange}
       />
       <div className="container">
-        <button className="btn waves-effect waves-light btn-large"
+        <button
+          type="submit"
+          className="btn waves-effect waves-light btn-large"
           disabled={isLoading}>
           SignIn
         <i className="material-icons right">send</i>

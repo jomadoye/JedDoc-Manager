@@ -50,6 +50,7 @@
     "morgan": "^1.8.1",
     "nock": "^9.0.13",
     "nodemailer": "^4.0.1",
+    "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",

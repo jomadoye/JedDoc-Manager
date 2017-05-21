@@ -35,7 +35,7 @@ class NavigationBar extends React.Component {
           </li>
           <li className="divider" />
           <li>
-            <a href="#" onClick={this.logout}>
+            <a id="logoutDropDownBtn" onClick={this.logout}>
               Logout
               <i className="material-icons right">power_settings_new</i>
             </a>
@@ -73,7 +73,7 @@ class NavigationBar extends React.Component {
     );
     const guestLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li>
+        <li id="signup">
            <Link to="/signup">
             Sign up
             <i className="material-icons right">exit_to_app</i>
@@ -145,7 +145,8 @@ class NavigationBar extends React.Component {
             <li><a href="manage-documents"><i className="material-icons">
                 settings</i>Manage Documents</a></li>
           </div>}
-          <li><a onClick={this.logout}><i className="material-icons">
+          <li><a
+            onClick={this.logout}><i className="material-icons">
               power_settings_new</i>Log-out</a></li>
           <li><a href="#!">Second Link</a></li>
           <li><div className="divider" /></li>

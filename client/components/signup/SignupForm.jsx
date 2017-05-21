@@ -112,6 +112,7 @@ class SignupForm extends React.Component {
 
         <div className="container">
           <button
+            type="submit"
             disabled={this.state.isLoading || this.state.invalid}
             className="btn waves-effect waves-light btn-large">
             Sign up
