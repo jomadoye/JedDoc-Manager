@@ -19,6 +19,9 @@
 npm-debug.log
 testem.log
 .nyc_output/*
+selenium-server-standalone-3.3.1.jar
+chromedriver
+CHROME_58.0.3029.110_MAC_google.spec.xml
 
 #----------------------------------------------------------------------------
 # DIVSHOT
