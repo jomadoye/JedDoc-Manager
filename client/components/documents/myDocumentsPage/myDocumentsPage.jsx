@@ -153,7 +153,7 @@ class MyDocumentPage extends React.Component {
                   onChange={this.onChange}
                   type="text"
                   className="validate"/>
-                  <label htmlFor="first_name">Search Users</label>
+                  <label htmlFor="first_name">Search Documents</label>
                 </div>
               </div>
             </form>

@@ -63,6 +63,9 @@ export default {
         },
         limit,
         offset,
+        include: [{
+          model: models.Users,
+          attributes: ['fullname'] }],
       })
       .then((document) => {
         if (!document) {

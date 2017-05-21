@@ -10,6 +10,7 @@ import {
   UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
   SEARCH_DOCUMENTS_BY_TITLE_SUCCESS,
   CREATE_DOCUMENT_BY_USER_SUCCESS,
+  SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS,
 } from './actionTypes';
 import {
   addFlashMessage,
@@ -54,6 +55,20 @@ export function loadUserDocumentSuccess(documents) {
   return {
     type: LOAD_USER_DOCUMENT_SUCCESS,
     MyDocuments: documents,
+  };
+}
+
+/**
+ * This function ensures a document was searched sucessfully
+ *
+ * @export
+ * @param {object} documents
+ * @returns {object}
+ */
+export function searchDocumentsByTitleOnDashboardSuccess(documents) {
+  return {
+    type: SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS,
+    searchDocuments: documents,
   };
 }
 
@@ -317,6 +332,26 @@ export function searchDocumentsByTitle(query, limit, offset) {
     &limit=${limit}&offset=${offset}`)
     .then((res) => {
       dispatch(searchDocumentsByTitleSuccess(res.data.document));
+    })
+    .catch((error) => {
+      throw error;
+    });
+}
+/**
+ * This function searches a document by title
+ *
+ * @export
+ * @param {any} query
+ * @param {any} limit
+ * @param {any} offset
+ * @returns dispatch
+ */
+export function searchDocumentsByTitleOnDashboard(query, limit, offset) {
+  return dispatch =>
+    axios.get(`/api/search/documents?q=${query}
+    &limit=${limit}&offset=${offset}`)
+    .then((res) => {
+      dispatch(searchDocumentsByTitleOnDashboardSuccess(res.data.document));
     })
     .catch((error) => {
       throw error;

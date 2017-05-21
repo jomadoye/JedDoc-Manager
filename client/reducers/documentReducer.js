@@ -11,6 +11,7 @@ import {
   UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
   SEARCH_DOCUMENTS_BY_TITLE_SUCCESS,
   CREATE_DOCUMENT_BY_USER_SUCCESS,
+  SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS,
 } from '../actions/actionTypes';
 
 export default
@@ -34,6 +35,13 @@ function documentReducer(state = initialState.documents, action) {
       {
         return Object.assign({}, state, {
           AuthorizeToViewDocuments: action.AuthorizeToViewDocuments,
+        });
+      }
+
+    case SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS:
+      {
+        return Object.assign({}, state, {
+          AuthorizeToViewDocuments: action.searchDocuments,
         });
       }
 
