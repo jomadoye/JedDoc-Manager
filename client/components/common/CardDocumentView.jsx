@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Row, Input } from 'react-materialize';
@@ -79,6 +80,11 @@ class CardDocumentView extends React.Component {
 
   render() {
     const { document, myDocument, readOnly } = this.props;
+    const currentDate = moment(new Date());
+    const DateCreated = moment(document.createdAt);
+    const dateUpdated = moment(document.updatedAt);
+    const documentDate = DateCreated.from(currentDate);
+    const updatedDocumentDate = dateUpdated.from(currentDate);
     const { title, body } = this.state;
     return (
     <div>
@@ -94,6 +100,8 @@ class CardDocumentView extends React.Component {
               <h4 className="center-align">{document.title}</h4>
               <hr />
               <p>{document.body}</p>
+              <h6>Created: {documentDate}</h6>
+              <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>
             <div className="modal-footer">
               <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
@@ -165,6 +173,8 @@ class CardDocumentView extends React.Component {
               <hr />
               <p>{document.body}</p>
               <h4>Author: {document.User.fullname}</h4>
+              <h6>Created: {documentDate}</h6>
+              <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>
             <div className="modal-footer">
               <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
