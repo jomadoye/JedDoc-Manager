@@ -3,7 +3,7 @@ import React from 'react';
 import {
   shallow,
 } from 'enzyme';
-import PaginationNav from '../../components/common/PaginationNav.jsx';
+import PaginationNav from '../../../components/common/PaginationNav.jsx';
 
 /**
  * This function setup the component
