@@ -3,7 +3,8 @@ import React from 'react';
 import {
   shallow,
 } from 'enzyme';
-import CreateDocumentForm from '../../../components/documents/createDocumentsPage/CreateDocumentForm.jsx';
+import CreateDocumentForm from
+  '../../../components/documents/createDocumentsPage/CreateDocumentForm.jsx';
 
 /**
  * This function setup the component
