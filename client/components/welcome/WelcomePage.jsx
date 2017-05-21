@@ -30,6 +30,17 @@ class LoadDocuments extends React.Component {
               readOnly/>,
           )}
         </div>
+        <div className="center-align">
+          <ul className="pagination">
+          <li className="disabled"><a href=""><i className="material-icons">chevron_left</i></a></li>
+          <li className="active"><a href="signup">1</a></li>
+          <li className="waves-effect"><a href="signup">2</a></li>
+          <li className="waves-effect"><a href="signup">3</a></li>
+          <li className="waves-effect"><a href="signup">4</a></li>
+          <li className="waves-effect"><a href="signup">5</a></li>
+          <li className="waves-effect"><a href="signup"><i className="material-icons">chevron_right</i></a></li>
+        </ul>
+        </div>
       </div>
     );
   }
