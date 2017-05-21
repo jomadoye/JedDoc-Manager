@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon --watch server --exec babel-node ./bin/www",
-    "start": "npm-run-all --parallel start:dev lint:watch mocha:testClientWatch",
+    "start": "nodemon --watch server --exec babel-node ./bin/www",
+    "start:client": "npm-run-all --parallel start:dev lint:watch mocha:testClientWatch",
     "build": "babel server -d dist/server",
     "lint": "node_modules/.bin/esw webpack.config.* client server",
     "lint:watch": "npm run lint -- --watch",
