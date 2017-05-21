@@ -5,6 +5,12 @@ import {
 } from 'enzyme';
 import PaginationNav from '../../components/common/PaginationNav.jsx';
 
+/**
+ * This function setup the component
+ *
+ * @param {string} isSearchDocument
+ * @returns {object}
+ */
 function setup(isSearchDocument) {
   const props = {
     index: 0,

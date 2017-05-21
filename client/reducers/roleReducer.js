@@ -6,6 +6,7 @@ import {
 
 export default
 
+// eslint-disable-next-line require-jsdoc
 function documentReducer(state = initialState.role, action) {
   switch (action.type) {
     case LOAD_USER_ROLE_SUCCESS:

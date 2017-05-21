@@ -93,7 +93,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     documents: state.documents,
-    // UserId: state.login.user.id,
   };
 }
 

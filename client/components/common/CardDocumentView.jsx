@@ -5,7 +5,7 @@ import { Row, Input } from 'react-materialize';
 import * as DocumentAction from '../../actions/documentAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
-class DashboardDocumentView extends React.Component {
+class CardDocumentView extends React.Component {
   constructor(props) {
     super(props);
 
@@ -55,7 +55,8 @@ class DashboardDocumentView extends React.Component {
 
   handleDelete() {
     event.preventDefault();
-    const confirmDelete = confirm('Are you sure you want to delete this Document');
+    const confirmDelete =
+      confirm('Are you sure you want to delete this Document');
     if (confirmDelete === true) {
       const documentId = this.props.document.id;
       this.props.deleteDocument(documentId);
@@ -190,7 +191,7 @@ class DashboardDocumentView extends React.Component {
   }
 }
 
-DashboardDocumentView.propTypes = {
+CardDocumentView.propTypes = {
   document: PropTypes.object.isRequired,
   myDocument: PropTypes.bool,
   readOnly: PropTypes.bool,
@@ -231,4 +232,4 @@ function mapStateToProps(state) {
 }
 
 export default
-  connect(mapStateToProps, mapDispatchToProps)(DashboardDocumentView);
+  connect(mapStateToProps, mapDispatchToProps)(CardDocumentView);

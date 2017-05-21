@@ -123,7 +123,6 @@ export function updateUserProfile(user, userId) {
         dispatch(deleteFlashMessage(1));
       })
       .catch((error) => {
-        console.log(error);
         const response = error.response.data.message;
         const message = {};
         message.text = response;
@@ -244,7 +243,7 @@ export function deleteSingleUserAccount(userId) {
  * This function allows the admin edit a user profile
  *
  * @export
- * @param {object} user
+ * @param {object} updatedUser
  * @param {user} userId
  * @returns dispatch
  */

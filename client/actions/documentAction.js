@@ -253,6 +253,7 @@ export function deleteDocument(documentId) {
  * @export
  * @param {object} document
  * @param {number} documentId
+ * @param {number} roleId
  * @returns dispatch
  */
 export function updateDocument(document, documentId, roleId) {
