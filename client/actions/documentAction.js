@@ -9,40 +9,11 @@ import {
   DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
   UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS,
   SEARCH_DOCUMENTS_BY_TITLE_SUCCESS,
+  CREATE_DOCUMENT_BY_USER_SUCCESS,
 } from './actionTypes';
 import {
   addFlashMessage,
 } from '../actions/flashMessages';
-
-/**
- * This function creates a document
- *
- * @export
- * @param {object} document An array of documents
- * @returns dispatch
- */
-export function createDocument(document) {
-  return () => axios.post('/api/documents', document)
-    .then(res => res.data.message)
-    .catch((error) => {
-      let res;
-      try {
-        const errorMessage = error.response.data.error.errors[0].message;
-        if (errorMessage) {
-          if (errorMessage === 'Validation notEmpty failed') {
-            res = 'Please ensure document has a Title and Body';
-          } else if (errorMessage === 'title must be unique') {
-            res = 'Title must be unique';
-          } else {
-            res = 'An error occured while creating this document';
-          }
-        }
-      } catch (err) {
-        res = 'An error occured while creating this document';
-      }
-      return res;
-    });
-}
 
 /**
  * This function ensures the documents were sucessfully created
@@ -111,6 +82,18 @@ export function deleteDocumentByAdminSuccess(documentId) {
   return {
     type: DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
     documentId,
+  };
+}
+
+/**
+ * This function ensures a document was created successfully
+ *
+ * @export
+ * @returns dispatch
+ */
+export function documentCreatedByUserSuccess() {
+  return {
+    type: CREATE_DOCUMENT_BY_USER_SUCCESS,
   };
 }
 
@@ -337,5 +320,39 @@ export function searchDocumentsByTitle(query, limit, offset) {
     })
     .catch((error) => {
       throw error;
+    });
+}
+
+/**
+ * This function creates a document
+ *
+ * @export
+ * @param {object} document An array of documents
+ * @returns dispatch
+ */
+export function createDocument(document) {
+  return dispatch => axios.post('/api/documents', document)
+    .then((res) => {
+      dispatch(documentCreatedByUserSuccess());
+      return res.data.message;
+    })
+
+    .catch((error) => {
+      let res;
+      try {
+        const errorMessage = error.response.data.error.errors[0].message;
+        if (errorMessage) {
+          if (errorMessage === 'Validation notEmpty failed') {
+            res = 'Please ensure document has a Title and Body';
+          } else if (errorMessage === 'title must be unique') {
+            res = 'Title must be unique';
+          } else {
+            res = 'An error occured while creating this document';
+          }
+        }
+      } catch (err) {
+        res = 'An error occured while creating this document';
+      }
+      return res;
     });
 }

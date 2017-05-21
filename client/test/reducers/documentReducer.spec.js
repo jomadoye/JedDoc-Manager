@@ -1627,4 +1627,9 @@ describe('Document Reducers', () => {
         role: [],
       });
   });
+
+  it('should handle CREATE_DOCUMENT_BY_USER_SUCCESS actions', () => {
+    const state = reducers({flashMessages:[],login:{isAuthenticated:true,user:{id:6,username:'q',fullname:'q',roleId:3,email:'qq1bqe@email.com'}},documents:{PublicDocuments:[],MyDocuments:[],AuthToViewDocuments:[],allDocuments:[]},user:[],role:[]}, {type:'CREATE_DOCUMENT_BY_USER_SUCCESS'});
+    expect(state).toEqual({flashMessages:[],login:{isAuthenticated:true,user:{id:6,username:'q',fullname:'q',roleId:3,email:'qq1bqe@email.com'}},documents:{PublicDocuments:[],MyDocuments:[],AuthToViewDocuments:[],allDocuments:[]},user:[],role:[]});
+  });
 });
