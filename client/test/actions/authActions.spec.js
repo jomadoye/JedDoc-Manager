@@ -5,7 +5,6 @@ import nock from 'nock';
 import * as userActions from '../../actions/loginActions';
 import {
   SET_CURRENT_USER,
-  LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
 } from '../../actions/actionTypes';
 
 const middlewares = [thunk];
