@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import NavigationBar from './General/NavigationBar.jsx';
 import FlashMessageList from './flashMessages/flashMessagesList.jsx';
 import Footer from './General/footer.jsx';
-import '../public/scss/app.scss';
 
 class App extends React.Component {
   render() {

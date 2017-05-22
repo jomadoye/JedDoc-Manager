@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
 import App from '../../../components/App';
@@ -45,4 +45,4 @@ describe(' Test for App Component', () => {
     );
     expect(wrapper.contains(<NavigationBar />)).toEqual(true);
   });
-});*/
+});
