@@ -37,7 +37,32 @@ describe('Authentication actions', () => {
 
       const expectedActions = [
         { type: SET_CURRENT_USER },
-        { type: LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS },
+      ];
+      const store = mockStore({
+        user: {},
+      });
+      store.dispatch(userActions.setCurrentUser(user));
+      expect(store.getActions()[0].type)
+        .to.eql(expectedActions[0].type);
+    });
+  });
+  describe('signup', () => {
+    const response = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+    };
+    after(() => {
+      nock.cleanAll();
+    });
+    it('should signup a user', () => {
+      nock('/api')
+        .post('/users', user)
+        .reply(201, response);
+
+      const expectedActions = [
+        { type: SET_CURRENT_USER },
       ];
       const store = mockStore({
         user: {},
