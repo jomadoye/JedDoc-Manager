@@ -175,7 +175,7 @@ MyDocumentPage.propTypes = {
   loadUserDocuments: PropTypes.func.isRequired,
   searchDocumentsByTitle: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
-  props: PropTypes.object.isRequired,
+  props: PropTypes.object,
   UserId: PropTypes.number.isRequired,
 };
 
