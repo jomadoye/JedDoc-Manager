@@ -49,6 +49,11 @@ class MyDocumentPage extends React.Component {
   onChange(event) {
     event.preventDefault();
     this.setState({ search: event.target.value });
+    if (event.target.value === ' ' ||
+        event.target.value === '  ') {
+      const { UserId } = this.props;
+      this.props.loadUserDocuments(UserId);
+    }
   }
   onSubmit(event) {
     event.preventDefault();
@@ -68,6 +73,7 @@ class MyDocumentPage extends React.Component {
       } else if (document.access === 'role') {
         roleDocuments.push(document);
       }
+      return roleDocuments.push([]);
     });
     const { selected, page, search } = this.state;
     const selectedDocuments = selected.toString();
@@ -152,7 +158,7 @@ class MyDocumentPage extends React.Component {
                   value={search}
                   onChange={this.onChange}
                   type="text"
-                  className="validate"/>
+                  className="validate teal lighten-3"/>
                   <label htmlFor="first_name">Search Documents</label>
                 </div>
               </div>
@@ -169,6 +175,7 @@ MyDocumentPage.propTypes = {
   loadUserDocuments: PropTypes.func.isRequired,
   searchDocumentsByTitle: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
+  props: PropTypes.object.isRequired,
   UserId: PropTypes.number.isRequired,
 };
 
@@ -183,7 +190,8 @@ function mapDispatchToProps(dispatch) {
     loadUserDocuments: (userId, limit, offset) =>
       dispatch(DocumentAction.loadUserDocuments(userId, limit, offset)),
     searchDocumentsByTitle: (searchQuery, limit, offset) =>
-      dispatch(DocumentAction.searchDocumentsByTitle(searchQuery, limit, offset)),
+      dispatch(DocumentAction
+        .searchDocumentsByTitle(searchQuery, limit, offset)),
   };
 }
 

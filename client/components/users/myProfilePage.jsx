@@ -49,7 +49,8 @@ class myProfilePage extends React.Component {
   }
   handleDelete(event) {
     event.preventDefault();
-    const confirmDelete = confirm('Are you sure you want to delete this account!!!');
+    const confirmDelete =
+      confirm('Are you sure you want to delete this account!!!');
     if (confirmDelete === true) {
       this.props.deleteUserAccount(this.props.userId);
       this.props.logout();
@@ -64,37 +65,63 @@ class myProfilePage extends React.Component {
           <h1>{this.props.user.fullname}, welcome to your profile page</h1>
           <hr />
           <div className="row">
-            <form className="col s8 offset-s2" onSubmit={this.updateUserProfile}>
+            <form className="col s8 offset-s2"
+              onSubmit={this.updateUserProfile}>
               <div className="row">
                 <div className="input-field">
-                  <input disabled={disabled} onChange={this.updateUserState} name="fullname" value={this.state.user.fullname} id="full_name" type="text" className="validate"/>
-                  <label className="active" htmlFor="full_name">Full Name</label>
+                  <input disabled={disabled}
+                    onChange={this.updateUserState} name="fullname" v
+                    alue={this.state.user.fullname} id="full_name"
+                    type="text" className="validate"/>
+                  <label className="active"
+                    htmlFor="full_name">Full Name</label>
                 </div>
                 <div className="input-field">
-                  <input disabled={disabled} onChange={this.updateUserState} name="username" value={this.state.user.username} id="username" type="text" className="validate"/>
+                  <input disabled={disabled}
+                    onChange={this.updateUserState}
+                    name="username"
+                    value={this.state.user.username}
+                    id="username" type="text"
+                    className="validate"/>
                   <label className="active" htmlFor="username">UserName</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field">
-                  <input disabled={disabled} onChange={this.updateUserState} name="password" value={this.state.user.password} id="password" type="password" className="validate"/>
+                  <input disabled={disabled}
+                  onChange={this.updateUserState}
+                  name="password" value={this.state.user.password}
+                  id="password" type="password" className="validate"/>
                   <label className="active" htmlFor="password">Password</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field">
-                  <input disabled={disabled} onChange={this.updateUserState} name="email" value={this.state.user.email} id="email" type="email" className="validate"/>
+                  <input disabled={disabled}
+                  onChange={this.updateUserState}
+                  name="email" value={this.state.user.email}
+                  id="email" type="email" className="validate"/>
                   <label className="active" htmlFor="email">Email</label>
                 </div>
               </div>
               <div>
-                {!showSubmitButton && <button onClick={this.setupUpdateUser} id="editUserBtn" className="btn waves-effect waves-light" name="action">Edit User
+                {!showSubmitButton && <button
+                onClick={this.setupUpdateUser}
+                id="editUserBtn"
+                className="btn waves-effect waves-light"
+                name="action">Edit User
                   <i className="material-icons right">send</i>
                 </button>}
-                  {showSubmitButton && <button id="editUserSubmitBtn" className="btn waves-effect waves-light" type="submit" name="action">Submit
+                  {showSubmitButton && <button
+                  id="editUserSubmitBtn"
+                  className="btn waves-effect waves-light"
+                  type="submit" name="action">Submit
                     <i className="material-icons right">send</i>
                   </button>}
-                  <button className="btn waves-effect waves-light" id="deleteUserBtn" onClick={this.handleDelete} name="action">Delete User
+                  <button className="btn waves-effect waves-light"
+                  id="deleteUserBtn"
+                  onClick={this.handleDelete}
+                  name="action">Delete User
                     <i className="material-icons right">delete_forever</i>
                   </button>
               </div>

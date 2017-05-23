@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup.jsx';
 
 /**
- * Thhis function renders the login page
+ * This function renders the login page
  *
  * @export
- * @param {object, function} { state, onsubmit, onchange }
- * @returns HTML
+ * @param {object, function, function} { state, onsubmit, onchange }
+ * @returns {HTML}
  */
 export default function LoginForm({ state, onsubmit, onchange }) {
   const { errors, query, password, isLoading } = state;
   return (
     <form onSubmit={onsubmit} className="center-align">
-      {errors.form && <div className="alert alert-danger">
+      {errors.form && <div className="teal darken-1">
       { errors.form } </div> }
       <TextFieldGroup
       materialIcon="account_circle"

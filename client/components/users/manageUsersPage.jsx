@@ -86,7 +86,7 @@ class ManageUsersPage extends React.Component {
             <div>
               <li className="waves-effect"><a href="#!">
                 <i className="material-icons">chevron_left</i></a></li>
-              {page && pageArray && pageArray.map((pages, index) => 
+              {page && pageArray && pageArray.map((pages, index) =>
               (<PaginationNav
                  key={index}
                  selected={selectedUsers}

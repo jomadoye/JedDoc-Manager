@@ -1,62 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="2">
 
   <testsuite name="auth.spec"
-    errors="0" failures="0" hostname="" id="" package="auth.spec" skipped="0"
-    tests="2" time="28.51" timestamp="Tue, 23 May 2017 18:49:24 GMT">
+    errors="0" failures="1" hostname="" id="" package="auth.spec" skipped="1"
+    tests="2" time="7.900" timestamp="Tue, 23 May 2017 22:08:14 GMT">
   
-    <testcase name="Creates a new User and log him/her in and logout" classname="auth.spec" time="15.41" assertions="12">
+    <testcase name="Creates a new User and log him/her in and logout" classname="auth.spec" time="7.900" assertions="3">
 
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+      <failure message="Timed out while waiting for element &lt;nav&gt; to be present for 1000 milliseconds.">    at Object.CreatesANewUserAndLogHimHerInAndLogout [as Creates a new User and log him/her in and logout] (/Users/jedidiahomadoye/Desktop/JedDoc-Manager/client/test/e2e/auth.spec.js:10:8)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
 
     
     </testcase>
   
-    <testcase name="an already registed user can login and logout" classname="auth.spec" time="13.10" assertions="10">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    </testcase>
   
+    
+    <testcase
+      name="an already registed user can login and logout" classname="auth.spec">
+      <skipped />
+    </testcase>
+    
   
   </testsuite>
 </testsuites>

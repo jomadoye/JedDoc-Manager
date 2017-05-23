@@ -1,51 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="1">
 
   <testsuite name="document.spec"
-    errors="0" failures="0" hostname="" id="" package="document.spec" skipped="0"
-    tests="1" time="43.09" timestamp="Tue, 23 May 2017 18:49:54 GMT">
+    errors="0" failures="1" hostname="" id="" package="document.spec" skipped="0"
+    tests="1" time="16.21" timestamp="Tue, 23 May 2017 22:08:22 GMT">
   
-    <testcase name="create document, edit and delete" classname="document.spec" time="43.09" assertions="20">
+    <testcase name="create document, edit and delete" classname="document.spec" time="16.21" assertions="3">
 
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+      <failure message="Timed out while waiting for element &lt;nav&gt; to be present for 1000 milliseconds.">    at Object.createDocumentEditAndDelete [as create document, edit and delete] (/Users/jedidiahomadoye/Desktop/JedDoc-Manager/client/test/e2e/document.spec.js:12:8)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
 
     
     </testcase>

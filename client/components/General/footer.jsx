@@ -9,7 +9,7 @@ class Footer extends React.Component {
               <div className="col l6 s12">
                 <h5 className="white-text">Jed-Doc Manager</h5>
                 <p className="grey-text text-lighten-4">
-                    Your Real-Time document sharing and management application</p>
+        Your Real-Time document sharing and management application</p>
               </div>
               <div className="col l4 offset-l2 s12">
                 <h5 className="white-text">Informations</h5>
@@ -18,10 +18,10 @@ class Footer extends React.Component {
                     href="https://github.com/andela-jomadoye/JedDoc-Manager">
                       Github</a></li>
                   <li><a className="grey-text text-lighten-3"
-                    href="https://github.com/andela-jomadoye/JedDoc-Manager/issues">
+        href="https://github.com/andela-jomadoye/JedDoc-Manager/issues">
                       Submit Issues</a></li>
                   <li><a className="grey-text text-lighten-3"
-                    href="https://github.com/andela-jomadoye/JedDoc-Manager/wiki">
+         href="https://github.com/andela-jomadoye/JedDoc-Manager/wiki">
                       Contributing</a></li>
                   <li><a className="grey-text text-lighten-3"
                     href="https://slimjed.github.io/">Author</a></li>
@@ -32,7 +32,8 @@ class Footer extends React.Component {
           <div className="footer-copyright">
             <div className="container">
             © 2017 Omadoye Jedidiah
-            <a className="grey-text text-lighten-4 right" href="https://slimjed.github.io/">About Jed-Doc Manager</a>
+            <a className="grey-text text-lighten-4 right"
+            href="https://slimjed.github.io/">About Jed-Doc Manager</a>
             </div>
           </div>
         </footer>

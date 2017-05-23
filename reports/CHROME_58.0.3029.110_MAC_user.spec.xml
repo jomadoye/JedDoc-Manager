@@ -1,63 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="1">
 
   <testsuite name="user.spec"
-    errors="0" failures="0" hostname="" id="" package="user.spec" skipped="0"
-    tests="1" time="55.45" timestamp="Tue, 23 May 2017 18:50:37 GMT">
+    errors="0" failures="1" hostname="" id="" package="user.spec" skipped="0"
+    tests="1" time="7.090" timestamp="Tue, 23 May 2017 22:08:39 GMT">
   
-    <testcase name="Edit user profile and delete account" classname="user.spec" time="55.45" assertions="26">
+    <testcase name="Edit user profile and delete account" classname="user.spec" time="7.090" assertions="3">
 
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+      <failure message="Timed out while waiting for element &lt;nav&gt; to be present for 1000 milliseconds.">    at Object.EditUserProfileAndDeleteAccount [as Edit user profile and delete account] (/Users/jedidiahomadoye/Desktop/JedDoc-Manager/client/test/e2e/user.spec.js:10:8)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
 
     
     </testcase>

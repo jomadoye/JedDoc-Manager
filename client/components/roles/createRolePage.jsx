@@ -47,7 +47,9 @@ class createRolePage extends React.Component {
               </div>
             </div>
             <div className="row">
-              <button id="create-role-btn" className="btn waves-effect waves-light" type="submit" name="action">Submit
+              <button id="create-role-btn"
+              className="btn waves-effect waves-light"
+              type="submit" name="action">Submit
                 <i className="material-icons right">send</i>
               </button>
             </div>

@@ -90,12 +90,22 @@ class CardDocumentView extends React.Component {
     <div>
       <div className="col l3 s6 m4">
       {myDocument && <div>
-          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleView} key={document.id}><i id="mi-visibility" className="material-icons">visibility</i></a>
+          <a
+className="modal-trigger btn-floating btn-small waves-effect waves-light red"
+            onClick={this.handleView} key={document.id}>
+              <i id="mi-visibility"
+              className="material-icons">visibility</i></a>
           &nbsp;&nbsp;
-            <a className="btn-floating btn-small waves-effect waves-light red" onClick={this.handleDelete}><i id="mi-delete" className="material-icons">delete</i></a>
+            <a className="btn-floating btn-small waves-effect waves-light red"
+              onClick={this.handleDelete}>
+                <i id="mi-delete" className="material-icons">delete</i></a>
           &nbsp;&nbsp;
-          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleEdit} key={document.id + 1000}><i id="mi-edit" className="material-icons">mode_edit</i></a>
-          <div id={`viewDocument${document.id}`} className="modal modal-fixed-footer">
+          <a
+className="modal-trigger btn-floating btn-small waves-effect waves-light red"
+            onClick={this.handleEdit} key={document.id + 1000}>
+              <i id="mi-edit" className="material-icons">mode_edit</i></a>
+          <div id={`viewDocument${document.id}`}
+            className="modal modal-fixed-footer">
             <div className="modal-content">
               <h4 className="center-align">{document.title}</h4>
               <hr />
@@ -104,13 +114,19 @@ class CardDocumentView extends React.Component {
               <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>
             <div className="modal-footer">
-              <a href="#!" id="modal-close" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a href="#!"
+              id="modal-close"
+    className="modal-action modal-close waves-effect waves-green btn-flat ">
+              Close</a>
             </div>
           </div>
-          <div id={`editDocument${document.id}`} className="modal modal-fixed-footer">
+          <div id={`editDocument${document.id}`}
+            className="modal modal-fixed-footer">
             <div className="modal-content">
               <div className="">
-                <form id="editDocumentModal" onSubmit={this.handleEditDocumentSubmit}>
+                <form
+                id="editDocumentModal"
+                onSubmit={this.handleEditDocumentSubmit}>
                   <div className="input-field">
                     <i className="material-icons prefix">mode_edit</i>
                     <label>Document title</label>
@@ -160,15 +176,21 @@ class CardDocumentView extends React.Component {
               </div>
             </div>
             <div className="modal-footer">
-              <a href="#!" id="modal-close-edit" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a href="#!"
+              id="modal-close-edit"
+className="modal-action modal-close waves-effect waves-green btn-flat">
+              Close</a>
             </div>
           </div>
         </div>
       }
         {readOnly &&
         <div>
-          <a className=" modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleView} key={document.id}><i className="material-icons">visibility</i></a>
-          <div id={`viewDocument${document.id}`} className="modal modal-fixed-footer">
+          <a
+className=" modal-trigger btn-floating btn-small waves-effect waves-light red"
+          onClick={this.handleView} key={document.id}>
+          <i className="material-icons">visibility</i></a>
+<div id={`viewDocument${document.id}`} className="modal modal-fixed-footer">
             <div className="modal-content">
               <h4 className="center-align">{document.title}</h4>
               <hr />
@@ -178,21 +200,33 @@ class CardDocumentView extends React.Component {
               <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>
             <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a href="#!"
+    className="modal-action modal-close waves-effect waves-green btn-flat">
+              Close</a>
             </div>
           </div>
         </div>}
         <div className="">
           <div className="card small">
             <div className="card-image waves-effect waves-block waves-light">
-              <img className="activator" src="https://unsplash.it/200/300/?random" />
+              <img
+              className="activator"
+              src="https://unsplash.it/200/300/?random" />
             </div>
             <div className="card-content">
-              <span className="card-title activator grey-text text-darken-4">{ document.title.length > 20 ? `${document.title.substring(0, 15)}...` : document.title }</span>
+              <span
+              className="card-title activator grey-text text-darken-4">
+{document.title.length > 20 ?
+`${document.title.substring(0, 15)}...` : document.title}
+</span>
             </div>
             <div className="card-reveal">
-              <span className="card-title grey-text text-darken-4">{ document.title.length > 20 ? `${document.title.substring(0, 15)}...` : document.title }<i className="material-icons right">close</i></span>
-              <p>{ document.body.length > 100 ? `${document.body.substring(0, 150)}...` : document.body }</p>
+              <span className="card-title grey-text text-darken-4">
+{ document.title.length > 20 ?
+`${document.title.substring(0, 15)}...` : document.title}
+<i className="material-icons right">close</i></span>
+<p>{ document.body.length > 100 ?
+   `${document.body.substring(0, 150)}...` : document.body }</p>
             </div>
           </div>
         </div>

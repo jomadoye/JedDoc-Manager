@@ -24,7 +24,8 @@ class Dashboard extends React.Component {
     this.props.loadAuthorizedToViewDocument();
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ AuthToViewDocuments: nextProps.documents.AuthorizeToViewDocuments });
+    this.setState({ AuthToViewDocuments:
+      nextProps.documents.AuthorizeToViewDocuments });
     if (this.props !== nextProps.props) {
       const { isPageLoad } = this.state;
       const { AuthorizeToViewDocuments } = nextProps.documents;
@@ -66,6 +67,7 @@ class Dashboard extends React.Component {
         } else if (document.access === 'role') {
           roleDocuments.push(document);
         }
+        return roleDocuments.push([]);
       });
     }
     const { selected, page, search } = this.state;
@@ -82,8 +84,10 @@ class Dashboard extends React.Component {
         <div className="row">
           <div className="col s12">
             <ul className="tabs">
-              <li className="tab col s6"><a href="#test1">Public Documents</a></li>
-              <li className="tab col s6"><a href="#test2">Role Documents</a></li>
+              <li className="tab col s6">
+                <a href="#test1">Public Documents</a></li>
+              <li className="tab col s6">
+                <a href="#test2">Role Documents</a></li>
             </ul>
           </div>
           <div id="test1" className="col s12">
@@ -125,7 +129,7 @@ class Dashboard extends React.Component {
           </div>
           <div className="fixed-action-btn horizontal click-to-toggle">
           <a className="btn-floating btn-large red">
-            <i className="material-icons  teal lighten-3">search</i>
+            <i className="material-icons  teal darken-4">search</i>
           </a>
           <ul>
             <form onSubmit={this.onSubmit}>
@@ -137,7 +141,7 @@ class Dashboard extends React.Component {
                   value={search}
                   onChange={this.onChange}
                   type="text"
-                  className="validate"/>
+                  className="validate teal lighten-3"/>
                   <label htmlFor="first_name">Search Documents</label>
                 </div>
               </div>
@@ -154,6 +158,7 @@ Dashboard.propTypes = {
   searchDocumentsByTitleOnDashboard: PropTypes.func.isRequired,
   AuthToViewDocuments: PropTypes.array,
   documents: PropTypes.object.isRequired,
+  props: PropTypes.object.isRequired,
 };
 
 /**
@@ -167,7 +172,8 @@ function mapDispatchToProps(dispatch) {
     loadAuthorizedToViewDocument: (limit, offset) =>
       dispatch(DocumentAction.loadAuthorizedToViewDocument(limit, offset)),
     searchDocumentsByTitleOnDashboard: (query, limit, offset) =>
-      dispatch(DocumentAction.searchDocumentsByTitleOnDashboard(query, limit, offset)),
+      dispatch(DocumentAction
+        .searchDocumentsByTitleOnDashboard(query, limit, offset)),
   };
 }
 
