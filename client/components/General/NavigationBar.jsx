@@ -72,14 +72,14 @@ class NavigationBar extends React.Component {
        </div>
     );
     const guestLinks = (
-      <ul className="nav navbar-nav navbar-right">
+      <ul className="nav navbar-right">
         <li id="signup">
            <Link to="/signup">
             Sign up
             <i className="material-icons right">exit_to_app</i>
            </Link>
         </li>
-         <li>
+         <li id="login">
            <Link to="/login">
              login
              <i className="material-icons right">trending_flat</i>
@@ -90,7 +90,9 @@ class NavigationBar extends React.Component {
 
     const sideNavBar = (
       <Link to="/dashboard" className="brand-logo">
-        <i className="material-icons button-collapse"
+        <i
+        id = "mobile-nav"
+        className="material-icons button-collapse"
         data-activates="slide-out">menu</i>
         J-Docs
        </Link>
@@ -128,19 +130,25 @@ class NavigationBar extends React.Component {
                   { isAuthenticated && user.email}</span></a>
             </div>
           </li>
-          <li><a href="my-profile"><i className="material-icons">
+          <li><a id="my-profile" href="my-profile">
+            <i className="material-icons">
               account_circle</i>My Profile</a></li>
-          <li><a href="create-document"><i className="material-icons">
+          <li><a id="create-document" href="create-document">
+            <i className="material-icons">
               add</i>Create Document</a></li>
-          <li><a href="my-documents"><i className="material-icons">
+          <li><a id="my-documents" href="my-documents">
+            <i className="material-icons">
               perm_media</i>My Documents</a></li>
           {user && user.roleId === 1 &&
           <div>
-            <li><a href="create-role"><i className="material-icons">
+            <li><a id="create-roles" href="create-role">
+              <i className="material-icons">
                 add</i>Create Roles</a></li>
-            <li><a href="manage-roles"><i className="material-icons">
+            <li><a id="manage-roles" href="manage-roles">
+              <i className="material-icons">
                 settings</i>Manage Roles</a></li>
-            <li><a href="manage-users"><i className="material-icons">
+            <li><a id="manage-users" href="manage-users">
+              <i className="material-icons">
                 settings</i>Manage Users</a></li>
             <li><a href="manage-documents"><i className="material-icons">
                 settings</i>Manage Documents</a></li>

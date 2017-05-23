@@ -84,8 +84,10 @@ class ManageUsersPage extends React.Component {
           <ul className="pagination">
             {
             <div>
-              <li className="waves-effect"><a href="#!"><i className="material-icons">chevron_left</i></a></li>
-              {page && pageArray && pageArray.map((pages, index) => (<PaginationNav
+              <li className="waves-effect"><a href="#!">
+                <i className="material-icons">chevron_left</i></a></li>
+              {page && pageArray && pageArray.map((pages, index) => 
+              (<PaginationNav
                  key={index}
                  selected={selectedUsers}
                  index={index}
@@ -94,7 +96,8 @@ class ManageUsersPage extends React.Component {
                  handlePagination={this.handlePagination}
                 />))
               }
-              <li className="waves-effect"><a href="#!"><i className="material-icons">chevron_right</i></a></li>
+              <li className="waves-effect"><a href="#!">
+                <i className="material-icons">chevron_right</i></a></li>
             </div>
             }
           </ul>

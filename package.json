@@ -22,7 +22,7 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:all": "npm-run-all --parallel test mocha:testClient",
-    "test-e2e": "nightwatch"
+    "test-e2e": "npm run db:seed && nightwatch"
   },
   "repository": {
     "type": "git",

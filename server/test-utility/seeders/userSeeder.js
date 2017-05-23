@@ -28,5 +28,12 @@ export default [{
   password: 'password',
   roleId: 3,
 },
+{
+  username: 'dede',
+  fullname: 'dede',
+  email: faker.internet.email(),
+  password: 'password',
+  roleId: 1,
+},
 
 ];

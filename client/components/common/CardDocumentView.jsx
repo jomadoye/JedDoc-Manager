@@ -90,11 +90,11 @@ class CardDocumentView extends React.Component {
     <div>
       <div className="col l3 s6 m4">
       {myDocument && <div>
-          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleView} key={document.id}><i className="material-icons">visibility</i></a>
+          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleView} key={document.id}><i id="mi-visibility" className="material-icons">visibility</i></a>
           &nbsp;&nbsp;
-            <a className="btn-floating btn-small waves-effect waves-light red" onClick={this.handleDelete}><i className="material-icons">delete</i></a>
+            <a className="btn-floating btn-small waves-effect waves-light red" onClick={this.handleDelete}><i id="mi-delete" className="material-icons">delete</i></a>
           &nbsp;&nbsp;
-          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleEdit} key={document.id + 1000}><i className="material-icons">mode_edit</i></a>
+          <a className="modal-trigger btn-floating btn-small waves-effect waves-light red" onClick={this.handleEdit} key={document.id + 1000}><i id="mi-edit" className="material-icons">mode_edit</i></a>
           <div id={`viewDocument${document.id}`} className="modal modal-fixed-footer">
             <div className="modal-content">
               <h4 className="center-align">{document.title}</h4>
@@ -104,17 +104,18 @@ class CardDocumentView extends React.Component {
               <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>
             <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a href="#!" id="modal-close" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
             </div>
           </div>
           <div id={`editDocument${document.id}`} className="modal modal-fixed-footer">
             <div className="modal-content">
               <div className="">
-                <form onSubmit={this.handleEditDocumentSubmit}>
+                <form id="editDocumentModal" onSubmit={this.handleEditDocumentSubmit}>
                   <div className="input-field">
                     <i className="material-icons prefix">mode_edit</i>
                     <label>Document title</label>
                     <input
+                    id="title"
                     onChange={this.handleDocumentOnchange}
                     name="title"
                     value={title}
@@ -128,7 +129,7 @@ class CardDocumentView extends React.Component {
                     onChange={this.handleDocumentOnchange}
                     name="body"
                     value={body}
-                    id="icon_prefix2"
+                    id="body"
                     />
                     <label htmlFor="icon_prefix2">Document body</label>
                   </div>
@@ -159,7 +160,7 @@ class CardDocumentView extends React.Component {
               </div>
             </div>
             <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+              <a href="#!" id="modal-close-edit" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
             </div>
           </div>
         </div>

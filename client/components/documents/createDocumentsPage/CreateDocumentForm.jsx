@@ -18,6 +18,7 @@ export default function CreateDocumentForm({ state, onchange, onsubmit }) {
             <i className="material-icons prefix">mode_edit</i>
             <label>Document title</label>
             <input
+            id="title"
             onChange={onchange}
             name="title"
             value={title}
@@ -27,11 +28,11 @@ export default function CreateDocumentForm({ state, onchange, onsubmit }) {
           <div className="input-field">
             <i className="material-icons prefix">question_answer</i>
             <textarea
+            id="body"
             className="materialize-textarea"
             onChange={onchange}
             name="body"
             value={body}
-            id="icon_prefix2"
               />
             <label htmlFor="icon_prefix2">Document body</label>
           </div>
@@ -43,8 +44,8 @@ export default function CreateDocumentForm({ state, onchange, onsubmit }) {
                 onChange={onchange}
                 label="Select a document access type"
                 defaultValue="public">
-                <option value="public">Public</option>
-                <option value="private">Private</option>
+                <option id="publicSelect" value="public">Public</option>
+                <option id="privateSelect" value="private">Private</option>
                 <option value="role">Role</option>
               </Input>
             </Row>

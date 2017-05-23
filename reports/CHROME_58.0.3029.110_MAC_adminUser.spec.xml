@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="2">
+
+  <testsuite name="adminUser.spec"
+    errors="0" failures="0" hostname="" id="" package="adminUser.spec" skipped="0"
+    tests="2" time="49.61" timestamp="Tue, 23 May 2017 18:48:34 GMT">
+  
+    <testcase name="an Admin can edit a user and delete a user" classname="adminUser.spec" time="28.32" assertions="19">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="an Admin can create a role and delete a role" classname="adminUser.spec" time="21.29" assertions="18">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

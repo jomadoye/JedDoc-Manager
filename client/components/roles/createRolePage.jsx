@@ -37,7 +37,7 @@ class createRolePage extends React.Component {
             <div className="row">
               <div className="input-field col s6">
                 <input placeholder="Enter role name"
-                  id="first_name"
+                  id="new-role"
                   type="text"
                   className="validate"
                   onChange={this.handleChange}
@@ -47,7 +47,7 @@ class createRolePage extends React.Component {
               </div>
             </div>
             <div className="row">
-              <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+              <button id="create-role-btn" className="btn waves-effect waves-light" type="submit" name="action">Submit
                 <i className="material-icons right">send</i>
               </button>
             </div>

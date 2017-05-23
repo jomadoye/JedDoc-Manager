@@ -69,7 +69,7 @@ class ManageUsersRow extends React.Component {
         <td>{user.email}</td>
         <td>{user.roleId}</td>
         <td>{this.handleDisplayUserRole(user.roleId)}</td>
-        <td><a className="waves-effect waves-light btn"
+        <td><a className="waves-effect waves-light btn manage-edit-user-btn"
           onClick={this.handleEditModal}>Edit User</a>
           <div id={`modal-${user.id}`} className="modal">
             <div className="modal-content">
@@ -78,7 +78,8 @@ class ManageUsersRow extends React.Component {
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
                     <input placeholder="Placeholder"
-                    id="fullName" type="text"
+                    id="fullName"
+                    type="text"
                     value={fullname}
                     name="fullname"
                     onChange={this.handleUserEditOnchange}
@@ -88,7 +89,8 @@ class ManageUsersRow extends React.Component {
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
-                    <input id="username"
+                    <input
+                    id="username"
                     type="text"
                     className="validate"
                     name="username"
@@ -99,7 +101,8 @@ class ManageUsersRow extends React.Component {
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
-                    <input id="email"
+                    <input
+                    id="email"
                     type="email"
                     className="validate"
                     name="email"
@@ -110,7 +113,8 @@ class ManageUsersRow extends React.Component {
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
-                    <input id="roleId"
+                    <input
+                    id="roleId"
                     type="text"
                     value={roleId}
                     name="roleId"
@@ -121,7 +125,8 @@ class ManageUsersRow extends React.Component {
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
-                    <button className="btn waves-effect waves-light"
+                    <button
+          className="btn waves-effect waves-light manage-edit-user-submit-btn"
                       type="submit" name="action">Edit User
                       <i className="material-icons right">send</i>
                     </button>
@@ -132,12 +137,12 @@ class ManageUsersRow extends React.Component {
             </div>
             <div className="modal-footer">
               <a href="#!"
-                className="modal-action modal-closewaves-effect waves-green btn-flat">
+      className="modal-action modal-closewaves-effect waves-green btn-flat">
                 Agree</a>
             </div>
         </div></td>
         <td><button
-        className="waves-effect waves-light btn"
+        className="waves-effect waves-light btn manage-delete-user-btn"
         onClick={this.handleDelete}
         >Delete User</button></td>
       </tr>

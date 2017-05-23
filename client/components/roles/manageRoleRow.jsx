@@ -14,7 +14,8 @@ export default function ManageRoleRow({ handleDelete, role }) {
       <td>{role.id}</td>
       <td>{role.title}</td>
       <td><button
-      className="waves-effect waves-light btn"
+      id="delete-role"
+      className="waves-effect waves-light btn delete-role"
       onClick={() => { handleDelete(role.id); }}
       >Delete Role</button></td>
     </tr>
