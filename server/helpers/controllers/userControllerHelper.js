@@ -152,8 +152,9 @@ class UserControllerHelper {
           errors.email = 'This email already exists';
         }
       }
+      const newError = errors;
       return {
-        errors,
+        errors: newError,
         isValid: lodash.isEmpty(errors),
       };
     });
