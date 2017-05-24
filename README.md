@@ -5,7 +5,7 @@
 
 About the Application
 -------------
-This is a Document Management System, with user and documents roles and privileges. Each document defines access rights; the document defines which roles can access it. 
+This is a Document Management System, with user and documents roles and privileges. Each document has access levels, the document defines which users can access it. 
 Also, each document specifies the date it was published, when it was last updated, and the author who published it.
 
 ### **API Features**
@@ -37,6 +37,7 @@ The following features make up the Document Management System API:
 - It ensures users can delete, edit and update documents that they own.   
 - It allows users to retrieve all documents they own.
 - It allows users to set a access for any document they create.   
+
 
 ##### Search
 - It allows users to search `public` and `role` documents that belong to other users (as well as documents that belong to the user).
