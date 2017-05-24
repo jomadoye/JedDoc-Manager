@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
         } else if (document.access === 'role') {
           roleDocuments.push(document);
         }
-        return roleDocuments.push([]);
+        // return roleDocuments.push([]);
       });
     }
     const { selected, page, search } = this.state;
@@ -158,7 +158,7 @@ Dashboard.propTypes = {
   searchDocumentsByTitleOnDashboard: PropTypes.func.isRequired,
   AuthToViewDocuments: PropTypes.array,
   documents: PropTypes.object.isRequired,
-  props: PropTypes.object.isRequired,
+  props: PropTypes.object,
 };
 
 /**

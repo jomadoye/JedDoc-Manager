@@ -73,7 +73,7 @@ class MyDocumentPage extends React.Component {
       } else if (document.access === 'role') {
         roleDocuments.push(document);
       }
-      return roleDocuments.push([]);
+      // return roleDocuments.push([]);
     });
     const { selected, page, search } = this.state;
     const selectedDocuments = selected.toString();
