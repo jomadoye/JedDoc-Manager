@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
-app.use(express.static('dist/client'));
+app.use(express.static('client'));
 
 Route(app);
 // Setup a default route that sends back a welcome message in JSON format.
