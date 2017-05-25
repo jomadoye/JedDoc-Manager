@@ -24,7 +24,7 @@
     "test": "npm-run-all test:server mocha:testClient",
     "test:all": "npm-run-all test:server mocha:testClient test-e2e",
     "test-e2e": "npm run db:seed && nightwatch",
-    "postinstall": "npm run build && npm run db:seed",
+    "postinstall": "npm run db:seed",
     "build": "rm -rf dist/ && babel server -d dist/server && npm run build:client",
     "build:client": "webpack --config webpack.config.prod.js && cat client/index.html > dist/client/index.html"
   },
