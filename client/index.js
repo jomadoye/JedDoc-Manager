@@ -1,20 +1,23 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-// import { BrowserRouter, Route, Link } from 'react-router-dom';
-import AppRoutes from './routes';
+import jwtDecode from 'jwt-decode';
+import { Router, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import routes from './routes';
+import './styles/styles.scss';
+import setAuthorizationToken from './utils/setAuthorizationToken';
+import { setCurrentUser } from './actions/loginActions';
+import configureStore from './store/configureStore';
 
+const store = configureStore();
 
+if (localStorage.jwtToken_JedDoc) {
+  setAuthorizationToken(localStorage.jwtToken_JedDoc);
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken_JedDoc)));
+}
 render(
-  <BrowserRouter>
-    <AppRoutes />
-  </BrowserRouter>,
-  document.getElementById('app')
+    <Provider store={store}>
+      <Router history={browserHistory} routes={routes}/>
+    </Provider>,
+    document.getElementById('app'),
 );
-    // {/*<div>*/}
-    //    {/*<Route path="/signup" component={Signup} />*/}
-    //    {/*<IndexRoutes component={Greeting}/>*/}
-    //  {/*</Route>*/}
-    // {/*</div>   */}
-
-

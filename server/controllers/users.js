@@ -25,7 +25,14 @@ export default {
           return User
             .create(req.body)
             .then((user) => {
-              const token = signJwtToken(user);
+              const secureUserDetails = {
+                id: user.id,
+                username: user.username,
+                fullname: user.fullname,
+                roleId: user.roleId,
+                email: user.email,
+              };
+              const token = signJwtToken(secureUserDetails);
               res.status(201)
                 .json({
                   success: true,
@@ -59,6 +66,7 @@ export default {
   retrieve(req, res) {
     return User
       .findById(req.params.userId, {
+        attributes: ['username', 'email', 'fullname', 'id', 'roleId'],
         include: [{
           model: Document,
           as: 'documents',
@@ -130,6 +138,7 @@ export default {
   login(req, res) {
     const loginQuery = req.body.query;
     return User.find({
+      attributes: ['username', 'password', 'email', 'id', 'fullname', 'roleId'],
       where: {
         $or: [{ email: loginQuery }, { username: loginQuery }],
       },

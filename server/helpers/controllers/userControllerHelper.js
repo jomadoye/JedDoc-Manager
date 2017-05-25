@@ -118,7 +118,14 @@ class UserControllerHelper {
           });
         return response;
       }
-      const token = UserControllerHelper.signJwtToken(user);
+      const secureUserDetails = {
+        id: user.id,
+        username: user.username,
+        fullname: user.fullname,
+        roleId: user.roleId,
+        email: user.email,
+      };
+      const token = UserControllerHelper.signJwtToken(secureUserDetails);
       response = res.status(200)
         .json({
           success: true,
@@ -145,8 +152,9 @@ class UserControllerHelper {
           errors.email = 'This email already exists';
         }
       }
+      const newError = errors;
       return {
-        errors,
+        errors: newError,
         isValid: lodash.isEmpty(errors),
       };
     });

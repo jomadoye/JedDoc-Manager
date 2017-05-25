@@ -26,13 +26,26 @@ export default {
       ],
       loader: ['react-hot-loader', 'babel-loader'],
       exclude: /node_modules/,
-    }],
+    }, {
+      test: /.jsx$/,
+      loader: 'babel-loader',
+      exclude: /node_modules/,
+      include: path.join(__dirname, 'client'),
+      query: {
+        presets: ['es2015', 'react'],
+      },
+    }, {
+      test: /\.scss$/,
+      include: path.join(__dirname, 'client'),
+      loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    },
+    {
+      test: /\.(png|jpg)$/,
+      loader: 'url-loader?limit=8192',
+    },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-  },
-  node: {
-    net: 'empty',
-    dns: 'empty',
   },
 };

@@ -12,6 +12,8 @@ ratings:
   paths:
     - server/**
     - server/**/**
+    - client/**
+    - client/**/**
 languages:
   JavaScript: true
 exclude_paths:

@@ -255,7 +255,7 @@ describe('User API', () => {
   describe('Search User by username', () => {
     it('should search for a user by username', (done) => {
       chai.request(server)
-        .get(`/api/search/users/${userData.user.username}`)
+        .get(`/api/search/users/?q=${userData.user.username}`)
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(201);
@@ -267,19 +267,17 @@ describe('User API', () => {
 
     it('should not find user if username does not exist', (done) => {
       chai.request(server)
-        .get(`/api/search/users/${userData.user.username}notExist`)
+        .get(`/api/search/users/?q=${userData.user.username}notExist`)
         .set('x-access-token', userData.token)
         .end((err, res) => {
-          res.should.have.status(404);
-          res.body.message.should.eql('User not found.');
-          res.body.success.should.eql(false);
+          res.body.user.length.should.eql(0);
           done();
         });
     });
 
     it('should not find user if not admin', (done) => {
       chai.request(server)
-        .get(`/api/search/users/${userData.user.username}`)
+        .get(`/api/search/users/?q=${userData.user.username}`)
         .set('x-access-token', basicUser.token)
         .end((err, res) => {
           res.should.have.status(403);

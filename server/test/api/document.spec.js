@@ -175,7 +175,7 @@ describe('Document API', () => {
   describe('Search Document by title', () => {
     it('should search for a document by title', (done) => {
       chai.request(server)
-        .get(`/api/search/documents/${document.document.title}`)
+        .get(`/api/search/documents/?q=${document.document.title}`)
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(201);
@@ -187,12 +187,10 @@ describe('Document API', () => {
 
     it('should not find doc if title does not exist', (done) => {
       chai.request(server)
-        .get(`/api/search/documents/${document.document.title}notExist`)
+        .get('/api/search/documents/?q=notExist')
         .set('x-access-token', userData.token)
         .end((err, res) => {
-          res.should.have.status(404);
-          res.body.message.should.eql('Document Not Found');
-          res.body.success.should.eql(false);
+          res.body.document.length.should.eql(0);
           done();
         });
     });

@@ -5,11 +5,22 @@ const Document = models.Documents;
 
 export default {
   searchUsers(req, res) {
+    const query = req.query.q.trim()
+      .split(' ')
+      .map(searchWord => `%${searchWord}%`);
+    const limit = req.query.limit || null;
+    const offset = req.query.offset || 0;
     return User
-      .find({
+      .findAll({
         where: {
-          username: req.params.username,
+          username: {
+            $ilike: {
+              $any: query,
+            },
+          },
         },
+        limit,
+        offset,
         include: [{
           model: Document,
           as: 'documents',
@@ -36,11 +47,25 @@ export default {
   },
 
   searchDocuments(req, res) {
+    const query = req.query.q.trim()
+      .split(' ')
+      .map(searchWord => `%${searchWord}%`);
+    const limit = req.query.limit || null;
+    const offset = req.query.offset || 0;
     return Document
-      .find({
+      .findAll({
         where: {
-          title: req.params.documentTitle,
+          title: {
+            $ilike: {
+              $any: query,
+            },
+          },
         },
+        limit,
+        offset,
+        include: [{
+          model: models.Users,
+          attributes: ['fullname'] }],
       })
       .then((document) => {
         if (!document) {

@@ -10,7 +10,7 @@ export default (sequelize, DataTypes) => {
       },
     },
     body: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       required: true,
       validate: {
