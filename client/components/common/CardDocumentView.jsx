@@ -110,6 +110,7 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
               <h4 className="center-align">{document.title}</h4>
               <hr />
               <p>{document.body}</p>
+              <h6>Author: {document.User.fullname}</h6>
               <h6>Created: {documentDate}</h6>
               <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>

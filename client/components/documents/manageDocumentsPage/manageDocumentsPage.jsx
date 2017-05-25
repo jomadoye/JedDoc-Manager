@@ -24,6 +24,20 @@ class manageUserDocumentsPage extends React.Component {
 
   render() {
     const MyDocuments = this.state.documents;
+    const publicDocuments = [];
+    const roleDocuments = [];
+    const privateDocuments = [];
+    if (MyDocuments) {
+      MyDocuments.map((document) => {
+        if (document.access === 'public') {
+          publicDocuments.push(document);
+        } else if (document.access === 'role') {
+          roleDocuments.push(document);
+        } else if (document.access === 'private') {
+          privateDocuments.push(document);
+        }
+      });
+    }
     return (
       <div className="container">
         <br />
@@ -40,7 +54,7 @@ class manageUserDocumentsPage extends React.Component {
           </div>
            <div id="test1" className="col s12">
             <br />
-              { MyDocuments && MyDocuments.map((document) => {
+              { MyDocuments && privateDocuments.map((document) => {
                 if (document.access === 'private') {
                   return (<CardDocumentView
                     document={document} key={document.id} myDocument/>);
@@ -50,7 +64,7 @@ class manageUserDocumentsPage extends React.Component {
           </div>
           <div id="test2" className="col s12">
             <br />
-              { MyDocuments && MyDocuments.map((document) => {
+              { MyDocuments && publicDocuments.map((document) => {
                 if (document.access === 'public') {
                   return (<CardDocumentView
                     document={document} key={document.id} myDocument/>);
@@ -61,7 +75,7 @@ class manageUserDocumentsPage extends React.Component {
 
           <div id="test3" className="col s12">
             <br />
-              { MyDocuments && MyDocuments.map((document) => {
+              { MyDocuments && roleDocuments.map((document) => {
                 if (document.access === 'role') {
                   return (<CardDocumentView
                     document={document} key={document.id} myDocument/>);
