@@ -135,10 +135,10 @@ class NavigationBar extends React.Component {
               account_circle</i>My Profile</a></li>
           <li><a id="create-document" href="create-document">
             <i className="material-icons">
-              add</i>Create Document</a></li>
+              add</i>Create Docs</a></li>
           <li><a id="my-documents" href="my-documents">
             <i className="material-icons">
-              perm_media</i>My Documents</a></li>
+              perm_media</i>my docs</a></li>
           {user && user.roleId === 1 &&
           <div>
             <li><a id="create-roles" href="create-role">

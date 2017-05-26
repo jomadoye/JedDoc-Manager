@@ -20,16 +20,48 @@ class ManageUsersRow extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDisplayUserRole = this.handleDisplayUserRole.bind(this);
   }
+  /**
+   * This function mounts the component
+   * 
+   * 
+   * @memberof ManageUsersRow
+   */
   componentDidMount() {
     $('.modal').modal();
   }
+  /**
+   * This function handles editing user details
+   * 
+   * @param {any} event 
+   * 
+   * @memberof ManageUsersRow
+   */
   handleUserEditOnchange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+  /**
+   * This function handles the delete of documents
+   * 
+   * @param {any} event 
+   * 
+   * @memberof ManageUsersRow
+   */
   handleDelete(event) {
     event.preventDefault();
-    this.props.deleteSingleUserAccount(this.props.user.id);
+    const confirmDelete =
+      confirm('Are you sure you want to delete this User');
+    if (confirmDelete === true) {
+      this.props.deleteSingleUserAccount(this.props.user.id);
+    }
   }
+
+  /**
+   * This function handle submit
+   * 
+   * @param {any} event 
+   * 
+   * @memberof ManageUsersRow
+   */
   handleSubmit(event) {
     event.preventDefault();
     const user = {
@@ -41,12 +73,29 @@ class ManageUsersRow extends React.Component {
     this.props.updateSingleUserAccountByAdmin(user, this.props.user.id);
     this.props.deleteFlashMessage(1);
   }
+
+  /**
+   * This function handles edit the user details on the modal
+   * 
+   * @param {any} event 
+   * 
+   * @memberof ManageUsersRow
+   */
   handleEditModal(event) {
     event.preventDefault();
     const userId = this.props.user.id;
     const modal = `#modal-${userId}`;
     $(modal).modal('open');
   }
+
+  /**
+   * This function dis plays the user roles
+   * 
+   * @param {any} id 
+   * @returns 
+   * 
+   * @memberof ManageUsersRow
+   */
   handleDisplayUserRole(id) {
     if (id === 1) {
       return 'Administrator';
