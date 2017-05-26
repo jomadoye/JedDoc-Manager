@@ -236,7 +236,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.be.a('object');
-          res.body.should.have.property('success');
+          
           res.body.should.have.property('message');
           res.body.should.have.property('token');
           res.body.user.should.have.property('id');
@@ -258,9 +258,9 @@ describe('User API', () => {
         .get(`/api/search/users/?q=${userData.user.username}`)
         .set('x-access-token', userData.token)
         .end((err, res) => {
-          res.should.have.status(201);
+          res.should.have.status(200);
           res.body.message.should.eql('This is your user.');
-          res.body.success.should.eql(true);
+          
           done();
         });
     });
@@ -282,7 +282,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.message.should.eql('Admin access is required');
-          res.body.success.should.eql(false);
+          
           done();
         });
     });
@@ -295,10 +295,8 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          res.body.should.have.property('success');
+          
           res.body.should.have.property('message');
-          res.body.should.have.property('success')
-            .eql(false);
           res.body.should.have.property('message')
             .eql('No token provided.');
           done();
@@ -313,10 +311,10 @@ describe('User API', () => {
           .end((err, res) => {
             res.should.have.status(403);
             res.body.should.be.a('Object');
-            res.body.should.have.property('success');
+            
             res.body.should.have.property('message');
-            res.body.should.have.property('success')
-              .eql(false);
+            
+              
             res.body.should.have.property('message')
               .eql('Incorrect token.');
             done();
@@ -329,10 +327,10 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          res.body.should.have.property('success');
+          
           res.body.should.have.property('message');
-          res.body.should.have.property('success')
-            .eql(false);
+          
+            
           res.body.should.have.property('message')
             .eql('No token provided.');
           done();
@@ -347,10 +345,10 @@ describe('User API', () => {
           .end((err, res) => {
             res.should.have.status(403);
             res.body.should.be.a('Object');
-            res.body.should.have.property('success');
+            
             res.body.should.have.property('message');
-            res.body.should.have.property('success')
-              .eql(false);
+            
+              
             res.body.should.have.property('message')
               .eql('Incorrect token.');
             done();
@@ -414,7 +412,7 @@ describe('User API', () => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User updated successfully.');
-          res.body.success.should.eql(true);
+          
           done();
         });
     });
@@ -428,7 +426,7 @@ describe('User API', () => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User updated successfully.');
-          res.body.success.should.eql(true);
+          
           done();
         });
     });
@@ -442,7 +440,7 @@ describe('User API', () => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User updated successfully.');
-          res.body.success.should.eql(true);
+          
           done();
         });
     });
@@ -468,7 +466,7 @@ describe('User API', () => {
           res.should.have.status(404);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User not found');
-          res.body.success.should.eql(false);
+          
           done();
         });
     });
@@ -481,7 +479,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+          
           res.body.message.should.eql('Error updating user.');
           done();
         });
@@ -495,7 +493,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+          
           res.body.message.should.eql('Error updating user.');
           done();
         });
@@ -509,7 +507,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(true);
+          
           res.body.message.should.eql('User updated successfully.');
           done();
         });
@@ -525,7 +523,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+          
           res.body.message.should.eql('unauthorized to perform this request');
           done();
         });
@@ -540,7 +538,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(true);
+          
           res.body.message.should.eql('User deleted successfully.');
           done();
         });
@@ -553,7 +551,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+          
           res.body.message.should.eql('Error encountered when deleting user');
           done();
         });
@@ -566,7 +564,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+          
           res.body.message.should.eql('User not found');
           done();
         });
@@ -579,7 +577,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+          
           res.body.message.should.eql('unauthorized to perform this request');
           done();
         });
@@ -592,7 +590,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(true);
+          
           res.body.message.should.eql('User deleted successfully.');
           done();
         });
