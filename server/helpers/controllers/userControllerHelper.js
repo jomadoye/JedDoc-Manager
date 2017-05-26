@@ -25,7 +25,7 @@ class UserControllerHelper {
     if (!user) {
       response = res.status(404)
         .json({
-          success: false,
+          
           message: 'User not found',
         });
       return response;
@@ -41,7 +41,7 @@ class UserControllerHelper {
       .then(() => {
         response = res.status(200)
           .json({
-            success: true,
+            
             message: 'User updated successfully.',
             user,
           });
@@ -50,7 +50,7 @@ class UserControllerHelper {
       .catch((error) => {
         response = res.status(400)
           .json({
-            success: false,
+            
             message: 'Error updating user.',
             error,
           });
@@ -63,7 +63,7 @@ class UserControllerHelper {
     if (!user) {
       response = res.status(404)
         .json({
-          success: false,
+          
           message: 'User not found',
         });
       return response;
@@ -73,7 +73,7 @@ class UserControllerHelper {
       .then(() => {
         response = res.status(200)
           .json({
-            success: true,
+            
             message: 'User deleted successfully.',
           });
         return response;
@@ -82,7 +82,7 @@ class UserControllerHelper {
         response = res.status(400)
           .json({
             error,
-            success: false,
+            
             message: 'Error encountered when deleting user',
           });
         return response;
@@ -95,7 +95,7 @@ class UserControllerHelper {
       response = res.status(400)
         .json({
           form: 'Invalid Credentials',
-          success: false,
+          
           message: 'Authentication failed, user not found',
         });
       return response;
@@ -104,7 +104,7 @@ class UserControllerHelper {
         response = res.status(400)
           .json({
             form: 'Invalid Credentials',
-            success: false,
+            
             message: 'Authentication failed, no password.',
           });
         return response;
@@ -113,7 +113,7 @@ class UserControllerHelper {
         response = res.status(400)
           .json({
             form: 'Invalid Credentials',
-            success: false,
+            
             message: 'Authentication failed, wrong password.',
           });
         return response;
@@ -128,7 +128,7 @@ class UserControllerHelper {
       const token = UserControllerHelper.signJwtToken(secureUserDetails);
       response = res.status(200)
         .json({
-          success: true,
+          
           message: 'User logged in',
           token,
         });

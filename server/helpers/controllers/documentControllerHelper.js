@@ -44,9 +44,9 @@ class DocumentControllerHelper {
           message: 'Documents Not Found',
         });
     } else {
-      response = res.status(201)
+      response = res.status(200)
         .json({
-          success: true,
+          
           message: 'Document is shown below',
           document,
         });
@@ -61,7 +61,7 @@ class DocumentControllerHelper {
     if (!user) {
       response = res.status(404)
         .json({
-          success: false,
+          
           message: 'User not found',
         });
     } else {
@@ -78,14 +78,14 @@ class DocumentControllerHelper {
           if (!documents) {
             response = res.status(404)
               .json({
-                success: false,
+                
                 message: 'User has no document.',
               });
           } else if (req.decoded.data.id === 1 ||
           req.decoded.data.id === parseInt(req.params.userId, 10)) {
-            response = res.status(201)
+            response = res.status(200)
                 .json({
-                  success: true,
+                  
                   message: 'This is the user document(s).',
                   documents,
                 });
@@ -96,9 +96,9 @@ class DocumentControllerHelper {
                 authToViewDocuments.push(document);
               }
             });
-            response = res.status(201)
+            response = res.status(200)
                 .json({
-                  success: true,
+                  
                   message: 'This is the user document(s).',
                   authToViewDocuments,
                 });
@@ -107,7 +107,7 @@ class DocumentControllerHelper {
         })
         .catch(error => res.status(400)
           .json({
-            success: false,
+            
             message: 'Error retrieving document',
             error,
           }));
@@ -119,7 +119,7 @@ class DocumentControllerHelper {
     if (!document) {
       response = res.status(404)
         .json({
-          success: false,
+          
           message: 'Document Not Found',
         });
     } else {
@@ -129,21 +129,21 @@ class DocumentControllerHelper {
         if (document.userId !== userId && document.access === 'private') {
           response = res.status(403)
             .json({
-              success: false,
+              
               message: 'You dont have permission to view this document',
             });
         } else {
-          response = res.status(201)
+          response = res.status(200)
             .json({
-              success: true,
+              
               message: 'This is your document.',
               document,
             });
         }
       } else {
-        response = res.status(201)
+        response = res.status(200)
           .json({
-            success: true,
+            
             message: 'This is your document.',
             document,
           });
@@ -157,7 +157,7 @@ class DocumentControllerHelper {
     if (!document) {
       response = res.status(404)
         .json({
-          success: false,
+          
           message: 'Document Not Found',
         });
     } else {
@@ -165,7 +165,7 @@ class DocumentControllerHelper {
         .destroy()
         .then(() => res.status(200)
           .json({
-            success: true,
+            
             message: 'Document deleted successfully.',
           }));
     }
@@ -177,7 +177,7 @@ class DocumentControllerHelper {
     if (!document) {
       response = res.status(404)
         .json({
-          success: false,
+          
           message: 'Document Not Found',
         });
     } else {
@@ -190,7 +190,7 @@ class DocumentControllerHelper {
         })
         .then(() => res.status(200)
           .json({
-            success: true,
+            
             message: 'Document successfuly updated',
             document,
           }));
