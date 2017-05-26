@@ -23,13 +23,12 @@ export default {
       })
       .then(document => res.status(201)
         .json({
-          success: true,
           message: 'Document created successfully.',
           document,
         }))
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'An error occured while creating this document.',
           error,
         }));
@@ -48,7 +47,7 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error encountered while updating',
           error,
         }));
@@ -67,7 +66,7 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error encountered while deleting user',
           error,
         }));
@@ -86,7 +85,7 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error retrieving document',
           error,
         }));
@@ -119,7 +118,7 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error retrieving document',
           error,
         }));

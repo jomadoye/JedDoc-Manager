@@ -30,13 +30,13 @@ export default {
         if (!user) {
           res.status(404)
             .json({
-              success: false,
+              
               message: 'User not found.',
             });
         } else {
-          res.status(201)
+          res.status(200)
             .json({
-              success: true,
+              
               message: 'This is your user.',
               user,
             });
@@ -71,20 +71,20 @@ export default {
         if (!document) {
           return res.status(404)
             .json({
-              success: false,
+              
               message: 'Document Not Found',
             });
         }
-        return res.status(201)
+        return res.status(200)
           .json({
-            success: true,
+            
             message: 'This is your document.',
             document,
           });
       })
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Document Not Found',
           error,
         }));

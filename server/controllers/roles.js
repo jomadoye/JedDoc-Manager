@@ -9,13 +9,13 @@ module.exports = {
       })
       .then(role => res.status(201)
         .json({
-          success: true,
+          
           message: 'Role created successfully',
           role,
         }))
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error creating role',
           error,
         }));
@@ -23,15 +23,15 @@ module.exports = {
   list(req, res) {
     return Role
       .all()
-      .then(roles => res.status(201)
+      .then(roles => res.status(200)
         .json({
-          success: true,
+          
           message: 'This are the roles',
           roles,
         }))
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error listing role',
           error,
         }));
@@ -43,13 +43,13 @@ module.exports = {
         if (!role) {
           res.status(404)
             .json({
-              success: false,
+              
               message: 'This role does not exist',
             });
         } else {
           res.status(200)
             .json({
-              success: true,
+              
               message: 'This is the role',
               role,
             });
@@ -58,54 +58,13 @@ module.exports = {
       .catch((error) => {
         res.status(400)
           .json({
-            success: false,
+            
             message: 'Error retrieving Role',
             error,
           });
       });
   },
-  // update(req, res) {
-  //   return Role
-  //     .findById(req.params.roleId)
-  //     .then((role) => {
-  //       if (!role) {
-  //         res.status(404)
-  //           .json({
-  //             success: false,
-  //             message: 'Role not found',
-  //           });
-  //       } else {
-  //         return role
-  //           .update({
-  //             title: req.body.title || role.title,
-  //           })
-  //           .then(() => {
-  //             res.status(200)
-  //               .json({
-  //                 success: true,
-  //                 message: 'Role Updated',
-  //                 role,
-  //               });
-  //           })
-  //           .catch((error) => {
-  //             res.status(400)
-  //               .json({
-  //                 success: false,
-  //                 message: 'Error updating role',
-  //                 error,
-  //               });
-  //           });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       res.status(400)
-  //         .json({
-  //           success: false,
-  //           message: 'Server Error',
-  //           error,
-  //         });
-  //     });
-  // },
+ 
   destroy(req, res) {
     return Role
       .findById(req.params.roleId)
@@ -113,7 +72,7 @@ module.exports = {
         if (!role) {
           return res.status(404)
             .json({
-              success: false,
+              
               message: 'Role not found',
               role,
             });
@@ -122,20 +81,20 @@ module.exports = {
           .destroy()
           .then(() => res.status(200)
             .json({
-              success: true,
+              
               message: 'Role deleted succesfully',
               role,
             }))
           .catch(error => res.status(400)
             .json({
-              success: true,
+              
               message: 'Role not deleted',
               error,
             }));
       })
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error deleting role',
           error,
         }));

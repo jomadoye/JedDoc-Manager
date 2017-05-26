@@ -35,7 +35,7 @@ export default {
               const token = signJwtToken(secureUserDetails);
               res.status(201)
                 .json({
-                  success: true,
+                  
                   message: 'User successfully created',
                   token,
                   user,
@@ -115,7 +115,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           error,
-          success: false,
+          
           message: 'Error updating user.',
         }));
   },
@@ -130,7 +130,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           error,
-          success: false,
+          
           message: 'Error encountered when deleting user',
         }));
   },
@@ -148,7 +148,7 @@ export default {
     })
       .catch(error => res.status(400)
         .json({
-          success: false,
+          
           message: 'Error logging',
           error,
         }));
@@ -158,7 +158,7 @@ export default {
     res.setHeader['x-access-token'] = ' ';
     res.status(200)
       .json({
-        success: true,
+        
         message: 'User logged out',
       });
   },
