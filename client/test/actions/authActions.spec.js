@@ -32,7 +32,7 @@ describe('Authentication actions', () => {
     it('should login a user', () => {
       nock('/api')
         .post('/users/login', user)
-        .reply(201, response);
+        .reply(200, response);
 
       const expectedActions = [
         { type: SET_CURRENT_USER },

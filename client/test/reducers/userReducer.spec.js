@@ -149,7 +149,7 @@ describe('User Reducers', () => {
     }, {
       type: 'UPDATE_USER_PROFILE_SUCCESS',
       updatedUser: {
-        success: true,
+        
         message: 'User updated successfully.',
         user: {
           id: 7,
