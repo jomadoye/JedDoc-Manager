@@ -49,12 +49,12 @@ export default (sequelize, DataTypes) => {
         User.hasMany(models.Documents, {
           foreignKey: 'userId',
           as: 'documents',
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
         });
 
         User.belongsTo(models.Roles, {
           foreignKey: 'roleId',
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
         });
       },
     },

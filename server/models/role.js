@@ -15,7 +15,7 @@ export default (sequelize, DataTypes) => {
         Role.hasMany(models.Users, {
           foreignKey: 'roleId',
           as: 'users',
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
         });
       },
     },
