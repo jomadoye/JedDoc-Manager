@@ -12,6 +12,14 @@ const isDestroyDocuments = DocumentControllerHelper.isDestroyDocuments;
 const isUpdateDocuments = DocumentControllerHelper.isUpdateDocuments;
 
 export default {
+
+  /**
+   * This method creates a document
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} document
+   */
   create(req, res) {
     return Document
       .create({
@@ -28,12 +36,18 @@ export default {
         }))
       .catch(error => res.status(400)
         .json({
-          
           message: 'An error occured while creating this document.',
           error,
         }));
   },
 
+  /**
+   * This method updates a document
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} document
+   */
   update(req, res) {
     return Document
       .find({
@@ -47,12 +61,18 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          
           message: 'Error encountered while updating',
           error,
         }));
   },
 
+  /**
+   * This method deletes a document
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {string} error, message
+   */
   destroy(req, res) {
     return Document
       .find({
@@ -66,12 +86,18 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          
           message: 'Error encountered while deleting user',
           error,
         }));
   },
 
+  /**
+   * This method gets a documents
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} document
+   */
   retrieve(req, res) {
     return Document
       .find({
@@ -85,12 +111,18 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          
           message: 'Error retrieving document',
           error,
         }));
   },
 
+  /**
+   * This method gets all documents
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} document
+   */
   list(req, res) {
     const query = createQuery(req);
     return Document
@@ -110,6 +142,12 @@ export default {
         .send(error));
   },
 
+  /**
+   * This method gets all documents for a specific user
+   *
+   * @param {req} req
+   * @param {res} res
+   */
   getUserDocuments(req, res) {
     User.findById(req.params.userId)
       .then((user) => {
@@ -118,7 +156,6 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          
           message: 'Error retrieving document',
           error,
         }));

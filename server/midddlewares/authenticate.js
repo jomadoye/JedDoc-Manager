@@ -2,15 +2,21 @@ import models from '../models';
 
 export default {
 
+  /**
+   * This method checks if the user making the request is an admin
+   *
+   * @param {req} req
+   * @param {res} res
+   * @param {next} next
+   */
   isAdmin(req, res, next) {
     models.Roles.findById(req.decoded.data.roleId)
       .then((role) => {
         if (role.title === 'Administrator') {
           return next();
         }
-        return res.status(403)
+        return res.status(401)
           .send({
-            
             message: 'Admin access is required',
           });
       })
@@ -18,6 +24,15 @@ export default {
         .send(error));
   },
 
+  /**
+   * This method checks if the user making the request is
+   * the owner of the item
+   *
+   * @param {req} req
+   * @param {res} res
+   * @param {next} next
+   * @returns next
+   */
   isOwner(req, res, next) {
     const loggedInUserId = req.decoded.data.id;
     const loggedInUserRoleId = req.decoded.data.roleId;
@@ -33,9 +48,8 @@ export default {
           if (loggedInUserId === documentUserId) {
             return next();
           }
-          return res.status(403)
+          return res.status(401)
             .json({
-              
               message: 'unauthorized to perform this request',
             });
         })
@@ -43,9 +57,8 @@ export default {
     } else if (loggedInUserId === parseInt(userId, 10)) {
       return next();
     }
-    return res.status(403)
+    return res.status(401)
       .json({
-        
         message: 'unauthorized to perform this request',
       });
   },

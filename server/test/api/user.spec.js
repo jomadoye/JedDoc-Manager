@@ -236,7 +236,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.be.a('object');
-          
+
           res.body.should.have.property('message');
           res.body.should.have.property('token');
           res.body.user.should.have.property('id');
@@ -260,7 +260,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.message.should.eql('This is your user.');
-          
+
           done();
         });
     });
@@ -280,9 +280,9 @@ describe('User API', () => {
         .get(`/api/search/users/?q=${userData.user.username}`)
         .set('x-access-token', basicUser.token)
         .end((err, res) => {
-          res.should.have.status(403);
+          res.should.have.status(401);
           res.body.message.should.eql('Admin access is required');
-          
+
           done();
         });
     });
@@ -295,7 +295,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          
+
           res.body.should.have.property('message');
           res.body.should.have.property('message')
             .eql('No token provided.');
@@ -311,10 +311,10 @@ describe('User API', () => {
           .end((err, res) => {
             res.should.have.status(403);
             res.body.should.be.a('Object');
-            
+
             res.body.should.have.property('message');
-            
-              
+
+
             res.body.should.have.property('message')
               .eql('Incorrect token.');
             done();
@@ -327,10 +327,10 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          
+
           res.body.should.have.property('message');
-          
-            
+
+
           res.body.should.have.property('message')
             .eql('No token provided.');
           done();
@@ -345,10 +345,10 @@ describe('User API', () => {
           .end((err, res) => {
             res.should.have.status(403);
             res.body.should.be.a('Object');
-            
+
             res.body.should.have.property('message');
-            
-              
+
+
             res.body.should.have.property('message')
               .eql('Incorrect token.');
             done();
@@ -412,7 +412,7 @@ describe('User API', () => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User updated successfully.');
-          
+
           done();
         });
     });
@@ -426,7 +426,7 @@ describe('User API', () => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User updated successfully.');
-          
+
           done();
         });
     });
@@ -440,7 +440,7 @@ describe('User API', () => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User updated successfully.');
-          
+
           done();
         });
     });
@@ -466,7 +466,7 @@ describe('User API', () => {
           res.should.have.status(404);
           res.body.should.be.a('Object');
           res.body.message.should.eql('User not found');
-          
+
           done();
         });
     });
@@ -479,7 +479,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('Error updating user.');
           done();
         });
@@ -493,7 +493,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('Error updating user.');
           done();
         });
@@ -507,7 +507,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('User updated successfully.');
           done();
         });
@@ -521,9 +521,9 @@ describe('User API', () => {
           username: 'Omadoye ewo',
         })
         .end((err, res) => {
-          res.should.have.status(403);
+          res.should.have.status(401);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('unauthorized to perform this request');
           done();
         });
@@ -538,7 +538,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('User deleted successfully.');
           done();
         });
@@ -551,7 +551,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('Error encountered when deleting user');
           done();
         });
@@ -564,7 +564,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('User not found');
           done();
         });
@@ -575,9 +575,9 @@ describe('User API', () => {
         .delete('/api/users/21')
         .set('x-access-token', basicUser.token)
         .end((err, res) => {
-          res.should.have.status(403);
+          res.should.have.status(401);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('unauthorized to perform this request');
           done();
         });
@@ -590,7 +590,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          
+
           res.body.message.should.eql('User deleted successfully.');
           done();
         });

@@ -5,6 +5,15 @@ const secret = process.env.SECRET;
 const User = models.Users;
 
 export default {
+
+  /**
+   * This method verifies the token of the user making the request
+   *
+   * @param {req} req
+   * @param {res} res
+   * @param {next} next
+   * @returns next
+   */
   verifyToken(req, res, next) {
     let token;
     if (req.headers.authorization) {
@@ -17,7 +26,6 @@ export default {
         if (err) {
           return res.status(403)
             .send({
-              
               message: 'Incorrect token.',
             });
         }
@@ -26,7 +34,6 @@ export default {
             if (!user) {
               return res.status(403)
                 .send({
-                  
                   message: 'This user does not exist',
                 });
             }
@@ -35,7 +42,6 @@ export default {
           })
           .catch(error => res.status(400)
             .send({
-              
               message: 'Error finding current users',
               error,
             }));
@@ -43,7 +49,6 @@ export default {
     } else {
       return res.status(403)
         .send({
-          
           message: 'No token provided.',
         });
     }
