@@ -8,10 +8,9 @@ const rolesController = controller.roles;
 const authenticate = auth.authenticate;
 const authorization = auth.authorization;
 
-
-const verifyToken = authorization.verifyToken;
-const isAdmin = authenticate.isAdmin;
-const isOwner = authenticate.isOwner;
+const verifyToken = authenticate.verifyToken;
+const isAdmin = authorization.isAdmin;
+const isOwner = authorization.isOwner;
 
 const Route = (app) => {
   app
