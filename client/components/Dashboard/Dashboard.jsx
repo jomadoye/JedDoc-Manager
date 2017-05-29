@@ -58,18 +58,6 @@ class Dashboard extends React.Component {
   }
   render() {
     const { AuthToViewDocuments } = this.state;
-    const publicDocuments = [];
-    const roleDocuments = [];
-    if (AuthToViewDocuments) {
-      AuthToViewDocuments.map((document) => {
-        if (document.access === 'public') {
-          publicDocuments.push(document);
-        } else if (document.access === 'role') {
-          roleDocuments.push(document);
-        }
-        // return roleDocuments.push([]);
-      });
-    }
     const { selected, page, search } = this.state;
     const selectedDocuments = selected.toString();
     const isActive = 'active';
@@ -84,21 +72,14 @@ class Dashboard extends React.Component {
         <div className="row">
           <div className="col s12">
             <ul className="tabs">
-              <li className="tab col s6">
-                <a href="#test1">Public Documents</a></li>
-              <li className="tab col s6">
-                <a href="#test2">Role Documents</a></li>
+              <li className="tab col s12">
+                <a href="#test1">My Dashboard</a>
+              </li>
             </ul>
           </div>
           <div id="test1" className="col s12">
-            { AuthToViewDocuments && publicDocuments.map(document =>
-                <CardDocumentView
-                document={document}
-                key={document.id}
-                 readOnly/>)}
-          </div>
-          <div id="test2" className="col s12">
-            { AuthToViewDocuments && roleDocuments.map(document =>
+            <br/>
+            { AuthToViewDocuments && AuthToViewDocuments.map(document =>
                 <CardDocumentView
                 document={document}
                 key={document.id}
