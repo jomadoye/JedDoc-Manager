@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import * as UserActions from '../../actions/userAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
@@ -22,8 +23,8 @@ class ManageUsersRow extends React.Component {
   }
   /**
    * This function mounts the component
-   * 
-   * 
+   *
+   *
    * @memberof ManageUsersRow
    */
   componentDidMount() {
@@ -31,9 +32,9 @@ class ManageUsersRow extends React.Component {
   }
   /**
    * This function handles editing user details
-   * 
-   * @param {any} event 
-   * 
+   *
+   * @param {any} event
+   *
    * @memberof ManageUsersRow
    */
   handleUserEditOnchange(event) {
@@ -41,25 +42,33 @@ class ManageUsersRow extends React.Component {
   }
   /**
    * This function handles the delete of documents
-   * 
-   * @param {any} event 
-   * 
+   *
+   * @param {any} event
+   *
    * @memberof ManageUsersRow
    */
   handleDelete(event) {
     event.preventDefault();
-    const confirmDelete =
-      confirm('Are you sure you want to delete this User');
-    if (confirmDelete === true) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this user!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
       this.props.deleteSingleUserAccount(this.props.user.id);
-    }
+      swal('Deleted!', 'This user has been deleted.', 'success');
+    });
   }
 
   /**
    * This function handle submit
-   * 
-   * @param {any} event 
-   * 
+   *
+   * @param {any} event
+   *
    * @memberof ManageUsersRow
    */
   handleSubmit(event) {
@@ -76,9 +85,9 @@ class ManageUsersRow extends React.Component {
 
   /**
    * This function handles edit the user details on the modal
-   * 
-   * @param {any} event 
-   * 
+   *
+   * @param {any} event
+   *
    * @memberof ManageUsersRow
    */
   handleEditModal(event) {
@@ -90,10 +99,10 @@ class ManageUsersRow extends React.Component {
 
   /**
    * This function dis plays the user roles
-   * 
-   * @param {any} id 
-   * @returns 
-   * 
+   *
+   * @param {any} id
+   * @returns
+   *
    * @memberof ManageUsersRow
    */
   handleDisplayUserRole(id) {

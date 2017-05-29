@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import swal from 'sweetalert';
 import * as userAction from '../../actions/userAction';
 import * as loginAction from '../../actions/loginActions';
 import { deleteFlashMessage } from '../../actions/flashMessages';
@@ -49,12 +50,20 @@ class myProfilePage extends React.Component {
   }
   handleDelete(event) {
     event.preventDefault();
-    const confirmDelete =
-      confirm('Are you sure you want to delete this account!!!');
-    if (confirmDelete === true) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this account!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
       this.props.deleteUserAccount(this.props.userId);
       this.props.logout();
-    }
+      swal('Deleted!', 'This Account has been deleted.', 'success');
+    });
   }
   render() {
     const { isUpdateingUser, showSubmitButton } = this.state;

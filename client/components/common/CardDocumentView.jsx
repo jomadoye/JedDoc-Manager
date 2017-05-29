@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import { Row, Input } from 'react-materialize';
 import * as DocumentAction from '../../actions/documentAction';
@@ -56,13 +57,21 @@ class CardDocumentView extends React.Component {
 
   handleDelete() {
     event.preventDefault();
-    const confirmDelete =
-      confirm('Are you sure you want to delete this Document');
-    if (confirmDelete === true) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this document!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
       const documentId = this.props.document.id;
       this.props.deleteDocument(documentId);
       this.props.deleteFlashMessage(1);
-    }
+      swal('Deleted!', 'This document has been deleted.', 'success');
+    });
   }
 
   handleDocumentOnchange(event) {
