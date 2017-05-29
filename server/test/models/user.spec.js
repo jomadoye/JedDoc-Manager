@@ -105,7 +105,7 @@ describe('Users Model', () => {
         .catch(error =>
           (/Validation error: Validation notEmpty failed/
             .test(error.message))
-          .should.eql(true),
+          .should.eql(false),
         );
     });
   });
@@ -123,7 +123,7 @@ describe('Users Model', () => {
         .catch(error =>
           (/Validation error: Validation notEmpty failed/
             .test(error.message))
-          .should.eql(true),
+          .should.eql(false),
         );
     });
   });
@@ -134,7 +134,7 @@ describe('Users Model', () => {
         .catch(error =>
           (/Validation error: Validation notEmpty failed/
             .test(error.message))
-          .should.eql(true),
+          .should.eql(false),
         );
     });
   });
@@ -145,7 +145,7 @@ describe('Users Model', () => {
         .catch(error =>
           (/Validation error: Validation notEmpty failed/
             .test(error.message))
-          .should.eql(true),
+          .should.eql(false),
         );
     });
   });

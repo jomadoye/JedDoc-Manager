@@ -3,10 +3,10 @@ export default (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: { args: true, msg: 'This document title already exist' },
       required: true,
       validate: {
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'This title cannot be empty' },
       },
     },
     body: {
@@ -14,7 +14,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       required: true,
       validate: {
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'This body cannot be empty' },
       },
     },
     access: {
