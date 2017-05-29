@@ -7,7 +7,7 @@ import { Row, Input } from 'react-materialize';
 import * as DocumentAction from '../../actions/documentAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
-class CardDocumentView extends React.Component {
+export class CardDocumentView extends React.Component {
   constructor(props) {
     super(props);
 

@@ -72,6 +72,8 @@ class SignupForm extends React.Component {
   render() {
     const { errors } = this.state;
     return (
+      <div>
+        <h1 className="center-align welcome-message">Join our community</h1>
       <form onSubmit={this.onSubmit} className="center-align">
         <TextFieldGroup
         materialIcon="account_circle"
@@ -120,6 +122,7 @@ class SignupForm extends React.Component {
           </button>
         </div>
       </form>
+    </div>
     );
   }
 }

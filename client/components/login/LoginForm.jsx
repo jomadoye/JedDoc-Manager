@@ -12,6 +12,8 @@ import TextFieldGroup from '../common/TextFieldGroup.jsx';
 export default function LoginForm({ state, onsubmit, onchange }) {
   const { errors, query, password, isLoading } = state;
   return (
+    <div>
+    <h1 className="center-align welcome-message">Login Page</h1>
     <form onSubmit={onsubmit} className="center-align">
       {errors.form && <div className="teal darken-1">
       { errors.form } </div> }
@@ -42,6 +44,7 @@ export default function LoginForm({ state, onsubmit, onchange }) {
         </button>
       </div>
     </form>
+    </div>
   );
 }
 

@@ -22,19 +22,29 @@ function setup() {
   return shallow(<CreateDocumentForm {...props} />);
 }
 describe('CreateDocumentForm', () => {
-  it('renders form, div, iput, label, Row, textarea', () => {
-    const wrapper = setup();
-    expect(wrapper.find('div').length).toBe(5);
-    expect(wrapper.find('form').length).toBe(1);
-    expect(wrapper.find('Input').length).toBe(1);
-    expect(wrapper.find('input').length).toBe(1);
-    expect(wrapper.find('label').length).toBe(2);
-    expect(wrapper.find('textarea').length).toBe(1);
-    expect(wrapper.find('Row').length).toBe(1);
-    expect(wrapper.find('label').length).toBe(2);
+  const wrapper = setup();
+  it('renders a h1 tag containing the title', () => {
+    expect(wrapper.find('h1').props().children).toBe('Create A Document');
   });
-  it('does not render img, span, ul e.t.c', () => {
-    const wrapper = setup();
+  it('renders a form for creating a document', () => {
+    expect(wrapper.find('form').length).toBe(1);
+  });
+  it('renders a select box for selecting documents access', () => {
+    expect(wrapper.find('input').length).toBe(1);
+  });
+  it('renders an input field for inputing the document title', () => {
+    expect(wrapper.find('input').props().type).toBe('text');
+    expect(wrapper.find('Input').length).toBe(1);
+  });
+  it('renders a textarea for inputing the document content', () => {
+    expect(wrapper.find('textarea').length).toBe(1);
+    expect(wrapper.find('textarea').props().name).toBe('body');
+  });
+  it('renders a submit button to create a document', () => {
+    expect(wrapper.find('button').length).toBe(1);
+    expect(wrapper.find('button').props().children[0]).toBe('Create Document');
+  });
+  it('does not render img, span, ul e.t.c on the page', () => {
     expect(wrapper.find('a').length).toBe(0);
     expect(wrapper.find('li').length).toBe(0);
     expect(wrapper.find('span').length).toBe(0);
