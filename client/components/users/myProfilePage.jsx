@@ -91,7 +91,7 @@ class myProfilePage extends React.Component {
                     name="username"
                     value={this.state.user.username}
                     id="username" type="text"
-                    className="validate"/>
+                    className="validate active"/>
                   <label className="active" htmlFor="username">UserName</label>
                 </div>
               </div>

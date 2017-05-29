@@ -138,7 +138,7 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
                 onSubmit={this.handleEditDocumentSubmit}>
                   <div className="input-field">
                     <i className="material-icons prefix">mode_edit</i>
-                    <label>Document title</label>
+                    <label className="active">Document title</label>
                     <input
                     id="title"
                     onChange={this.handleDocumentOnchange}
@@ -156,7 +156,8 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
                     value={body}
                     id="body"
                     />
-                    <label htmlFor="icon_prefix2">Document body</label>
+                    <label className="active"
+                    htmlFor="icon_prefix2">Document body</label>
                   </div>
 
                   <div className="input-field">

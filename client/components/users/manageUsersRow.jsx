@@ -79,8 +79,20 @@ class ManageUsersRow extends React.Component {
       email: this.state.email,
       roleId: this.state.roleId,
     };
-    this.props.updateSingleUserAccountByAdmin(user, this.props.user.id);
-    this.props.deleteFlashMessage(1);
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this users previous details!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, update it!',
+      closeOnConfirm: false,
+    },
+    () => {
+      this.props.updateSingleUserAccountByAdmin(user, this.props.user.id);
+      this.props.deleteFlashMessage(1);
+      swal('Deleted!', 'This user has been edited.', 'success');
+    });
   }
 
   /**
@@ -136,37 +148,43 @@ class ManageUsersRow extends React.Component {
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
                     <input placeholder="Placeholder"
+                    disabled
                     id="fullName"
                     type="text"
                     value={fullname}
                     name="fullname"
                     onChange={this.handleUserEditOnchange}
                     className="validate"/>
-                    <label htmlFor="fullName">Full Name</label>
+                    <label className="active"
+                    htmlFor="fullName">Full Name</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
                     <input
+                    disabled
                     id="username"
                     type="text"
                     className="validate"
                     name="username"
                     onChange={this.handleUserEditOnchange}
                     value={username}/>
-                    <label htmlFor="username">Username</label>
+                    <label className="active"
+                    htmlFor="username">Username</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
                     <input
+                    disabled
                     id="email"
                     type="email"
                     className="validate"
                     name="email"
                     onChange={this.handleUserEditOnchange}
                     value={email}/>
-                    <label htmlFor="email">Email</label>
+                    <label className="active"
+                    htmlFor="email">Email</label>
                   </div>
                 </div>
                 <div className="row">
@@ -178,7 +196,8 @@ class ManageUsersRow extends React.Component {
                     name="roleId"
                     onChange={this.handleUserEditOnchange}
                     className="validate"/>
-                    <label htmlFor="roleId">RoleId</label>
+                    <label className="active"
+                    htmlFor="roleId">RoleId</label>
                   </div>
                 </div>
                 <div className="row">
