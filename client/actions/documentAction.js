@@ -249,11 +249,6 @@ export function deleteDocument(documentId) {
       dispatch(addFlashMessage(message));
       dispatch(deleteUserDocumentSuccess(documentId));
       dispatch(deleteDocumentByAdminSuccess(documentId));
-    })
-    .catch(() => {
-      const message = {};
-      message.text = 'Error deleting document';
-      dispatch(addFlashMessage(message));
     });
 }
 
