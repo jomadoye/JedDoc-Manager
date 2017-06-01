@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../../actions/documentAction';
-import CardDocumentView from '../../common/CardDocumentView.jsx';
+import { CardDocumentView } from '../../common/CardDocumentView.jsx';
 import PaginationNav from '../../common/PaginationNav.jsx';
 
 class MyDocumentPage extends React.Component {
@@ -21,10 +21,24 @@ class MyDocumentPage extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof MyDocumentPage
+   */
   componentDidMount() {
     const { UserId } = this.props;
     this.props.loadUserDocuments(UserId);
   }
+
+  /**
+   * This method runs when the component updates it's props
+   *
+   * @param {any} nextProps
+   *
+   * @memberof MyDocumentPage
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({ documents: [...nextProps.documents.MyDocuments] });
     if (this.props !== nextProps.props) {
@@ -41,11 +55,29 @@ class MyDocumentPage extends React.Component {
       }
     }
   }
+
+  /**
+   * This method handles the pagination
+   *
+   * @param {any} limit
+   * @param {any} offset
+   * @param {any} event
+   *
+   * @memberof MyDocumentPage
+   */
   handlePagination(limit, offset, event) {
     const { UserId } = this.props;
     this.props.loadUserDocuments(UserId, limit, offset);
     this.setState({ selected: event.target.innerHTML });
   }
+
+  /**
+   * This method handles the onChange handler
+   *
+   * @param {any} event
+   *
+   * @memberof MyDocumentPage
+   */
   onChange(event) {
     event.preventDefault();
     this.setState({ search: event.target.value });
@@ -55,6 +87,14 @@ class MyDocumentPage extends React.Component {
       this.props.loadUserDocuments(UserId);
     }
   }
+
+  /**
+   * This method handles the onSubmit handler
+   *
+   * @param {any} event
+   *
+   * @memberof MyDocumentPage
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.searchDocumentsByTitle(this.state.search, 5, 0);

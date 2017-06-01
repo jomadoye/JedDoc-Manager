@@ -14,6 +14,14 @@ class createRolePage extends React.Component {
       title: ' ',
     };
   }
+
+  /**
+   * This method handles the submit action
+   *
+   * @param {any} event
+   *
+   * @memberof createRolePage
+   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.createUserRole(this.state).then((res) => {
@@ -24,6 +32,13 @@ class createRolePage extends React.Component {
     this.props.deleteFlashMessage(1);
   }
 
+  /**
+   * This method handles the onChange action
+   *
+   * @param {any} event
+   *
+   * @memberof createRolePage
+   */
   handleChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
@@ -79,10 +94,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     roles: state.roles,
-//   };
-// }
 export default
   connect(null, mapDispatchToProps)(createRolePage);

@@ -25,9 +25,26 @@ class myProfilePage extends React.Component {
     this.setupUpdateUser = this.setupUpdateUser.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
+
+  /**
+   * This method runs when the component props is updated
+   *
+   * @param {any} nextProps
+   *
+   * @memberof myProfilePage
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({ user: nextProps.user });
   }
+
+  /**
+   * This method updates the user state
+   *
+   * @param {any} event
+   * @returns
+   *
+   * @memberof myProfilePage
+   */
   updateUserState(event) {
     const field = event.target.name;
     const user = Object.assign({}, this.state.user);
@@ -36,6 +53,14 @@ class myProfilePage extends React.Component {
       user,
     });
   }
+
+  /**
+   * This method updates a user profile
+   *
+   * @param {any} event
+   *
+   * @memberof myProfilePage
+   */
   updateUserProfile(event) {
     event.preventDefault();
     this.setState({ isUpdateingUser: true, showSubmitButton: false });
@@ -43,11 +68,26 @@ class myProfilePage extends React.Component {
     this.props.roleId);
     this.props.deleteFlashMessage(1);
   }
+
+  /**
+   * This method setups the user modal
+   *
+   * @param {any} event
+   *
+   * @memberof myProfilePage
+   */
   setupUpdateUser(event) {
     event.preventDefault();
     this.setState({ isUpdateingUser: false, showSubmitButton: true });
-    // this.context.router.push('/courses');
   }
+
+  /**
+   * This method handles user delete
+   *
+   * @param {any} event
+   *
+   * @memberof myProfilePage
+   */
   handleDelete(event) {
     event.preventDefault();
     swal({

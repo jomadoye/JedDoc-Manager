@@ -19,10 +19,24 @@ class CreateDocumentPage extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * This method handles the documnent onChange
+   *
+   * @param {any} event
+   *
+   * @memberof CreateDocumentPage
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  /**
+   * This method handles the onSubmit handler
+   *
+   * @param {any} event
+   *
+   * @memberof CreateDocumentPage
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.createDocument(this.state).then((res) => {

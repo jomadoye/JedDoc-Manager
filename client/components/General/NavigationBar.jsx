@@ -10,6 +10,13 @@ class NavigationBar extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
+  /**
+   * This method handles logout
+   *
+   * @param {any} event
+   *
+   * @memberof NavigationBar
+   */
   logout(event) {
     event.preventDefault();
     this.context.router.push('/');

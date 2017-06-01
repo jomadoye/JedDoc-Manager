@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
-import CardDocumentView from '../common/CardDocumentView.jsx';
+import { CardDocumentView } from '../common/CardDocumentView.jsx';
 import PaginationNav from '../common/PaginationNav.jsx';
 
 class Dashboard extends React.Component {
@@ -20,9 +20,24 @@ class Dashboard extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof Dashboard
+   */
   componentWillMount() {
     this.props.loadAuthorizedToViewDocument();
   }
+
+  /**
+   * This method runs when the props are updated
+   *
+   * @param {any} nextProps
+   *
+   * @memberof Dashboard
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({ AuthToViewDocuments:
       nextProps.documents.AuthorizeToViewDocuments });
@@ -39,10 +54,28 @@ class Dashboard extends React.Component {
       }
     }
   }
+
+  /**
+   * This method handles pagination
+   *
+   * @param {any} limit
+   * @param {any} offset
+   * @param {any} event
+   *
+   * @memberof Dashboard
+   */
   handlePagination(limit, offset, event) {
     this.props.loadAuthorizedToViewDocument(limit, offset);
     this.setState({ selected: event.target.innerHTML });
   }
+
+  /**
+   * This method handles the onChange handler
+   *
+   * @param {any} event
+   *
+   * @memberof Dashboard
+   */
   onChange(event) {
     event.preventDefault();
     if (event.target.value === '' ||
@@ -52,6 +85,14 @@ class Dashboard extends React.Component {
     }
     this.setState({ search: event.target.value });
   }
+
+  /**
+   * This method handles the onSubmit event
+   *
+   * @param {any} event
+   *
+   * @memberof Dashboard
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.searchDocumentsByTitleOnDashboard(this.state.search, 5, 0);

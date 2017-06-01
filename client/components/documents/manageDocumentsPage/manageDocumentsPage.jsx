@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../../actions/documentAction';
-import CardDocumentView from '../../common/CardDocumentView.jsx';
+import { CardDocumentView } from '../../common/CardDocumentView.jsx';
 
 class manageUserDocumentsPage extends React.Component {
   constructor(props) {
@@ -13,11 +13,23 @@ class manageUserDocumentsPage extends React.Component {
     };
   }
 
+  /**
+   * This method runs when the components mount
+   *
+   *
+   * @memberof manageUserDocumentsPage
+   */
   componentDidMount() {
-    // const { UserId } = this.props;
     this.props.loadAllDocuments();
   }
 
+  /**
+   * This method runs when the component will receive props
+   *
+   * @param {any} nextProps
+   *
+   * @memberof manageUserDocumentsPage
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({ documents: [...nextProps.documents.allDocuments] });
   }

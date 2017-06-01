@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
-import CardDocumentView from '../common/CardDocumentView.jsx';
+import { CardDocumentView } from '../common/CardDocumentView.jsx';
 
 class LoadDocuments extends React.Component {
+
+  /**
+   * This method runs when the components mounts
+   *
+   *
+   * @memberof LoadDocuments
+   */
   componentDidMount() {
     this.props.loadDocuments();
   }

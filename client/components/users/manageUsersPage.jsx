@@ -19,9 +19,24 @@ class ManageUsersPage extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof ManageUsersPage
+   */
   componentWillMount() {
     this.props.loadAllUsers();
   }
+
+  /**
+   * This method runs when the component updates props
+   *
+   * @param {any} nextProps
+   *
+   * @memberof ManageUsersPage
+   */
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps.props) {
       const { allUsers } = nextProps;
@@ -36,14 +51,40 @@ class ManageUsersPage extends React.Component {
       }
     }
   }
+
+  /**
+   * This method handles the pagination
+   *
+   * @param {any} limit
+   * @param {any} offset
+   * @param {any} event
+   *
+   * @memberof ManageUsersPage
+   */
   handlePagination(limit, offset, event) {
     this.props.loadAllUsers(limit, offset);
     this.setState({ selected: event.target.innerHTML });
   }
+
+  /**
+   * This method handles the onSubmit handler
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersPage
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.searchUserByUsername(this.state.search, 5, 0);
   }
+
+  /**
+   * This method handles the onChange handler
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersPage
+   */
   onChange(event) {
     event.preventDefault();
     this.setState({ search: event.target.value });

@@ -12,9 +12,24 @@ class manageRolesPage extends React.Component {
 
     this.handleDelete = this.handleDelete.bind(this);
   }
+
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof manageRolesPage
+   */
   componentWillMount() {
     this.props.loadUserRoles();
   }
+
+  /**
+   * This method deletes a role
+   *
+   * @param {any} roleId
+   *
+   * @memberof manageRolesPage
+   */
   handleDelete(roleId) {
     event.preventDefault();
     this.props.DeleteUserRoles(roleId);

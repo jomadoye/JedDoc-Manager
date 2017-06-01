@@ -24,6 +24,12 @@ export class CardDocumentView extends React.Component {
       isLoading: false,
     };
   }
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof CardDocumentView
+   */
   componentDidMount() {
     $('.modal').modal();
     $('.button-collapse').sideNav();
@@ -41,6 +47,13 @@ export class CardDocumentView extends React.Component {
   );
   }
 
+  /**
+   * This method handles the document view
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleView(event) {
     event.preventDefault();
     const docID = this.props.document.id;
@@ -48,6 +61,13 @@ export class CardDocumentView extends React.Component {
     $(modal).modal('open');
   }
 
+  /**
+   * This method handles edit document
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleEdit(event) {
     event.preventDefault();
     const docID = this.props.document.id;
@@ -55,6 +75,12 @@ export class CardDocumentView extends React.Component {
     $(modal).modal('open');
   }
 
+  /**
+   * This method handles document delete
+   *
+   *
+   * @memberof CardDocumentView
+   */
   handleDelete() {
     event.preventDefault();
     swal({
@@ -74,10 +100,24 @@ export class CardDocumentView extends React.Component {
     });
   }
 
+  /**
+   * This method handle tdocument onchange
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleDocumentOnchange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  /**
+   * This method handles document edit
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleEditDocumentSubmit(event) {
     event.preventDefault();
     const document = this.state;

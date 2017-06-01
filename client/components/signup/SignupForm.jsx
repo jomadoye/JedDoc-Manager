@@ -23,6 +23,13 @@ class SignupForm extends React.Component {
     this.checkUserExists = this.checkUserExists.bind(this);
   }
 
+  /**
+   * This method checks if a user is valid
+   *
+   * @param {any} event
+   *
+   * @memberof SignupForm
+   */
   checkUserExists(event) {
     const field = event.target.name;
     const value = event.target.value;
@@ -42,9 +49,25 @@ class SignupForm extends React.Component {
         });
     }
   }
+
+  /**
+   * This method handles the onChange handler
+   *
+   * @param {any} event
+   *
+   * @memberof SignupForm
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+  /**
+   * This method validate the user input
+   *
+   * @returns
+   *
+   * @memberof SignupForm
+   */
   isValid() {
     const { errors, isValid } = signupValidation(this.state);
     if (!isValid) {
@@ -52,6 +75,14 @@ class SignupForm extends React.Component {
     }
     return isValid;
   }
+
+  /**
+   * This method handles the onSubmit handler
+   *
+   * @param {any} event
+   *
+   * @memberof SignupForm
+   */
   onSubmit(event) {
     event.preventDefault();
     if (this.isValid()) {
