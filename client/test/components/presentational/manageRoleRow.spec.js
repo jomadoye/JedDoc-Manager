@@ -29,7 +29,8 @@
 //     expect(wrapper.find('button').length).toBe(0);
 //   });
 
-//   it('does not render footer, li, ul, h5, img, form, h1, h2, h4, row', () => {
+//   it('does not render footer, li, ul, h5, img, form, h1, h2, h4, row',
+//     () => {
 //     const wrapper = setup();
 //     expect(wrapper.find('h3').length).toBe(0);
 //     expect(wrapper.find('footer').length).toBe(0);

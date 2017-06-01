@@ -157,10 +157,10 @@ export function loadWelcomePageDocument() {
       dispatch(loadWelcomePageDocumentSuccess(document));
     })
     .catch(() => {
-        const message = {};
-        message.text = 'Error loading document';
-        dispatch(addFlashMessage(message));
-      });
+      const message = {};
+      message.text = 'Error loading document';
+      dispatch(addFlashMessage(message));
+    });
 }
 
 /**
@@ -191,10 +191,10 @@ export function loadAuthorizedToViewDocument(limit, offset) {
       dispatch(loadAuthorizedToViewDocumentSuccess(document));
     })
     .catch(() => {
-        const message = {};
-        message.text = 'Error loading document';
-        dispatch(addFlashMessage(message));
-      });
+      const message = {};
+      message.text = 'Error loading document';
+      dispatch(addFlashMessage(message));
+    });
 }
 
 /**
