@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
-import { CardDocumentView } from '../common/CardDocumentView.jsx';
+import CardDocumentView from '../common/CardDocumentView.jsx';
 import PaginationNav from '../common/PaginationNav.jsx';
 
 class Dashboard extends React.Component {

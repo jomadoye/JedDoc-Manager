@@ -119,8 +119,8 @@ class myProfilePage extends React.Component {
               <div className="row">
                 <div className="input-field">
                   <input disabled={disabled}
-                    onChange={this.updateUserState} name="fullname" v
-                    alue={this.state.user.fullname} id="full_name"
+                    onChange={this.updateUserState} name="fullname"
+                    value={this.state.user.fullname} id="full_name"
                     type="text" className="validate"/>
                   <label className="active"
                     htmlFor="full_name">Full Name</label>
