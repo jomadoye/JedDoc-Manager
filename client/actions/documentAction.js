@@ -156,9 +156,11 @@ export function loadWelcomePageDocument() {
       const document = documents.data.document;
       dispatch(loadWelcomePageDocumentSuccess(document));
     })
-    .catch((error) => {
-      throw error;
-    });
+    .catch(() => {
+        const message = {};
+        message.text = 'Error loading document';
+        dispatch(addFlashMessage(message));
+      });
 }
 
 /**
@@ -177,8 +179,10 @@ export function loadAuthorizedToViewDocument(limit, offset) {
         const document = documents.data.document;
         dispatch(loadAuthorizedToViewDocumentSuccess(document));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error loading document';
+        dispatch(addFlashMessage(message));
       });
   }
   return dispatch => axios.get('/api/documents')
@@ -186,9 +190,11 @@ export function loadAuthorizedToViewDocument(limit, offset) {
       const document = documents.data.document;
       dispatch(loadAuthorizedToViewDocumentSuccess(document));
     })
-    .catch((error) => {
-      throw error;
-    });
+    .catch(() => {
+        const message = {};
+        message.text = 'Error loading document';
+        dispatch(addFlashMessage(message));
+      });
 }
 
 /**
@@ -209,8 +215,10 @@ export function loadUserDocuments(userId, limit, offset) {
         const document = documents.data.documents;
         dispatch(loadUserDocumentSuccess(document));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error loading document';
+        dispatch(addFlashMessage(message));
       });
   }
   return dispatch => axios.get(`/api/users/${userId}/documents`)
@@ -218,8 +226,10 @@ export function loadUserDocuments(userId, limit, offset) {
         const document = documents.data.documents;
         dispatch(loadUserDocumentSuccess(document));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error loading documents';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -240,8 +250,10 @@ export function deleteDocument(documentId) {
       dispatch(deleteUserDocumentSuccess(documentId));
       dispatch(deleteDocumentByAdminSuccess(documentId));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error deleting document';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -268,8 +280,10 @@ export function updateDocument(document, documentId, roleId) {
         dispatch(updateUserDocumentSuccess(res.data.document, documentId));
       }
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error updating document';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -312,8 +326,10 @@ export function loadAllDocuments() {
     .then((res) => {
       dispatch(loadAllDocumentsSuccess(res.data.document));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading documents';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -333,8 +349,10 @@ export function searchDocumentsByTitle(query, limit, offset) {
     .then((res) => {
       dispatch(searchDocumentsByTitleSuccess(res.data.document));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error searching document';
+      dispatch(addFlashMessage(message));
     });
 }
 /**
@@ -353,8 +371,10 @@ export function searchDocumentsByTitleOnDashboard(query, limit, offset) {
     .then((res) => {
       dispatch(searchDocumentsByTitleOnDashboardSuccess(res.data.document));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error searching document';
+      dispatch(addFlashMessage(message));
     });
 }
 

@@ -97,8 +97,10 @@ export function loadUserProfile(userId) {
         const userDetails = user.data;
         dispatch(loadUserProfileSuccess(userDetails));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error searching user';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -142,8 +144,10 @@ export function deleteUserAccount(userId) {
       .then(() => {
         dispatch(deleteUserAccountSuccess());
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error deleting user';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -175,16 +179,20 @@ export function loadAllUsers(limit, offset) {
       .then((res) => {
         dispatch(loadAllUsersSuccess(res.data));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error searching document';
+        dispatch(addFlashMessage(message));
       });
   }
   return dispatch => axios.get('/api/users')
         .then((res) => {
           dispatch(loadAllUsersSuccess(res.data));
         })
-        .catch((error) => {
-          throw error;
+        .catch(() => {
+          const message = {};
+          message.text = 'Error loading user';
+          dispatch(addFlashMessage(message));
         });
 }
 
@@ -234,8 +242,10 @@ export function deleteSingleUserAccount(userId) {
         dispatch(deleteFlashMessage(1));
         dispatch(deleteSingleUserAccountSuccess(userId));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error deleting user';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -256,8 +266,10 @@ export function updateSingleUserAccountByAdmin(updatedUser, userId) {
         dispatch(deleteFlashMessage(1));
         dispatch(updateSingleUserAccountByAdminSuccess(updatedUser, userId));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error updating user';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -277,7 +289,9 @@ export function searchUserByUsername(searchQuery, limit, offset) {
       .then((res) => {
         dispatch(searchUserByUsernameSuccess(res.data.user));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error searching user';
+        dispatch(addFlashMessage(message));
       });
 }

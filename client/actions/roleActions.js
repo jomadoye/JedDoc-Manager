@@ -85,8 +85,10 @@ export function loadUserRoles() {
     .then((res) => {
       dispatch(loadUserRolesSuccess(res.data.roles));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading role';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -119,7 +121,9 @@ export function DeleteUserRoles(roleId) {
       dispatch(addFlashMessage(message));
       dispatch(deleteUserRolesSuccess(roleId));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error searching document';
+      dispatch(addFlashMessage(message));
     });
 }
