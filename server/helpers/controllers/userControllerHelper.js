@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken';
 import lodash from 'lodash';
 import models from '../../models';
-// import Validator from 'validatv/or';
-// import models from '../../models';
 
 require('dotenv')
   .config();

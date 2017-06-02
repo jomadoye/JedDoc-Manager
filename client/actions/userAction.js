@@ -158,10 +158,12 @@ export function deleteUserAccount(userId) {
  * @param {object} users
  * @returns {object}
  */
-export function loadAllUsersSuccess(users) {
+export function loadAllUsersSuccess(users, metadata, count) {
   return {
     type: LOAD_ALL_USERS_SUCCESS,
     users,
+    metadata,
+    count,
   };
 }
 
@@ -177,7 +179,10 @@ export function loadAllUsers(limit, offset) {
   if (limit || offset) {
     return dispatch => axios.get(`/api/users?limit=${limit}&offset=${offset}`)
       .then((res) => {
-        dispatch(loadAllUsersSuccess(res.data));
+        const users = res.data.rows;
+        const metadata = res.data.metaData;
+        const count = res.data.count;
+        dispatch(loadAllUsersSuccess(users, metadata, count));
       })
       .catch(() => {
         const message = {};
@@ -187,7 +192,10 @@ export function loadAllUsers(limit, offset) {
   }
   return dispatch => axios.get('/api/users')
         .then((res) => {
-          dispatch(loadAllUsersSuccess(res.data));
+          const users = res.data.rows;
+          const metadata = res.data.metaData;
+          const count = res.data.count;
+          dispatch(loadAllUsersSuccess(users, metadata, count));
         })
         .catch(() => {
           const message = {};

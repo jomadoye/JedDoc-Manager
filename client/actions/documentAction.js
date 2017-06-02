@@ -37,10 +37,12 @@ export function loadWelcomePageDocumentSuccess(documents) {
  * @param {object} documents An array of documents
  * @returns {object}
  */
-export function loadAuthorizedToViewDocumentSuccess(documents) {
+export function loadAuthorizedToViewDocumentSuccess(documents, metadata, count) {
   return {
     type: LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
     AuthorizeToViewDocuments: documents,
+    metadata,
+    count,
   };
 }
 
@@ -51,10 +53,11 @@ export function loadAuthorizedToViewDocumentSuccess(documents) {
  * @param {object} documents An array of documents
  * @returns {object}
  */
-export function loadUserDocumentSuccess(documents) {
+export function loadUserDocumentSuccess(documents, count) {
   return {
     type: LOAD_USER_DOCUMENT_SUCCESS,
     MyDocuments: documents,
+    count,
   };
 }
 
@@ -153,7 +156,7 @@ export function updateDocumentByAdminSuccess(document, documentId) {
 export function loadWelcomePageDocument() {
   return dispatch => axios.get('/documents', document)
     .then((documents) => {
-      const document = documents.data.document;
+      const document = documents.data.documents.rows;
       dispatch(loadWelcomePageDocumentSuccess(document));
     })
     .catch(() => {
@@ -176,8 +179,10 @@ export function loadAuthorizedToViewDocument(limit, offset) {
     return dispatch =>
       axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
       .then((documents) => {
-        const document = documents.data.document;
-        dispatch(loadAuthorizedToViewDocumentSuccess(document));
+        const document = documents.data.documents.rows;
+        const metadata = documents.data.documents.metaData;
+        const count = documents.data.documents.count;
+        dispatch(loadAuthorizedToViewDocumentSuccess(document, metadata, count));
       })
       .catch(() => {
         const message = {};
@@ -187,8 +192,10 @@ export function loadAuthorizedToViewDocument(limit, offset) {
   }
   return dispatch => axios.get('/api/documents')
     .then((documents) => {
-      const document = documents.data.document;
-      dispatch(loadAuthorizedToViewDocumentSuccess(document));
+      const document = documents.data.documents.rows;
+      const metadata = documents.data.documents.metaData;
+      const count = documents.data.documents.count;
+      dispatch(loadAuthorizedToViewDocumentSuccess(document, metadata, count));
     })
     .catch(() => {
       const message = {};
@@ -209,11 +216,11 @@ export function loadAuthorizedToViewDocument(limit, offset) {
 export function loadUserDocuments(userId, limit, offset) {
   if (limit) {
     return dispatch =>
-      axios.get(`/api/users/${userId}/documents?
-      limit=${limit}&offset=${offset}`)
+      axios.get(`/api/users/${userId}/documents?limit=${limit}&offset=${offset}`)
       .then((documents) => {
+        const count = documents.data.count;
         const document = documents.data.documents;
-        dispatch(loadUserDocumentSuccess(document));
+        dispatch(loadUserDocumentSuccess(document, count));
       })
       .catch(() => {
         const message = {};
@@ -223,8 +230,9 @@ export function loadUserDocuments(userId, limit, offset) {
   }
   return dispatch => axios.get(`/api/users/${userId}/documents`)
       .then((documents) => {
+        const count = documents.data.count;
         const document = documents.data.documents;
-        dispatch(loadUserDocumentSuccess(document));
+        dispatch(loadUserDocumentSuccess(document, count));
       })
       .catch(() => {
         const message = {};

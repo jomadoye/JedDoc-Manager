@@ -1,4 +1,5 @@
 import models from '../../models';
+import paginate from '../../helpers/pagination/pagination';
 
 const Document = models.Documents;
 
@@ -19,7 +20,7 @@ class DocumentControllerHelper {
    * @memberof DocumentControllerHelper
    */
   static createQueryForList(req) {
-    const limit = req.query.limit || null;
+    const limit = req.query.limit || 8;
     const offset = req.query.offset || 0;
     const query = {};
     if (limit || offset) {
@@ -61,7 +62,7 @@ class DocumentControllerHelper {
    *
    * @memberof DocumentControllerHelper
    */
-  static isDocumentList(document, res) {
+  static isDocumentList(document, res, limit, offset) {
     let response = {};
     if (!document) {
       response = res.status(404)
@@ -69,10 +70,16 @@ class DocumentControllerHelper {
           message: 'Documents Not Found',
         });
     } else {
+      const documents = {
+        count: document.count,
+        rows: document.rows,
+        metaData: paginate(document.count, limit, offset),
+      };
+
       response = res.status(200)
         .json({
           message: 'Document is shown below',
-          document,
+          documents,
         });
     }
     return response;
@@ -101,14 +108,24 @@ class DocumentControllerHelper {
           message: 'User not found',
         });
     } else {
+      const query = {
+        where: {
+          userId: req.params.userId,
+        },
+      };
+      let documentCount;
+      Document.count({ where: query.where }).then((countNumber) => {
+        documentCount = countNumber;
+        return documentCount;
+      });
       return Document
         .findAll({
-          where: {
-            userId: req.params.userId,
-          },
+          where: query.where,
           limit,
           offset,
-          include: [models.Users],
+          include: [{
+            model: models.Users,
+            attributes: ['fullname'] }],
         })
         .then((documents) => {
           if (!documents) {
@@ -121,6 +138,7 @@ class DocumentControllerHelper {
             response = res.status(200)
                 .json({
                   message: 'This is the user document(s).',
+                  count: documentCount,
                   documents,
                 });
           } else {

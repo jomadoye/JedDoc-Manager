@@ -125,8 +125,10 @@ export default {
    */
   list(req, res) {
     const query = createQuery(req);
+    const limit = query.limit;
+    const offset = query.offset;
     return Document
-      .findAll({
+      .findAndCount({
         where: query.where,
         offset: query.offset,
         limit: query.limit,
@@ -135,7 +137,7 @@ export default {
           attributes: ['fullname'] }],
       })
       .then((document) => {
-        const response = isDocumentList(document, res);
+        const response = isDocumentList(document, res, limit, offset);
         return response;
       })
       .catch(error => res.status(400)

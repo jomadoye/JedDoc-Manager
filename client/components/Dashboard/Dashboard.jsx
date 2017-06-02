@@ -10,11 +10,13 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      AuthToViewDocuments: props.documents.AuthToViewDocuments,
+      AuthToViewDocuments: props.documents.AuthToViewDocuments.documents,
       selected: 1,
       page: 1,
+      index: 1,
       isPageLoad: false,
       search: ' ',
+      count: 1,
     };
     this.handlePagination = this.handlePagination.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -40,15 +42,16 @@ class Dashboard extends React.Component {
    */
   componentWillReceiveProps(nextProps) {
     this.setState({ AuthToViewDocuments:
-      nextProps.documents.AuthorizeToViewDocuments });
+      nextProps.documents.AuthorizeToViewDocuments.documents });
     if (this.props !== nextProps.props) {
       const { isPageLoad } = this.state;
       const { AuthorizeToViewDocuments } = nextProps.documents;
       if (!isPageLoad) {
         if (AuthorizeToViewDocuments) {
-          const page = Math.ceil(AuthorizeToViewDocuments.length / 5);
-          this.props.loadAuthorizedToViewDocument(5, 0);
+          const page = Math.ceil(AuthorizeToViewDocuments.count / 8);
+          this.props.loadAuthorizedToViewDocument();
           this.setState({ page });
+          this.setState({ count: AuthorizeToViewDocuments.count });
           this.setState({ isPageLoad: true });
         }
       }
@@ -64,9 +67,10 @@ class Dashboard extends React.Component {
    *
    * @memberof Dashboard
    */
-  handlePagination(limit, offset, event) {
+  handlePagination(limit, offset, event, index) {
     this.props.loadAuthorizedToViewDocument(limit, offset);
     this.setState({ selected: event.target.innerHTML });
+    this.setState({ index: index + 1 });
   }
 
   /**
@@ -99,7 +103,7 @@ class Dashboard extends React.Component {
   }
   render() {
     const { AuthToViewDocuments } = this.state;
-    const { selected, page, search } = this.state;
+    const { selected, page, search, index, count } = this.state;
     const selectedDocuments = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -139,12 +143,17 @@ class Dashboard extends React.Component {
                   selected={selectedDocuments}
                   index={index}
                   isActive={isActive}
+                  pageCount={page}
                   notActive={notActive}
                   handlePagination={this.handlePagination}
                   />))
                 }
                 <li className="waves-effect"><a href="#!">
                   <i className="material-icons">chevron_right</i></a></li>
+                <div className="center-align">
+                  <h6>page {index} of {page}</h6>
+                  <h6>Showing {AuthToViewDocuments && AuthToViewDocuments.length} of {count} result</h6>
+                </div>
               </div>
               }
             </ul>

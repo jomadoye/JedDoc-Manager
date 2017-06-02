@@ -33,8 +33,16 @@ function documentReducer(state = initialState.documents, action) {
 
     case LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS:
       {
+        const document = {
+          count: action.count,
+          page: action.metadata.page,
+          pageCount: action.metadata.pageCount,
+          pageSize: action.metadata.pageSize,
+          totalCount: action.metadata.totalCount,
+          documents: action.AuthorizeToViewDocuments,
+        };
         return Object.assign({}, state, {
-          AuthorizeToViewDocuments: action.AuthorizeToViewDocuments,
+          AuthorizeToViewDocuments: document,
         });
       }
 
@@ -47,8 +55,12 @@ function documentReducer(state = initialState.documents, action) {
 
     case LOAD_USER_DOCUMENT_SUCCESS:
       {
+        const document = {
+          count: action.count,
+          documents: action.MyDocuments,
+        };
         return Object.assign({}, state, {
-          MyDocuments: action.MyDocuments,
+          MyDocuments: document,
         });
       }
     case SEARCH_DOCUMENTS_BY_TITLE_SUCCESS:

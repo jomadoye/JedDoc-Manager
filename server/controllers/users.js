@@ -1,6 +1,7 @@
 import models from '../models';
 import UserControllerHelper from '../helpers/controllers/userControllerHelper';
 import commonValidations from '../shared/validations/signup/signupValidation';
+import paginate from '../helpers/pagination/pagination';
 
 require('dotenv')
   .config();
@@ -65,12 +66,19 @@ export default {
     const limit = req.query.limit || null;
     const offset = req.query.offset || 0;
     return User
-      .findAll({
+      .findAndCount({
         limit,
         offset,
       })
-      .then(users => res.status(200)
-        .send(users))
+      .then((users) => {
+        const user = {
+          count: users.count,
+          rows: users.rows,
+          metaData: paginate(users.count, limit, offset),
+        };
+        res.status(200)
+        .send(user);
+      })
       .catch(error => res.status(400)
         .send(error));
   },

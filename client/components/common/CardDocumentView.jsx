@@ -43,8 +43,7 @@ export class CardDocumentView extends React.Component {
       belowOrigin: false, // Displays dropdown below the button
       alignment: 'left',
       stopPropagation: false, // Stops event propagation
-    },
-  );
+    });
   }
 
   /**

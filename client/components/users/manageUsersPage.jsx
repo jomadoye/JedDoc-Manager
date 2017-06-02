@@ -15,6 +15,8 @@ class ManageUsersPage extends React.Component {
       page: 1,
       isPageLoad: false,
       search: ' ',
+      count: 1,
+      index: 1,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -43,8 +45,9 @@ class ManageUsersPage extends React.Component {
       const { isPageLoad } = this.state;
       if (!isPageLoad) {
         if (allUsers) {
-          const page = Math.ceil(allUsers.length / 5);
-          this.props.loadAllUsers(5, 0);
+          const page = Math.ceil(allUsers.count / 8);
+          this.props.loadAllUsers(8, 0);
+          this.setState({ count: allUsers.count });
           this.setState({ page });
           this.setState({ isPageLoad: true });
         }
@@ -92,7 +95,7 @@ class ManageUsersPage extends React.Component {
 
   render() {
     const { allUsers } = this.props;
-    const { selected, page, search } = this.state;
+    const { selected, page, search, index, count } = this.state;
     const selectedUsers = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -106,18 +109,18 @@ class ManageUsersPage extends React.Component {
         <table className="striped">
           <thead>
             <tr>
-                <th>S/N</th>
-                <th>FullName</th>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Role Id</th>
-                <th>Role</th>
-                <th>Edit User</th>
-                <th>Delete User</th>
+              <th>S/N</th>
+              <th>FullName</th>
+              <th>UserName</th>
+              <th>Email</th>
+              <th>Role Id</th>
+              <th>Role</th>
+              <th>Edit User</th>
+              <th>Delete User</th>
             </tr>
           </thead>
           <tbody>
-            {allUsers && allUsers.map((user, index) =>
+            {allUsers && allUsers.users.map((user, index) =>
               <ManageUsersRow key={user.id} user={user} index={index}/>)}
           </tbody>
         </table>
@@ -139,6 +142,10 @@ class ManageUsersPage extends React.Component {
               }
               <li className="waves-effect"><a href="#!">
                 <i className="material-icons">chevron_right</i></a></li>
+                <div className="center-align">
+                  <h6>page {index} of {page}</h6>
+                  <h6>Showing {allUsers && allUsers.users.length} of {count} result</h6>
+                </div>
             </div>
             }
           </ul>
@@ -173,7 +180,7 @@ class ManageUsersPage extends React.Component {
 ManageUsersPage.propTypes = {
   loadAllUsers: PropTypes.func.isRequired,
   searchUserByUsername: PropTypes.func.isRequired,
-  allUsers: PropTypes.array,
+  allUsers: PropTypes.object,
 };
 
 /**

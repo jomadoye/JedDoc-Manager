@@ -10,7 +10,7 @@ class MyDocumentPage extends React.Component {
     super(props);
 
     this.state = {
-      documents: [...props.documents.MyDocuments],
+      documents: props.documents.MyDocuments.documents,
       selected: 1,
       page: 1,
       isPageLoad: false,
@@ -40,14 +40,14 @@ class MyDocumentPage extends React.Component {
    * @memberof MyDocumentPage
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ documents: [...nextProps.documents.MyDocuments] });
+    this.setState({ documents: nextProps.documents.MyDocuments.documents });
     if (this.props !== nextProps.props) {
       const { isPageLoad } = this.state;
       const { MyDocuments } = nextProps.documents;
       const { UserId } = this.props;
       if (!isPageLoad) {
         if (MyDocuments) {
-          const page = Math.ceil(MyDocuments.length / 8);
+          const page = Math.ceil(MyDocuments.count / 8);
           this.props.loadUserDocuments(UserId, 8, 0);
           this.setState({ page });
           this.setState({ isPageLoad: true });

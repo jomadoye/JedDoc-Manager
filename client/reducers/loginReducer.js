@@ -36,8 +36,16 @@ export default (state = initialState.isUser, action = {}) => {
 
     case LOAD_ALL_USERS_SUCCESS:
       {
+        const users = {
+          count: action.count,
+          page: action.metadata.page,
+          pageCount: action.metadata.pageCount,
+          pageSize: action.metadata.pageSize,
+          totalCount: action.metadata.totalCount,
+          users: action.users,
+        };
         return Object.assign({}, state, {
-          allUsers: action.users,
+          allUsers: users,
         });
       }
 
