@@ -189,7 +189,7 @@ describe('Document API', () => {
         .get('/api/search/documents/?q=notExist')
         .set('x-access-token', userData.token)
         .end((err, res) => {
-          res.body.document.length.should.eql(0);
+          res.body.documents.count.should.eql(0);
           done();
         });
     });

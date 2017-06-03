@@ -270,7 +270,7 @@ describe('User API', () => {
         .get(`/api/search/users/?q=${userData.user.username}notExist`)
         .set('x-access-token', userData.token)
         .end((err, res) => {
-          res.body.user.length.should.eql(0);
+          res.body.users.count.should.eql(0);
           done();
         });
     });
@@ -361,7 +361,7 @@ describe('User API', () => {
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a('Array');
+          res.body.should.be.a('Object');
           done();
         });
     });
@@ -372,7 +372,7 @@ describe('User API', () => {
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a('Array');
+          res.body.should.be.a('Object');
           done();
         });
     });
