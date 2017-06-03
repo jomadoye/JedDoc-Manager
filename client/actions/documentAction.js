@@ -297,10 +297,12 @@ export function updateDocument(document, documentId, roleId) {
  * @param {string} documents
  * @returns {object}
  */
-export function loadAllDocumentsSuccess(documents) {
+export function loadAllDocumentsSuccess(documents, metadata, count) {
   return {
     type: LOAD_ALL_DOCUMENTS_SUCCESS,
     allDocuments: documents,
+    metadata,
+    count,
   };
 }
 
@@ -324,10 +326,27 @@ export function searchDocumentsByTitleSuccess(documents) {
  * @export
  * @returns dispatch
  */
-export function loadAllDocuments() {
+export function loadAllDocuments(limit, offset) {
+  if (limit) {
+    return dispatch => axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
+    .then((documents) => {
+      const document = documents.data.documents.rows;
+      const metadata = documents.data.documents.metaData;
+      const count = documents.data.documents.count;
+      dispatch(loadAllDocumentsSuccess(document, metadata, count));
+    })
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading documents';
+      dispatch(addFlashMessage(message));
+    });
+  }
   return dispatch => axios.get('/api/documents/')
-    .then((res) => {
-      dispatch(loadAllDocumentsSuccess(res.data.document));
+    .then((documents) => {
+      const document = documents.data.documents.rows;
+      const metadata = documents.data.documents.metaData;
+      const count = documents.data.documents.count;
+      dispatch(loadAllDocumentsSuccess(document, metadata, count));
     })
     .catch(() => {
       const message = {};
