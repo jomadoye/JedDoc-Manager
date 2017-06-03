@@ -77,10 +77,10 @@ export function deleteUserAccountSuccess() {
  * @param {string} searchedUsers
  * @returns dispatch
  */
-export function searchUserByUsernameSuccess(searchedUsers) {
+export function searchUserByUsernameSuccess(users) {
   return {
     type: SEARCH_USER_BY_USERNAME_SUCCESS,
-    users: searchedUsers,
+    users,
   };
 }
 
@@ -186,7 +186,7 @@ export function loadAllUsers(limit, offset) {
       })
       .catch(() => {
         const message = {};
-        message.text = 'Error searching document';
+        message.text = 'Error searching user';
         dispatch(addFlashMessage(message));
       });
   }
@@ -295,7 +295,8 @@ export function searchUserByUsername(searchQuery, limit, offset) {
     axios.get(`/api/search/users?q=${searchQuery}
     &limit=${limit}&offset=${offset}`)
       .then((res) => {
-        dispatch(searchUserByUsernameSuccess(res.data.user));
+        const users = res.data.users;
+        dispatch(searchUserByUsernameSuccess(users));
       })
       .catch(() => {
         const message = {};

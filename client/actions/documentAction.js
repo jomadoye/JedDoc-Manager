@@ -71,7 +71,7 @@ export function loadUserDocumentSuccess(documents, count) {
 export function searchDocumentsByTitleOnDashboardSuccess(documents) {
   return {
     type: SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS,
-    searchDocuments: documents,
+    documents,
   };
 }
 
@@ -367,12 +367,14 @@ export function searchDocumentsByTitle(query, limit, offset) {
  * @param {any} offset
  * @returns dispatch
  */
-export function searchDocumentsByTitleOnDashboard(query, limit, offset) {
+export function searchDocumentsByTitleOnDashboard(query, limits, offsets) {
+  const limit = limits || 8;
+  const offset = offsets || 0;
   return dispatch =>
     axios.get(`/api/search/documents?q=${query}
     &limit=${limit}&offset=${offset}`)
     .then((res) => {
-      dispatch(searchDocumentsByTitleOnDashboardSuccess(res.data.document));
+      dispatch(searchDocumentsByTitleOnDashboardSuccess(res.data.documents));
     })
     .catch(() => {
       const message = {};

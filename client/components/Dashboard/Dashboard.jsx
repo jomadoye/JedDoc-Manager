@@ -85,7 +85,7 @@ class Dashboard extends React.Component {
     if (event.target.value === '' ||
         event.target.value === '  ' ||
         event.target.value === ' ') {
-      this.props.loadAuthorizedToViewDocument(5, 0);
+      this.props.loadAuthorizedToViewDocument();
     }
     this.setState({ search: event.target.value });
   }
@@ -99,11 +99,16 @@ class Dashboard extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.searchDocumentsByTitleOnDashboard(this.state.search, 5, 0);
+    this.props.searchDocumentsByTitleOnDashboard(this.state.search);
+    const page = 1;
+    this.setState({ count: this.state.count });
+    this.setState({ page });
+    this.setState({ isPageLoad: true });
   }
   render() {
     const { AuthToViewDocuments } = this.state;
-    const { selected, page, search, index, count } = this.state;
+    const { selected, page, search, index } = this.state;
+    const { documents } = this.props;
     const selectedDocuments = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -152,7 +157,7 @@ class Dashboard extends React.Component {
                   <i className="material-icons">chevron_right</i></a></li>
                 <div className="center-align">
                   <h6>page {index} of {page}</h6>
-                  <h6>Showing {AuthToViewDocuments && AuthToViewDocuments.length} of {count} result</h6>
+                  <h6>Showing {AuthToViewDocuments && AuthToViewDocuments.length} of {AuthToViewDocuments && documents.AuthorizeToViewDocuments.count} result</h6>
                 </div>
               </div>
               }

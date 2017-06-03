@@ -1,4 +1,5 @@
 import models from '../models';
+import paginate from '../helpers/pagination/pagination';
 
 const User = models.Users;
 const Document = models.Documents;
@@ -19,7 +20,7 @@ export default {
     const limit = req.query.limit || 10;
     const offset = req.query.offset || 0;
     return User
-      .findAll({
+      .findAndCountAll({
         where: {
           username: {
             $ilike: {
@@ -41,10 +42,15 @@ export default {
               message: 'User not found.',
             });
         } else {
+          const users = {
+            count: user.count,
+            metaData: paginate(user.count, limit, offset),
+            users: user.rows,
+          };
           res.status(200)
             .json({
               message: 'This is your user.',
-              user,
+              users,
             });
         }
       })
@@ -66,7 +72,7 @@ export default {
     const limit = req.query.limit || null;
     const offset = req.query.offset || 0;
     return Document
-      .findAll({
+      .findAndCountAll({
         where: {
           title: {
             $ilike: {
@@ -87,10 +93,15 @@ export default {
               message: 'Document Not Found',
             });
         }
+        const documents = {
+          count: document.count,
+          metaData: paginate(document.count, limit, offset),
+          document: document.rows,
+        };
         return res.status(200)
           .json({
             message: 'This is your document.',
-            document,
+            documents,
           });
       })
       .catch(error => res.status(400)

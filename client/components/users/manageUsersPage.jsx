@@ -79,6 +79,10 @@ class ManageUsersPage extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.searchUserByUsername(this.state.search, 5, 0);
+    const page = 1;
+    this.setState({ count: this.props.allUsers.count });
+    this.setState({ page });
+    this.setState({ isPageLoad: true });
   }
 
   /**
@@ -91,6 +95,12 @@ class ManageUsersPage extends React.Component {
   onChange(event) {
     event.preventDefault();
     this.setState({ search: event.target.value });
+    if (event.target.value === '' ||
+      event.target.value === ' ' ||
+      event.target.value === '  '
+    ) {
+      this.props.loadAllUsers(8, 0);
+    }
   }
 
   render() {
@@ -144,7 +154,7 @@ class ManageUsersPage extends React.Component {
                 <i className="material-icons">chevron_right</i></a></li>
                 <div className="center-align">
                   <h6>page {index} of {page}</h6>
-                  <h6>Showing {allUsers && allUsers.users.length} of {count} result</h6>
+                  <h6>Showing {allUsers && allUsers.users.length} of {allUsers && allUsers.count} result</h6>
                 </div>
             </div>
             }

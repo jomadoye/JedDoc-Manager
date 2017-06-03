@@ -52,7 +52,7 @@ export default (state = initialState.isUser, action = {}) => {
     case SEARCH_USER_BY_USERNAME_SUCCESS:
       {
         return Object.assign({}, state, {
-          allUsers: action.users,
+          allUsers: Object.assign({}, state.allUsers, action.users),
         });
       }
 

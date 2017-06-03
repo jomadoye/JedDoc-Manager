@@ -48,8 +48,16 @@ function documentReducer(state = initialState.documents, action) {
 
     case SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS:
       {
+        const document = {
+          count: action.documents.count,
+          page: action.documents.metaData.page,
+          pageCount: action.documents.metaData.pageCount,
+          pageSize: action.documents.metaData.pageSize,
+          totalCount: action.documents.metaData.totalCount,
+          documents: action.documents.document,
+        };
         return Object.assign({}, state, {
-          AuthorizeToViewDocuments: action.searchDocuments,
+          AuthorizeToViewDocuments: document,
         });
       }
 
