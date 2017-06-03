@@ -37,9 +37,9 @@ describe('PaginationNav', () => {
     expect(wrapper.find('a').props().onClick().limit).toBe(8);
     expect(wrapper.find('a').props().onClick().offset).toBe(0);
   });
-  it('default limit and offset are 5, 0 if searching users', () => {
+  it('default limit and offset are 8, 0 if searching users', () => {
     const wrapper = setup(false);
-    expect(wrapper.find('a').props().onClick().limit).toBe(5);
+    expect(wrapper.find('a').props().onClick().limit).toBe(8);
     expect(wrapper.find('a').props().onClick().offset).toBe(0);
   });
   it('does not render div, span, ul e.t.c', () => {
