@@ -123,7 +123,7 @@ export function DeleteUserRoles(roleId) {
     })
     .catch(() => {
       const message = {};
-      message.text = 'Error searching document';
+      message.text = 'Error deleting document';
       dispatch(addFlashMessage(message));
     });
 }
