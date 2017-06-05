@@ -19,10 +19,24 @@ class CreateDocumentPage extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * This method handles the documnent onChange
+   *
+   * @param {any} event
+   *
+   * @memberof CreateDocumentPage
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  /**
+   * This method handles the onSubmit handler
+   *
+   * @param {any} event
+   *
+   * @memberof CreateDocumentPage
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.createDocument(this.state).then((res) => {
@@ -40,9 +54,6 @@ class CreateDocumentPage extends React.Component {
   render() {
     return (
       <div className="center-align">
-        <div className="row">
-          <h1 className="center-align welcome-message">Create A Document</h1>
-        </div>
         <div className="row">
           <div className="col s6 offset-s3">
             <CreateDocumentForm

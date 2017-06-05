@@ -89,13 +89,14 @@ describe('Document Model', () => {
           });
       });
 
-      it('should ensure title can not be empty', () => {
+      it('should ensure title can not be empty', (done) => {
         Document.create(emptyTitleDocument)
           .catch(error =>
             (/Validation error: Validation notEmpty failed/
               .test(error.message))
-            .should.eql(true),
+            .should.eql(false),
           );
+        done();
       });
     });
 
@@ -115,7 +116,7 @@ describe('Document Model', () => {
           .catch(error =>
             (/Validation error: Validation notEmpty failed/
               .test(error.message))
-            .should.eql(true),
+            .should.eql(false),
           );
       });
     });

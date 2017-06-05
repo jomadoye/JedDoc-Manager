@@ -17,16 +17,33 @@ function setup() {
   return shallow(<NotFound {...props} />);
 }
 describe('NotFound', () => {
-  it('renders div, h3, p, a', () => {
-    const wrapper = setup();
-    expect(wrapper.find('div').length).toBe(2);
-    expect(wrapper.find('p').length).toBe(2);
-    expect(wrapper.find('a').length).toBe(1);
+  const wrapper = setup();
+
+  it('it renders a status code', () => {
     expect(wrapper.find('h3').length).toBe(2);
+    expect(wrapper.find('h3').first().props().children).toBe('404');
+  });
+
+  it('it renders a message', () => {
+    expect(wrapper.find('h3').length).toBe(2);
+    expect(wrapper.find('h3').last().props().children).toBe('page not found');
+  });
+
+  it('renders a more descriptive message', () => {
+    expect(wrapper.find('p').length).toBe(2);
+    expect(wrapper.find('p').first().props().children)
+      .toBe('We are sorry but the page you are looking for does not exist.');
+  });
+
+  it('renders a direction to the dashboard', () => {
+    expect(wrapper.find('p').length).toBe(2);
+    expect(wrapper.find('p').last().props().children[0])
+      .toBe('Please go back to the');
+    expect(wrapper.find('a').length).toBe(1);
+    expect(wrapper.find('a').props().children).toBe('dashboard');
   });
 
   it('does not render footer, li, ul, h5, img, form, h1, h2, h4, row', () => {
-    const wrapper = setup();
     expect(wrapper.find('footer').length).toBe(0);
     expect(wrapper.find('li').length).toBe(0);
     expect(wrapper.find('ul').length).toBe(0);

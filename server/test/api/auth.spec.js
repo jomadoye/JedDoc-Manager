@@ -22,7 +22,6 @@ describe('User authentication API', () => {
         .end((err, res) => {
           loggedInUser = res.body;
           res.should.have.status(200);
-          res.body.success.should.eql(true);
           res.body.message.should.eql('User logged in');
           done();
         });
@@ -40,7 +39,7 @@ describe('User authentication API', () => {
         .end((err, res) => {
           loggedInUser = res.body;
           res.should.have.status(400);
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Authentication failed, user not found');
           done();
         });
@@ -55,7 +54,7 @@ describe('User authentication API', () => {
         })
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Authentication failed, wrong password.');
           done();
         });
@@ -66,7 +65,7 @@ describe('User authentication API', () => {
         .get('/api/users')
         .end((err, res) => {
           res.should.have.status(403);
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('No token provided.');
           done();
         });
@@ -81,7 +80,7 @@ describe('User authentication API', () => {
         })
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Authentication failed, user not found');
           done();
         });
@@ -95,7 +94,7 @@ describe('User authentication API', () => {
         })
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Authentication failed, no password.');
           done();
         });
@@ -108,7 +107,7 @@ describe('User authentication API', () => {
         .get('/api/users/logout')
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.success.should.eql(true);
+
           res.body.message.should.eql('User logged out');
           done();
         });

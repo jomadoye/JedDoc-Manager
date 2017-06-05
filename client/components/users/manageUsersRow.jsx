@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import * as UserActions from '../../actions/userAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
@@ -20,16 +21,56 @@ class ManageUsersRow extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDisplayUserRole = this.handleDisplayUserRole.bind(this);
   }
+  /**
+   * This function mounts the component
+   *
+   *
+   * @memberof ManageUsersRow
+   */
   componentDidMount() {
     $('.modal').modal();
   }
+  /**
+   * This function handles editing user details
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersRow
+   */
   handleUserEditOnchange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+  /**
+   * This function handles the delete of documents
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersRow
+   */
   handleDelete(event) {
     event.preventDefault();
-    this.props.deleteSingleUserAccount(this.props.user.id);
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this user!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
+      this.props.deleteSingleUserAccount(this.props.user.id);
+      swal('Deleted!', 'This user has been deleted.', 'success');
+    });
   }
+
+  /**
+   * This function handle submit
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersRow
+   */
   handleSubmit(event) {
     event.preventDefault();
     const user = {
@@ -38,15 +79,44 @@ class ManageUsersRow extends React.Component {
       email: this.state.email,
       roleId: this.state.roleId,
     };
-    this.props.updateSingleUserAccountByAdmin(user, this.props.user.id);
-    this.props.deleteFlashMessage(1);
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this users previous details!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, update it!',
+      closeOnConfirm: false,
+    },
+    () => {
+      this.props.updateSingleUserAccountByAdmin(user, this.props.user.id);
+      this.props.deleteFlashMessage(1);
+      swal('Updated!', 'This user has been edited.', 'success');
+    });
   }
+
+  /**
+   * This function handles edit the user details on the modal
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersRow
+   */
   handleEditModal(event) {
     event.preventDefault();
     const userId = this.props.user.id;
     const modal = `#modal-${userId}`;
     $(modal).modal('open');
   }
+
+  /**
+   * This function dis plays the user roles
+   *
+   * @param {any} id
+   * @returns
+   *
+   * @memberof ManageUsersRow
+   */
   handleDisplayUserRole(id) {
     if (id === 1) {
       return 'Administrator';
@@ -78,37 +148,43 @@ class ManageUsersRow extends React.Component {
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
                     <input placeholder="Placeholder"
+                    disabled
                     id="fullName"
                     type="text"
                     value={fullname}
                     name="fullname"
                     onChange={this.handleUserEditOnchange}
                     className="validate"/>
-                    <label htmlFor="fullName">Full Name</label>
+                    <label className="active"
+                    htmlFor="fullName">Full Name</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
                     <input
+                    disabled
                     id="username"
                     type="text"
                     className="validate"
                     name="username"
                     onChange={this.handleUserEditOnchange}
                     value={username}/>
-                    <label htmlFor="username">Username</label>
+                    <label className="active"
+                    htmlFor="username">Username</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s8 offset-s2">
                     <input
+                    disabled
                     id="email"
                     type="email"
                     className="validate"
                     name="email"
                     onChange={this.handleUserEditOnchange}
                     value={email}/>
-                    <label htmlFor="email">Email</label>
+                    <label className="active"
+                    htmlFor="email">Email</label>
                   </div>
                 </div>
                 <div className="row">
@@ -120,7 +196,8 @@ class ManageUsersRow extends React.Component {
                     name="roleId"
                     onChange={this.handleUserEditOnchange}
                     className="validate"/>
-                    <label htmlFor="roleId">RoleId</label>
+                    <label className="active"
+                    htmlFor="roleId">RoleId</label>
                   </div>
                 </div>
                 <div className="row">

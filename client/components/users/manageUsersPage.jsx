@@ -15,43 +15,97 @@ class ManageUsersPage extends React.Component {
       page: 1,
       isPageLoad: false,
       search: ' ',
+      count: 1,
+      index: 1,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof ManageUsersPage
+   */
   componentWillMount() {
     this.props.loadAllUsers();
   }
+
+  /**
+   * This method runs when the component updates props
+   *
+   * @param {any} nextProps
+   *
+   * @memberof ManageUsersPage
+   */
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps.props) {
       const { allUsers } = nextProps;
       const { isPageLoad } = this.state;
       if (!isPageLoad) {
         if (allUsers) {
-          const page = Math.ceil(allUsers.length / 5);
-          this.props.loadAllUsers(5, 0);
+          const page = Math.ceil(allUsers.count / 8);
+          this.props.loadAllUsers(8, 0);
+          this.setState({ count: allUsers.count });
           this.setState({ page });
           this.setState({ isPageLoad: true });
         }
       }
     }
   }
+
+  /**
+   * This method handles the pagination
+   *
+   * @param {any} limit
+   * @param {any} offset
+   * @param {any} event
+   *
+   * @memberof ManageUsersPage
+   */
   handlePagination(limit, offset, event) {
     this.props.loadAllUsers(limit, offset);
     this.setState({ selected: event.target.innerHTML });
   }
+
+  /**
+   * This method handles the onSubmit handler
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersPage
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.searchUserByUsername(this.state.search, 5, 0);
+    const page = 1;
+    this.setState({ count: this.props.allUsers.count });
+    this.setState({ page });
+    this.setState({ isPageLoad: true });
   }
+
+  /**
+   * This method handles the onChange handler
+   *
+   * @param {any} event
+   *
+   * @memberof ManageUsersPage
+   */
   onChange(event) {
     event.preventDefault();
     this.setState({ search: event.target.value });
+    if (event.target.value === '' ||
+      event.target.value === ' ' ||
+      event.target.value === '  '
+    ) {
+      this.props.loadAllUsers(8, 0);
+    }
   }
 
   render() {
     const { allUsers } = this.props;
-    const { selected, page, search } = this.state;
+    const { selected, page, search, index } = this.state;
     const selectedUsers = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -65,18 +119,18 @@ class ManageUsersPage extends React.Component {
         <table className="striped">
           <thead>
             <tr>
-                <th>S/N</th>
-                <th>FullName</th>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Role Id</th>
-                <th>Role</th>
-                <th>Edit User</th>
-                <th>Delete User</th>
+              <th>S/N</th>
+              <th>FullName</th>
+              <th>UserName</th>
+              <th>Email</th>
+              <th>Role Id</th>
+              <th>Role</th>
+              <th>Edit User</th>
+              <th>Delete User</th>
             </tr>
           </thead>
           <tbody>
-            {allUsers && allUsers.map((user, index) =>
+            {allUsers && allUsers.users && allUsers.users.map((user, index) =>
               <ManageUsersRow key={user.id} user={user} index={index}/>)}
           </tbody>
         </table>
@@ -98,6 +152,10 @@ class ManageUsersPage extends React.Component {
               }
               <li className="waves-effect"><a href="#!">
                 <i className="material-icons">chevron_right</i></a></li>
+                <div className="center-align">
+                  <h6>page {index} of {page}</h6>
+                  <h6>Showing {allUsers && allUsers.users && allUsers.users.length} of {allUsers && allUsers.count} result</h6>
+                </div>
             </div>
             }
           </ul>
@@ -132,7 +190,7 @@ class ManageUsersPage extends React.Component {
 ManageUsersPage.propTypes = {
   loadAllUsers: PropTypes.func.isRequired,
   searchUserByUsername: PropTypes.func.isRequired,
-  allUsers: PropTypes.array,
+  allUsers: PropTypes.object,
 };
 
 /**

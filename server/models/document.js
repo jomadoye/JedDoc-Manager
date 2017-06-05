@@ -3,10 +3,10 @@ export default (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: { args: true, msg: 'This document title already exist' },
       required: true,
       validate: {
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'This title cannot be empty' },
       },
     },
     body: {
@@ -14,7 +14,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       required: true,
       validate: {
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'This body cannot be empty' },
       },
     },
     access: {
@@ -34,7 +34,7 @@ export default (sequelize, DataTypes) => {
         // associations can be defined here
         Document.belongsTo(models.Users, {
           foreignKey: 'userId',
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
         });
       },
     },

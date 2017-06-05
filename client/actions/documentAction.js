@@ -35,12 +35,17 @@ export function loadWelcomePageDocumentSuccess(documents) {
  *
  * @export
  * @param {object} documents An array of documents
+ * @param {object} metadata This contains the pagination objec
+ * @param {object} count the number of documents
  * @returns {object}
  */
-export function loadAuthorizedToViewDocumentSuccess(documents) {
+export function loadAuthorizedToViewDocumentSuccess(documents,
+  metadata, count) {
   return {
     type: LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
     AuthorizeToViewDocuments: documents,
+    metadata,
+    count,
   };
 }
 
@@ -49,12 +54,14 @@ export function loadAuthorizedToViewDocumentSuccess(documents) {
  *
  * @export
  * @param {object} documents An array of documents
+ * @param {object} count The total number of documents
  * @returns {object}
  */
-export function loadUserDocumentSuccess(documents) {
+export function loadUserDocumentSuccess(documents, count) {
   return {
     type: LOAD_USER_DOCUMENT_SUCCESS,
     MyDocuments: documents,
+    count,
   };
 }
 
@@ -68,7 +75,7 @@ export function loadUserDocumentSuccess(documents) {
 export function searchDocumentsByTitleOnDashboardSuccess(documents) {
   return {
     type: SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS,
-    searchDocuments: documents,
+    documents,
   };
 }
 
@@ -153,11 +160,13 @@ export function updateDocumentByAdminSuccess(document, documentId) {
 export function loadWelcomePageDocument() {
   return dispatch => axios.get('/documents', document)
     .then((documents) => {
-      const document = documents.data.document;
+      const document = documents.data.documents.rows;
       dispatch(loadWelcomePageDocumentSuccess(document));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading document';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -174,20 +183,29 @@ export function loadAuthorizedToViewDocument(limit, offset) {
     return dispatch =>
       axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
       .then((documents) => {
-        const document = documents.data.document;
-        dispatch(loadAuthorizedToViewDocumentSuccess(document));
+        const document = documents.data.documents.rows;
+        const metadata = documents.data.documents.metaData;
+        const count = documents.data.documents.count;
+        dispatch(loadAuthorizedToViewDocumentSuccess(document,
+        metadata, count));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error loading document';
+        dispatch(addFlashMessage(message));
       });
   }
   return dispatch => axios.get('/api/documents')
     .then((documents) => {
-      const document = documents.data.document;
-      dispatch(loadAuthorizedToViewDocumentSuccess(document));
+      const document = documents.data.documents.rows;
+      const metadata = documents.data.documents.metaData;
+      const count = documents.data.documents.count;
+      dispatch(loadAuthorizedToViewDocumentSuccess(document, metadata, count));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading document';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -203,23 +221,28 @@ export function loadAuthorizedToViewDocument(limit, offset) {
 export function loadUserDocuments(userId, limit, offset) {
   if (limit) {
     return dispatch =>
-      axios.get(`/api/users/${userId}/documents?
-      limit=${limit}&offset=${offset}`)
+      axios.get(`/api/users/${userId}/documents?limit=${limit}&offset=${offset}`)
       .then((documents) => {
+        const count = documents.data.count;
         const document = documents.data.documents;
-        dispatch(loadUserDocumentSuccess(document));
+        dispatch(loadUserDocumentSuccess(document, count));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error loading document';
+        dispatch(addFlashMessage(message));
       });
   }
   return dispatch => axios.get(`/api/users/${userId}/documents`)
       .then((documents) => {
+        const count = documents.data.count;
         const document = documents.data.documents;
-        dispatch(loadUserDocumentSuccess(document));
+        dispatch(loadUserDocumentSuccess(document, count));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error loading documents';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -238,10 +261,24 @@ export function deleteDocument(documentId) {
       message.text = response;
       dispatch(addFlashMessage(message));
       dispatch(deleteUserDocumentSuccess(documentId));
+    });
+}
+
+/**
+ * This function ensures the documents were sucessfully loaded
+ *
+ * @export
+ * @param {number} documentId The ID of the document to delete
+ * @returns dispatch
+ */
+export function deleteDocumentByAdmin(documentId) {
+  return dispatch => axios.delete(`/api/documents/${documentId}`)
+    .then((res) => {
+      const response = res.data.message;
+      const message = {};
+      message.text = response;
+      dispatch(addFlashMessage(message));
       dispatch(deleteDocumentByAdminSuccess(documentId));
-    })
-    .catch((error) => {
-      throw error;
     });
 }
 
@@ -268,8 +305,10 @@ export function updateDocument(document, documentId, roleId) {
         dispatch(updateUserDocumentSuccess(res.data.document, documentId));
       }
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error updating document';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -278,12 +317,16 @@ export function updateDocument(document, documentId, roleId) {
  *
  * @export
  * @param {string} documents
+ * @param {string} metadata
+ * @param {string} count
  * @returns {object}
  */
-export function loadAllDocumentsSuccess(documents) {
+export function loadAllDocumentsSuccess(documents, metadata, count) {
   return {
     type: LOAD_ALL_DOCUMENTS_SUCCESS,
     allDocuments: documents,
+    metadata,
+    count,
   };
 }
 
@@ -302,18 +345,39 @@ export function searchDocumentsByTitleSuccess(documents) {
 }
 
 /**
- * Thie function loads all documents for admin
+ * This function loads all documents for admin
  *
  * @export
+ * @param {string} limit
+ * @param {string} offset
  * @returns dispatch
  */
-export function loadAllDocuments() {
-  return dispatch => axios.get('/api/documents/')
-    .then((res) => {
-      dispatch(loadAllDocumentsSuccess(res.data.document));
+export function loadAllDocuments(limit, offset) {
+  if (limit) {
+    return dispatch => axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
+    .then((documents) => {
+      const document = documents.data.documents.rows;
+      const metadata = documents.data.documents.metaData;
+      const count = documents.data.documents.count;
+      dispatch(loadAllDocumentsSuccess(document, metadata, count));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading documents';
+      dispatch(addFlashMessage(message));
+    });
+  }
+  return dispatch => axios.get('/api/documents/')
+    .then((documents) => {
+      const document = documents.data.documents.rows;
+      const metadata = documents.data.documents.metaData;
+      const count = documents.data.documents.count;
+      dispatch(loadAllDocumentsSuccess(document, metadata, count));
+    })
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading documents';
+      dispatch(addFlashMessage(message));
     });
 }
 
@@ -333,8 +397,10 @@ export function searchDocumentsByTitle(query, limit, offset) {
     .then((res) => {
       dispatch(searchDocumentsByTitleSuccess(res.data.document));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error searching document';
+      dispatch(addFlashMessage(message));
     });
 }
 /**
@@ -342,19 +408,23 @@ export function searchDocumentsByTitle(query, limit, offset) {
  *
  * @export
  * @param {any} query
- * @param {any} limit
- * @param {any} offset
+ * @param {any} limits
+ * @param {any} offsets
  * @returns dispatch
  */
-export function searchDocumentsByTitleOnDashboard(query, limit, offset) {
+export function searchDocumentsByTitleOnDashboard(query, limits, offsets) {
+  const limit = limits || 8;
+  const offset = offsets || 0;
   return dispatch =>
     axios.get(`/api/search/documents?q=${query}
     &limit=${limit}&offset=${offset}`)
     .then((res) => {
-      dispatch(searchDocumentsByTitleOnDashboardSuccess(res.data.document));
+      dispatch(searchDocumentsByTitleOnDashboardSuccess(res.data.documents));
     })
-    .catch((error) => {
-      throw error;
+    .catch(() => {
+      const message = {};
+      message.text = 'Error searching document';
+      dispatch(addFlashMessage(message));
     });
 }
 

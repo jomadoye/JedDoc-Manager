@@ -13,6 +13,9 @@ export default function CreateDocumentForm({ state, onchange, onsubmit }) {
   const { title, body } = state;
   return (
       <div className="">
+        <div className="row">
+          <h1 className="center-align welcome-message">Create A Document</h1>
+        </div>
         <form onSubmit={onsubmit}>
           <div className="input-field">
             <i className="material-icons prefix">mode_edit</i>

@@ -5,6 +5,15 @@ const secret = process.env.SECRET;
 const User = models.Users;
 
 export default {
+
+  /**
+   * This method verifies the token of the user making the request
+   *
+   * @param {req} req
+   * @param {res} res
+   * @param {next} next
+   * @returns next
+   */
   verifyToken(req, res, next) {
     let token;
     if (req.headers.authorization) {
@@ -17,7 +26,6 @@ export default {
         if (err) {
           return res.status(403)
             .send({
-              success: false,
               message: 'Incorrect token.',
             });
         }
@@ -26,7 +34,6 @@ export default {
             if (!user) {
               return res.status(403)
                 .send({
-                  success: false,
                   message: 'This user does not exist',
                 });
             }
@@ -35,7 +42,6 @@ export default {
           })
           .catch(error => res.status(400)
             .send({
-              success: false,
               message: 'Error finding current users',
               error,
             }));
@@ -43,57 +49,8 @@ export default {
     } else {
       return res.status(403)
         .send({
-          success: false,
           message: 'No token provided.',
         });
     }
-  },
-
-  isAdmin(req, res, next) {
-    models.Roles.findById(req.decoded.data.roleId)
-      .then((role) => {
-        if (role.title === 'Administrator') {
-          return next();
-        }
-        return res.status(403)
-          .send({
-            success: false,
-            message: 'Admin access is required',
-          });
-      })
-      .catch(error => res.status(400)
-        .send(error));
-  },
-
-  isAdminOrOwner(req, res, next) {
-    const loggedInUserId = req.decoded.data.id;
-    const loggedInUserRoleId = req.decoded.data.roleId;
-    const documentId = req.params.documentId;
-    const userId = req.params.userId;
-    let documentUserId;
-    if (loggedInUserRoleId === 1) {
-      return next();
-    } else if (documentId) {
-      return models.Documents.findById(documentId)
-        .then((document) => {
-          documentUserId = document.userId;
-          if (loggedInUserId === documentUserId) {
-            return next();
-          }
-          return res.status(403)
-            .json({
-              success: false,
-              message: 'unauthorized to perform this request',
-            });
-        })
-        .catch(error => res.send(error));
-    } else if (loggedInUserId === parseInt(userId, 10)) {
-      return next();
-    }
-    return res.status(403)
-      .json({
-        success: false,
-        message: 'unauthorized to perform this request',
-      });
   },
 };

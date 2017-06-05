@@ -5,6 +5,13 @@ import * as DocumentAction from '../../actions/documentAction';
 import CardDocumentView from '../common/CardDocumentView.jsx';
 
 class LoadDocuments extends React.Component {
+
+  /**
+   * This method runs when the components mounts
+   *
+   *
+   * @memberof LoadDocuments
+   */
   componentDidMount() {
     this.props.loadDocuments();
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import * as RoleActions from '../../actions/roleActions';
 import ManageRoleRow from '../roles/manageRoleRow.jsx';
@@ -12,13 +13,40 @@ class manageRolesPage extends React.Component {
 
     this.handleDelete = this.handleDelete.bind(this);
   }
+
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof manageRolesPage
+   */
   componentWillMount() {
     this.props.loadUserRoles();
   }
+
+  /**
+   * This method deletes a role
+   *
+   * @param {any} roleId
+   *
+   * @memberof manageRolesPage
+   */
   handleDelete(roleId) {
     event.preventDefault();
-    this.props.DeleteUserRoles(roleId);
-    this.props.deleteFlashMessage(1);
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this role!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
+      this.props.DeleteUserRoles(roleId);
+      this.props.deleteFlashMessage(1);
+      swal('Deleted!', 'This document has been deleted.', 'success');
+    });
   }
   render() {
     const { roles } = this.props;

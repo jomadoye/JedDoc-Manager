@@ -1,6 +1,7 @@
 import models from '../models';
 import UserControllerHelper from '../helpers/controllers/userControllerHelper';
 import commonValidations from '../shared/validations/signup/signupValidation';
+import paginate from '../helpers/pagination/pagination';
 
 require('dotenv')
   .config();
@@ -12,9 +13,15 @@ const isUpdateUser = UserControllerHelper.isUpdateUser;
 const isDestroyUser = UserControllerHelper.isDestroyUser;
 const isLoginUser = UserControllerHelper.isLoginUser;
 const validateInput = UserControllerHelper.validateInput;
-// const validateInput = UserControllerHelper.validateInput;
 
 export default {
+
+  /**
+   * This method creates a user
+   *
+   * @param {req} req
+   * @param {res} res
+   */
   create(req, res) {
     validateInput(req.body, commonValidations)
       .then(({
@@ -35,7 +42,6 @@ export default {
               const token = signJwtToken(secureUserDetails);
               res.status(201)
                 .json({
-                  success: true,
                   message: 'User successfully created',
                   token,
                   user,
@@ -49,20 +55,41 @@ export default {
       });
   },
 
+  /**
+   * This method gets all users
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} user
+   */
   list(req, res) {
     const limit = req.query.limit || null;
     const offset = req.query.offset || 0;
     return User
-      .findAll({
+      .findAndCount({
         limit,
         offset,
       })
-      .then(users => res.status(200)
-        .send(users))
+      .then((users) => {
+        const user = {
+          count: users.count,
+          rows: users.rows,
+          metaData: paginate(users.count, limit, offset),
+        };
+        res.status(200)
+        .send(user);
+      })
       .catch(error => res.status(400)
         .send(error));
   },
 
+  /**
+   * This method gets a specific user
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} user
+   */
   retrieve(req, res) {
     return User
       .findById(req.params.userId, {
@@ -87,6 +114,13 @@ export default {
         .send(error));
   },
 
+  /**
+   * This method checks if a user exists
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} user
+   */
   isUserExist(req, res) {
     return User.find({
       attributes: ['username', 'email'],
@@ -100,6 +134,13 @@ export default {
         .send(error));
   },
 
+  /**
+   * This method updates a user
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} user
+   */
   update(req, res) {
     return User
       .findById(req.params.userId, {
@@ -115,11 +156,17 @@ export default {
       .catch(error => res.status(400)
         .json({
           error,
-          success: false,
           message: 'Error updating user.',
         }));
   },
 
+  /**
+   * This method deletes a user
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {string} message
+   */
   destroy(req, res) {
     return User
       .findById(req.params.userId)
@@ -130,11 +177,18 @@ export default {
       .catch(error => res.status(400)
         .json({
           error,
-          success: false,
+
           message: 'Error encountered when deleting user',
         }));
   },
 
+  /**
+   * This method logs a user in
+   *
+   * @param {req} req
+   * @param {res} res
+   * @returns {object} user{object} user
+   */
   login(req, res) {
     const loginQuery = req.body.query;
     return User.find({
@@ -148,17 +202,22 @@ export default {
     })
       .catch(error => res.status(400)
         .json({
-          success: false,
+
           message: 'Error logging',
           error,
         }));
   },
 
+  /**
+   * This method logs a user out
+   *
+   * @param {req} req
+   * @param {res} res
+   */
   logout(req, res) {
     res.setHeader['x-access-token'] = ' ';
     res.status(200)
       .json({
-        success: true,
         message: 'User logged out',
       });
   },

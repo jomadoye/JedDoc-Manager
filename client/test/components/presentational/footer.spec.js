@@ -11,31 +11,88 @@ import Footer from '../../../components/General/footer.jsx';
  * @returns {object}
  */
 function setup() {
-  const props = {
-  };
+  const props = {};
 
-  return shallow(<Footer {...props} />);
+  return shallow(< Footer {...props
+    }
+    />);
 }
 describe('Footer', () => {
-  it('renders li, ul, h5, div, footer, p, a', () => {
-    const wrapper = setup();
-    expect(wrapper.find('li').length).toBe(4);
-    expect(wrapper.find('ul').length).toBe(1);
-    expect(wrapper.find('h5').length).toBe(2);
-    expect(wrapper.find('div').length).toBe(6);
-    expect(wrapper.find('footer').length).toBe(1);
-    expect(wrapper.find('p').length).toBe(1);
-    expect(wrapper.find('a').length).toBe(5);
+  const wrapper = setup();
+
+  it('renders two h5', () => {
+    expect(wrapper.find('h5')
+          .first()
+          .props()
+          .children)
+        .toBe('Jed-Doc Manager');
+    expect(wrapper.find('h5')
+          .last()
+          .props()
+          .children)
+        .toBe('Informations');
+  });
+
+  it('renders four li', () => {
+    expect(wrapper.find('li')
+          .first()
+          .props()
+          .children.props.children)
+        .toBe('Github');
+    expect(wrapper.find('li')
+          .last()
+          .props()
+          .children.props.children)
+        .toBe('Author');
+    expect(wrapper.find('ul')
+          .first()
+          .props()
+          .children[0].props.children.props.children)
+        .toBe('Github');
+    expect(wrapper.find('ul')
+          .first()
+          .props()
+          .children[1].props.children.props.children)
+        .toBe('Submit Issues');
+    expect(wrapper.find('ul')
+          .first()
+          .props()
+          .children[2].props.children.props.children)
+        .toBe('Contributing');
+    expect(wrapper.find('ul')
+          .first()
+          .props()
+          .children[3].props.children.props.children)
+        .toBe('Author');
+  });
+
+  it('renders a ul', () => {
+    expect(wrapper.find('ul')
+          .length)
+        .toBe(1);
   });
 
   it('does not render img, form, h1 -h4', () => {
-    const wrapper = setup();
-    expect(wrapper.find('img').length).toBe(0);
-    expect(wrapper.find('form').length).toBe(0);
-    expect(wrapper.find('h1').length).toBe(0);
-    expect(wrapper.find('h2').length).toBe(0);
-    expect(wrapper.find('h3').length).toBe(0);
-    expect(wrapper.find('h4').length).toBe(0);
-    expect(wrapper.find('row').length).toBe(0);
+    expect(wrapper.find('img')
+          .length)
+        .toBe(0);
+    expect(wrapper.find('form')
+          .length)
+        .toBe(0);
+    expect(wrapper.find('h1')
+          .length)
+        .toBe(0);
+    expect(wrapper.find('h2')
+          .length)
+        .toBe(0);
+    expect(wrapper.find('h3')
+          .length)
+        .toBe(0);
+    expect(wrapper.find('h4')
+          .length)
+        .toBe(0);
+    expect(wrapper.find('row')
+          .length)
+        .toBe(0);
   });
 });

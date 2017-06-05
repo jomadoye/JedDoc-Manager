@@ -7,26 +7,24 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       required: true,
       validate: {
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'Fullname cannot be empty' },
       },
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: { args: true, msg: 'This username already exist' },
       required: true,
-      validate: {
-        notEmpty: true,
-      },
+      validate: { notEmpty: { args: true, msg: 'Username cannot be empty' } },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: { args: true, msg: 'This email already exist' },
       required: true,
       validate: {
         isEmail: true,
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'Email cannot be empty' },
       },
     },
     roleId: {
@@ -39,7 +37,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       required: true,
       validate: {
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'Password cannot be empty' },
       },
     },
   }, {
@@ -49,12 +47,12 @@ export default (sequelize, DataTypes) => {
         User.hasMany(models.Documents, {
           foreignKey: 'userId',
           as: 'documents',
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
         });
 
         User.belongsTo(models.Roles, {
           foreignKey: 'roleId',
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
         });
       },
     },

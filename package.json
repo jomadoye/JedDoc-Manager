@@ -14,7 +14,7 @@
     "db:test:seed": "NODE_ENV=test babel-node ./server/test-utility/seeders/seedDatabase",
     "db:seed": "NODE_ENV=development babel-node ./server/test-utility/seeders/seedDatabase",
     "mocha:testServer": "NODE_ENV=test nyc --reporter=html mocha \"./**/server/test/**/*.spec.js\" --compilers js:babel-register --timeout 10000",
-    "mocha:testClient": "nyc --reporter=text mocha client/test/testSetup.js \"./**/client/test/**/*.spec.js\"",
+    "mocha:testClient": "nyc --reporter=html mocha client/test/testSetup.js \"./**/client/test/**/*.spec.js\"",
     "mocha:testClientWatch": "npm run mocha:testClient -- --watch",
     "db:migrate": "NODE_ENV=development sequelize db:migrate:undo:all && sequelize db:migrate",
     "test:server": "NODE_ENV=test npm run db:test:seed && npm run mocha:testServer",
@@ -22,11 +22,7 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "npm-run-all test:server mocha:testClient",
-    "test:all": "npm-run-all test:server mocha:testClient test-e2e",
-    "test-e2e": "npm run db:seed && nightwatch",
-    "postinstall": "npm run db:seed",
-    "build": "rm -rf dist/ && babel server -d dist/server && npm run build:client",
-    "build:client": "webpack --config webpack.config.prod.js && cat client/index.html > dist/client/index.html"
+    "test-e2e": "npm run db:seed && nightwatch"
   },
   "repository": {
     "type": "git",

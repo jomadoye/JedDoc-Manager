@@ -10,67 +10,105 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      AuthToViewDocuments: props.documents.AuthToViewDocuments,
+      AuthToViewDocuments: props.documents.AuthToViewDocuments.documents,
       selected: 1,
       page: 1,
+      index: 1,
       isPageLoad: false,
       search: ' ',
+      count: 1,
     };
     this.handlePagination = this.handlePagination.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof Dashboard
+   */
   componentWillMount() {
     this.props.loadAuthorizedToViewDocument();
   }
+
+  /**
+   * This method runs when the props are updated
+   *
+   * @param {any} nextProps
+   *
+   * @memberof Dashboard
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({ AuthToViewDocuments:
-      nextProps.documents.AuthorizeToViewDocuments });
+      nextProps.documents.AuthorizeToViewDocuments.documents });
     if (this.props !== nextProps.props) {
       const { isPageLoad } = this.state;
       const { AuthorizeToViewDocuments } = nextProps.documents;
       if (!isPageLoad) {
         if (AuthorizeToViewDocuments) {
-          const page = Math.ceil(AuthorizeToViewDocuments.length / 5);
-          this.props.loadAuthorizedToViewDocument(5, 0);
+          const page = Math.ceil(AuthorizeToViewDocuments.count / 8);
+          this.props.loadAuthorizedToViewDocument();
           this.setState({ page });
+          this.setState({ count: AuthorizeToViewDocuments.count });
           this.setState({ isPageLoad: true });
         }
       }
     }
   }
-  handlePagination(limit, offset, event) {
+
+  /**
+   * This method handles pagination
+   *
+   * @param {any} limit
+   * @param {any} offset
+   * @param {any} event
+   *
+   * @memberof Dashboard
+   */
+  handlePagination(limit, offset, event, index) {
     this.props.loadAuthorizedToViewDocument(limit, offset);
     this.setState({ selected: event.target.innerHTML });
+    this.setState({ index: index + 1 });
   }
+
+  /**
+   * This method handles the onChange handler
+   *
+   * @param {any} event
+   *
+   * @memberof Dashboard
+   */
   onChange(event) {
     event.preventDefault();
     if (event.target.value === '' ||
         event.target.value === '  ' ||
         event.target.value === ' ') {
-      this.props.loadAuthorizedToViewDocument(5, 0);
+      this.props.loadAuthorizedToViewDocument();
     }
     this.setState({ search: event.target.value });
   }
+
+  /**
+   * This method handles the onSubmit event
+   *
+   * @param {any} event
+   *
+   * @memberof Dashboard
+   */
   onSubmit(event) {
     event.preventDefault();
-    this.props.searchDocumentsByTitleOnDashboard(this.state.search, 5, 0);
+    this.props.searchDocumentsByTitleOnDashboard(this.state.search);
+    const page = 1;
+    this.setState({ count: this.state.count });
+    this.setState({ page });
+    this.setState({ isPageLoad: true });
   }
   render() {
     const { AuthToViewDocuments } = this.state;
-    const publicDocuments = [];
-    const roleDocuments = [];
-    if (AuthToViewDocuments) {
-      AuthToViewDocuments.map((document) => {
-        if (document.access === 'public') {
-          publicDocuments.push(document);
-        } else if (document.access === 'role') {
-          roleDocuments.push(document);
-        }
-        // return roleDocuments.push([]);
-      });
-    }
-    const { selected, page, search } = this.state;
+    const { selected, page, search, index } = this.state;
+    const { documents } = this.props;
     const selectedDocuments = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -84,21 +122,14 @@ class Dashboard extends React.Component {
         <div className="row">
           <div className="col s12">
             <ul className="tabs">
-              <li className="tab col s6">
-                <a href="#test1">Public Documents</a></li>
-              <li className="tab col s6">
-                <a href="#test2">Role Documents</a></li>
+              <li className="tab col s12">
+                <a href="#test1">My Dashboard</a>
+              </li>
             </ul>
           </div>
           <div id="test1" className="col s12">
-            { AuthToViewDocuments && publicDocuments.map(document =>
-                <CardDocumentView
-                document={document}
-                key={document.id}
-                 readOnly/>)}
-          </div>
-          <div id="test2" className="col s12">
-            { AuthToViewDocuments && roleDocuments.map(document =>
+            <br/>
+            { AuthToViewDocuments && AuthToViewDocuments.map(document =>
                 <CardDocumentView
                 document={document}
                 key={document.id}
@@ -117,12 +148,17 @@ class Dashboard extends React.Component {
                   selected={selectedDocuments}
                   index={index}
                   isActive={isActive}
+                  pageCount={page}
                   notActive={notActive}
                   handlePagination={this.handlePagination}
                   />))
                 }
                 <li className="waves-effect"><a href="#!">
                   <i className="material-icons">chevron_right</i></a></li>
+                <div className="center-align">
+                  <h6>page {index} of {page}</h6>
+                  <h6>Showing {AuthToViewDocuments && AuthToViewDocuments.length} of {AuthToViewDocuments && documents.AuthorizeToViewDocuments.count} result</h6>
+                </div>
               </div>
               }
             </ul>

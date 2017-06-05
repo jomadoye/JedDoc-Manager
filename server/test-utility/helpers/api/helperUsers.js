@@ -77,6 +77,14 @@ export default {
     roleId: 1,
   },
 
+  middlewareTestUser: {
+    fullname: 'jed anthony',
+    username: 'jerry1234',
+    email: 'jerry1234@andela.com',
+    password: 'password',
+    roleId: 1,
+  },
+
   newUserAdmin: {
     fullname: 'Administrator jed',
     username: 'adminJed',

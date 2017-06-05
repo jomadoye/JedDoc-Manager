@@ -1,12 +1,13 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import { Row, Input } from 'react-materialize';
 import * as DocumentAction from '../../actions/documentAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
-class CardDocumentView extends React.Component {
+export class CardDocumentView extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,6 +24,12 @@ class CardDocumentView extends React.Component {
       isLoading: false,
     };
   }
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof CardDocumentView
+   */
   componentDidMount() {
     $('.modal').modal();
     $('.button-collapse').sideNav();
@@ -36,10 +43,16 @@ class CardDocumentView extends React.Component {
       belowOrigin: false, // Displays dropdown below the button
       alignment: 'left',
       stopPropagation: false, // Stops event propagation
-    },
-  );
+    });
   }
 
+  /**
+   * This method handles the document view
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleView(event) {
     event.preventDefault();
     const docID = this.props.document.id;
@@ -47,6 +60,13 @@ class CardDocumentView extends React.Component {
     $(modal).modal('open');
   }
 
+  /**
+   * This method handles edit document
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleEdit(event) {
     event.preventDefault();
     const docID = this.props.document.id;
@@ -54,21 +74,53 @@ class CardDocumentView extends React.Component {
     $(modal).modal('open');
   }
 
+  /**
+   * This method handles document delete
+   *
+   *
+   * @memberof CardDocumentView
+   */
   handleDelete() {
     event.preventDefault();
-    const confirmDelete =
-      confirm('Are you sure you want to delete this Document');
-    if (confirmDelete === true) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this document!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
       const documentId = this.props.document.id;
-      this.props.deleteDocument(documentId);
+      if (this.props.currentUser.roleId === 1) {
+        this.props.deleteDocumentByAdmin(documentId);
+      } else {
+        this.props.deleteDocument(documentId);
+      }
       this.props.deleteFlashMessage(1);
-    }
+      swal('Deleted!', 'This document has been deleted.', 'success');
+    });
   }
 
+  /**
+   * This method handle tdocument onchange
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleDocumentOnchange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  /**
+   * This method handles document edit
+   *
+   * @param {any} event
+   *
+   * @memberof CardDocumentView
+   */
   handleEditDocumentSubmit(event) {
     event.preventDefault();
     const document = this.state;
@@ -129,7 +181,7 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
                 onSubmit={this.handleEditDocumentSubmit}>
                   <div className="input-field">
                     <i className="material-icons prefix">mode_edit</i>
-                    <label>Document title</label>
+                    <label className="active">Document title</label>
                     <input
                     id="title"
                     onChange={this.handleDocumentOnchange}
@@ -147,7 +199,8 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
                     value={body}
                     id="body"
                     />
-                    <label htmlFor="icon_prefix2">Document body</label>
+                    <label className="active"
+                    htmlFor="icon_prefix2">Document body</label>
                   </div>
 
                   <div className="input-field">
@@ -241,6 +294,7 @@ CardDocumentView.propTypes = {
   myDocument: PropTypes.bool,
   readOnly: PropTypes.bool,
   deleteDocument: PropTypes.func.isRequired,
+  deleteDocumentByAdmin: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
@@ -257,6 +311,8 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteDocument: documentId =>
       dispatch(DocumentAction.deleteDocument(documentId)),
+    deleteDocumentByAdmin: documentId =>
+      dispatch(DocumentAction.deleteDocumentByAdmin(documentId)),
     updateDocument: (document, documentId, roleId) =>
       dispatch(DocumentAction.updateDocument(document, documentId, roleId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),

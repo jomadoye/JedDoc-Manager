@@ -6,11 +6,11 @@ const documentsController = controller.documents;
 const searchController = controller.search;
 const rolesController = controller.roles;
 const authenticate = auth.authenticate;
-
+const authorization = auth.authorization;
 
 const verifyToken = authenticate.verifyToken;
-const isAdmin = authenticate.isAdmin;
-const isAdminOrOwner = authenticate.isAdminOrOwner;
+const isAdmin = authorization.isAdmin;
+const isOwner = authorization.isOwner;
 
 const Route = (app) => {
   app
@@ -36,13 +36,13 @@ const Route = (app) => {
   app
     .route('/api/users/:userId')
     .get(usersController.retrieve)
-    .put(isAdminOrOwner, usersController.update)
-    .delete(isAdminOrOwner, usersController.destroy);
+    .put(isOwner, usersController.update)
+    .delete(isOwner, usersController.destroy);
 
   // User-Document routes
   app
     .route('/api/users/:userId/documents')
-    .post(isAdminOrOwner, documentsController.create)
+    .post(isOwner, documentsController.create)
     .get(documentsController.getUserDocuments);
 
   // app
@@ -54,8 +54,8 @@ const Route = (app) => {
   app
     .route('/api/documents/:documentId')
     .get(documentsController.retrieve)
-    .put(isAdminOrOwner, documentsController.update)
-    .delete(isAdminOrOwner, documentsController.destroy);
+    .put(isOwner, documentsController.update)
+    .delete(isOwner, documentsController.destroy);
 
   app
     // TODO Get all authorized documents

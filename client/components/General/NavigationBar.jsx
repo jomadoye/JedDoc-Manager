@@ -10,6 +10,13 @@ class NavigationBar extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
+  /**
+   * This method handles logout
+   *
+   * @param {any} event
+   *
+   * @memberof NavigationBar
+   */
   logout(event) {
     event.preventDefault();
     this.context.router.push('/');
@@ -133,17 +140,19 @@ class NavigationBar extends React.Component {
           <li><a id="my-profile" href="my-profile">
             <i className="material-icons">
               account_circle</i>My Profile</a></li>
-          <li><a id="create-document" href="create-document">
-            <i className="material-icons">
-              add</i>Create Document</a></li>
           <li><a id="my-documents" href="my-documents">
             <i className="material-icons">
-              perm_media</i>My Documents</a></li>
+              perm_media</i>my docs</a></li>
+          <li><div className="divider" /></li>
+          <li><a id="create-document" href="create-document">
+            <i className="material-icons">
+              add</i>Create Docs</a></li>
           {user && user.roleId === 1 &&
           <div>
             <li><a id="create-roles" href="create-role">
               <i className="material-icons">
                 add</i>Create Roles</a></li>
+            <li><div className="divider" /></li>
             <li><a id="manage-roles" href="manage-roles">
               <i className="material-icons">
                 settings</i>Manage Roles</a></li>
@@ -152,15 +161,11 @@ class NavigationBar extends React.Component {
                 settings</i>Manage Users</a></li>
             <li><a href="manage-documents"><i className="material-icons">
                 settings</i>Manage Documents</a></li>
+              <li><div className="divider" /></li>
           </div>}
           <li><a
             onClick={this.logout}><i className="material-icons">
               power_settings_new</i>Log-out</a></li>
-          <li><a href="#!">Second Link</a></li>
-          <li><div className="divider" /></li>
-          <li><a className="subheader">Subheader</a></li>
-          <li><a className="waves-effect" href="#!">
-            Third Link With Waves</a></li>
         </ul>
       </div>
 

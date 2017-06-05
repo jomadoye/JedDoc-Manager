@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import swal from 'sweetalert';
 import * as userAction from '../../actions/userAction';
 import * as loginAction from '../../actions/loginActions';
 import { deleteFlashMessage } from '../../actions/flashMessages';
@@ -24,9 +25,26 @@ class myProfilePage extends React.Component {
     this.setupUpdateUser = this.setupUpdateUser.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
+
+  /**
+   * This method runs when the component props is updated
+   *
+   * @param {any} nextProps
+   *
+   * @memberof myProfilePage
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({ user: nextProps.user });
   }
+
+  /**
+   * This method updates the user state
+   *
+   * @param {any} event
+   * @returns
+   *
+   * @memberof myProfilePage
+   */
   updateUserState(event) {
     const field = event.target.name;
     const user = Object.assign({}, this.state.user);
@@ -35,6 +53,14 @@ class myProfilePage extends React.Component {
       user,
     });
   }
+
+  /**
+   * This method updates a user profile
+   *
+   * @param {any} event
+   *
+   * @memberof myProfilePage
+   */
   updateUserProfile(event) {
     event.preventDefault();
     this.setState({ isUpdateingUser: true, showSubmitButton: false });
@@ -42,19 +68,42 @@ class myProfilePage extends React.Component {
     this.props.roleId);
     this.props.deleteFlashMessage(1);
   }
+
+  /**
+   * This method setups the user modal
+   *
+   * @param {any} event
+   *
+   * @memberof myProfilePage
+   */
   setupUpdateUser(event) {
     event.preventDefault();
     this.setState({ isUpdateingUser: false, showSubmitButton: true });
-    // this.context.router.push('/courses');
   }
+
+  /**
+   * This method handles user delete
+   *
+   * @param {any} event
+   *
+   * @memberof myProfilePage
+   */
   handleDelete(event) {
     event.preventDefault();
-    const confirmDelete =
-      confirm('Are you sure you want to delete this account!!!');
-    if (confirmDelete === true) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this account!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
       this.props.deleteUserAccount(this.props.userId);
       this.props.logout();
-    }
+      swal('Deleted!', 'This Account has been deleted.', 'success');
+    });
   }
   render() {
     const { isUpdateingUser, showSubmitButton } = this.state;
@@ -70,8 +119,8 @@ class myProfilePage extends React.Component {
               <div className="row">
                 <div className="input-field">
                   <input disabled={disabled}
-                    onChange={this.updateUserState} name="fullname" v
-                    alue={this.state.user.fullname} id="full_name"
+                    onChange={this.updateUserState} name="fullname"
+                    value={this.state.user.fullname} id="full_name"
                     type="text" className="validate"/>
                   <label className="active"
                     htmlFor="full_name">Full Name</label>
@@ -82,7 +131,7 @@ class myProfilePage extends React.Component {
                     name="username"
                     value={this.state.user.username}
                     id="username" type="text"
-                    className="validate"/>
+                    className="validate active"/>
                   <label className="active" htmlFor="username">UserName</label>
                 </div>
               </div>
