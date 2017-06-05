@@ -45,6 +45,31 @@ describe('Authentication actions', () => {
         .to.eql(expectedActions[0].type);
     });
   });
+  describe('logout', () => {
+    const response = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    };
+    after(() => {
+      nock.cleanAll();
+    });
+    it('should login a user', () => {
+      nock('/')
+        .post('logout', user)
+        .reply(200, response);
+
+      const expectedActions = [
+        { type: SET_CURRENT_USER },
+      ];
+      const store = mockStore({
+        user: {},
+      });
+      store.dispatch(userActions.setCurrentUser(user));
+      expect(store.getActions()[0].type)
+        .to.eql(expectedActions[0].type);
+    });
+  });
   describe('signup', () => {
     const response = {
       firstName: user.firstName,
