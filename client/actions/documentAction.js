@@ -35,9 +35,12 @@ export function loadWelcomePageDocumentSuccess(documents) {
  *
  * @export
  * @param {object} documents An array of documents
+ * @param {object} metadata This contains the pagination objec
+ * @param {object} count the number of documents
  * @returns {object}
  */
-export function loadAuthorizedToViewDocumentSuccess(documents, metadata, count) {
+export function loadAuthorizedToViewDocumentSuccess(documents,
+  metadata, count) {
   return {
     type: LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
     AuthorizeToViewDocuments: documents,
@@ -51,6 +54,7 @@ export function loadAuthorizedToViewDocumentSuccess(documents, metadata, count) 
  *
  * @export
  * @param {object} documents An array of documents
+ * @param {object} count The total number of documents
  * @returns {object}
  */
 export function loadUserDocumentSuccess(documents, count) {
@@ -182,7 +186,8 @@ export function loadAuthorizedToViewDocument(limit, offset) {
         const document = documents.data.documents.rows;
         const metadata = documents.data.documents.metaData;
         const count = documents.data.documents.count;
-        dispatch(loadAuthorizedToViewDocumentSuccess(document, metadata, count));
+        dispatch(loadAuthorizedToViewDocumentSuccess(document,
+        metadata, count));
       })
       .catch(() => {
         const message = {};
@@ -312,6 +317,8 @@ export function updateDocument(document, documentId, roleId) {
  *
  * @export
  * @param {string} documents
+ * @param {string} metadata
+ * @param {string} count
  * @returns {object}
  */
 export function loadAllDocumentsSuccess(documents, metadata, count) {
@@ -338,9 +345,11 @@ export function searchDocumentsByTitleSuccess(documents) {
 }
 
 /**
- * Thie function loads all documents for admin
+ * This function loads all documents for admin
  *
  * @export
+ * @param {string} limit
+ * @param {string} offset
  * @returns dispatch
  */
 export function loadAllDocuments(limit, offset) {
@@ -399,8 +408,8 @@ export function searchDocumentsByTitle(query, limit, offset) {
  *
  * @export
  * @param {any} query
- * @param {any} limit
- * @param {any} offset
+ * @param {any} limits
+ * @param {any} offsets
  * @returns dispatch
  */
 export function searchDocumentsByTitleOnDashboard(query, limits, offsets) {

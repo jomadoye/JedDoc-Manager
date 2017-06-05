@@ -58,6 +58,8 @@ class DocumentControllerHelper {
    * @static
    * @param {object} document
    * @param {res} res
+   * @param {limit} limit
+   * @param {offset} offset
    * @returns
    *
    * @memberof DocumentControllerHelper

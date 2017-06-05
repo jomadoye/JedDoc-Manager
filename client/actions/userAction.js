@@ -74,7 +74,7 @@ export function deleteUserAccountSuccess() {
  * This function ensures the user was searched successfully
  *
  * @export
- * @param {string} searchedUsers
+ * @param {string} users
  * @returns dispatch
  */
 export function searchUserByUsernameSuccess(users) {
@@ -155,7 +155,9 @@ export function deleteUserAccount(userId) {
  * This function ensures users are loaded sucessfully
  *
  * @export
- * @param {object} users
+ * @param {users} users
+ * @param {metadata} metadata
+ * @param {count} count
  * @returns {object}
  */
 export function loadAllUsersSuccess(users, metadata, count) {

@@ -19,10 +19,6 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const document = {
-  body: 'jed is a boy',
-  title: 'jedidiahh',
-};
 describe('Document actions', () => {
   after(() => {
     nock.cleanAll();

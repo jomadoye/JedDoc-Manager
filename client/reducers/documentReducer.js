@@ -1,4 +1,3 @@
-import findIndex from 'lodash/findIndex';
 import initialState from './initialState';
 import {
   LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS,
@@ -117,7 +116,6 @@ function documentReducer(state = initialState.documents, action) {
 
     case UPDATE_USER_DOCUMENT_SUCCESS:
       {
-        console.log('user');
         const documemts = state.MyDocuments.documents.filter(document =>
         document.id !== action.document.id);
         return { MyDocuments: {
@@ -130,7 +128,6 @@ function documentReducer(state = initialState.documents, action) {
 
     case UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS:
       {
-        console.log('admin');
         const documemts = state.allDocuments.documents.filter(document =>
         document.id !== action.document.id);
         return { allDocuments: {
