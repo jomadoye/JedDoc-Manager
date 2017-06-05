@@ -105,7 +105,7 @@ class ManageUsersPage extends React.Component {
 
   render() {
     const { allUsers } = this.props;
-    const { selected, page, search, index, count } = this.state;
+    const { selected, page, search, index } = this.state;
     const selectedUsers = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -130,7 +130,7 @@ class ManageUsersPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {allUsers && allUsers.users.map((user, index) =>
+            {allUsers && allUsers.users && allUsers.users.map((user, index) =>
               <ManageUsersRow key={user.id} user={user} index={index}/>)}
           </tbody>
         </table>
@@ -154,7 +154,7 @@ class ManageUsersPage extends React.Component {
                 <i className="material-icons">chevron_right</i></a></li>
                 <div className="center-align">
                   <h6>page {index} of {page}</h6>
-                  <h6>Showing {allUsers && allUsers.users.length} of {allUsers && allUsers.count} result</h6>
+                  <h6>Showing {allUsers && allUsers.users && allUsers.users.length} of {allUsers && allUsers.count} result</h6>
                 </div>
             </div>
             }

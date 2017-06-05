@@ -95,38 +95,50 @@ function documentReducer(state = initialState.documents, action) {
 
     case DELETE_USER_DOCUMENT_SUCCESS:
       {
-        const index = findIndex(state.MyDocuments, { id: action.documentId });
-        const stateCopy = Object.assign({}, state);
-        stateCopy.MyDocuments.splice(index, 1);
-        return stateCopy;
+        const allDocuments = state.MyDocuments.documents.filter(document =>
+          document.id !== action.documentId);
+        return Object.assign({}, state, {
+          MyDocuments: {
+            documents: allDocuments,
+          },
+        });
       }
 
     case DELETE_DOCUMENT_BY_ADMIN_SUCCESS:
       {
-        const index = findIndex(state.allDocuments, { id: action.documentId });
-        const stateCopy = Object.assign({}, state);
-        stateCopy.allDocuments.splice(index, 1);
-        return stateCopy;
+        const allDocuments = state.allDocuments.documents.filter(document =>
+          document.id !== action.documentId);
+        return Object.assign({}, state, {
+          allDocuments: {
+            documents: allDocuments,
+          },
+        });
       }
 
     case UPDATE_USER_DOCUMENT_SUCCESS:
       {
-        const documemts = state.MyDocuments.filter(document =>
+        console.log('user');
+        const documemts = state.MyDocuments.documents.filter(document =>
         document.id !== action.document.id);
-        return { MyDocuments: [
-          ...documemts,
-          Object.assign({}, action.document),
-        ] };
+        return { MyDocuments: {
+          documents: [
+            ...documemts,
+            Object.assign({}, action.document),
+          ],
+        } };
       }
 
     case UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS:
       {
-        const documemts = state.allDocuments.filter(document =>
+        console.log('admin');
+        const documemts = state.allDocuments.documents.filter(document =>
         document.id !== action.document.id);
-        return { allDocuments: [
-          ...documemts,
-          Object.assign({}, action.document),
-        ] };
+        return { allDocuments: {
+          documents: [
+            ...documemts,
+            Object.assign({}, action.document),
+          ],
+        } };
       }
 
     default:

@@ -249,11 +249,6 @@ export function deleteSingleUserAccount(userId) {
         dispatch(addFlashMessage(message));
         dispatch(deleteFlashMessage(1));
         dispatch(deleteSingleUserAccountSuccess(userId));
-      })
-      .catch(() => {
-        const message = {};
-        message.text = 'Error deleting user';
-        dispatch(addFlashMessage(message));
       });
 }
 

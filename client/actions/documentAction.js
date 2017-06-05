@@ -256,6 +256,23 @@ export function deleteDocument(documentId) {
       message.text = response;
       dispatch(addFlashMessage(message));
       dispatch(deleteUserDocumentSuccess(documentId));
+    });
+}
+
+/**
+ * This function ensures the documents were sucessfully loaded
+ *
+ * @export
+ * @param {number} documentId The ID of the document to delete
+ * @returns dispatch
+ */
+export function deleteDocumentByAdmin(documentId) {
+  return dispatch => axios.delete(`/api/documents/${documentId}`)
+    .then((res) => {
+      const response = res.data.message;
+      const message = {};
+      message.text = response;
+      dispatch(addFlashMessage(message));
       dispatch(deleteDocumentByAdminSuccess(documentId));
     });
 }

@@ -93,7 +93,11 @@ export class CardDocumentView extends React.Component {
     },
     () => {
       const documentId = this.props.document.id;
-      this.props.deleteDocument(documentId);
+      if (this.props.currentUser.roleId === 1) {
+        this.props.deleteDocumentByAdmin(documentId);
+      } else {
+        this.props.deleteDocument(documentId);
+      }
       this.props.deleteFlashMessage(1);
       swal('Deleted!', 'This document has been deleted.', 'success');
     });
@@ -290,6 +294,7 @@ CardDocumentView.propTypes = {
   myDocument: PropTypes.bool,
   readOnly: PropTypes.bool,
   deleteDocument: PropTypes.func.isRequired,
+  deleteDocumentByAdmin: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
@@ -306,6 +311,8 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteDocument: documentId =>
       dispatch(DocumentAction.deleteDocument(documentId)),
+    deleteDocumentByAdmin: documentId =>
+      dispatch(DocumentAction.deleteDocumentByAdmin(documentId)),
     updateDocument: (document, documentId, roleId) =>
       dispatch(DocumentAction.updateDocument(document, documentId, roleId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),

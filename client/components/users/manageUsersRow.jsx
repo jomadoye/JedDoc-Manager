@@ -91,7 +91,7 @@ class ManageUsersRow extends React.Component {
     () => {
       this.props.updateSingleUserAccountByAdmin(user, this.props.user.id);
       this.props.deleteFlashMessage(1);
-      swal('Deleted!', 'This user has been edited.', 'success');
+      swal('Updated!', 'This user has been edited.', 'success');
     });
   }
 
