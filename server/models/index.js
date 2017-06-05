@@ -12,7 +12,7 @@ var config    = require(__dirname + './../config/config')[env];
 var db        = {};
 
 
-var databaseUrl = process.env[config.use_env_variable];
+var databaseUrl = 'postgres://pyreanii:og0MX9MODR32YCFjbC4GXifldrJVOJMK@stampy.db.elephantsql.com:5432/pyreanii';
 var sequelize = new Sequelize(databaseUrl, config);
 
 fs
