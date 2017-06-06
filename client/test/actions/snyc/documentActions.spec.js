@@ -3,7 +3,7 @@ import {
 } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as documentAction from '../../actions/documentAction';
+import * as documentAction from '../../../actions/documentAction';
 import {
   LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS,
   LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
@@ -13,7 +13,7 @@ import {
   DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
   UPDATE_USER_DOCUMENT_SUCCESS,
   CREATE_DOCUMENT_BY_USER_SUCCESS,
-} from '../../actions/actionTypes';
+} from '../../../actions/actionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

@@ -100,6 +100,7 @@ export class CardDocumentView extends React.Component {
       }
       this.props.deleteFlashMessage(1);
       swal('Deleted!', 'This document has been deleted.', 'success');
+      this.props.deleteFlashMessage(1);
     });
   }
 

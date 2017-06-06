@@ -4,7 +4,7 @@ import {
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import * as userAction from '../../actions/userAction';
+import * as userAction from '../../../actions/userAction';
 import {
   DELETE_SINGLE_USER_SUCCESS,
   LOAD_USER_PROFILE_SUCCESS,
@@ -14,7 +14,7 @@ import {
   SEARCH_USER_BY_USERNAME_SUCCESS,
   LOAD_ALL_USERS_SUCCESS,
   UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS,
-} from '../../actions/actionTypes';
+} from '../../../actions/actionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

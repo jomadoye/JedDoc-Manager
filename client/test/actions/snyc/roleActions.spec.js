@@ -3,12 +3,12 @@ import {
 } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as roleActions from '../../actions/roleActions';
+import * as roleActions from '../../../actions/roleActions';
 import {
   CREATE_USER_ROLE_SUCCESS,
   LOAD_USER_ROLE_SUCCESS,
   DELETE_USER_ROLE_SUCCESS,
-} from '../../actions/actionTypes';
+} from '../../../actions/actionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
