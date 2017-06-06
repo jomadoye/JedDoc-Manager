@@ -1,7 +1,8 @@
-import { expect } from 'chai';
+import {
+  expect,
+} from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import nock from 'nock';
 import * as userActions from '../../actions/loginActions';
 import {
   SET_CURRENT_USER,
@@ -17,26 +18,15 @@ const user = {
   password: 'password',
 };
 describe('Authentication actions', () => {
-  after(() => {
-    nock.cleanAll();
-  });
   describe('login', () => {
-    const response = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-    };
-    after(() => {
-      nock.cleanAll();
-    });
     it('should login a user', () => {
-      nock('/api')
-        .post('/users/login', user)
-        .reply(200, response);
-
-      const expectedActions = [
-        { type: SET_CURRENT_USER },
-      ];
+      const expectedActions = [{
+        type: SET_CURRENT_USER,
+        user: { email: 'jed@gmail.com',
+          firstName: 'jedidiah',
+          lastName: 'Omadoye',
+          password: 'password' },
+      }];
       const store = mockStore({
         user: {},
       });
@@ -46,24 +36,16 @@ describe('Authentication actions', () => {
     });
   });
   describe('logout', () => {
-    const response = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-    };
-    after(() => {
-      nock.cleanAll();
-    });
     it('should login a user', () => {
-      nock('/')
-        .post('logout', user)
-        .reply(200, response);
-
-      const expectedActions = [
-        { type: SET_CURRENT_USER },
-      ];
+      const expectedActions = [{
+        type: SET_CURRENT_USER,
+      }];
       const store = mockStore({
-        user: {},
+        user:
+        { email: 'jed@gmail.com',
+          firstName: 'jedidiah',
+          lastName: 'Omadoye',
+          password: 'password' },
       });
       store.dispatch(userActions.setCurrentUser(user));
       expect(store.getActions()[0].type)
@@ -71,22 +53,16 @@ describe('Authentication actions', () => {
     });
   });
   describe('signup', () => {
-    const response = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password,
-    };
-    after(() => {
-      nock.cleanAll();
-    });
     it('should signup a user', () => {
-      nock('/api')
-        .post('/users', user)
-        .reply(201, response);
-
-      const expectedActions = [
-        { type: SET_CURRENT_USER },
+      const expectedActions = [{
+        type: SET_CURRENT_USER,
+      },
+        user: {
+          email: 'jed@gmail.com',
+          firstName: 'jedidiah',
+          lastName: 'Omadoye',
+          password: 'password'
+        },
       ];
       const store = mockStore({
         user: {},

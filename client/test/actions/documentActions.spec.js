@@ -3,7 +3,6 @@ import {
 } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import nock from 'nock';
 import * as documentAction from '../../actions/documentAction';
 import {
   LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS,
@@ -20,144 +19,153 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('Document actions', () => {
-  after(() => {
-    nock.cleanAll();
-  });
+  const document = {
+    title: 'jed',
+    body: 'jed is a boy',
+  };
   it('should loads documents on the welcome page',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS,
+        PublicDocuments: {
+          title: 'jed',
+          body: 'jed is a boy',
+        },
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.loadWelcomePageDocumentSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction.loadWelcomePageDocumentSuccess(document));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should load dashboard documents',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
+        AuthorizeToViewDocuments: {
+          title: 'jed',
+          body: 'jed is a boy',
+        },
+        metadata: undefined,
+        count: undefined,
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.loadAuthorizedToViewDocumentSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction
+        .loadAuthorizedToViewDocumentSuccess(document));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should loads all users documents',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: LOAD_USER_DOCUMENT_SUCCESS,
+        MyDocuments: {
+          title: 'jed',
+          body: 'jed is a boy',
+        },
+        count: undefined,
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.loadUserDocumentSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction.loadUserDocumentSuccess(document));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should search for documents by title on the dashbard',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS,
+        documents: {
+          title: 'jed',
+          body: 'jed is a boy',
+        },
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.searchDocumentsByTitleOnDashboardSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction
+        .searchDocumentsByTitleOnDashboardSuccess(document));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should loads documents on the welcome page',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: DELETE_USER_DOCUMENT_SUCCESS,
+        documentId: 1,
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.deleteUserDocumentSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction.deleteUserDocumentSuccess(1));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
 
   it('should delete a document by admin',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: DELETE_DOCUMENT_BY_ADMIN_SUCCESS,
+        documentId: 1,
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.deleteDocumentByAdminSuccess());
+      store.dispatch(documentAction.deleteDocumentByAdminSuccess(1));
       expect(store.getActions()[0].type)
         .to.eql(expectedActions[0].type);
     });
 
   it('should load documents on the welcome page',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS,
+        AuthorizeToViewDocuments: {
+          body: 'jed is a boy',
+          title: 'jed',
+        },
+        count: undefined,
+        metadata: undefined,
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.loadAuthorizedToViewDocumentSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction
+        .loadAuthorizedToViewDocumentSuccess(document));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should create a document by user',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: CREATE_DOCUMENT_BY_USER_SUCCESS,
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.documentCreatedByUserSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction.documentCreatedByUserSuccess(document));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should update a users document',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
       const expectedActions = [{
         type: UPDATE_USER_DOCUMENT_SUCCESS,
+        document: {
+          body: 'jed is a boy',
+          title: 'jed',
+        },
+        documentId: undefined,
       }];
       const store = mockStore({
         documents: [],
       });
-      store.dispatch(documentAction.updateUserDocumentSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(documentAction.updateUserDocumentSuccess(document));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
 });

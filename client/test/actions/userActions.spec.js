@@ -20,71 +20,69 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('User Actions', () => {
-  afterEach(() => {
-    nock.cleanAll();
-  });
-
+  const user = {
+    fullname: 'omadoye jedidiah',
+    username: 'omadoye jedidiah',
+    email: 'omadoye jedidiah',
+    roleId: '3',
+  };
   it('should deletes a user by admin',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
-
       const expectedActions = [{
         type: DELETE_SINGLE_USER_SUCCESS,
+        userId: 1,
       }];
       const store = mockStore({
         login: {
           allUsers: {},
         },
       });
-      store.dispatch(userAction.deleteSingleUserAccountSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(userAction.deleteSingleUserAccountSuccess(1));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
 
   it('should loads a user profile',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
-
       const expectedActions = [{
         type: LOAD_USER_PROFILE_SUCCESS,
+        userDetails: {
+          email: 'omadoye jedidiah',
+          fullname: 'omadoye jedidiah',
+          roleId: '3',
+          username: 'omadoye jedidiah',
+        },
       }];
       const store = mockStore({
         login: {
           allUsers: {},
         },
       });
-      store.dispatch(userAction.loadUserProfileSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(userAction.loadUserProfileSuccess(user));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should updates a user profile',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
-
       const expectedActions = [{
         type: UPDATE_USER_PROFILE_SUCCESS,
+        updatedUser: {
+          fullanme: 'jed',
+        },
       }];
       const store = mockStore({
         login: {
           allUsers: {},
         },
       });
-      store.dispatch(userAction.updateUserProfileSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(userAction.updateUserProfileSuccess({
+        fullanme: 'jed',
+      }));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should updates a user profile by admin',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
-
       const expectedActions = [{
         type: UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS,
       }];
@@ -99,10 +97,6 @@ describe('User Actions', () => {
     });
   it('should deletes a user',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
-
       const expectedActions = [{
         type: DELETE_USER_PROFILE_SUCCESS,
       }];
@@ -111,9 +105,9 @@ describe('User Actions', () => {
           allUsers: {},
         },
       });
-      store.dispatch(userAction.deleteUserAccountSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(userAction.deleteUserAccountSuccess(1));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should searches a user by username',
     () => {
@@ -123,40 +117,57 @@ describe('User Actions', () => {
 
       const expectedActions = [{
         type: SEARCH_USER_BY_USERNAME_SUCCESS,
+        users: {
+          username: 'jed',
+        },
       }];
       const store = mockStore({
         login: {
           allUsers: {},
         },
       });
-      store.dispatch(userAction.searchUserByUsernameSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(userAction
+        .searchUserByUsernameSuccess({
+          username: 'jed',
+        }));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should load all users',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
-
       const expectedActions = [{
         type: LOAD_ALL_USERS_SUCCESS,
+        users: [
+          {
+            fullname: 'omas jed',
+            username: 'jed',
+          },
+          {
+            fullname: 'omas jed',
+            username: 'jed1',
+          },
+        ],
+        count: undefined,
+        metadata: undefined,
       }];
       const store = mockStore({
         login: {
           allUsers: {},
         },
       });
-      store.dispatch(userAction.loadAllUsersSuccess());
-      expect(store.getActions()[0].type)
-        .to.eql(expectedActions[0].type);
+      store.dispatch(userAction
+        .loadAllUsersSuccess([{
+          username: 'jed',
+          fullname: 'omas jed',
+        }, {
+          username: 'jed1',
+          fullname: 'omas jed',
+        }]));
+      expect(store.getActions()[0])
+        .to.eql(expectedActions[0]);
     });
   it('should updates a user role by admin',
     () => {
-      nock('/api')
-        .delete('/users/3')
-        .reply(200);
-
       const expectedActions = [{
         type: UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS,
       }];
