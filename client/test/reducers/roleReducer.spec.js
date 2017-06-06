@@ -27,27 +27,7 @@ describe('Roles Reducer', () => {
 
     expect(newState).toEqual(expectedState);
   });
-
-  it('should add role when passed CREATE_USER_ROLE_SUCCESS', () => {
-    // arrange
-    const initialState = [
-      { title: 'admin' },
-      { title: 'regular' }
-    ];
-    const newRole = { title: 'editor' };
-    const action = { type: CREATE_USER_ROLE_SUCCESS, role: newRole };
-
-    const expectedState = [
-      { title: 'admin' },
-      { title: 'regular' },
-    ];
-
-    // act
-    const newState = roles(initialState, action);
-
-    expect(newState).toEqual(expectedState);
-  });
-
+ 
   it('should delete role when passed DELETE_USER_ROLE_SUCCESS', () => {
     // arrange
     const initialState = { allRoles: [
@@ -63,6 +43,26 @@ describe('Roles Reducer', () => {
       { id: '2', title: 'regular' },
       { id: '3', title: 'editor' },
     ] };
+
+    // act
+    const newState = roles(initialState, action);
+
+    expect(newState).toEqual(expectedState);
+  });
+
+  it('should add role when passed CREATE_USER_ROLE_SUCCESS', () => {
+    // arrange
+    const initialState = [
+      { title: 'admin' },
+      { title: 'regular' }
+    ];
+    const newRole = { title: 'editor' };
+    const action = { type: CREATE_USER_ROLE_SUCCESS, role: newRole };
+
+    const expectedState = [
+      { title: 'admin' },
+      { title: 'regular' },
+    ];
 
     // act
     const newState = roles(initialState, action);
