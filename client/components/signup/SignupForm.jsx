@@ -26,7 +26,7 @@ class SignupForm extends React.Component {
   /**
    * This method checks if a user is valid
    *
-   * @param {any} event
+   * @param {function} event
    *
    * @memberof SignupForm
    */
@@ -53,7 +53,7 @@ class SignupForm extends React.Component {
   /**
    * This method handles the onChange handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof SignupForm
    */
@@ -79,7 +79,7 @@ class SignupForm extends React.Component {
   /**
    * This method handles the onSubmit handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof SignupForm
    */

@@ -18,7 +18,7 @@ class createRolePage extends React.Component {
   /**
    * This method handles the submit action
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof createRolePage
    */
@@ -35,7 +35,7 @@ class createRolePage extends React.Component {
   /**
    * This method handles the onChange action
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof createRolePage
    */
@@ -83,7 +83,7 @@ createRolePage.propTypes = {
 /**
  * This function maps dispatches to props
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatches
  */
 function mapDispatchToProps(dispatch) {

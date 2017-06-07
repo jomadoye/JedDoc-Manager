@@ -22,7 +22,7 @@ class CreateDocumentPage extends React.Component {
   /**
    * This method handles the documnent onChange
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof CreateDocumentPage
    */
@@ -33,7 +33,7 @@ class CreateDocumentPage extends React.Component {
   /**
    * This method handles the onSubmit handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof CreateDocumentPage
    */

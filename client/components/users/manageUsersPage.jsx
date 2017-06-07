@@ -35,7 +35,7 @@ class ManageUsersPage extends React.Component {
   /**
    * This method runs when the component updates props
    *
-   * @param {any} nextProps
+   * @param {object} nextProps
    *
    * @memberof ManageUsersPage
    */
@@ -58,9 +58,9 @@ class ManageUsersPage extends React.Component {
   /**
    * This method handles the pagination
    *
-   * @param {any} limit
-   * @param {any} offset
-   * @param {any} event
+   * @param {string} limit
+   * @param {string} offset
+   * @param {string} event
    *
    * @memberof ManageUsersPage
    */
@@ -72,7 +72,7 @@ class ManageUsersPage extends React.Component {
   /**
    * This method handles the onSubmit handler
    *
-   * @param {any} event
+   * @param {function} event
    *
    * @memberof ManageUsersPage
    */
@@ -88,7 +88,7 @@ class ManageUsersPage extends React.Component {
   /**
    * This method handles the onChange handler
    *
-   * @param {any} event
+   * @param {function} event
    *
    * @memberof ManageUsersPage
    */
@@ -196,7 +196,7 @@ ManageUsersPage.propTypes = {
 /**
  * This function maps the dispatch to the props
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns {function}
  */
 function mapDispatchToProps(dispatch) {

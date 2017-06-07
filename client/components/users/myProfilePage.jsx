@@ -29,7 +29,7 @@ class myProfilePage extends React.Component {
   /**
    * This method runs when the component props is updated
    *
-   * @param {any} nextProps
+   * @param {object} nextProps
    *
    * @memberof myProfilePage
    */
@@ -40,7 +40,7 @@ class myProfilePage extends React.Component {
   /**
    * This method updates the user state
    *
-   * @param {any} event
+   * @param {object} event
    * @returns
    *
    * @memberof myProfilePage
@@ -57,7 +57,7 @@ class myProfilePage extends React.Component {
   /**
    * This method updates a user profile
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof myProfilePage
    */
@@ -72,7 +72,7 @@ class myProfilePage extends React.Component {
   /**
    * This method setups the user modal
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof myProfilePage
    */
@@ -84,7 +84,7 @@ class myProfilePage extends React.Component {
   /**
    * This method handles user delete
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof myProfilePage
    */
@@ -200,7 +200,7 @@ myProfilePage.contextTypes = {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {
@@ -223,7 +223,7 @@ function mapStateToProps(state) {
 /**
  * mapDispatchToProps
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {

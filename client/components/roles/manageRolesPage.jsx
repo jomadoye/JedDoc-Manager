@@ -27,7 +27,7 @@ class manageRolesPage extends React.Component {
   /**
    * This method deletes a role
    *
-   * @param {any} roleId
+   * @param {number} roleId
    *
    * @memberof manageRolesPage
    */
@@ -79,7 +79,7 @@ manageRolesPage.propTypes = {
 /**
  * The function maps dispatch to props
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {

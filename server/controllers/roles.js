@@ -6,8 +6,8 @@ module.exports = {
   /**
    * This method creates a role
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} role
    */
   create(req, res) {
@@ -30,8 +30,8 @@ module.exports = {
   /**
    * This method gets a specific role
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} role
    */
   list(req, res) {
@@ -52,8 +52,8 @@ module.exports = {
   /**
    * This method gets all roles
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} role
    */
   retrieve(req, res) {
@@ -85,8 +85,8 @@ module.exports = {
  /**
   * This method deletes a role
   *
-  * @param {req} req
-  * @param {res} res
+  * @param {object} req
+  * @param {object} res
   * @returns {string} message
   */
   destroy(req, res) {

@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
   /**
    * This method handles the onSubmit handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof LoginPage
    */
@@ -58,7 +58,7 @@ class LoginPage extends React.Component {
   /**
    * This method handles the onChange handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof LoginPage
    */

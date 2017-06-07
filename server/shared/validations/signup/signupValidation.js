@@ -5,7 +5,7 @@ import lodash from 'lodash';
  * This function validates the user signup input
  *
  * @export
- * @param {object} data
+ * @param {object} data the user input
  * @returns {string}
  */
 export default function validateInput(data) {

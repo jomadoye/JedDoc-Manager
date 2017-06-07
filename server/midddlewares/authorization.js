@@ -5,9 +5,9 @@ export default {
   /**
    * This method checks if the user making the request is an admin
    *
-   * @param {req} req
-   * @param {res} res
-   * @param {next} next
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
    */
   isAdmin(req, res, next) {
     models.Roles.findById(req.decoded.data.roleId)
@@ -28,9 +28,9 @@ export default {
    * This method checks if the user making the request is
    * the owner of the item
    *
-   * @param {req} req
-   * @param {res} res
-   * @param {next} next
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
    * @returns next
    */
   isOwner(req, res, next) {

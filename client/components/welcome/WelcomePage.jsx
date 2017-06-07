@@ -64,7 +64,7 @@ LoadDocuments.propTypes = {
 /**
  * mapDispatchToProps
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {
@@ -76,7 +76,7 @@ function mapDispatchToProps(dispatch) {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {

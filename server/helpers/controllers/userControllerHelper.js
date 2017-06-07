@@ -38,8 +38,8 @@ class UserControllerHelper {
    *
    * @static
    * @param {object} user
-   * @param {res} res
-   * @param {req} req
+   * @param {object} res the response object
+   * @param {object} req the request object
    * @returns {object} user
    *
    * @memberof UserControllerHelper
@@ -84,7 +84,7 @@ class UserControllerHelper {
    *
    * @static
    * @param {object} user
-   * @param {res} res
+   * @param {object} res the response object
    * @returns {string} message
    *
    * @memberof UserControllerHelper
@@ -122,8 +122,8 @@ class UserControllerHelper {
    *
    * @static
    * @param {object} user
-   * @param {res} res
-   * @param {req} req
+   * @param {object} res the request object
+   * @param {object} req the response object
    * @returns {object} user
    *
    * @memberof UserControllerHelper

@@ -5,8 +5,14 @@ import PropTypes from 'prop-types';
  * This function renders the pagination component
  *
  * @export
- * @param {...props} { props }
- * return HTML
+ * @param {number} {index}
+ * @param {number} {selected}
+ * @param {boolean} {isActive}
+ * @param {boolean} {notActive}
+ * @param {function} {handlePagination}
+ * @param {function} {index}
+ * @param {function} {isSearchDocument}
+ * @returns
  */
 export default function PaginationNav({ index, selected, isActive, notActive, handlePagination, isSearchDocument }) {
   let limit = 8;

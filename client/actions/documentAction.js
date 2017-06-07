@@ -36,7 +36,7 @@ export function loadWelcomePageDocumentSuccess(documents) {
  * @export
  * @param {object} documents An array of documents
  * @param {object} metadata This contains the pagination objec
- * @param {object} count the number of documents
+ * @param {number} count the number of documents
  * @returns {object}
  */
 export function loadAuthorizedToViewDocumentSuccess(documents,
@@ -54,7 +54,7 @@ export function loadAuthorizedToViewDocumentSuccess(documents,
  *
  * @export
  * @param {object} documents An array of documents
- * @param {object} count The total number of documents
+ * @param {number} count The total number of documents
  * @returns {object}
  */
 export function loadUserDocumentSuccess(documents, count) {
@@ -316,9 +316,9 @@ export function updateDocument(document, documentId, roleId) {
  * This function ensures document are loaded sucessfully
  *
  * @export
- * @param {string} documents
- * @param {string} metadata
- * @param {string} count
+ * @param {object} documents
+ * @param {object} metadata
+ * @param {object} count
  * @returns {object}
  */
 export function loadAllDocumentsSuccess(documents, metadata, count) {
@@ -403,13 +403,14 @@ export function searchDocumentsByTitle(query, limit, offset) {
       dispatch(addFlashMessage(message));
     });
 }
+
 /**
  * This function searches a document by title
  *
  * @export
- * @param {any} query
- * @param {any} limits
- * @param {any} offsets
+ * @param {string} query
+ * @param {string} limits
+ * @param {string} offsets
  * @returns dispatch
  */
 export function searchDocumentsByTitleOnDashboard(query, limits, offsets) {

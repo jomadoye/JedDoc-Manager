@@ -33,7 +33,7 @@ class manageUserDocumentsPage extends React.Component {
   /**
    * This method runs when the component will receive props
    *
-   * @param {any} nextProps
+   * @param {object} nextProps
    *
    * @memberof manageUserDocumentsPage
    */
@@ -57,10 +57,10 @@ class manageUserDocumentsPage extends React.Component {
    /**
    * This method handles pagination
    *
-   * @param {any} limit
-   * @param {any} offset
-   * @param {any} event
-   * @param {any} index
+   * @param {string} limit
+   * @param {string} offset
+   * @param {string} event
+   * @param {string} index
    *
    * @memberof Dashboard
    */
@@ -140,7 +140,7 @@ manageUserDocumentsPage.propTypes = {
 /**
  * mapDispatchToProps
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dipatch
  */
 function mapDispatchToProps(dispatch) {
@@ -153,7 +153,7 @@ function mapDispatchToProps(dispatch) {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {

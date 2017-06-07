@@ -35,7 +35,7 @@ class MyDocumentPage extends React.Component {
   /**
    * This method runs when the component updates it's props
    *
-   * @param {any} nextProps
+   * @param {object} nextProps
    *
    * @memberof MyDocumentPage
    */
@@ -59,9 +59,9 @@ class MyDocumentPage extends React.Component {
   /**
    * This method handles the pagination
    *
-   * @param {any} limit
-   * @param {any} offset
-   * @param {any} event
+   * @param {string} limit
+   * @param {string} offset
+   * @param {object} event
    *
    * @memberof MyDocumentPage
    */
@@ -74,7 +74,7 @@ class MyDocumentPage extends React.Component {
   /**
    * This method handles the onChange handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof MyDocumentPage
    */
@@ -91,7 +91,7 @@ class MyDocumentPage extends React.Component {
   /**
    * This method handles the onSubmit handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof MyDocumentPage
    */
@@ -189,7 +189,7 @@ MyDocumentPage.propTypes = {
 /**
  * mapDispatchToProps
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dipatch
  */
 function mapDispatchToProps(dispatch) {
@@ -205,7 +205,7 @@ function mapDispatchToProps(dispatch) {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {

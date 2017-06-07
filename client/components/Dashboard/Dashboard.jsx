@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
   /**
    * This method runs when the props are updated
    *
-   * @param {any} nextProps
+   * @param {object} nextProps
    *
    * @memberof Dashboard
    */
@@ -61,9 +61,9 @@ class Dashboard extends React.Component {
   /**
    * This method handles pagination
    *
-   * @param {any} limit
-   * @param {any} offset
-   * @param {any} event
+   * @param {object} limit
+   * @param {object} offset
+   * @param {object} event
    *
    * @memberof Dashboard
    */
@@ -76,7 +76,7 @@ class Dashboard extends React.Component {
   /**
    * This method handles the onChange handler
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof Dashboard
    */
@@ -93,7 +93,7 @@ class Dashboard extends React.Component {
   /**
    * This method handles the onSubmit event
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof Dashboard
    */
@@ -200,7 +200,7 @@ Dashboard.propTypes = {
 /**
  * mapDispatchToProps
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {
@@ -216,7 +216,7 @@ function mapDispatchToProps(dispatch) {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object}
  */
 function mapStateToProps(state) {

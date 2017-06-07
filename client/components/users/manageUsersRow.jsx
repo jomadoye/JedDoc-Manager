@@ -33,7 +33,7 @@ class ManageUsersRow extends React.Component {
   /**
    * This function handles editing user details
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof ManageUsersRow
    */
@@ -43,7 +43,7 @@ class ManageUsersRow extends React.Component {
   /**
    * This function handles the delete of documents
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof ManageUsersRow
    */
@@ -67,7 +67,7 @@ class ManageUsersRow extends React.Component {
   /**
    * This function handle submit
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof ManageUsersRow
    */
@@ -98,7 +98,7 @@ class ManageUsersRow extends React.Component {
   /**
    * This function handles edit the user details on the modal
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof ManageUsersRow
    */
@@ -112,7 +112,7 @@ class ManageUsersRow extends React.Component {
   /**
    * This function dis plays the user roles
    *
-   * @param {any} id
+   * @param {object} id
    * @returns
    *
    * @memberof ManageUsersRow
@@ -240,7 +240,7 @@ ManageUsersRow.propTypes = {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {

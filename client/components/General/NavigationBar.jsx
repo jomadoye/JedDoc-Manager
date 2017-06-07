@@ -13,7 +13,7 @@ class NavigationBar extends React.Component {
   /**
    * This method handles logout
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof NavigationBar
    */
@@ -187,7 +187,7 @@ NavigationBar.contextTypes = {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {

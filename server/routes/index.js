@@ -45,11 +45,6 @@ const Route = (app) => {
     .post(isOwner, documentsController.create)
     .get(documentsController.getUserDocuments);
 
-  // app
-  //   .route('/api/users/:userId/documents/:documentId')
-  //   .put(isAdminOrOwnerDocument, documentsController.update)
-  //   .delete(isAdminOrOwnerDocument, documentsController.destroy);
-
   // Documents routes
   app
     .route('/api/documents/:documentId')

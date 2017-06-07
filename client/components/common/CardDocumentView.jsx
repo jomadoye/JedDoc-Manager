@@ -49,7 +49,7 @@ export class CardDocumentView extends React.Component {
   /**
    * This method handles the document view
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof CardDocumentView
    */
@@ -63,7 +63,7 @@ export class CardDocumentView extends React.Component {
   /**
    * This method handles edit document
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof CardDocumentView
    */
@@ -107,7 +107,7 @@ export class CardDocumentView extends React.Component {
   /**
    * This method handle tdocument onchange
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof CardDocumentView
    */
@@ -118,7 +118,7 @@ export class CardDocumentView extends React.Component {
   /**
    * This method handles document edit
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof CardDocumentView
    */

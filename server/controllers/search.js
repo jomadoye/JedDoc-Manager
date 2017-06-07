@@ -9,8 +9,8 @@ export default {
   /**
    * This method searches for a user by username
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} user
    */
   searchUsers(req, res) {
@@ -61,8 +61,8 @@ export default {
   /**
    * This method searches for a document by title
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} document
    */
   searchDocuments(req, res) {

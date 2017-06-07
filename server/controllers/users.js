@@ -19,8 +19,8 @@ export default {
   /**
    * This method creates a user
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    */
   create(req, res) {
     validateInput(req.body, commonValidations)
@@ -58,8 +58,8 @@ export default {
   /**
    * This method gets all users
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} user
    */
   list(req, res) {
@@ -86,8 +86,8 @@ export default {
   /**
    * This method gets a specific user
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} user
    */
   retrieve(req, res) {
@@ -117,8 +117,8 @@ export default {
   /**
    * This method checks if a user exists
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} user
    */
   isUserExist(req, res) {
@@ -137,8 +137,8 @@ export default {
   /**
    * This method updates a user
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} user
    */
   update(req, res) {
@@ -163,8 +163,8 @@ export default {
   /**
    * This method deletes a user
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {string} message
    */
   destroy(req, res) {
@@ -185,8 +185,8 @@ export default {
   /**
    * This method logs a user in
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} user{object} user
    */
   login(req, res) {
@@ -211,8 +211,8 @@ export default {
   /**
    * This method logs a user out
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    */
   logout(req, res) {
     res.setHeader['x-access-token'] = ' ';

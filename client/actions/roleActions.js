@@ -77,7 +77,6 @@ export function loadUserRolesSuccess(roles) {
  * This function loads the user roles
  *
  * @export
- * @param {any} dispatch
  * @returns {object}
  */
 export function loadUserRoles() {

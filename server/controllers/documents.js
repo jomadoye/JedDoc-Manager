@@ -16,8 +16,8 @@ export default {
   /**
    * This method creates a document
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} document
    */
   create(req, res) {
@@ -44,8 +44,8 @@ export default {
   /**
    * This method updates a document
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} document
    */
   update(req, res) {
@@ -69,8 +69,8 @@ export default {
   /**
    * This method deletes a document
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {string} error, message
    */
   destroy(req, res) {
@@ -94,8 +94,8 @@ export default {
   /**
    * This method gets a documents
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} document
    */
   retrieve(req, res) {
@@ -119,8 +119,8 @@ export default {
   /**
    * This method gets all documents
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    * @returns {object} document
    */
   list(req, res) {
@@ -147,8 +147,8 @@ export default {
   /**
    * This method gets all documents for a specific user
    *
-   * @param {req} req
-   * @param {res} res
+   * @param {object} req
+   * @param {object} res
    */
   getUserDocuments(req, res) {
     User.findById(req.params.userId)

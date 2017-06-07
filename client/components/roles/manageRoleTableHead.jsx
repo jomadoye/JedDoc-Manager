@@ -4,7 +4,6 @@ import React from 'react';
  * This fucntion renders the user table head roles for the admin
  *
  * @export
- * @param {function, object} { handleDelete, role }
  * @returns HTML
  */
 export default function ManageRoleTableHead() {

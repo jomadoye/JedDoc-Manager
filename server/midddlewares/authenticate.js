@@ -9,9 +9,9 @@ export default {
   /**
    * This method verifies the token of the user making the request
    *
-   * @param {req} req
-   * @param {res} res
-   * @param {next} next
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
    * @returns next
    */
   verifyToken(req, res, next) {

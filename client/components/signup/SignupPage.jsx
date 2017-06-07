@@ -31,7 +31,7 @@ SignupPage.propTypes = {
 /**
  * This function maps the dispatch to the props
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {

@@ -14,7 +14,7 @@ class DocumentControllerHelper {
    * The method dynamically creates the query for the document list controller
    *
    * @static
-   * @param {req} req
+   * @param {object} req
    * @returns
    *
    * @memberof DocumentControllerHelper
@@ -57,7 +57,7 @@ class DocumentControllerHelper {
    *
    * @static
    * @param {object} document
-   * @param {res} res
+   * @param {res} res the response object
    * @param {limit} limit
    * @param {offset} offset
    * @returns
@@ -93,8 +93,8 @@ class DocumentControllerHelper {
    *
    * @static
    * @param {object} user
-   * @param {res} res
-   * @param {req} req
+   * @param {object} res the response object
+   * @param {object} req the request object
    * @returns
    *
    * @memberof DocumentControllerHelper
@@ -172,8 +172,8 @@ class DocumentControllerHelper {
    *
    * @static
    * @param {object} document
-   * @param {res} res
-   * @param {req} req
+   * @param {object} res the response object
+   * @param {object} req the request object
    * @returns
    *
    * @memberof DocumentControllerHelper
@@ -217,7 +217,7 @@ class DocumentControllerHelper {
    *
    * @static
    * @param {object} document
-   * @param {res} res
+   * @param {object} res the response object
    * @returns
    *
    * @memberof DocumentControllerHelper
@@ -245,8 +245,8 @@ class DocumentControllerHelper {
    *
    * @static
    * @param {object} document
-   * @param {res} res
-   * @param {req} req
+   * @param {object} res the response object
+   * @param {object} req the request object
    * @returns
    *
    * @memberof DocumentControllerHelper
