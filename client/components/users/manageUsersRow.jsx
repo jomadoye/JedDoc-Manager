@@ -131,6 +131,7 @@ class ManageUsersRow extends React.Component {
     const { user, index } = this.props;
     const { fullname, email, username, roleId } = this.state;
 
+
     return (
       <tr key={user.id}>
         <td>{index + 1}</td>
@@ -219,6 +220,7 @@ class ManageUsersRow extends React.Component {
             </div>
         </div></td>
         <td><button
+        disabled={user.roleId === 1}
         className="waves-effect waves-light btn manage-delete-user-btn"
         onClick={this.handleDelete}
         >Delete User</button></td>
