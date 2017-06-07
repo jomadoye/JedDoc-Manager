@@ -219,6 +219,7 @@ class ManageUsersRow extends React.Component {
             </div>
         </div></td>
         <td><button
+        disabled={user.roleId === 1}
         className="waves-effect waves-light btn manage-delete-user-btn"
         onClick={this.handleDelete}
         >Delete User</button></td>
