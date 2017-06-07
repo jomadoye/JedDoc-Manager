@@ -64,9 +64,10 @@ class ManageUsersPage extends React.Component {
    *
    * @memberof ManageUsersPage
    */
-  handlePagination(limit, offset, event) {
+  handlePagination(limit, offset, event, index) {
     this.props.loadAllUsers(limit, offset);
     this.setState({ selected: event.target.innerHTML });
+    this.setState({ index: index + 1 });
   }
 
   /**
