@@ -35,5 +35,46 @@ export default [{
   password: 'password',
   roleId: 1,
 },
-
+{
+  username: 'dede1',
+  fullname: 'dede',
+  email: faker.internet.email(),
+  password: 'password',
+  roleId: 1,
+},
+{
+  username: 'dede2',
+  fullname: 'dede',
+  email: faker.internet.email(),
+  password: 'password',
+  roleId: 1,
+},
+{
+  username: 'dede3',
+  fullname: 'dede',
+  email: faker.internet.email(),
+  password: 'password',
+  roleId: 1,
+},
+{
+  username: 'dede4',
+  fullname: 'dede',
+  email: faker.internet.email(),
+  password: 'password',
+  roleId: 1,
+},
+{
+  username: 'dede5',
+  fullname: 'dede',
+  email: faker.internet.email(),
+  password: 'password',
+  roleId: 1,
+},
+{
+  username: 'dede6',
+  fullname: 'dede',
+  email: faker.internet.email(),
+  password: 'password',
+  roleId: 1,
+},
 ];
