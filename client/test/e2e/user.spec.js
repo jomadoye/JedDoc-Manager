@@ -35,7 +35,6 @@ module.exports = {
       .click('.dropdown-button')
       .waitForElementVisible('#logoutDropDownBtn', 1000000)
       .click('#logoutDropDownBtn')
-      .url('http://localhost:8000/')
       .assert.urlEquals('http://localhost:8000/')
       .waitForElementVisible('nav', 1000)
       .waitForElementVisible('#login', 100000)
