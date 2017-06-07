@@ -127,10 +127,8 @@ class NavigationBar extends React.Component {
           <li>
             <div className="userView">
               <div className="background">
-                <img src="../../public/assets/SideBarBackgroundImg.png" />
+                <img src="http://lorempixel.com/400/200/" />
               </div>
-              <a href="#!user"><img className="circle"
-                src="../../public/assets/q.png"/></a>
               <a href="#!name"><span className="white-text name">
                   { isAuthenticated && user.fullname }</span></a>
               <a href="#!email"><span className="white-text email">

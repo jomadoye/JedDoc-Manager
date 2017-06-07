@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon --watch server --exec babel-node ./bin/www",
-    "start": "./node_modules/.bin/babel-node ./bin/www",
+    "start": "node ./bin/www",
     "start:client": "npm-run-all --parallel start:dev lint:watch mocha:testClientWatch",
-    "build": "babel server -d dist/server",
+    "build:x": "babel server -d dist/server",
     "lint": "node_modules/.bin/esw webpack.config.* client server",
     "lint:watch": "npm run lint -- --watch",
     "db:test:seed": "NODE_ENV=test babel-node ./server/test-utility/seeders/seedDatabase",
@@ -21,7 +21,10 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "npm-run-all test:server mocha:testClient",
-    "test-e2e": "npm run db:seed && nightwatch"
+    "test-e2e": "npm run db:seed && nightwatch",
+    "postinstall": "npm run build && npm run db:seed",
+    "build": "rm -rf dist/ && babel server -d dist/server && npm run build:client",
+    "build:client": "webpack --config webpack.config.prod.js && cat client/index.html > dist/client/index.html"
   },
   "repository": {
     "type": "git",
@@ -36,6 +39,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "babel-cli": "^6.24.1",
+    "babili-webpack-plugin": "^0.1.1",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "classnames": "^2.2.5",
@@ -44,6 +48,8 @@
     "enzyme": "^2.8.2",
     "eslint-watch": "^3.1.0",
     "express": "^4.15.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "http": "0.0.0",
     "jsdom": "^8.5.0",
     "jsonwebtoken": "^7.3.0",
     "jwt-decode": "^2.2.0",
