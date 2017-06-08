@@ -1,4 +1,5 @@
 import React from 'react';
+import TinyMCE from 'react-tinymce';
 import { Row, Input } from 'react-materialize';
 import PropTypes from 'prop-types';
 
@@ -11,7 +12,7 @@ import PropTypes from 'prop-types';
  * @param {function} { onsubmit }
  * @returns HTML
  */
-export default function CreateDocumentForm({ state, onchange, onsubmit }) {
+export default function CreateDocumentForm({ state, onchange, onsubmit, getContent }) {
   const { title, body } = state;
   return (
       <div className="">
@@ -31,15 +32,16 @@ export default function CreateDocumentForm({ state, onchange, onsubmit }) {
           </div>
 
           <div className="input-field">
-            <i className="material-icons prefix">question_answer</i>
-            <textarea
-            id="body"
-            className="materialize-textarea"
-            onChange={onchange}
-            name="body"
-            value={body}
               />
-            <label htmlFor="icon_prefix2">Document body</label>
+            <label htmlFor="icon_prefix2">Document body</label>*/}
+            <TinyMCE
+              content={body}
+              config={{
+                plugins: 'link image code',
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
+              }}
+              onChange={getContent}
+            />
           </div>
 
           <div className="input-field">
@@ -73,4 +75,5 @@ CreateDocumentForm.propTypes = {
   state: PropTypes.object.isRequired,
   onchange: PropTypes.func.isRequired,
   onsubmit: PropTypes.func.isRequired,
+  getContent: PropTypes.func.isRequired,
 };

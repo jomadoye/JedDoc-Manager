@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import TinyMCE from 'react-tinymce';
 import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import { Row, Input } from 'react-materialize';
@@ -16,6 +17,8 @@ export class CardDocumentView extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDocumentOnchange = this.handleDocumentOnchange.bind(this);
     this.handleEditDocumentSubmit = this.handleEditDocumentSubmit.bind(this);
+    this.getContent = this.getContent.bind(this);
+    this.createMarkup = this.createMarkup.bind(this);
 
     this.state = {
       title: this.props.document.title,
@@ -58,6 +61,15 @@ export class CardDocumentView extends React.Component {
     const docID = this.props.document.id;
     const modal = `#viewDocument${docID}`;
     $(modal).modal('open');
+  }
+
+  /**
+  * Get the content of the TinyMCE editor
+  *
+  * @param {Object} event
+  */
+  getContent(event) {
+    this.setState({ body: event.target.getContent() });
   }
 
   /**
@@ -131,6 +143,18 @@ export class CardDocumentView extends React.Component {
     this.props.deleteFlashMessage(1);
   }
 
+  /**
+   * This function displays the html for the document body
+   *
+   * @param {sbject} docBody
+   * @returns
+   *
+   * @memberof CardDocumentView
+   */
+  createMarkup(docBody) {
+    return { __html: docBody };
+  }
+
   render() {
     const { document, myDocument, readOnly } = this.props;
     const currentDate = moment(new Date());
@@ -162,7 +186,7 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
             <div className="modal-content">
               <h4 className="center-align">{document.title}</h4>
               <hr />
-              <p>{document.body}</p>
+              <p dangerouslySetInnerHTML={this.createMarkup(document.body)} />
               <h6>Created: {documentDate}</h6>
               <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>
@@ -193,12 +217,13 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
 
                   <div className="input-field">
                     <i className="material-icons prefix">question_answer</i>
-                    <textarea
-                    className="materialize-textarea"
-                    onChange={this.handleDocumentOnchange}
-                    name="body"
-                    value={body}
-                    id="body"
+                   <TinyMCE
+                      content={body}
+                      config={{
+                        plugins: 'link image code',
+                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
+                      }}
+                      onChange={this.getContent}
                     />
                     <label className="active"
                     htmlFor="icon_prefix2">Document body</label>
@@ -248,7 +273,7 @@ className=" modal-trigger btn-floating btn-small waves-effect waves-light red"
             <div className="modal-content">
               <h4 className="center-align">{document.title}</h4>
               <hr />
-              <p>{document.body}</p>
+              <p dangerouslySetInnerHTML={this.createMarkup(document.body)} />
               <h4>Author: {document.User.fullname}</h4>
               <h6>Created: {documentDate}</h6>
               <h6>lastUpdated: {updatedDocumentDate}</h6>

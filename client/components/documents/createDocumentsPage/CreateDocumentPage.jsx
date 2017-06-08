@@ -17,6 +17,7 @@ class CreateDocumentPage extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.getContent = this.getContent.bind(this);
   }
 
   /**
@@ -28,6 +29,15 @@ class CreateDocumentPage extends React.Component {
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  /**
+  * Get the content of the TinyMCE editor
+  *
+  * @param {Object} event
+  */
+  getContent(event) {
+    this.setState({ body: event.target.getContent() });
   }
 
   /**
@@ -60,6 +70,7 @@ class CreateDocumentPage extends React.Component {
             state={this.state}
             onsubmit={this.onSubmit}
             onchange={this.onChange}
+            getContent={this.getContent}
             />
           </div>
         </div>

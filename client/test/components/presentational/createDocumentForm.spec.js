@@ -36,10 +36,6 @@ describe('CreateDocumentForm', () => {
     expect(wrapper.find('input').props().type).toBe('text');
     expect(wrapper.find('Input').length).toBe(1);
   });
-  it('renders a textarea for inputing the document content', () => {
-    expect(wrapper.find('textarea').length).toBe(1);
-    expect(wrapper.find('textarea').props().name).toBe('body');
-  });
   it('renders a submit button to create a document', () => {
     expect(wrapper.find('button').length).toBe(1);
     expect(wrapper.find('button').props().children[0]).toBe('Create Document');
