@@ -32,8 +32,7 @@ export default function CreateDocumentForm({ state, onchange, onsubmit, getConte
           </div>
 
           <div className="input-field">
-              />
-            <label htmlFor="icon_prefix2">Document body</label>*/}
+            <label htmlFor="icon_prefix2">Document body</label>
             <TinyMCE
               content={body}
               config={{

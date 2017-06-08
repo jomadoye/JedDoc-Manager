@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
       page: 1,
       index: 1,
       isPageLoad: false,
-      search: ' ',
+      search: '',
       count: 1,
     };
     this.handlePagination = this.handlePagination.bind(this);
@@ -119,6 +119,24 @@ class Dashboard extends React.Component {
     return (
       <div className="container">
         <br />
+        <div className="top horizontal click-to-toggle">
+          <ul>
+            <form onSubmit={this.onSubmit}>
+              <div className="row">
+                <div className="col s8 m8 l8  offset-s2 offset-m2 offset-l2 input-field">
+                  <i className="material-icons prefix">search</i>
+                  <input
+                  placeholder="Search for documents"
+                  id="first_name"
+                  value={search}
+                  onChange={this.onChange}
+                  type="text"
+                  className="validate"/>
+                </div>
+            </div>
+            </form>
+          </ul>
+        </div>
         <div className="row">
           <div className="col s12">
             <ul className="tabs">
