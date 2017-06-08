@@ -5,14 +5,43 @@
 
   <testsuite name="user.spec"
     errors="0" failures="1" hostname="" id="" package="user.spec" skipped="0"
-    tests="1" time="7.090" timestamp="Tue, 23 May 2017 22:08:39 GMT">
+    tests="1" time="8.529" timestamp="Thu, 08 Jun 2017 13:05:34 GMT">
   
-    <testcase name="Edit user profile and delete account" classname="user.spec" time="7.090" assertions="3">
+    <testcase name="Edit user profile and delete account" classname="user.spec" time="8.529" assertions="17">
 
     
 
-      <failure message="Timed out while waiting for element &lt;nav&gt; to be present for 1000 milliseconds.">    at Object.EditUserProfileAndDeleteAccount [as Edit user profile and delete account] (/Users/jedidiahomadoye/Desktop/JedDoc-Manager/client/test/e2e/user.spec.js:10:8)
-    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Testing if the URL equals &quot;http://localhost:8000/&quot;.">    at Object.EditUserProfileAndDeleteAccount [as Edit user profile and delete account] (/Users/jedidiahomadoye/Desktop/JedDoc-Manager/client/test/e2e/user.spec.js:38:15)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)
+    at process._tickCallback (internal/process/next_tick.js:104:9)</failure>
 
     
     </testcase>
