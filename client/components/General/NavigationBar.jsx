@@ -29,13 +29,13 @@ class NavigationBar extends React.Component {
       <div>
         <ul id="dropdown1" className="dropdown-content">
           <li>
-            <Link to="my-documents">
+            <Link to="mydocs">
               my-docs
               <i className="material-icons right">perm_media</i>
             </Link>
           </li>
           <li>
-            <Link to="my-profile">
+            <Link to="myprofile">
               Profile
               <i className="material-icons right">account_circle</i>
             </Link>
@@ -137,29 +137,29 @@ class NavigationBar extends React.Component {
                   { isAuthenticated && user.email}</span></a>
             </div>
           </li>
-          <li><a id="my-profile" href="my-profile">
+          <li><a id="my-profile" href="myprofile">
             <i className="material-icons">
               account_circle</i>My Profile</a></li>
-          <li><a id="my-documents" href="my-documents">
+          <li><a id="my-documents" href="mydocs">
             <i className="material-icons">
               perm_media</i>my docs</a></li>
           <li><div className="divider" /></li>
-          <li><a id="create-document" href="create-document">
+          <li><a id="create-document" href="createdoc">
             <i className="material-icons">
               add</i>Create Docs</a></li>
           {user && user.roleId === 1 &&
           <div>
-            <li><a id="create-roles" href="create-role">
+            <li><a id="create-roles" href="createrole">
               <i className="material-icons">
                 add</i>Create Roles</a></li>
             <li><div className="divider" /></li>
-            <li><a id="manage-roles" href="manage-roles">
+            <li><a id="manage-roles" href="manageroles">
               <i className="material-icons">
                 settings</i>Manage Roles</a></li>
-            <li><a id="manage-users" href="manage-users">
+            <li><a id="manage-users" href="manageusers">
               <i className="material-icons">
                 settings</i>Manage Users</a></li>
-            <li><a href="manage-documents"><i className="material-icons">
+            <li><a href="managedocs"><i className="material-icons">
                 settings</i>Manage Documents</a></li>
               <li><div className="divider" /></li>
           </div>}

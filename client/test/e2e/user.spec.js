@@ -50,7 +50,7 @@ module.exports = {
       .waitForElementVisible('#my-profile', 10000)
       .click('#my-profile')
       .pause(2000)
-      .assert.urlEquals('http://localhost:8000/my-profile')
+      .assert.urlEquals('http://localhost:8000/myprofile')
       .waitForElementVisible('#deleteUserBtn', 10000)
       .click('#deleteUserBtn')
       .acceptAlert()
