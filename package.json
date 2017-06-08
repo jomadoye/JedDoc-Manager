@@ -118,6 +118,7 @@
       "build"
     ],
     "include": [
+      "server/**/*.js",
       "client/**/*.js"
     ]
   },
