@@ -44,7 +44,7 @@ describe('Document Actions', () => {
         { type: 'SEARCH_DOCUMENTS_BY_TITLE_SUCCESS', searchResult: [{ title: 'good' }], metaData: {}, offset: 0 },
       ];
       const store = mockStore();
-      store.dispatch(documentAction.searchDocumentsByTitle('dms'))
+      store.dispatch(documentAction.searchDocumentsByTitle('good'))
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
         });
