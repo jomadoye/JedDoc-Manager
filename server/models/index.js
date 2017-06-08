@@ -8,11 +8,11 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + './../config/config')[env];
+var config = require('../config/config');
 var db        = {};
 
-
-var databaseUrl = process.env[config.use_env_variable];
+var productionDB = config[env].use_env_variable;
+var databaseUrl = process.env[productionDB];
 var sequelize = new Sequelize(databaseUrl, config);
 
 fs
