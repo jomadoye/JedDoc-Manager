@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as UserActions from '../../actions/userAction';
-import ManageUsersRow from '../users/manageUsersRow.jsx';
+import ManageUsersRow from '../users/ManageUsersRow.jsx';
 import PaginationNav from '../common/PaginationNav.jsx';
 
 class ManageUsersPage extends React.Component {

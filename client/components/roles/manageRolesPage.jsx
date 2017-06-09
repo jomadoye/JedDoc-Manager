@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as RoleActions from '../../actions/roleActions';
 import ManageRoleRow from '../roles/manageRoleRow.jsx';
 import { deleteFlashMessage } from '../../actions/flashMessages';
-import ManageRoleTableHead from './manageRoleTableHead.jsx';
+import ManageRoleTableHead from './ManageRoleTableHead.jsx';
 
 class manageRolesPage extends React.Component {
   constructor(props) {
