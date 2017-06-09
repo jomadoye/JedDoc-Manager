@@ -6,7 +6,7 @@ export default [{
   username: faker.internet.userName(),
   email: faker.internet.email(),
   password: faker.internet.password(),
-  roleId: 1,
+  roleId: 2,
 }, {
   id: 21,
   fullname: faker.name.findName(),

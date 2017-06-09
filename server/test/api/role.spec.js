@@ -37,7 +37,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.be.a('object');
-          res.body.success.should.eql(true);
+
           res.body.should.have.property('message')
             .eql('Role created successfully');
           should.exist(res.body.message);
@@ -53,10 +53,10 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Error creating role');
           res.body.error.errors[0].message.should
-            .eql('Validation notEmpty failed');
+            .eql('This role title cannot be empty');
           res.body.error.errors[0].type.should.eql('Validation error');
           res.body.error.errors[0].path.should.eql('title');
           done();
@@ -71,7 +71,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Error creating role');
           res.body.error.errors[0].message.should.eql('title cannot be null');
           res.body.error.errors[0].type.should.eql('notNull Violation');
@@ -88,9 +88,9 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.success.should.eql(false);
           res.body.message.should.eql('Error creating role');
-          res.body.error.errors[0].message.should.eql('title must be unique');
+          res.body.error.errors[0].message.should
+            .eql('This role already exist');
           res.body.error.errors[0].type.should.eql('unique violation');
           res.body.error.errors[0].path.should.eql('title');
           done();
@@ -105,10 +105,8 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          res.body.should.have.property('success');
+
           res.body.should.have.property('message');
-          res.body.should.have.property('success')
-            .eql(false);
           res.body.should.have.property('message')
             .eql('No token provided.');
           done();
@@ -121,10 +119,8 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          res.body.should.have.property('success');
+
           res.body.should.have.property('message');
-          res.body.should.have.property('success')
-            .eql(false);
           res.body.should.have.property('message')
             .eql('No token provided.');
           done();
@@ -138,10 +134,8 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.body.should.be.a('Object');
-          res.body.should.have.property('success');
+
           res.body.should.have.property('message');
-          res.body.should.have.property('success')
-            .eql(false);
           res.body.should.have.property('message')
             .eql('Incorrect token.');
           done();
@@ -153,9 +147,9 @@ describe('Role API', () => {
         .get('/api/roles')
         .set('x-access-token', userData.token)
         .end((err, res) => {
-          res.should.have.status(201);
+          res.should.have.status(200);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(true);
+
           res.body.message.should.eql('This are the roles');
           done();
         });
@@ -168,7 +162,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(true);
+
           res.body.message.should.eql('This is the role');
           done();
         });
@@ -180,7 +174,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('This role does not exist');
           done();
         });
@@ -195,7 +189,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(true);
+
           res.body.message.should.eql('Role deleted succesfully');
           done();
         });
@@ -208,7 +202,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Error deleting role');
           done();
         });
@@ -221,7 +215,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('Object');
-          res.body.success.should.eql(false);
+
           res.body.message.should.eql('Role not found');
           done();
         });

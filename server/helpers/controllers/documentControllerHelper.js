@@ -1,11 +1,26 @@
 import models from '../../models';
+import paginate from '../../helpers/pagination/pagination';
 
 const Document = models.Documents;
 
+/**
+ * This classs contains helpers methids for the document controller
+ *
+ * @class DocumentControllerHelper
+ */
 class DocumentControllerHelper {
 
+  /**
+   * The method dynamically creates the query for the document list controller
+   *
+   * @static
+   * @param {object} req
+   * @returns
+   *
+   * @memberof DocumentControllerHelper
+   */
   static createQueryForList(req) {
-    const limit = req.query.limit || null;
+    const limit = req.query.limit || 8;
     const offset = req.query.offset || 0;
     const query = {};
     if (limit || offset) {
@@ -36,7 +51,20 @@ class DocumentControllerHelper {
     return query;
   }
 
-  static isDocumentList(document, res) {
+  /**
+   * This method checks if there are documents to be shown
+   * in the document list controller
+   *
+   * @static
+   * @param {object} document
+   * @param {res} res the response object
+   * @param {limit} limit
+   * @param {offset} offset
+   * @returns
+   *
+   * @memberof DocumentControllerHelper
+   */
+  static isDocumentList(document, res, limit, offset) {
     let response = {};
     if (!document) {
       response = res.status(404)
@@ -44,16 +72,33 @@ class DocumentControllerHelper {
           message: 'Documents Not Found',
         });
     } else {
-      response = res.status(201)
+      const documents = {
+        count: document.count,
+        rows: document.rows,
+        metaData: paginate(document.count, limit, offset),
+      };
+
+      response = res.status(200)
         .json({
-          success: true,
           message: 'Document is shown below',
-          document,
+          documents,
         });
     }
     return response;
   }
 
+  /**
+   * This method returns only the documents a user is authorized
+   * to view from another user portfolio
+   *
+   * @static
+   * @param {object} user
+   * @param {object} res the response object
+   * @param {object} req the request object
+   * @returns
+   *
+   * @memberof DocumentControllerHelper
+   */
   static isGetUserDocuments(user, res, req) {
     let response = {};
     const limit = req.query.limit || null;
@@ -61,32 +106,41 @@ class DocumentControllerHelper {
     if (!user) {
       response = res.status(404)
         .json({
-          success: false,
+
           message: 'User not found',
         });
     } else {
+      const query = {
+        where: {
+          userId: req.params.userId,
+        },
+      };
+      let documentCount;
+      Document.count({ where: query.where }).then((countNumber) => {
+        documentCount = countNumber;
+        return documentCount;
+      });
       return Document
         .findAll({
-          where: {
-            userId: req.params.userId,
-          },
+          where: query.where,
           limit,
           offset,
-          include: [models.Users],
+          include: [{
+            model: models.Users,
+            attributes: ['fullname'] }],
         })
         .then((documents) => {
           if (!documents) {
             response = res.status(404)
               .json({
-                success: false,
                 message: 'User has no document.',
               });
           } else if (req.decoded.data.id === 1 ||
           req.decoded.data.id === parseInt(req.params.userId, 10)) {
-            response = res.status(201)
+            response = res.status(200)
                 .json({
-                  success: true,
                   message: 'This is the user document(s).',
+                  count: documentCount,
                   documents,
                 });
           } else {
@@ -96,9 +150,8 @@ class DocumentControllerHelper {
                 authToViewDocuments.push(document);
               }
             });
-            response = res.status(201)
+            response = res.status(200)
                 .json({
-                  success: true,
                   message: 'This is the user document(s).',
                   authToViewDocuments,
                 });
@@ -107,19 +160,29 @@ class DocumentControllerHelper {
         })
         .catch(error => res.status(400)
           .json({
-            success: false,
             message: 'Error retrieving document',
             error,
           }));
     }
   }
 
+  /**
+   * This method returns only the documents a user is authorized
+   * to view
+   *
+   * @static
+   * @param {object} document
+   * @param {object} res the response object
+   * @param {object} req the request object
+   * @returns
+   *
+   * @memberof DocumentControllerHelper
+   */
   static isRetrieveDocuments(document, res, req) {
     let response = {};
     if (!document) {
       response = res.status(404)
         .json({
-          success: false,
           message: 'Document Not Found',
         });
     } else {
@@ -129,21 +192,18 @@ class DocumentControllerHelper {
         if (document.userId !== userId && document.access === 'private') {
           response = res.status(403)
             .json({
-              success: false,
               message: 'You dont have permission to view this document',
             });
         } else {
-          response = res.status(201)
+          response = res.status(200)
             .json({
-              success: true,
               message: 'This is your document.',
               document,
             });
         }
       } else {
-        response = res.status(201)
+        response = res.status(200)
           .json({
-            success: true,
             message: 'This is your document.',
             document,
           });
@@ -152,12 +212,21 @@ class DocumentControllerHelper {
     return response;
   }
 
+  /**
+   * This method deletes a document from the database
+   *
+   * @static
+   * @param {object} document
+   * @param {object} res the response object
+   * @returns
+   *
+   * @memberof DocumentControllerHelper
+   */
   static isDestroyDocuments(document, res) {
     let response = {};
     if (!document) {
       response = res.status(404)
         .json({
-          success: false,
           message: 'Document Not Found',
         });
     } else {
@@ -165,19 +234,28 @@ class DocumentControllerHelper {
         .destroy()
         .then(() => res.status(200)
           .json({
-            success: true,
             message: 'Document deleted successfully.',
           }));
     }
     return response;
   }
 
+  /**
+   * This method updates a document
+   *
+   * @static
+   * @param {object} document
+   * @param {object} res the response object
+   * @param {object} req the request object
+   * @returns
+   *
+   * @memberof DocumentControllerHelper
+   */
   static isUpdateDocuments(document, res, req) {
     let response = {};
     if (!document) {
       response = res.status(404)
         .json({
-          success: false,
           message: 'Document Not Found',
         });
     } else {
@@ -186,11 +264,9 @@ class DocumentControllerHelper {
           title: req.body.title || document.title,
           body: req.body.body || document.body,
           access: req.body.access || document.access,
-          // ownerRoleId: document.ownerRoleId,
         })
         .then(() => res.status(200)
           .json({
-            success: true,
             message: 'Document successfuly updated',
             document,
           }));

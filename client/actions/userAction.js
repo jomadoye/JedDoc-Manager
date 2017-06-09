@@ -74,13 +74,13 @@ export function deleteUserAccountSuccess() {
  * This function ensures the user was searched successfully
  *
  * @export
- * @param {string} searchedUsers
+ * @param {string} users
  * @returns dispatch
  */
-export function searchUserByUsernameSuccess(searchedUsers) {
+export function searchUserByUsernameSuccess(users) {
   return {
     type: SEARCH_USER_BY_USERNAME_SUCCESS,
-    users: searchedUsers,
+    users,
   };
 }
 
@@ -97,8 +97,10 @@ export function loadUserProfile(userId) {
         const userDetails = user.data;
         dispatch(loadUserProfileSuccess(userDetails));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error searching user';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -142,8 +144,10 @@ export function deleteUserAccount(userId) {
       .then(() => {
         dispatch(deleteUserAccountSuccess());
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error deleting user';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -151,13 +155,17 @@ export function deleteUserAccount(userId) {
  * This function ensures users are loaded sucessfully
  *
  * @export
- * @param {object} users
+ * @param {users} users
+ * @param {metadata} metadata
+ * @param {count} count
  * @returns {object}
  */
-export function loadAllUsersSuccess(users) {
+export function loadAllUsersSuccess(users, metadata, count) {
   return {
     type: LOAD_ALL_USERS_SUCCESS,
     users,
+    metadata,
+    count,
   };
 }
 
@@ -173,18 +181,28 @@ export function loadAllUsers(limit, offset) {
   if (limit || offset) {
     return dispatch => axios.get(`/api/users?limit=${limit}&offset=${offset}`)
       .then((res) => {
-        dispatch(loadAllUsersSuccess(res.data));
+        const users = res.data.rows;
+        const metadata = res.data.metaData;
+        const count = res.data.count;
+        dispatch(loadAllUsersSuccess(users, metadata, count));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error searching user';
+        dispatch(addFlashMessage(message));
       });
   }
   return dispatch => axios.get('/api/users')
         .then((res) => {
-          dispatch(loadAllUsersSuccess(res.data));
+          const users = res.data.rows;
+          const metadata = res.data.metaData;
+          const count = res.data.count;
+          dispatch(loadAllUsersSuccess(users, metadata, count));
         })
-        .catch((error) => {
-          throw error;
+        .catch(() => {
+          const message = {};
+          message.text = 'Error loading user';
+          dispatch(addFlashMessage(message));
         });
 }
 
@@ -233,9 +251,6 @@ export function deleteSingleUserAccount(userId) {
         dispatch(addFlashMessage(message));
         dispatch(deleteFlashMessage(1));
         dispatch(deleteSingleUserAccountSuccess(userId));
-      })
-      .catch((error) => {
-        throw error;
       });
 }
 
@@ -256,8 +271,10 @@ export function updateSingleUserAccountByAdmin(updatedUser, userId) {
         dispatch(deleteFlashMessage(1));
         dispatch(updateSingleUserAccountByAdminSuccess(updatedUser, userId));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error updating user';
+        dispatch(addFlashMessage(message));
       });
 }
 
@@ -275,9 +292,12 @@ export function searchUserByUsername(searchQuery, limit, offset) {
     axios.get(`/api/search/users?q=${searchQuery}
     &limit=${limit}&offset=${offset}`)
       .then((res) => {
-        dispatch(searchUserByUsernameSuccess(res.data.user));
+        const users = res.data.users;
+        dispatch(searchUserByUsernameSuccess(users));
       })
-      .catch((error) => {
-        throw error;
+      .catch(() => {
+        const message = {};
+        message.text = 'Error searching user';
+        dispatch(addFlashMessage(message));
       });
 }

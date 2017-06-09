@@ -1,12 +1,14 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import TinyMCE from 'react-tinymce';
+import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import { Row, Input } from 'react-materialize';
 import * as DocumentAction from '../../actions/documentAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
-class CardDocumentView extends React.Component {
+export class CardDocumentView extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,6 +17,8 @@ class CardDocumentView extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDocumentOnchange = this.handleDocumentOnchange.bind(this);
     this.handleEditDocumentSubmit = this.handleEditDocumentSubmit.bind(this);
+    this.getContent = this.getContent.bind(this);
+    this.createMarkup = this.createMarkup.bind(this);
 
     this.state = {
       title: this.props.document.title,
@@ -23,6 +27,12 @@ class CardDocumentView extends React.Component {
       isLoading: false,
     };
   }
+  /**
+   * This method runs when the component mounts
+   *
+   *
+   * @memberof CardDocumentView
+   */
   componentDidMount() {
     $('.modal').modal();
     $('.button-collapse').sideNav();
@@ -36,10 +46,16 @@ class CardDocumentView extends React.Component {
       belowOrigin: false, // Displays dropdown below the button
       alignment: 'left',
       stopPropagation: false, // Stops event propagation
-    },
-  );
+    });
   }
 
+  /**
+   * This method handles the document view
+   *
+   * @param {object} event
+   *
+   * @memberof CardDocumentView
+   */
   handleView(event) {
     event.preventDefault();
     const docID = this.props.document.id;
@@ -47,6 +63,22 @@ class CardDocumentView extends React.Component {
     $(modal).modal('open');
   }
 
+  /**
+  * Get the content of the TinyMCE editor
+  *
+  * @param {Object} event
+  */
+  getContent(event) {
+    this.setState({ body: event.target.getContent() });
+  }
+
+  /**
+   * This method handles edit document
+   *
+   * @param {object} event
+   *
+   * @memberof CardDocumentView
+   */
   handleEdit(event) {
     event.preventDefault();
     const docID = this.props.document.id;
@@ -54,21 +86,54 @@ class CardDocumentView extends React.Component {
     $(modal).modal('open');
   }
 
+  /**
+   * This method handles document delete
+   *
+   *
+   * @memberof CardDocumentView
+   */
   handleDelete() {
     event.preventDefault();
-    const confirmDelete =
-      confirm('Are you sure you want to delete this Document');
-    if (confirmDelete === true) {
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this document!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false,
+    },
+    () => {
       const documentId = this.props.document.id;
-      this.props.deleteDocument(documentId);
+      if (this.props.currentUser.roleId === 1) {
+        this.props.deleteDocumentByAdmin(documentId);
+      } else {
+        this.props.deleteDocument(documentId);
+      }
       this.props.deleteFlashMessage(1);
-    }
+      swal('Deleted!', 'This document has been deleted.', 'success');
+      this.props.deleteFlashMessage(1);
+    });
   }
 
+  /**
+   * This method handle tdocument onchange
+   *
+   * @param {object} event
+   *
+   * @memberof CardDocumentView
+   */
   handleDocumentOnchange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  /**
+   * This method handles document edit
+   *
+   * @param {object} event
+   *
+   * @memberof CardDocumentView
+   */
   handleEditDocumentSubmit(event) {
     event.preventDefault();
     const document = this.state;
@@ -76,6 +141,18 @@ class CardDocumentView extends React.Component {
     this.props.updateDocument(document, documentId,
       this.props.currentUser.roleId);
     this.props.deleteFlashMessage(1);
+  }
+
+  /**
+   * This function displays the html for the document body
+   *
+   * @param {sbject} docBody
+   * @returns
+   *
+   * @memberof CardDocumentView
+   */
+  createMarkup(docBody) {
+    return { __html: docBody };
   }
 
   render() {
@@ -109,7 +186,7 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
             <div className="modal-content">
               <h4 className="center-align">{document.title}</h4>
               <hr />
-              <p>{document.body}</p>
+              <p dangerouslySetInnerHTML={this.createMarkup(document.body)} />
               <h6>Created: {documentDate}</h6>
               <h6>lastUpdated: {updatedDocumentDate}</h6>
             </div>
@@ -129,7 +206,7 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
                 onSubmit={this.handleEditDocumentSubmit}>
                   <div className="input-field">
                     <i className="material-icons prefix">mode_edit</i>
-                    <label>Document title</label>
+                    <label className="active">Document title</label>
                     <input
                     id="title"
                     onChange={this.handleDocumentOnchange}
@@ -140,14 +217,16 @@ className="modal-trigger btn-floating btn-small waves-effect waves-light red"
 
                   <div className="input-field">
                     <i className="material-icons prefix">question_answer</i>
-                    <textarea
-                    className="materialize-textarea"
-                    onChange={this.handleDocumentOnchange}
-                    name="body"
-                    value={body}
-                    id="body"
+                   <TinyMCE
+                      content={body}
+                      config={{
+                        plugins: 'link image code',
+                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
+                      }}
+                      onChange={this.getContent}
                     />
-                    <label htmlFor="icon_prefix2">Document body</label>
+                    <label className="active"
+                    htmlFor="icon_prefix2">Document body</label>
                   </div>
 
                   <div className="input-field">
@@ -194,7 +273,7 @@ className=" modal-trigger btn-floating btn-small waves-effect waves-light red"
             <div className="modal-content">
               <h4 className="center-align">{document.title}</h4>
               <hr />
-              <p>{document.body}</p>
+              <p dangerouslySetInnerHTML={this.createMarkup(document.body)} />
               <h4>Author: {document.User.fullname}</h4>
               <h6>Created: {documentDate}</h6>
               <h6>lastUpdated: {updatedDocumentDate}</h6>
@@ -241,6 +320,7 @@ CardDocumentView.propTypes = {
   myDocument: PropTypes.bool,
   readOnly: PropTypes.bool,
   deleteDocument: PropTypes.func.isRequired,
+  deleteDocumentByAdmin: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
@@ -257,6 +337,8 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteDocument: documentId =>
       dispatch(DocumentAction.deleteDocument(documentId)),
+    deleteDocumentByAdmin: documentId =>
+      dispatch(DocumentAction.deleteDocumentByAdmin(documentId)),
     updateDocument: (document, documentId, roleId) =>
       dispatch(DocumentAction.updateDocument(document, documentId, roleId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),

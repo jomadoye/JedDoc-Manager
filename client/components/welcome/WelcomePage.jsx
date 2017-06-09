@@ -5,6 +5,13 @@ import * as DocumentAction from '../../actions/documentAction';
 import CardDocumentView from '../common/CardDocumentView.jsx';
 
 class LoadDocuments extends React.Component {
+
+  /**
+   * This method runs when the components mounts
+   *
+   *
+   * @memberof LoadDocuments
+   */
   componentDidMount() {
     this.props.loadDocuments();
   }
@@ -57,7 +64,7 @@ LoadDocuments.propTypes = {
 /**
  * mapDispatchToProps
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {
@@ -69,7 +76,7 @@ function mapDispatchToProps(dispatch) {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {

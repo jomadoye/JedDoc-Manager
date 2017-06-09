@@ -25,19 +25,19 @@ export default (
         <Route path="signup" component={SignupPage}/>
         <Route path="login" component={LoginPage}/>
         <Route path="dashboard" component={VerifyToken(Dashboard)}/>
-        <Route path="my-profile"
+        <Route path="myprofile"
             component={VerifyToken(myProfilePage)}/>
-        <Route path="manage-documents"
+        <Route path="managedocs"
             component={VerifyToken(manageDocumentPage)}/>
-        <Route path="create-role"
+        <Route path="createrole"
             component={VerifyToken(createRolePage)}/>
-        <Route path="manage-roles"
+        <Route path="manageroles"
             component={VerifyToken(manageRolesPage)}/>
-        <Route path="manage-users"
+        <Route path="manageusers"
             component={VerifyToken(manageUsersPage)}/>
-        <Route path="create-document"
+        <Route path="createdoc"
             component={VerifyToken(CreateDocumentPage)}/>
-        <Route path="my-documents"
+        <Route path="mydocs"
             component={VerifyToken(MyDocumentsPage)}/>
         <Route path="*" component={NotFound} status={404}/>
     </Route>

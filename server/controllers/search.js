@@ -1,17 +1,26 @@
 import models from '../models';
+import paginate from '../helpers/pagination/pagination';
 
 const User = models.Users;
 const Document = models.Documents;
 
 export default {
+
+  /**
+   * This method searches for a user by username
+   *
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} user
+   */
   searchUsers(req, res) {
     const query = req.query.q.trim()
       .split(' ')
       .map(searchWord => `%${searchWord}%`);
-    const limit = req.query.limit || null;
+    const limit = req.query.limit || 10;
     const offset = req.query.offset || 0;
     return User
-      .findAll({
+      .findAndCountAll({
         where: {
           username: {
             $ilike: {
@@ -30,15 +39,18 @@ export default {
         if (!user) {
           res.status(404)
             .json({
-              success: false,
               message: 'User not found.',
             });
         } else {
-          res.status(201)
+          const users = {
+            count: user.count,
+            metaData: paginate(user.count, limit, offset),
+            users: user.rows,
+          };
+          res.status(200)
             .json({
-              success: true,
               message: 'This is your user.',
-              user,
+              users,
             });
         }
       })
@@ -46,6 +58,13 @@ export default {
         .send(error));
   },
 
+  /**
+   * This method searches for a document by title
+   *
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} document
+   */
   searchDocuments(req, res) {
     const query = req.query.q.trim()
       .split(' ')
@@ -53,7 +72,7 @@ export default {
     const limit = req.query.limit || null;
     const offset = req.query.offset || 0;
     return Document
-      .findAll({
+      .findAndCountAll({
         where: {
           title: {
             $ilike: {
@@ -71,20 +90,22 @@ export default {
         if (!document) {
           return res.status(404)
             .json({
-              success: false,
               message: 'Document Not Found',
             });
         }
-        return res.status(201)
+        const documents = {
+          count: document.count,
+          metaData: paginate(document.count, limit, offset),
+          document: document.rows,
+        };
+        return res.status(200)
           .json({
-            success: true,
             message: 'This is your document.',
-            document,
+            documents,
           });
       })
       .catch(error => res.status(400)
         .json({
-          success: false,
           message: 'Document Not Found',
           error,
         }));

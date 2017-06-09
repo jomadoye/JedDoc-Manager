@@ -1,4 +1,3 @@
-import findIndex from 'lodash/findIndex';
 import initialState from './initialState';
 import {
   LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS,
@@ -33,22 +32,42 @@ function documentReducer(state = initialState.documents, action) {
 
     case LOAD_AUTHORIZE_TO_VIEW_DOCUMENT_SUCCESS:
       {
+        const document = {
+          count: action.count,
+          page: action.metadata.page,
+          pageCount: action.metadata.pageCount,
+          pageSize: action.metadata.pageSize,
+          totalCount: action.metadata.totalCount,
+          documents: action.AuthorizeToViewDocuments,
+        };
         return Object.assign({}, state, {
-          AuthorizeToViewDocuments: action.AuthorizeToViewDocuments,
+          AuthorizeToViewDocuments: document,
         });
       }
 
     case SEARCH_DOCUMENTS_BY_TITLE_ON_DASHBOARD_SUCCESS:
       {
+        const document = {
+          count: action.documents.count,
+          page: action.documents.metaData.page,
+          pageCount: action.documents.metaData.pageCount,
+          pageSize: action.documents.metaData.pageSize,
+          totalCount: action.documents.metaData.totalCount,
+          documents: action.documents.document,
+        };
         return Object.assign({}, state, {
-          AuthorizeToViewDocuments: action.searchDocuments,
+          AuthorizeToViewDocuments: document,
         });
       }
 
     case LOAD_USER_DOCUMENT_SUCCESS:
       {
+        const document = {
+          count: action.count,
+          documents: action.MyDocuments,
+        };
         return Object.assign({}, state, {
-          MyDocuments: action.MyDocuments,
+          MyDocuments: document,
         });
       }
     case SEARCH_DOCUMENTS_BY_TITLE_SUCCESS:
@@ -60,42 +79,64 @@ function documentReducer(state = initialState.documents, action) {
 
     case LOAD_ALL_DOCUMENTS_SUCCESS:
       {
+        const document = {
+          count: action.count,
+          page: action.metadata.page,
+          pageCount: action.metadata.pageCount,
+          pageSize: action.metadata.pageSize,
+          totalCount: action.metadata.totalCount,
+          documents: action.allDocuments,
+        };
         return Object.assign({}, state, {
-          allDocuments: action.allDocuments,
+          allDocuments: document,
         });
       }
 
-    case DELETE_USER_DOCUMENT_SUCCESS: {
-      const index = findIndex(state.MyDocuments, { id: action.documentId });
-      const stateCopy = Object.assign({}, state);
-      stateCopy.MyDocuments.splice(index, 1);
-      return stateCopy;
-    }
+    case DELETE_USER_DOCUMENT_SUCCESS:
+      {
+        const allDocuments = state.MyDocuments.documents.filter(document =>
+          document.id !== action.documentId);
+        return Object.assign({}, state, {
+          MyDocuments: {
+            documents: allDocuments,
+          },
+        });
+      }
 
-    case DELETE_DOCUMENT_BY_ADMIN_SUCCESS: {
-      const index = findIndex(state.allDocuments, { id: action.documentId });
-      const stateCopy = Object.assign({}, state);
-      stateCopy.allDocuments.splice(index, 1);
-      return stateCopy;
-    }
+    case DELETE_DOCUMENT_BY_ADMIN_SUCCESS:
+      {
+        const allDocuments = state.allDocuments.documents.filter(document =>
+          document.id !== action.documentId);
+        return Object.assign({}, state, {
+          allDocuments: {
+            documents: allDocuments,
+          },
+        });
+      }
 
-    case UPDATE_USER_DOCUMENT_SUCCESS: {
-      const documemts = state.MyDocuments.filter(document =>
+    case UPDATE_USER_DOCUMENT_SUCCESS:
+      {
+        const documemts = state.MyDocuments.documents.filter(document =>
         document.id !== action.document.id);
-      return { MyDocuments: [
-        ...documemts,
-        Object.assign({}, action.document),
-      ] };
-    }
+        return { MyDocuments: {
+          documents: [
+            ...documemts,
+            Object.assign({}, action.document),
+          ],
+        } };
+      }
 
-    case UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS: {
-      const documemts = state.allDocuments.filter(document =>
+    case UPDATE_USER_DOCUMENT_BY_ADMIN_SUCCESS:
+      {
+        const documemts = state.allDocuments.documents.filter(document =>
         document.id !== action.document.id);
-      return { allDocuments: [
-        ...documemts,
-        Object.assign({}, action.document),
-      ] };
-    }
+        return { allDocuments: {
+          documents: [
+            ...documemts,
+            Object.assign({}, action.document),
+          ],
+        } };
+      }
 
     default:
       {

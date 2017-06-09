@@ -10,9 +10,6 @@ class SignupPage extends React.Component {
     const { userSignupRequest, addFlashMessage, isUserExists } = this.props;
     return (
       <div>
-        <div>
-          <h1 className="center-align welcome-message">Join our community</h1>
-        </div>
         <div className="row">
           <div className="col s8 offset-s2">
             <SignupForm userSignupRequest={userSignupRequest}
@@ -34,7 +31,7 @@ SignupPage.propTypes = {
 /**
  * This function maps the dispatch to the props
  *
- * @param {any} dispatch
+ * @param {function} dispatch
  * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {

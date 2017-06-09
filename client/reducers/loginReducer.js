@@ -36,44 +36,75 @@ export default (state = initialState.isUser, action = {}) => {
 
     case LOAD_ALL_USERS_SUCCESS:
       {
+        const users = {
+          count: action.count,
+          page: action.metadata.page,
+          pageCount: action.metadata.pageCount,
+          pageSize: action.metadata.pageSize,
+          totalCount: action.metadata.totalCount,
+          users: action.users,
+        };
         return Object.assign({}, state, {
-          allUsers: action.users,
+          allUsers: users,
         });
       }
 
     case SEARCH_USER_BY_USERNAME_SUCCESS:
       {
         return Object.assign({}, state, {
-          allUsers: action.users,
+          allUsers: Object.assign({}, state.allUsers, action.users),
         });
       }
 
-    case UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS:
-      {
-        const users = state.allUsers.filter(user =>
-          user.id !== action.userId);
-        return Object.assign({}, state, { allUsers: [
-          ...users,
-          Object.assign({}, action.updatedUser),
-        ],
-        });
-      }
+    // case UPDATE_USER_PROFILE_BY_ADMIN_SUCCESS:
+    //   {
+    //     const allusers = state.allUsers.users.filter(user =>
+    //       user.id !== action.userId);
+    //     const users = {
+    //       count: state.allUsers.count,
+    //       page: state.allUsers.page,
+    //       pageCount: state.allUsers.pageCount,
+    //       pageSize: state.allUsers.pageSize,
+    //       totalCount: state.allUsers.totalCount,
+    //       users: allusers,
+    //     };
+    //     return Object.assign({}, state, { allUsers: [
+    //       ...users,
+    //       Object.assign({}, action.updatedUser),
+    //     ],
+    //     });
+    //   }
 
     case UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS:
       {
-        const users = state.allUsers.filter(user =>
+        const allusers = state.allUsers.users.filter(user =>
           user.id !== action.userId);
-        return Object.assign({}, state, { allUsers: [
-          ...users,
-          Object.assign({}, action.updatedUser),
-        ],
+        allusers.push(action.updatedUser);
+        const users = {
+          count: state.allUsers.count,
+          page: state.allUsers.page,
+          pageCount: state.allUsers.pageCount,
+          pageSize: state.allUsers.pageSize,
+          totalCount: state.allUsers.totalCount,
+          users: allusers,
+        };
+        return Object.assign({}, state, {
+          allUsers: Object.assign({}, state.allUsers, users),
         });
       }
 
     case DELETE_SINGLE_USER_SUCCESS:
       {
-        const users = state.allUsers.filter(user =>
+        const allusers = state.allUsers.users.filter(user =>
           user.id !== action.userId);
+        const users = {
+          count: state.allUsers.count,
+          page: state.allUsers.page,
+          pageCount: state.allUsers.pageCount,
+          pageSize: state.allUsers.pageSize,
+          totalCount: state.allUsers.totalCount,
+          users: allusers,
+        };
         return Object.assign({}, state, {
           allUsers: users,
         });

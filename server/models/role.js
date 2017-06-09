@@ -3,9 +3,9 @@ export default (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: { args: true, msg: 'This role already exist' },
       validate: {
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'This role title cannot be empty' },
       },
     },
   }, {
@@ -15,7 +15,7 @@ export default (sequelize, DataTypes) => {
         Role.hasMany(models.Users, {
           foreignKey: 'roleId',
           as: 'users',
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
         });
       },
     },

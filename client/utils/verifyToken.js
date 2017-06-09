@@ -46,7 +46,7 @@ export default function (ComposedComponent) {
   /**
    * mapStateToProps
    *
-   * @param {any} state
+   * @param {object} state
    * @returns {object} state
    */
   function mapStateToProps(state) {

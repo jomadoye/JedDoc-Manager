@@ -1,16 +1,29 @@
 import jwt from 'jsonwebtoken';
 import lodash from 'lodash';
 import models from '../../models';
-// import Validator from 'validatv/or';
-// import models from '../../models';
 
 require('dotenv')
   .config();
 
 const secret = process.env.SECRET;
 
+/**
+ * This class contains helper methods for
+ * the user controller
+ *
+ * @class UserControllerHelper
+ */
 class UserControllerHelper {
 
+  /**
+   * This method signs the JWT token for user who login
+   *
+   * @static
+   * @param {object} user
+   * @returns {string} token
+   *
+   * @memberof UserControllerHelper
+   */
   static signJwtToken(user) {
     const token = jwt.sign({
       data: user,
@@ -20,12 +33,22 @@ class UserControllerHelper {
     return token;
   }
 
+  /**
+   *  This method updates a user
+   *
+   * @static
+   * @param {object} user
+   * @param {object} res the response object
+   * @param {object} req the request object
+   * @returns {object} user
+   *
+   * @memberof UserControllerHelper
+   */
   static isUpdateUser(user, res, req) {
     let response = {};
     if (!user) {
       response = res.status(404)
         .json({
-          success: false,
           message: 'User not found',
         });
       return response;
@@ -41,7 +64,6 @@ class UserControllerHelper {
       .then(() => {
         response = res.status(200)
           .json({
-            success: true,
             message: 'User updated successfully.',
             user,
           });
@@ -50,7 +72,6 @@ class UserControllerHelper {
       .catch((error) => {
         response = res.status(400)
           .json({
-            success: false,
             message: 'Error updating user.',
             error,
           });
@@ -58,12 +79,21 @@ class UserControllerHelper {
       });
   }
 
+  /**
+   * This method deletes a user
+   *
+   * @static
+   * @param {object} user
+   * @param {object} res the response object
+   * @returns {string} message
+   *
+   * @memberof UserControllerHelper
+   */
   static isDestroyUser(user, res) {
     let response = {};
     if (!user) {
       response = res.status(404)
         .json({
-          success: false,
           message: 'User not found',
         });
       return response;
@@ -73,7 +103,6 @@ class UserControllerHelper {
       .then(() => {
         response = res.status(200)
           .json({
-            success: true,
             message: 'User deleted successfully.',
           });
         return response;
@@ -82,20 +111,29 @@ class UserControllerHelper {
         response = res.status(400)
           .json({
             error,
-            success: false,
             message: 'Error encountered when deleting user',
           });
         return response;
       });
   }
 
+  /**
+   * This method logs in auser
+   *
+   * @static
+   * @param {object} user
+   * @param {object} res the request object
+   * @param {object} req the response object
+   * @returns {object} user
+   *
+   * @memberof UserControllerHelper
+   */
   static isLoginUser(user, res, req) {
     let response = {};
     if (!user) {
       response = res.status(400)
         .json({
           form: 'Invalid Credentials',
-          success: false,
           message: 'Authentication failed, user not found',
         });
       return response;
@@ -104,7 +142,6 @@ class UserControllerHelper {
         response = res.status(400)
           .json({
             form: 'Invalid Credentials',
-            success: false,
             message: 'Authentication failed, no password.',
           });
         return response;
@@ -113,7 +150,6 @@ class UserControllerHelper {
         response = res.status(400)
           .json({
             form: 'Invalid Credentials',
-            success: false,
             message: 'Authentication failed, wrong password.',
           });
         return response;
@@ -128,7 +164,6 @@ class UserControllerHelper {
       const token = UserControllerHelper.signJwtToken(secureUserDetails);
       response = res.status(200)
         .json({
-          success: true,
           message: 'User logged in',
           token,
         });
@@ -136,19 +171,29 @@ class UserControllerHelper {
     }
   }
 
-  static validateInput(data, otherValidations) {
-    const { errors } = otherValidations(data);
+  /**
+   * This method validates a user input
+   *
+   * @static
+   * @param {object} userDetails
+   * @param {object} otherValidations
+   * @returns {object} error
+   *
+   * @memberof UserControllerHelper
+   */
+  static validateInput(userDetails, otherValidations) {
+    const { errors } = otherValidations(userDetails);
     const User = models.Users;
     return User.find({
       where: {
-        $or: [{ email: data.email }, { username: data.username }],
+        $or: [{ email: userDetails.email }, { username: userDetails.username }],
       },
     }).then((user) => {
       if (user) {
-        if (user.username === data.username) {
+        if (user.username === userDetails.username) {
           errors.username = 'This username already exists';
         }
-        if (user.email === data.email) {
+        if (user.email === userDetails.email) {
           errors.email = 'This email already exists';
         }
       }

@@ -4,12 +4,19 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 
-class NavigationBar extends React.Component {
+export class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
   }
 
+  /**
+   * This method handles logout
+   *
+   * @param {object} event
+   *
+   * @memberof NavigationBar
+   */
   logout(event) {
     event.preventDefault();
     this.context.router.push('/');
@@ -22,13 +29,13 @@ class NavigationBar extends React.Component {
       <div>
         <ul id="dropdown1" className="dropdown-content">
           <li>
-            <Link to="my-documents">
+            <Link to="mydocs">
               my-docs
               <i className="material-icons right">perm_media</i>
             </Link>
           </li>
           <li>
-            <Link to="my-profile">
+            <Link to="myprofile">
               Profile
               <i className="material-icons right">account_circle</i>
             </Link>
@@ -45,12 +52,6 @@ class NavigationBar extends React.Component {
           <li>
             <div className="nav-wrapper">
               <form>
-                <div className="input-field">
-                  <input id="search" type="search" required/>
-                  <label className="label-icon" htmlFor="search">
-                    <i className="material-icons">search</i></label>
-                  <i className="material-icons">close</i>
-                </div>
               </form>
             </div>
           </li>
@@ -130,37 +131,35 @@ class NavigationBar extends React.Component {
                   { isAuthenticated && user.email}</span></a>
             </div>
           </li>
-          <li><a id="my-profile" href="my-profile">
+          <li><a id="my-profile" href="myprofile">
             <i className="material-icons">
               account_circle</i>My Profile</a></li>
-          <li><a id="create-document" href="create-document">
+          <li><a id="my-documents" href="mydocs">
             <i className="material-icons">
-              add</i>Create Document</a></li>
-          <li><a id="my-documents" href="my-documents">
+              perm_media</i>my docs</a></li>
+          <li><div className="divider" /></li>
+          <li><a id="create-document" href="createdoc">
             <i className="material-icons">
-              perm_media</i>My Documents</a></li>
+              add</i>Create Docs</a></li>
           {user && user.roleId === 1 &&
           <div>
-            <li><a id="create-roles" href="create-role">
+            <li><a id="create-roles" href="createrole">
               <i className="material-icons">
                 add</i>Create Roles</a></li>
-            <li><a id="manage-roles" href="manage-roles">
+            <li><div className="divider" /></li>
+            <li><a id="manage-roles" href="manageroles">
               <i className="material-icons">
                 settings</i>Manage Roles</a></li>
-            <li><a id="manage-users" href="manage-users">
+            <li><a id="manage-users" href="manageusers">
               <i className="material-icons">
                 settings</i>Manage Users</a></li>
-            <li><a href="manage-documents"><i className="material-icons">
+            <li><a href="managedocs"><i className="material-icons">
                 settings</i>Manage Documents</a></li>
+              <li><div className="divider" /></li>
           </div>}
           <li><a
             onClick={this.logout}><i className="material-icons">
               power_settings_new</i>Log-out</a></li>
-          <li><a href="#!">Second Link</a></li>
-          <li><div className="divider" /></li>
-          <li><a className="subheader">Subheader</a></li>
-          <li><a className="waves-effect" href="#!">
-            Third Link With Waves</a></li>
         </ul>
       </div>
 
@@ -182,7 +181,7 @@ NavigationBar.contextTypes = {
 /**
  * mapStateToProps
  *
- * @param {any} state
+ * @param {object} state
  * @returns {object} state
  */
 function mapStateToProps(state) {

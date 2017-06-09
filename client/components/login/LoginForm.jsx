@@ -6,12 +6,16 @@ import TextFieldGroup from '../common/TextFieldGroup.jsx';
  * This function renders the login page
  *
  * @export
- * @param {object, function, function} { state, onsubmit, onchange }
+ * @param {object} { state }
+ * @param {function} { onsubmit }
+ * @param {function} { onchange }
  * @returns {HTML}
  */
 export default function LoginForm({ state, onsubmit, onchange }) {
   const { errors, query, password, isLoading } = state;
   return (
+    <div>
+    <h1 className="center-align welcome-message">Login Page</h1>
     <form onSubmit={onsubmit} className="center-align">
       {errors.form && <div className="teal darken-1">
       { errors.form } </div> }
@@ -42,6 +46,7 @@ export default function LoginForm({ state, onsubmit, onchange }) {
         </button>
       </div>
     </form>
+    </div>
   );
 }
 
