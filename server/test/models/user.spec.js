@@ -39,8 +39,8 @@ describe('Users Model', () => {
         .then((user) => {
           createdUser = user;
           should.exist(user);
-          done();
         });
+      done();
     });
 
     it('should create username and email with user', () => {

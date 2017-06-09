@@ -193,8 +193,6 @@ describe('User API', () => {
           res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message');
-          res.body.should.have.property('message')
-            .eql('User successfully created');
           res.body.user.should.have.property('roleId')
             .eql(3);
           done();
