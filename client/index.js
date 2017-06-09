@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import routes from './routes';
-import './public/scss/app.scss';
+import './styles/styles.scss';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser } from './actions/loginActions';
 import configureStore from './store/configureStore';
