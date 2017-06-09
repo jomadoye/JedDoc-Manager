@@ -1,4 +1,5 @@
 import models from '../models';
+import handleError from '../../server/helpers/utility/handleError';
 import UserControllerHelper from '../helpers/controllers/userControllerHelper';
 import commonValidations from '../shared/validations/signup/signupValidation';
 import paginate from '../helpers/pagination/pagination';
@@ -48,10 +49,10 @@ export default {
                 });
             })
             .catch(error => res.status(400)
-              .send(error));
+              .json({ error: handleError(error, res) }));
         }
         return res.status(400)
-          .send(errors);
+          .json({ error: handleError(error, res) });
       });
   },
 
@@ -80,7 +81,7 @@ export default {
         .send(user);
       })
       .catch(error => res.status(400)
-        .send(error));
+        .json({ error: handleError(error, res) }));
   },
 
   /**
@@ -111,7 +112,7 @@ export default {
         }
       })
       .catch(error => res.status(400)
-        .send(error));
+        .json({ error: handleError(error, res) }));
   },
 
   /**
@@ -131,7 +132,7 @@ export default {
       res.json({ user });
     })
       .catch(error => res.status(400)
-        .send(error));
+        .send({ error: handleError(error, res) }));
   },
 
   /**
@@ -155,7 +156,7 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          error,
+          error: handleError(error, res),
           message: 'Error updating user.',
         }));
   },
@@ -176,8 +177,7 @@ export default {
       })
       .catch(error => res.status(400)
         .json({
-          error,
-
+          error: handleError(error, res),
           message: 'Error encountered when deleting user',
         }));
   },
@@ -202,9 +202,8 @@ export default {
     })
       .catch(error => res.status(400)
         .json({
-
           message: 'Error logging',
-          error,
+          error: handleError(error, res),
         }));
   },
 

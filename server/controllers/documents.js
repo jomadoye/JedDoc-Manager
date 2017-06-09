@@ -1,4 +1,5 @@
 import models from '../models';
+import handleError from '../../server/helpers/utility/handleError';
 import DocumentControllerHelper
 from '../helpers/controllers/documentControllerHelper';
 
@@ -37,7 +38,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           message: 'An error occured while creating this document.',
-          error,
+          error: handleError(error, res),
         }));
   },
 
@@ -62,7 +63,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           message: 'Error encountered while updating',
-          error,
+          error: handleError(error, res),
         }));
   },
 
@@ -87,7 +88,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           message: 'Error encountered while deleting user',
-          error,
+          error: handleError(error, res),
         }));
   },
 
@@ -112,7 +113,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           message: 'Error retrieving document',
-          error,
+          error: handleError(error, res),
         }));
   },
 
@@ -141,7 +142,7 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .send(error));
+        .json({ error: handleError(error, res) }));
   },
 
   /**
@@ -159,7 +160,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           message: 'Error retrieving document',
-          error,
+          error: handleError(error, res),
         }));
   },
 };

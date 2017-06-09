@@ -1,29 +1,13 @@
 import expect from 'expect';
 import reducers from '../../reducers/';
+import helperReducers from '../helpers/reducerHelpers';
+
+let expectedState1 = helperReducers.SET_CURRENT_USER;
+let expectedState2 = helperReducers.LOAD_USER_PROFILE_SUCCESS;
+let expectedState3 = helperReducers.UPDATE_USER_PROFILE_SUCCESS;
 
 describe('User Reducers', () => {
   it('should handle SET_CURRENT_USER actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 7,
-          username: 'jerry',
-          fullname: 'jerry',
-          roleId: 3,
-          email: 'jerry@ff.com',
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [],
       login: {
@@ -55,35 +39,10 @@ describe('User Reducers', () => {
 
     // Assertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState1);
   });
 
   it('should handle LOAD_USER_PROFILE_SUCCESS actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 7,
-          fullname: 'jerry',
-          username: 'jerry',
-          email: 'jerry@ff.com',
-          roleId: 3,
-          password: '$2a$08$b.rXG69qFkdd3jGnLVrfUewpAC0zYx4vZifhMTKkwEJxG4n7lVAGO',
-          createdAt: '2017-05-20T14:01:40.065Z',
-          updatedAt: '2017-05-20T14:01:40.065Z',
-          documents: [],
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [],
       login: {
@@ -121,38 +80,10 @@ describe('User Reducers', () => {
 
     // Assertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState2);
   });
 
   it('should handle UPDATE_USER_PROFILE_SUCCESS actions', () => {
-    const expectedState = {
-      flashMessages: [{
-        id: 1,
-        text: 'User updated successfully.',
-      }],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 7,
-          fullname: 'jerry',
-          username: 'jerry',
-          email: 'jerry@ff.com',
-          roleId: 3,
-          password: '$2a$08$mXt6ErO1NQVw4j/lkBsIseLxX7haeonkmgh9svP5XJQXC5oo02Z1a',
-          createdAt: '2017-05-20T14:01:40.065Z',
-          updatedAt: '2017-05-20T14:01:40.065Z',
-          documents: [],
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [{
         id: 1,
@@ -201,6 +132,6 @@ describe('User Reducers', () => {
 
     // Assertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState3);
   });
 });

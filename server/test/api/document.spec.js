@@ -107,7 +107,7 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should
-            .eql('An error occured while creating this document.');
+            .eql('title cannot be null');
 
           done();
         });
@@ -121,7 +121,7 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should
-            .eql('An error occured while creating this document.');
+            .eql('title cannot be null');
 
           done();
         });
@@ -135,7 +135,7 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should
-            .eql('An error occured while creating this document.');
+            .eql('title cannot be null');
 
           done();
         });
@@ -149,7 +149,7 @@ describe('Document API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.message.should
-            .eql('An error occured while creating this document.');
+            .eql('title cannot be null');
 
           done();
         });
@@ -165,7 +165,7 @@ describe('Document API', () => {
           res.body.should.be.a('object');
 
           res.body.message.should
-            .eql('An error occured while creating this document.');
+            .eql('This document title already exist');
           done();
         });
     });
@@ -299,7 +299,7 @@ describe('Document API', () => {
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.message.should.eql('Error retrieving document');
+          res.body.message.should.eql('invalid input syntax for integer: "invalidId"');
 
           done();
         });
@@ -321,7 +321,7 @@ describe('Document API', () => {
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.message.should.eql('Error retrieving document');
+          res.body.message.should.eql('invalid input syntax for integer: "jed"');
 
           done();
         });
@@ -371,7 +371,6 @@ describe('Document API', () => {
         .set('x-access-token', userData.token)
         .send({
           title: 'updateTitle',
-
         })
         .end((err, res) => {
           res.should.have.status(200);
@@ -420,7 +419,7 @@ describe('Document API', () => {
         })
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.message.should.eql('Error encountered while updating');
+          res.body.message.should.eql('invalid input syntax for integer: "jed"');
 
           done();
         });
@@ -458,7 +457,7 @@ describe('Document API', () => {
         .set('x-access-token', userData.token)
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.message.should.eql('Error encountered while deleting user');
+          res.body.message.should.eql('invalid input syntax for integer: "invalidDocumentId"');
           done();
         });
     });

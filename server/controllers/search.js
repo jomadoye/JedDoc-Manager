@@ -1,4 +1,5 @@
 import models from '../models';
+import handleError from '../../server/helpers/utility/handleError';
 import paginate from '../helpers/pagination/pagination';
 
 const User = models.Users;
@@ -55,7 +56,7 @@ export default {
         }
       })
       .catch(error => res.status(400)
-        .send(error));
+        .json({ error: handleError(error, res) }));
   },
 
   /**
@@ -107,7 +108,7 @@ export default {
       .catch(error => res.status(400)
         .json({
           message: 'Document Not Found',
-          error,
+          error: handleError(error, res),
         }));
   },
 };

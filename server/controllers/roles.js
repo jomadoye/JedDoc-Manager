@@ -1,3 +1,5 @@
+import handleError from '../../server/helpers/utility/handleError';
+
 const Role = require('../models')
   .Roles;
 
@@ -23,7 +25,7 @@ module.exports = {
       .catch(error => res.status(400)
         .json({
           message: 'Error creating role',
-          error,
+          error: handleError(error, res),
         }));
   },
 
@@ -45,7 +47,7 @@ module.exports = {
       .catch(error => res.status(400)
         .json({
           message: 'Error listing role',
-          error,
+          error: handleError(error, res),
         }));
   },
 
@@ -77,7 +79,7 @@ module.exports = {
         res.status(400)
           .json({
             message: 'Error retrieving Role',
-            error,
+            error: handleError(error, res),
           });
       });
   },
@@ -110,13 +112,13 @@ module.exports = {
           .catch(error => res.status(400)
             .json({
               message: 'Role not deleted',
-              error,
+              error: handleError(error, res),
             }));
       })
       .catch(error => res.status(400)
         .json({
           message: 'Error deleting role',
-          error,
+          error: handleError(error, res),
         }));
   },
 
