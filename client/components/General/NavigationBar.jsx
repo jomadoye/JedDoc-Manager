@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 
-class NavigationBar extends React.Component {
+export class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);

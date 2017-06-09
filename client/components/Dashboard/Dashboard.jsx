@@ -5,7 +5,7 @@ import * as DocumentAction from '../../actions/documentAction';
 import CardDocumentView from '../common/CardDocumentView.jsx';
 import PaginationNav from '../common/PaginationNav.jsx';
 
-class Dashboard extends React.Component {
+export class Dashboard extends React.Component {
   constructor(props) {
     super(props);
 
