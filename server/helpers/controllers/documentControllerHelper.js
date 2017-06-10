@@ -79,7 +79,7 @@ class DocumentControllerHelper {
       };
 
       response = res.status(200)
-        .json({
+        .send({
           message: 'Document is shown below',
           documents,
         });
@@ -105,7 +105,7 @@ class DocumentControllerHelper {
     const offset = req.query.offset || 0;
     if (!user) {
       response = res.status(404)
-        .json({
+        .send({
 
           message: 'User not found',
         });
@@ -132,13 +132,13 @@ class DocumentControllerHelper {
         .then((documents) => {
           if (!documents) {
             response = res.status(404)
-              .json({
+              .send({
                 message: 'User has no document.',
               });
           } else if (req.decoded.data.id === 1 ||
           req.decoded.data.id === parseInt(req.params.userId, 10)) {
             response = res.status(200)
-                .json({
+                .send({
                   message: 'This is the user document(s).',
                   count: documentCount,
                   documents,
@@ -151,7 +151,7 @@ class DocumentControllerHelper {
               }
             });
             response = res.status(200)
-                .json({
+                .send({
                   message: 'This is the user document(s).',
                   authToViewDocuments,
                 });
@@ -159,7 +159,7 @@ class DocumentControllerHelper {
           return response;
         })
         .catch(error => res.status(400)
-          .json({
+          .send({
             message: 'Error retrieving document',
             error,
           }));
@@ -182,7 +182,7 @@ class DocumentControllerHelper {
     let response = {};
     if (!document) {
       response = res.status(404)
-        .json({
+        .send({
           message: 'Document Not Found',
         });
     } else {
@@ -191,19 +191,19 @@ class DocumentControllerHelper {
       if (roleId !== 1) {
         if (document.userId !== userId && document.access === 'private') {
           response = res.status(403)
-            .json({
+            .send({
               message: 'You dont have permission to view this document',
             });
         } else {
           response = res.status(200)
-            .json({
+            .send({
               message: 'This is your document.',
               document,
             });
         }
       } else {
         response = res.status(200)
-          .json({
+          .send({
             message: 'This is your document.',
             document,
           });
@@ -226,14 +226,14 @@ class DocumentControllerHelper {
     let response = {};
     if (!document) {
       response = res.status(404)
-        .json({
+        .send({
           message: 'Document Not Found',
         });
     } else {
       response = document
         .destroy()
         .then(() => res.status(200)
-          .json({
+          .send({
             message: 'Document deleted successfully.',
           }));
     }
@@ -255,7 +255,7 @@ class DocumentControllerHelper {
     let response = {};
     if (!document) {
       response = res.status(404)
-        .json({
+        .send({
           message: 'Document Not Found',
         });
     } else {
@@ -266,7 +266,7 @@ class DocumentControllerHelper {
           access: req.body.access || document.access,
         })
         .then(() => res.status(200)
-          .json({
+          .send({
             message: 'Document successfuly updated',
             document,
           }));

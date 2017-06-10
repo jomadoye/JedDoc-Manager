@@ -39,7 +39,7 @@ export default {
       .then((user) => {
         if (!user) {
           res.status(404)
-            .json({
+            .send({
               message: 'User not found.',
             });
         } else {
@@ -49,14 +49,14 @@ export default {
             users: user.rows,
           };
           res.status(200)
-            .json({
+            .send({
               message: 'This is your user.',
               users,
             });
         }
       })
       .catch(error => res.status(400)
-        .json({ error: handleError(error, res) }));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -90,7 +90,7 @@ export default {
       .then((document) => {
         if (!document) {
           return res.status(404)
-            .json({
+            .send({
               message: 'Document Not Found',
             });
         }
@@ -100,15 +100,15 @@ export default {
           document: document.rows,
         };
         return res.status(200)
-          .json({
+          .send({
             message: 'This is your document.',
             documents,
           });
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Document Not Found',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 };

@@ -18,14 +18,14 @@ module.exports = {
         title: req.body.title,
       })
       .then(role => res.status(201)
-        .json({
+        .send({
           message: 'Role created successfully',
           role,
         }))
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error creating role',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 
@@ -40,14 +40,14 @@ module.exports = {
     return Role
       .all()
       .then(roles => res.status(200)
-        .json({
+        .send({
           message: 'This are the roles',
           roles,
         }))
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error listing role',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 
@@ -64,12 +64,12 @@ module.exports = {
       .then((role) => {
         if (!role) {
           res.status(404)
-            .json({
+            .send({
               message: 'This role does not exist',
             });
         } else {
           res.status(200)
-            .json({
+            .send({
               message: 'This is the role',
               role,
             });
@@ -77,9 +77,9 @@ module.exports = {
       })
       .catch((error) => {
         res.status(400)
-          .json({
+          .send({
             message: 'Error retrieving Role',
-            error: handleError(error, res),
+            error: handleError(error),
           });
       });
   },
@@ -97,7 +97,7 @@ module.exports = {
       .then((role) => {
         if (!role) {
           return res.status(404)
-            .json({
+            .send({
               message: 'Role not found',
               role,
             });
@@ -105,20 +105,20 @@ module.exports = {
         return role
           .destroy()
           .then(() => res.status(200)
-            .json({
+            .send({
               message: 'Role deleted succesfully',
               role,
             }))
           .catch(error => res.status(400)
-            .json({
+            .send({
               message: 'Role not deleted',
-              error: handleError(error, res),
+              error: handleError(error),
             }));
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error deleting role',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 

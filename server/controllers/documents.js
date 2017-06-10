@@ -31,14 +31,14 @@ export default {
         ownerRoleId: req.decoded.data.roleId,
       })
       .then(document => res.status(201)
-        .json({
+        .send({
           message: 'Document created successfully.',
           document,
         }))
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'An error occured while creating this document.',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 
@@ -61,9 +61,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error encountered while updating',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 
@@ -86,9 +86,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error encountered while deleting user',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 
@@ -111,9 +111,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error retrieving document',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 
@@ -142,7 +142,7 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({ error: handleError(error, res) }));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -158,9 +158,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error retrieving document',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 };

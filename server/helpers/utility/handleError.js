@@ -5,8 +5,8 @@
  * @param {Function} res server response function
  * @returns {Function} function that displays an error message
  */
-export default function handleError(error, res) {
+export default function handleError(error) {
   return error.errors ?
-    res.status(400).send({ message: error.errors[0].message }) :
-    res.status(400).send({ message: error.message });
+    error.errors[0].message :
+    error.message;
 }

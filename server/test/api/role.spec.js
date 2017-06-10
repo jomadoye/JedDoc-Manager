@@ -54,7 +54,7 @@ describe('Role API', () => {
           res.should.have.status(400);
           res.body.should.be.a('object');
 
-          res.body.message.should.eql('This role title cannot be empty');
+          res.body.message.should.eql('Error creating role');
           done();
         });
     });
@@ -67,7 +67,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.message.should.eql('title cannot be null');
+          res.body.message.should.eql('Error creating role');
           done();
         });
     });
@@ -80,7 +80,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.message.should.eql('This role already exist');
+          res.body.message.should.eql('Error creating role');
           done();
         });
     });
@@ -191,7 +191,7 @@ describe('Role API', () => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
 
-          res.body.message.should.eql('invalid input syntax for integer: "jed"');
+          res.body.message.should.eql('Error deleting role');
           done();
         });
     });

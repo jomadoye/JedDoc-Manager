@@ -5,7 +5,7 @@ import helperUsers from '../../test-utility/helpers/api/helperUsers';
 process.env.NODE_ENV = 'test';
 
 const User = model.Users;
-const fakeUser = helperUsers.fakeUser;
+const fakeUser = helperUsers.fakeUserModel;
 const fakeUser1 = helperUsers.fakeUser1;
 const unUniqueEmail = helperUsers.unUniqueEmail;
 const unUniqueUsername1 = helperUsers.unUniqueUsername1;
@@ -34,13 +34,12 @@ describe('Users Model', () => {
   });
   describe('Create User', () => {
     let createdUser;
-    it('should create new user', (done) => {
+    before((done) => {
       User.create(fakeUser)
         .then((user) => {
           createdUser = user;
-          should.exist(user);
+          done();
         });
-      done();
     });
 
     it('should create username and email with user', () => {

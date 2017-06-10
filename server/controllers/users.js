@@ -42,17 +42,17 @@ export default {
               };
               const token = signJwtToken(secureUserDetails);
               res.status(201)
-                .json({
+                .send({
                   message: 'User successfully created',
                   token,
                   user,
                 });
             })
             .catch(error => res.status(400)
-              .json({ error: handleError(error, res) }));
+              .send({ error: handleError(error) }));
         }
         return res.status(400)
-          .json({ error: handleError(error, res) });
+          .send({ errors });
       });
   },
 
@@ -81,7 +81,7 @@ export default {
         .send(user);
       })
       .catch(error => res.status(400)
-        .json({ error: handleError(error, res) }));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -112,7 +112,7 @@ export default {
         }
       })
       .catch(error => res.status(400)
-        .json({ error: handleError(error, res) }));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -129,10 +129,10 @@ export default {
         $or: [{ email: req.params.query }, { username: req.params.query }],
       },
     }).then((user) => {
-      res.json({ user });
+      res.send({ user });
     })
       .catch(error => res.status(400)
-        .send({ error: handleError(error, res) }));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -155,8 +155,8 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
-          error: handleError(error, res),
+        .send({
+          error: handleError(error),
           message: 'Error updating user.',
         }));
   },
@@ -176,8 +176,8 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
-          error: handleError(error, res),
+        .send({
+          error: handleError(error),
           message: 'Error encountered when deleting user',
         }));
   },
@@ -201,9 +201,9 @@ export default {
       return response;
     })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error logging',
-          error: handleError(error, res),
+          error: handleError(error),
         }));
   },
 
@@ -216,7 +216,7 @@ export default {
   logout(req, res) {
     res.setHeader['x-access-token'] = ' ';
     res.status(200)
-      .json({
+      .send({
         message: 'User logged out',
       });
   },

@@ -449,7 +449,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          res.body.message.should.eql('invalid input syntax for integer: "jedidiah"');
+          res.body.message.should.eql('Error updating user.');
           done();
         });
     });
@@ -463,7 +463,7 @@ describe('User API', () => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
 
-          res.body.message.should.eql('invalid input syntax for integer: "undefined"');
+          res.body.message.should.eql('Error updating user.');
           done();
         });
     });
@@ -520,7 +520,7 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-          res.body.message.should.eql('invalid input syntax for integer: "undefined"');
+          res.body.message.should.eql('Error encountered when deleting user');
           done();
         });
     });
