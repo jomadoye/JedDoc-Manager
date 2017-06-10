@@ -181,8 +181,8 @@ describe('User API', () => {
           res.body.should.have.property('message');
           res.body.should.have.property('message')
             .eql('User successfully created');
-          done();
         });
+      done();
     });
 
     it('should ensure new users have a role of basic ', (done) => {
