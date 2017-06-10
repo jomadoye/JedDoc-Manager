@@ -187,7 +187,7 @@ export function loadAuthorizedToViewDocument(limit, offset) {
         const metadata = documents.data.documents.metaData;
         const count = documents.data.documents.count;
         dispatch(loadAuthorizedToViewDocumentSuccess(document,
-        metadata, count));
+          metadata, count));
       })
       .catch(() => {
         const message = {};
@@ -221,7 +221,8 @@ export function loadAuthorizedToViewDocument(limit, offset) {
 export function loadUserDocuments(userId, limit, offset) {
   if (limit) {
     return dispatch =>
-      axios.get(`/api/users/${userId}/documents?limit=${limit}&offset=${offset}`)
+      axios.get(
+        `/api/users/${userId}/documents?limit=${limit}&offset=${offset}`)
       .then((documents) => {
         const count = documents.data.count;
         const document = documents.data.documents;
@@ -234,16 +235,16 @@ export function loadUserDocuments(userId, limit, offset) {
       });
   }
   return dispatch => axios.get(`/api/users/${userId}/documents`)
-      .then((documents) => {
-        const count = documents.data.count;
-        const document = documents.data.documents;
-        dispatch(loadUserDocumentSuccess(document, count));
-      })
-      .catch(() => {
-        const message = {};
-        message.text = 'Error loading documents';
-        dispatch(addFlashMessage(message));
-      });
+    .then((documents) => {
+      const count = documents.data.count;
+      const document = documents.data.documents;
+      dispatch(loadUserDocumentSuccess(document, count));
+    })
+    .catch(() => {
+      const message = {};
+      message.text = 'Error loading documents';
+      dispatch(addFlashMessage(message));
+    });
 }
 
 /**
@@ -354,18 +355,19 @@ export function searchDocumentsByTitleSuccess(documents) {
  */
 export function loadAllDocuments(limit, offset) {
   if (limit) {
-    return dispatch => axios.get(`/api/documents?limit=${limit}&offset=${offset}`)
-    .then((documents) => {
-      const document = documents.data.documents.rows;
-      const metadata = documents.data.documents.metaData;
-      const count = documents.data.documents.count;
-      dispatch(loadAllDocumentsSuccess(document, metadata, count));
-    })
-    .catch(() => {
-      const message = {};
-      message.text = 'Error loading documents';
-      dispatch(addFlashMessage(message));
-    });
+    return dispatch => axios.get(
+        `/api/documents?limit=${limit}&offset=${offset}`)
+      .then((documents) => {
+        const document = documents.data.documents.rows;
+        const metadata = documents.data.documents.metaData;
+        const count = documents.data.documents.count;
+        dispatch(loadAllDocumentsSuccess(document, metadata, count));
+      })
+      .catch(() => {
+        const message = {};
+        message.text = 'Error loading documents';
+        dispatch(addFlashMessage(message));
+      });
   }
   return dispatch => axios.get('/api/documents/')
     .then((documents) => {

@@ -39,12 +39,15 @@ module.exports = {
       .click('.manage-edit-user-submit-btn')
       .url('http://localhost:8000/manageusers')
       .waitForElementVisible('.manage-delete-user-btn', 10000)
-      .assert.containsText('tbody tr:first-child', '1 qwerty qwerty qwerty@email.com 2 Tester EDIT USER')
+      .assert
+      .containsText('tbody tr:first-child',
+        '1 qwerty qwerty qwerty@email.com 2 Tester EDIT USER')
       .click('.manage-delete-user-btn')
       .waitForElementVisible('.confirm', 10000)
       .click('.confirm');
     browser
-      .expect.element('tbody tr:first-child').text.to.not.equal('1 qwerty qwerty qwerty@email.com 2 Tester EDIT USER')
+      .expect.element('tbody tr:first-child')
+      .text.to.not.equal('1 qwerty qwerty qwerty@email.com 2 Tester EDIT USER')
       .click('.dropdown-button')
       .waitForElementVisible('#logoutDropDownBtn', 1000000)
       .click('#logoutDropDownBtn')
@@ -82,7 +85,8 @@ module.exports = {
       .waitForElementVisible('tbody:last-child', 10000)
       .assert.containsText('tbody:last-child', 'NightWatch Role');
     browser
-      .expect.element('tbody:last-child').text.to.not.equal('NightWatch Role')
+      .expect.element('tbody:last-child')
+      .text.to.not.equal('NightWatch Role')
       .assert.urlEquals('http://localhost:8000/manageroles')
       .waitForElementVisible('.delete-role:last-child', 10000)
       .click('.delete-role')

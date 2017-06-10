@@ -1,4 +1,3 @@
-import chai from 'chai';
 import model from '../../models';
 import helperUsers from '../../test-utility/helpers/api/helperUsers';
 
@@ -14,7 +13,6 @@ const emptyEmail = helperUsers.emptyEmail;
 const emptyPassword = helperUsers.emptyPassword;
 const emptyUsername = helperUsers.emptyUsername;
 const emptyFullname = helperUsers.emptyFullname;
-const should = chai.should();
 const userModelField = [
   'fullname',
   'username',

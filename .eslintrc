@@ -25,6 +25,8 @@
     "jsx-quotes": 1,
     "consistent-return": 0,
     "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default": 1,
+    "no-underscore-dangle": 1,
     "import/no-unresolved": 0,
     "react/display-name": [ 1, {"ignoreTranspilerName": false }],
     "react/forbid-prop-types": [1, {"forbid": ["any"]}],
