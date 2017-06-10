@@ -21,7 +21,7 @@
     "snyk-test": "snyk test && NODE_ENV=test npm run db:test:seed && npm run mocha:testServer",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test": "npm-run-all test:server mocha:testClient",
+    "test": "snyk test && npm-run-all test:server mocha:testClient",
     "test:all": "npm-run-all test:server mocha:testClient test-e2e",
     "test-e2e": "npm run db:seed && nightwatch",
     "postinstall": "npm run db:seed",
