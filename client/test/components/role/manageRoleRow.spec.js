@@ -22,16 +22,14 @@ function setup() {
   return shallow(<manageRoleRow {...props} />);
 }
 describe('manageRoleRow', () => {
-  it('renders tr, td, button', () => {
-    const wrapper = setup();
-    expect(wrapper.find('div').length).toBe(0);
-    expect(wrapper.find('td').length).toBe(0);
-    expect(wrapper.find('button').length).toBe(0);
+  const wrapper = setup();
+  it('renders the role and its title and ID', () => {
+    expect(wrapper.find('table').root.node.props.role.id).toBe(2);
+    expect(wrapper.find('table').root.node.props.role.title).toBe('admin');
   });
 
   it('does not render footer, li, ul, h5, img, form, h1, h2, h4, row',
     () => {
-      const wrapper = setup();
       expect(wrapper.find('h3').length).toBe(0);
       expect(wrapper.find('footer').length).toBe(0);
       expect(wrapper.find('li').length).toBe(0);
