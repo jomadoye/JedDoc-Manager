@@ -52,7 +52,10 @@ describe('CardDocumentView', () => {
   it('renders the correct content of h6 elements', () => {
     expect(wrapper.find('h6')
           .first().props().children[1])
-        .toBe('a few seconds ago');
+        .toBe('in a few seconds');
+    expect(wrapper.find('h6')
+          .last().props().children[1])
+        .toBe('in a few seconds');
     expect(wrapper.find('h6')
           .first().props().children[0])
         .toBe('Created: ');
