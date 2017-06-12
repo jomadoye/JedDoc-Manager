@@ -3,33 +3,33 @@
 [![Code Climate](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager/badges/gpa.svg)](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager) [![Test Coverage](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager/badges/issue_count.svg)](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager) [![CircleCI](https://circleci.com/gh/andela-jomadoye/JedDoc-Manager.svg?style=svg)](https://circleci.com/gh/andela-jomadoye/JedDoc-Manager)
 
 
-About the Application
--------------
+## About the Application
+------------------------
 This is a Document Management System, with user and documents roles and privileges. Each document has access levels, the document defines which users can access it. 
 Also, each document specifies the date it was published, when it was last updated, and the author who published it.
 
-### **API Features**
+## API Features
 
 The following features make up the Document Management System API:
 
-##### Authentication
+#### Authentication
 - It uses JSON Web Token (JWT) for authentication.  
 - It generates a token upon successul login.   
 - It verifies the token to ensures a user is authenticated to access protected endpoints.
 
-##### Users
+#### Users
 - It allows users to be created.  
 - It allows users to login and obtain a token  
 - It allows authenticated users to retrieve and edit their information only.   
 - All users can be retrieved, modified and deleted by the admin user.
 
-##### Roles
+#### Roles
 - It ensures that users have roles.   
 - It ensures user roles could be `admin`, `tester` or `regular`, or as created by the admin .   
 - It ensures roles can be created, retrieved and deleted by an admin user. 
 - A non-admin user cannot create, retrieve, modify, or delete roles.  
 
-##### Documents
+#### Documents
 - It allows new documents to be created by authenticated users.  
 - It ensures all documents have access roles defined as `public`, `role` or `private`.  
 - It allows admin users to create, retrieve, modify, and delete all documents.
@@ -39,12 +39,12 @@ The following features make up the Document Management System API:
 - It allows users to set a access for any document they create.   
 
 
-##### Search
+#### Search
 - It allows users to search `public` and `role` documents that belong to other users (as well as documents that belong to the user).
 - It allows admin to retrieve all documents that matches search term, be it `public`, `role` or `private`.
 
 
-Local Development
+## Local Development
 --------------
 Document Mnagement System requires [Node.js](https://nodejs.org/) v6+ to run.
 
@@ -60,17 +60,17 @@ $ Start the express server `npm start`.
 $ Run the test with `npm test`.
 ```
 
-#### Limitations:
+## Limitations:
 The limitations to the Document Management System API are as follows:
 
 * Users can only create plain textual documents and retrieve same when needed. 
 * Users cannot share documents with people, but can make document `public` to make it available to other users.
 * Users login and obtain a token which is verified on every request, but users cannot logout (nullify the token), however tokens become invalid when it expires (after 1 day).
 
-#### Api Documentation
+## Api Documentation
 View full API documentation [here](https://andela-jomadoye.github.io/slate/#introduction)
 
-#### _**Contributing**_
+## _**Contributing**_
 1. Fork this repository to your GitHub account
 2. Clone the forked repository and cd into it
 3. Create a .env file in the root of the project using the sample .env.sample in the root directory
