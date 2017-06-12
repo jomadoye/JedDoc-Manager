@@ -7,16 +7,16 @@ import CardDocumentView from '../common/CardDocumentView.jsx';
 /**
  * The welcome page
  *
- * @class LoadDocuments
+ * @class WelcomePage
  * @extends {React.Component}
  */
-class LoadDocuments extends React.Component {
+class WelcomePage extends React.Component {
 
   /**
    * This method runs when the components mounts
    *
    *
-   * @memberof LoadDocuments
+   * @memberof WelcomePage
    */
   componentDidMount() {
     this.props.loadDocuments();
@@ -27,7 +27,7 @@ class LoadDocuments extends React.Component {
    *
    * @returns {Object} jsx component
    *
-   * @memberof LoadDocuments
+   * @memberof WelcomePage
    */
   render() {
     const { documents } = this.props;
@@ -69,7 +69,7 @@ class LoadDocuments extends React.Component {
   }
 }
 
-LoadDocuments.propTypes = {
+WelcomePage.propTypes = {
   documents: PropTypes.array,
   loadDocuments: PropTypes.func.isRequired,
 };
@@ -98,4 +98,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoadDocuments);
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage);

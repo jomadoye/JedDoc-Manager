@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * This fucntion renders the user table head roles for the admin
+ * This function renders the user table head roles for the admin
  *
  * @export
  * @returns HTML

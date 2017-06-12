@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * Document Form
+ * The Not found page
  *
  * @returns {Object} jsx object
  */

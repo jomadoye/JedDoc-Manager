@@ -76,7 +76,7 @@ class SignupForm extends React.Component {
   /**
    * This method validate the user input
    *
-   * @returns
+   * @returns {bool} This checks if the user input is valid
    *
    * @memberof SignupForm
    */

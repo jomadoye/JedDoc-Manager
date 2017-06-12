@@ -162,7 +162,7 @@ export class CardDocumentView extends React.Component {
    * This function displays the html for the document body
    *
    * @param {sbject} docBody
-   * @returns
+   * @returns {HTML}
    *
    * @memberof CardDocumentView
    */
@@ -371,7 +371,7 @@ function mapDispatchToProps(dispatch) {
  * mapStateToProps
  *
  * @param {object} state
- * @returns {object}
+ * @returns {object} props
  */
 function mapStateToProps(state) {
   return {
