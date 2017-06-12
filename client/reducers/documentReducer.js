@@ -15,7 +15,14 @@ import {
 
 export default
 
-// eslint-disable-next-line require-jsdoc
+/**
+* document reducer
+*
+* @export
+* @param {Object} [state=initialState.documents] initial state
+* @param {Number} action action
+* @returns {Number} reduced or initial state
+*/
 function documentReducer(state = initialState.documents, action) {
   switch (action.type) {
     case LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS:

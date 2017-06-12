@@ -1,12 +1,12 @@
 import controller from '../controllers';
-import auth from '../midddlewares';
+import midddlewares from '../midddlewares';
 
 const usersController = controller.users;
 const documentsController = controller.documents;
 const searchController = controller.search;
 const rolesController = controller.roles;
-const authenticate = auth.authenticate;
-const authorization = auth.authorization;
+const authenticate = midddlewares.authenticate;
+const authorization = midddlewares.authorization;
 
 const verifyToken = authenticate.verifyToken;
 const isAdmin = authorization.isAdmin;

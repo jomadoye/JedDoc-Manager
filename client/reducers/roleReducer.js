@@ -6,7 +6,14 @@ import {
 
 export default
 
-// eslint-disable-next-line require-jsdoc
+/**
+* role reducer
+*
+* @export
+* @param {Object} [state=initialState.documents] initial state
+* @param {Number} action action
+* @returns {Number} reduced or initial state
+*/
 function documentReducer(state = initialState.role, action) {
   switch (action.type) {
     case LOAD_USER_ROLE_SUCCESS:

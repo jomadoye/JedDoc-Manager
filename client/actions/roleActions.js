@@ -112,7 +112,7 @@ export function deleteUserRolesSuccess(roleId) {
  * @param {number} roleId
  * @returns dispatch
  */
-export function DeleteUserRoles(roleId) {
+export function deleteUserRoles(roleId) {
   return dispatch => axios.delete(`/api/roles/${roleId}`)
     .then((res) => {
       const message = {};

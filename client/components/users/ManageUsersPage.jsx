@@ -15,7 +15,7 @@ class ManageUsersPage extends React.Component {
 
   /**
    * Creates an instance of ManageUsersPage.
-   * 
+   *
    * @param {object} props
    *
    * @memberof ManageUsersPage

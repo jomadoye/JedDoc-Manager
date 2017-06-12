@@ -48,7 +48,7 @@ class ManageRolesPage extends React.Component {
       closeOnConfirm: false,
     },
     () => {
-      this.props.DeleteUserRoles(roleId);
+      this.props.deleteUserRoles(roleId);
       this.props.deleteFlashMessage(1);
       swal('Deleted!', 'This document has been deleted.', 'success');
     });
@@ -85,7 +85,7 @@ ManageRolesPage.propTypes = {
   loadUserRoles: PropTypes.func.isRequired,
   roles: PropTypes.array,
   roleId: PropTypes.number,
-  DeleteUserRoles: PropTypes.func.isRequired,
+  deleteUserRoles: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
 };
 
@@ -98,7 +98,7 @@ ManageRolesPage.propTypes = {
 function mapDispatchToProps(dispatch) {
   return {
     loadUserRoles: () => dispatch(RoleActions.loadUserRoles()),
-    DeleteUserRoles: roleId => dispatch(RoleActions.DeleteUserRoles(roleId)),
+    deleteUserRoles: roleId => dispatch(RoleActions.deleteUserRoles(roleId)),
     deleteFlashMessage: a => dispatch(deleteFlashMessage(a)),
   };
 }

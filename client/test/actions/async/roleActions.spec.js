@@ -60,7 +60,7 @@ describe('Role Actions', () => {
       ];
 
       const store = mockStore({});
-      store.dispatch(roleActions.DeleteUserRoles(3))
+      store.dispatch(roleActions.deleteUserRoles(3))
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
         });

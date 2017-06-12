@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SignupForm from './SignupForm.jsx';
 import * as SignupActions from '../../actions/signupActions';
-import * as FlashMessageActions from '../../actions/flashMessages';
+import * as FlashMessage from '../../actions/flashMessages';
 
 /**
  * The signup page
@@ -55,7 +55,7 @@ function mapDispatchToProps(dispatch) {
     isUserExists: query =>
       dispatch(SignupActions.isUserExists(query)),
     addFlashMessage: message =>
-      dispatch(FlashMessageActions.addFlashMessage(message)),
+      dispatch(FlashMessage.addFlashMessage(message)),
   };
 }
 export default connect(null, mapDispatchToProps)(SignupPage);
