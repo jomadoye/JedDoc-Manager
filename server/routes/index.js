@@ -1,10 +1,10 @@
 import controller from '../controllers';
 import midddlewares from '../midddlewares';
 
-const usersController = controller.users;
-const documentsController = controller.documents;
-const searchController = controller.search;
-const rolesController = controller.roles;
+const UsersController = controller.Users;
+const DocumentsController = controller.Documents;
+const SearchController = controller.Search;
+const RolesController = controller.Roles;
 const authenticate = midddlewares.authenticate;
 const authorization = midddlewares.authorization;
 
@@ -15,15 +15,15 @@ const isOwner = authorization.isOwner;
 const Route = (app) => {
   app
     .route('/users/login')
-    .post(usersController.login);
+    .post(UsersController.login);
 
   app
     .route('/users')
-    .post(usersController.create);
+    .post(UsersController.create);
 
   app
     .route('/api/users/logout')
-    .get(usersController.logout);
+    .get(UsersController.logout);
 
   // apply the routes to our application with the prefix /api
   app.use('/api', verifyToken);
@@ -31,60 +31,58 @@ const Route = (app) => {
   // User routes
   app
     .route('/api/users')
-    .get(isAdmin, usersController.list);
+    .get(isAdmin, UsersController.list);
 
   app
     .route('/api/users/:userId')
-    .get(usersController.retrieve)
-    .put(isOwner, usersController.update)
-    .delete(isOwner, usersController.destroy);
+    .get(UsersController.retrieve)
+    .put(isOwner, UsersController.update)
+    .delete(isOwner, UsersController.destroy);
 
   // User-Document routes
   app
     .route('/api/users/:userId/documents')
-    .post(isOwner, documentsController.create)
-    .get(documentsController.getUserDocuments);
+    .post(isOwner, DocumentsController.create)
+    .get(DocumentsController.getUserDocuments);
 
   // Documents routes
   app
     .route('/api/documents/:documentId')
-    .get(documentsController.retrieve)
-    .put(isOwner, documentsController.update)
-    .delete(isOwner, documentsController.destroy);
+    .get(DocumentsController.retrieve)
+    .put(isOwner, DocumentsController.update)
+    .delete(isOwner, DocumentsController.destroy);
 
   app
-    // TODO Get all authorized documents
     .route('/api/documents')
-    .get(documentsController.list)
-    .post(documentsController.create);
+    .get(DocumentsController.list)
+    .post(DocumentsController.create);
+
   app
-    // TODO Get all public documents
     .route('/documents')
-    .get(documentsController.list);
+    .get(DocumentsController.list);
 
   // Roles routes
   app
     .route('/api/roles')
-    .get(isAdmin, rolesController.list)
-    .post(isAdmin, rolesController.create);
+    .get(isAdmin, RolesController.list)
+    .post(isAdmin, RolesController.create);
 
   app
     .route('/api/roles/:roleId')
-    // .put(isAdmin, rolesController.update)
-    .get(isAdmin, rolesController.retrieve)
-    .delete(isAdmin, rolesController.destroy);
+    .get(isAdmin, RolesController.retrieve)
+    .delete(isAdmin, RolesController.destroy);
 
   app
     .route('/api/search/users')
-    .get(isAdmin, searchController.searchUsers);
+    .get(isAdmin, SearchController.searchUsers);
 
   app
     .route('/api/search/documents')
-    .get(searchController.searchDocuments);
+    .get(SearchController.searchDocuments);
 
   app
     .route('/users/validate/:query')
-    .get(usersController.isUserExist);
+    .get(UsersController.isUserExist);
 };
 
 export default Route;
