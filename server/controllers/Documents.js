@@ -1,7 +1,7 @@
 import models from '../models';
 import handleError from '../../server/helpers/utility/handleError';
 import DocumentControllerHelper
-from '../helpers/controllers/documentControllerHelper';
+from '../helpers/controllers/DocumentControllerHelper';
 
 const Document = models.Documents;
 const User = models.Users;
