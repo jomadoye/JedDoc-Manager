@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import validateInput
+import loginValidation
  from '../../../server/shared/validations/login/loginValidation';
 import { login } from '../../actions/loginActions';
 import LoginForm from './LoginForm.jsx';
@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
    * @memberof LoginPage
    */
   isValid() {
-    const { errors, isValid } = validateInput(this.state);
+    const { errors, isValid } = loginValidation(this.state);
     if (!isValid) {
       this.setState({ errors });
     }

@@ -8,7 +8,7 @@ import lodash from 'lodash';
  * @param {object} data the user input
  * @returns {string}
  */
-export default function validateInput(data) {
+export default function signupValidation(data) {
   const hasPropertyFullname = Object.prototype.hasOwnProperty
     .call(data, 'fullname');
   const hasPropertyUsername = Object.prototype.hasOwnProperty
