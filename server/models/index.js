@@ -11,7 +11,6 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + './../config/config')[env];
 var db        = {};
 
-
 var databaseUrl = process.env[config.use_env_variable];
 var sequelize = new Sequelize(databaseUrl, config);
 
