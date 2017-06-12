@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+/**
+ * Text input
+ *
+ * @param {Object} props { field, value, label, error, type, onChange, onBlur }
+ * @returns {Object} jsx object
+ */
 const TextFieldGroup = ({ field, value, label, error,
         type, onChange, checkUserExists, materialIcon }) => (
         <div className="row">

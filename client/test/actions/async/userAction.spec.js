@@ -15,15 +15,25 @@ describe('User Actions', () => {
     it("fetches a user's profile and dispatches loadUserProfile", () => {
       moxios.stubRequest('api/users/3', {
         status: 200,
-        response: { username: 'jed', fullname: 'jed', roleId: 3 },
+        response: {
+          username: 'jed',
+          fullname: 'jed',
+          roleId: 3,
+        },
       });
-      const expectedActions = [
-        { type: 'LOAD_USER_PROFILE_SUCCESS', userDetails: { username: 'jed', fullname: 'jed', roleId: 3 } },
-      ];
+      const expectedActions = [{
+        type: 'LOAD_USER_PROFILE_SUCCESS',
+        userDetails: {
+          username: 'jed',
+          fullname: 'jed',
+          roleId: 3,
+        },
+      }];
       const store = mockStore();
       store.dispatch(userActions.loadUserProfile(3))
         .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
+          expect(store.getActions())
+            .toEqual(expectedActions);
         });
     });
   });
@@ -33,17 +43,25 @@ describe('User Actions', () => {
       moxios.stubRequest('/users?limit=9&offset=0', {
         status: 200,
         response: {
-          rows: [{ username: 'jed' }],
+          rows: [{
+            username: 'jed',
+          }],
           metaData: {},
         },
       });
-      const expectedActions = [
-        { type: 'LOAD_ALL_USERS_SUCCESS', users: [{ username: 'tony' }], metaData: {}, offset: 0 },
-      ];
+      const expectedActions = [{
+        type: 'LOAD_ALL_USERS_SUCCESS',
+        users: [{
+          username: 'tony',
+        }],
+        metaData: {},
+        offset: 0,
+      }];
       const store = mockStore();
       store.dispatch(userActions.loadAllUsers())
         .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
+          expect(store.getActions())
+            .toEqual(expectedActions);
         });
     });
   });
@@ -53,17 +71,25 @@ describe('User Actions', () => {
       moxios.stubRequest('/search/users?q=jed&limit=9&offset=0', {
         status: 200,
         response: {
-          rows: [{ username: 'tony' }],
+          rows: [{
+            username: 'tony',
+          }],
           metaData: {},
         },
       });
-      const expectedActions = [
-        { type: 'SEARCH_USERS_SUCCESS', searchResult: [{ username: 'jed' }], metaData: {}, offset: 0 },
-      ];
+      const expectedActions = [{
+        type: 'SEARCH_USERS_SUCCESS',
+        searchResult: [{
+          username: 'jed',
+        }],
+        metaData: {},
+        offset: 0,
+      }];
       const store = mockStore();
       store.dispatch(userActions.searchUserByUsername('tony', 8, 0))
         .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
+          expect(store.getActions())
+            .toEqual(expectedActions);
         });
     });
   });
@@ -72,32 +98,40 @@ describe('User Actions', () => {
     it("updates a user's dispatching updateUserProfileSuccess", () => {
       moxios.stubRequest('/users/3', {
         status: 200,
-        response: { username: 'jed' },
+        response: {
+          username: 'jed',
+        },
       });
-      const expectedActions = [
-        { type: 'UPDATE_USER_PROFILE_SUCCESS', user: { username: 'jed' } },
-      ];
+      const expectedActions = [{
+        type: 'UPDATE_USER_PROFILE_SUCCESS',
+        user: {
+          username: 'jed',
+        },
+      }];
       const store = mockStore({});
       store.dispatch(userActions.updateUserProfile(3))
         .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
+          expect(store.getActions())
+            .toEqual(expectedActions);
         });
     });
   });
 
   describe('deleteUserAccount', () => {
-    it("deletes a user's profile and dispatches deleteUserAccountSuccess", () => {
-      moxios.stubRequest('/users/3', {
-        status: 200,
-      });
-      const expectedActions = [
-        { type: 'DELETE_USER_PROFILE_SUCCESS' },
-      ];
-      const store = mockStore();
-      store.dispatch(userActions.deleteUserAccount(3))
-        .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
+    it("deletes a user's profile and dispatches deleteUserAccountSuccess",
+      () => {
+        moxios.stubRequest('/users/3', {
+          status: 200,
         });
-    });
+        const expectedActions = [{
+          type: 'DELETE_USER_PROFILE_SUCCESS',
+        }];
+        const store = mockStore();
+        store.dispatch(userActions.deleteUserAccount(3))
+          .then(() => {
+            expect(store.getActions())
+              .toEqual(expectedActions);
+          });
+      });
   });
 });

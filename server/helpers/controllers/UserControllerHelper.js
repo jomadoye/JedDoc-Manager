@@ -48,7 +48,7 @@ class UserControllerHelper {
     let response = {};
     if (!user) {
       response = res.status(404)
-        .json({
+        .send({
           message: 'User not found',
         });
       return response;
@@ -63,7 +63,7 @@ class UserControllerHelper {
       })
       .then(() => {
         response = res.status(200)
-          .json({
+          .send({
             message: 'User updated successfully.',
             user,
           });
@@ -71,7 +71,7 @@ class UserControllerHelper {
       })
       .catch((error) => {
         response = res.status(400)
-          .json({
+          .send({
             message: 'Error updating user.',
             error,
           });
@@ -93,7 +93,7 @@ class UserControllerHelper {
     let response = {};
     if (!user) {
       response = res.status(404)
-        .json({
+        .send({
           message: 'User not found',
         });
       return response;
@@ -102,14 +102,14 @@ class UserControllerHelper {
       .destroy()
       .then(() => {
         response = res.status(200)
-          .json({
+          .send({
             message: 'User deleted successfully.',
           });
         return response;
       })
       .catch((error) => {
         response = res.status(400)
-          .json({
+          .send({
             error,
             message: 'Error encountered when deleting user',
           });
@@ -132,7 +132,7 @@ class UserControllerHelper {
     let response = {};
     if (!user) {
       response = res.status(400)
-        .json({
+        .send({
           form: 'Invalid Credentials',
           message: 'Authentication failed, user not found',
         });
@@ -140,7 +140,7 @@ class UserControllerHelper {
     } else if (user) {
       if (req.body.password === undefined) {
         response = res.status(400)
-          .json({
+          .send({
             form: 'Invalid Credentials',
             message: 'Authentication failed, no password.',
           });
@@ -148,7 +148,7 @@ class UserControllerHelper {
       }
       if (!user.checkPassword(req.body.password)) {
         response = res.status(400)
-          .json({
+          .send({
             form: 'Invalid Credentials',
             message: 'Authentication failed, wrong password.',
           });
@@ -163,7 +163,7 @@ class UserControllerHelper {
       };
       const token = UserControllerHelper.signJwtToken(secureUserDetails);
       response = res.status(200)
-        .json({
+        .send({
           message: 'User logged in',
           token,
         });

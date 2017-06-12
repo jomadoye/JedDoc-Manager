@@ -1,53 +1,12 @@
 import expect from 'expect';
 import reducers from '../../reducers/';
+import reducerHelpers from '../helpers/reducerHelpers';
+
+let expectedState1 = reducerHelpers.SEARCH_USER_BY_USERNAME;
+let expectedState2 = reducerHelpers.SEARCH_DOCUMENTS_BY_TITLE_SUCCESS;
 
 describe('Reducers', () => {
   it('should handle SEARCH_USER_BY_USERNAME actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 4,
-          username: 'q',
-          fullname: 'q',
-          roleId: 1,
-          email: 'qq1be@email.com',
-        },
-        allUsers: {
-          count: 1,
-          page: 1,
-          pageCount: 1,
-          pageSize: 6,
-          totalCount: 6,
-          users: [{
-            id: 3,
-            fullname: 'dede',
-            username: 'dede',
-            email: 'Frederique44@yahoo.com',
-            roleId: 1,
-            password: '$2a$08$xiJEybtOvPA163fka4Ma6.A/5M4TvKskpqy2HMmydl6JS6vx/arAu',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-            documents: [],
-          }],
-          metaData: {
-            page: 1,
-            pageCount: 1,
-            pageSize: 1,
-            totalCount: 1,
-          },
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [],
       login: {
@@ -156,32 +115,10 @@ describe('Reducers', () => {
 
     // Assertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState1);
   });
 
   it('should handle SEARCH_DOCUMENTS_BY_TITLE_SUCCESS actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 3,
-          username: 'q',
-          fullname: 'q',
-          roleId: 1,
-          email: 'qq1be@email.com',
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
-
     const state = reducers({
       flashMessages: [],
       login: {
@@ -209,6 +146,6 @@ describe('Reducers', () => {
 
     // Assertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState2);
   });
 });

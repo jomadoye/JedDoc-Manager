@@ -1,6 +1,7 @@
 import models from '../models';
+import handleError from '../../server/helpers/utility/handleError';
 import DocumentControllerHelper
-from '../helpers/controllers/documentControllerHelper';
+from '../helpers/controllers/DocumentControllerHelper';
 
 const Document = models.Documents;
 const User = models.Users;
@@ -30,14 +31,14 @@ export default {
         ownerRoleId: req.decoded.data.roleId,
       })
       .then(document => res.status(201)
-        .json({
+        .send({
           message: 'Document created successfully.',
           document,
         }))
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'An error occured while creating this document.',
-          error,
+          error: handleError(error),
         }));
   },
 
@@ -60,9 +61,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error encountered while updating',
-          error,
+          error: handleError(error),
         }));
   },
 
@@ -85,9 +86,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error encountered while deleting user',
-          error,
+          error: handleError(error),
         }));
   },
 
@@ -110,9 +111,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error retrieving document',
-          error,
+          error: handleError(error),
         }));
   },
 
@@ -141,7 +142,7 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .send(error));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -157,9 +158,9 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Error retrieving document',
-          error,
+          error: handleError(error),
         }));
   },
 };

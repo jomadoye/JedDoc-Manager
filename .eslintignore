@@ -1,6 +1,8 @@
 /node_modules/*
 client/test/testSetup.js
 client/test/reducers/*.js
+client/test/helpers/*.js
 client/store/*.js
 server/models/index.js
 server/migrations/*.js
+client/test/helpers/reducerHelpers.js

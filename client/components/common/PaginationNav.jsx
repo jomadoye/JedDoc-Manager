@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
  * This function renders the pagination component
  *
  * @export
- * @param {number} {index}
- * @param {number} {selected}
- * @param {boolean} {isActive}
- * @param {boolean} {notActive}
- * @param {function} {handlePagination}
- * @param {function} {index}
- * @param {function} {isSearchDocument}
+ * @param {number} index The index
+ * @param {number} selected The currently selected numner
+ * @param {boolean} isActive This checks if a number is currently selected
+ * @param {boolean} notActive This checks if a number is currently selected
+ * @param {function} handlePagination This method calculates the pagination
+ * @param {function} isSearchDocument
+ *  This checks if a user is currently searching the documents
  * @returns
  */
 export default function PaginationNav({ index, selected, isActive, notActive, handlePagination, isSearchDocument }) {

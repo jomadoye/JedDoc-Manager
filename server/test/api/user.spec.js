@@ -53,8 +53,8 @@ describe('User API', () => {
           res.body.should.have.property('username')
             .eql('Username is required');
           should.exist(res.body.username);
-          done();
         });
+      done();
     });
 
     it('should not create a user with empty email field', (done) => {
@@ -66,8 +66,8 @@ describe('User API', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('email')
             .eql('This Email is invalid');
-          done();
         });
+      done();
     });
 
     it('should not create a user with empty fullname field', (done) => {
@@ -79,8 +79,8 @@ describe('User API', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('fullname')
             .eql('Fullname is required');
-          done();
         });
+      done();
     });
 
     it('should not create a user with empty password field', (done) => {
@@ -92,8 +92,8 @@ describe('User API', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('password')
             .eql('Password is required');
-          done();
         });
+      done();
     });
 
     it('should not create a user without username field', (done) => {
@@ -103,16 +103,9 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('errors');
-          res.body.errors[0].should.have.property('path');
-          res.body.errors[0].should.have.property('path')
-            .eql('username');
-          res.body.errors[0].should.have.property('type')
-            .eql('notNull Violation');
-          res.body.errors[0].should.have.property('message')
-            .eql('username cannot be null');
-          done();
+          res.body.message.eql('username cannot be null');
         });
+      done();
     });
 
     it('should not create a user without fullname field', (done) => {
@@ -122,16 +115,9 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('errors');
-          res.body.errors[0].should.have.property('path');
-          res.body.errors[0].should.have.property('path')
-            .eql('fullname');
-          res.body.errors[0].should.have.property('type')
-            .eql('notNull Violation');
-          res.body.errors[0].should.have.property('message')
-            .eql('fullname cannot be null');
-          done();
+          res.body.message.eql('fullname cannot be null');
         });
+      done();
     });
 
     it('should not create a user without email field', (done) => {
@@ -141,16 +127,9 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('errors');
-          res.body.errors[0].should.have.property('path');
-          res.body.errors[0].should.have.property('path')
-            .eql('email');
-          res.body.errors[0].should.have.property('type')
-            .eql('notNull Violation');
-          res.body.errors[0].should.have.property('message')
-            .eql('email cannot be null');
-          done();
+          res.body.message.eql('email cannot be null');
         });
+      done();
     });
 
     it('should not create a user without password field', (done) => {
@@ -160,16 +139,9 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('errors');
-          res.body.errors[0].should.have.property('path');
-          res.body.errors[0].should.have.property('path')
-            .eql('password');
-          res.body.errors[0].should.have.property('type')
-            .eql('notNull Violation');
-          res.body.errors[0].should.have.property('message')
-            .eql('password cannot be null');
-          done();
+          res.body.message.eql('password cannot be null');
         });
+      done();
     });
 
     it('should not create a user with an unUnique username', (done) => {
@@ -181,8 +153,8 @@ describe('User API', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('username')
             .eql('This username already exists');
-          done();
         });
+      done();
     });
 
     it('should not create a user with an unUnique email', (done) => {
@@ -194,8 +166,8 @@ describe('User API', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('email')
             .eql('This email already exists');
-          done();
         });
+      done();
     });
 
     it('should create a new user ', (done) => {
@@ -209,8 +181,8 @@ describe('User API', () => {
           res.body.should.have.property('message');
           res.body.should.have.property('message')
             .eql('User successfully created');
-          done();
         });
+      done();
     });
 
     it('should ensure new users have a role of basic ', (done) => {
@@ -221,8 +193,6 @@ describe('User API', () => {
           res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message');
-          res.body.should.have.property('message')
-            .eql('User successfully created');
           res.body.user.should.have.property('roleId')
             .eql(3);
           done();
@@ -479,7 +449,6 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-
           res.body.message.should.eql('Error updating user.');
           done();
         });
@@ -551,7 +520,6 @@ describe('User API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('Object');
-
           res.body.message.should.eql('Error encountered when deleting user');
           done();
         });

@@ -1,6 +1,13 @@
 import faker from 'faker';
 
 export default [{
+  id: 50,
+  fullname: 'qwerty',
+  username: 'qwerty',
+  email: 'qwerty@email.com',
+  password: 'password',
+  roleId: 2,
+}, {
   id: 20,
   fullname: faker.name.findName(),
   username: faker.internet.userName(),

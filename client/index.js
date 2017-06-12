@@ -15,6 +15,12 @@ if (localStorage.jwtToken_JedDoc) {
   setAuthorizationToken(localStorage.jwtToken_JedDoc);
   store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken_JedDoc)));
 }
+
+ /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   */
 render(
     <Provider store={store}>
       <Router history={browserHistory} routes={routes}/>

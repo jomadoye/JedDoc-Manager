@@ -6,28 +6,52 @@ ignore:
     - standard > eslint > shelljs:
         reason: I will fix it personally
         expires: '2017-06-13T20:08:44.467Z'
+      eslint > shelljs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
   'npm:ms:20170412':
     - morgan > debug > ms:
         reason: No fix available
         expires: '2017-06-15T17:42:06.557Z'
+      mocha > debug > ms:
+        reason: None given
+        expires: '2017-07-10T19:50:24.646Z'
     - axios > follow-redirects > debug > ms:
         reason: None
         expires: '2017-06-15T17:42:06.558Z'
+      eslint-plugin-import > eslint-module-utils > debug > ms:
+        reason: None given
+        expires: '2017-07-10T19:50:24.646Z'
     - body-parser > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.558Z'
+      babel-cli > chokidar > fsevents > node-pre-gyp > tar-pack > debug > ms:
+        reason: None given
+        expires: '2017-07-10T19:50:24.646Z'
     - express > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.558Z'
+      eslint-watch > chokidar > fsevents > node-pre-gyp > tar-pack > debug > ms:
+        reason: None given
+        expires: '2017-07-10T19:50:24.646Z'
     - express > send > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.558Z'
+      nodemon > chokidar > fsevents > node-pre-gyp > tar-pack > debug > ms:
+        reason: None given
+        expires: '2017-07-10T19:50:24.648Z'
     - express > serve-static > send > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.558Z'
+      nightwatch > mocha-nightwatch > debug > ms:
+        reason: None given
+        expires: '2017-07-10T19:50:24.649Z'
     - sequelize > retry-as-promised > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.558Z'
+      webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar-pack > debug > ms:
+        reason: None given
+        expires: '2017-07-10T19:50:24.649Z'
     - snyk > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.558Z'
@@ -103,4 +127,121 @@ ignore:
     - standard > eslint-plugin-import > eslint-module-utils > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.560Z'
+  'npm:qs:20170213':
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > qs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.651Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > request > qs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.651Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > request > qs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.651Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > request > qs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.652Z'
+  'npm:brace-expansion:20170302':
+    - babel-cli > chokidar > fsevents > node-pre-gyp > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.653Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.654Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > tar-pack > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.655Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > tar-pack > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.655Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.656Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.656Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > tar-pack > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.657Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.657Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.657Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > tar-pack > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.658Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > tar-pack > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.658Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.659Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.660Z'
+    - eslint-watch > chokidar > fsevents > node-pre-gyp > tar-pack > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.660Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.660Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.661Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > tar-pack > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.661Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > tar-pack > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.661Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.661Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.661Z'
+    - nodemon > chokidar > fsevents > node-pre-gyp > tar-pack > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.661Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.662Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.662Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar-pack > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.662Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar-pack > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.662Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.662Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar-pack > fstream-ignore > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar-pack > tar > fstream > rimraf > glob > minimatch > brace-expansion:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
+  'npm:ejs:20161128':
+    - nightwatch > ejs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
+  'npm:ejs:20161130':
+    - nightwatch > ejs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
+  'npm:ejs:20161130-1':
+    - nightwatch > ejs:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
+  'npm:growl:20160721':
+    - mocha > growl:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
+    - nightwatch > mocha-nightwatch > growl:
+        reason: None given
+        expires: '2017-07-10T19:50:24.663Z'
 patch: {}

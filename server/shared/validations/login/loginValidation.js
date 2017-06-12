@@ -8,7 +8,7 @@ import lodash from 'lodash';
  * @param {object} data
  * @returns {string}
  */
-export default function validateInput(data) {
+export default function loginValidation(data) {
   const errors = {};
   if (Validator.isEmpty(data.query)) {
     errors.query = 'This field is required';

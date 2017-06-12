@@ -8,7 +8,21 @@ import { Row, Input } from 'react-materialize';
 import * as DocumentAction from '../../actions/documentAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
+/**
+ * The document card component
+ *
+ * @export
+ * @class CardDocumentView
+ * @extends {React.Component}
+ */
 export class CardDocumentView extends React.Component {
+
+  /**
+   * Creates an instance of CardDocumentView.
+   * @param {object} props
+   *
+   * @memberof CardDocumentView
+   */
   constructor(props) {
     super(props);
 
@@ -27,6 +41,7 @@ export class CardDocumentView extends React.Component {
       isLoading: false,
     };
   }
+
   /**
    * This method runs when the component mounts
    *
@@ -147,7 +162,7 @@ export class CardDocumentView extends React.Component {
    * This function displays the html for the document body
    *
    * @param {sbject} docBody
-   * @returns
+   * @returns {HTML}
    *
    * @memberof CardDocumentView
    */
@@ -155,6 +170,13 @@ export class CardDocumentView extends React.Component {
     return { __html: docBody };
   }
 
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof CardDocumentView
+   */
   render() {
     const { document, myDocument, readOnly } = this.props;
     const currentDate = moment(new Date());
@@ -349,7 +371,7 @@ function mapDispatchToProps(dispatch) {
  * mapStateToProps
  *
  * @param {object} state
- * @returns {object}
+ * @returns {object} props
  */
 function mapStateToProps(state) {
   return {

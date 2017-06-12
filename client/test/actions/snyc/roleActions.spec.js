@@ -44,7 +44,8 @@ describe('User Actions', () => {
         ] }];
       const store = mockStore({
       });
-      store.dispatch(roleActions.loadUserRolesSuccess([{ title: 'role1' }, { title: 'role2' }]));
+      store.dispatch(roleActions
+        .loadUserRolesSuccess([{ title: 'role1' }, { title: 'role2' }]));
       expect(store.getActions()[0])
         .to.eql(expectedActions[0]);
     });

@@ -1,82 +1,15 @@
 import expect from 'expect';
 import reducers from '../../reducers/';
+import reducerHelpers from '../helpers/reducerHelpers';
+
+let expectedState1 = reducerHelpers.DELETE_SINGLE_USER_SUCCESS_EXPECTED_STATE;
+let expectedState2 = reducerHelpers.LOAD_ALL_DOCUMENTS_SUCCESS;
+let expectedState3 = reducerHelpers.LOAD_ALL_USERS_SUCCESS;
+let expectedState4 = reducerHelpers.UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS;
+
 
 describe('Admin Reducers', () => {
   it('should handle DELETE_SINGLE_USER_SUCCESS actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 4,
-          username: 'q',
-          fullname: 'q',
-          roleId: 1,
-          email: 'qq1be@email.com',
-        },
-        allUsers: {
-          count: 6,
-          page: 1,
-          pageCount: 1,
-          pageSize: 6,
-          totalCount: 6,
-          users: [{
-            id: 1,
-            fullname: 'Samara Stracke PhD',
-            username: 'Max_Borer',
-            email: 'Reyna.Torphy@hotmail.com',
-            roleId: 3,
-            password: '$2a$08$KPhQp3dHfCaDEoAZ6KmXiukUOwMDsvm9poOJNCI1tpk5sZoYEs4my',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 2,
-            fullname: 'jonathan doe',
-            username: 'john doe',
-            email: 'Tania92@yahoo.com',
-            roleId: 3,
-            password: '$2a$08$76j1vujLbWLdS8K3zCgiGes/OP.lxzMyWDRL7dw6.fej5SBlvuVxi',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 3,
-            fullname: 'dede',
-            username: 'dede',
-            email: 'Frederique44@yahoo.com',
-            roleId: 1,
-            password: '$2a$08$xiJEybtOvPA163fka4Ma6.A/5M4TvKskpqy2HMmydl6JS6vx/arAu',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 4,
-            fullname: 'q',
-            username: 'q',
-            email: 'qq1be@email.com',
-            roleId: 1,
-            password: '$2a$08$EyNLxwbvwENfI.yf/zswLOpY2ysC6XKEqEqgYQABNhLMtU9MtHrDq',
-            createdAt: '2017-06-05T11:55:11.608Z',
-            updatedAt: '2017-06-05T11:55:11.608Z',
-          }, {
-            id: 20,
-            fullname: 'Curt Walter',
-            username: 'Kade_Rempel68',
-            email: 'Gabriel.Goldner83@hotmail.com',
-            roleId: 2,
-            password: '$2a$08$vGRhr8ZKerc1jPTW2KHo0uoVFX.rJRP0ZhFFbQIXAa6c0YznWIdY.',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-06T12:44:06.350Z',
-          }],
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [],
       login: {
@@ -166,62 +99,10 @@ describe('Admin Reducers', () => {
 
     // Asertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState1);
   });
 
   it('should handle LOAD_ALL_DOCUMENTS_SUCCESS actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 12,
-          username: 'qq',
-          fullname: 'qq',
-          roleId: 1,
-          email: 'qq1e@email.com',
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: {
-          count: 10,
-          page: 2,
-          pageCount: 2,
-          pageSize: 2,
-          totalCount: 10,
-          documents: [{
-            id: 8,
-            title: 'test document 7r',
-            body: 'Voluptatibus et quos ut culpa mollitia amet voluptas ratione id. Error nesciunt eos libero ratione. Aliquam dolore qui similique nemo qui dolorem et. Omnis praesentium ducimus maiores cum.',
-            access: 'public',
-            ownerRoleId: 2,
-            createdAt: '2017-05-26T16:41:07.867Z',
-            updatedAt: '2017-06-01T15:29:34.760Z',
-            userId: 12,
-            User: {
-              fullname: 'qq',
-            },
-          }, {
-            id: 7,
-            title: 'test document 6e',
-            body: 'Aspernatur eum at dolor quae. Quo dignissimos rerum voluptas ducimus sit. Nihil minus sed dolores delectus earum error cumque. Quod dolorem ullam repellendus facere architecto.',
-            access: 'public',
-            ownerRoleId: 2,
-            createdAt: '2017-05-26T16:41:07.867Z',
-            updatedAt: '2017-06-01T15:30:34.285Z',
-            userId: 12,
-            User: {
-              fullname: 'qq',
-            },
-          }],
-        },
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [],
       login: {
@@ -383,93 +264,10 @@ describe('Admin Reducers', () => {
 
     // Asertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState2);
   });
 
   it('should handle LOAD_ALL_USERS_SUCCESS actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 4,
-          username: 'q',
-          fullname: 'q',
-          roleId: 1,
-          email: 'qq1be@email.com',
-        },
-        allUsers: {
-          count: 6,
-          page: 1,
-          pageCount: 1,
-          pageSize: 6,
-          totalCount: 6,
-          users: [{
-            id: 21,
-            fullname: 'Alvah Shanahan',
-            username: 'Jacynthe.Will',
-            email: 'Geraldine79@gmail.com',
-            roleId: 2,
-            password: '$2a$08$TMey3z1W6b1pbtD3qvdjauU7686vQlcwFxs15KNwaXp8weB4t8xr2',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 1,
-            fullname: 'Samara Stracke PhD',
-            username: 'Max_Borer',
-            email: 'Reyna.Torphy@hotmail.com',
-            roleId: 3,
-            password: '$2a$08$KPhQp3dHfCaDEoAZ6KmXiukUOwMDsvm9poOJNCI1tpk5sZoYEs4my',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 2,
-            fullname: 'jonathan doe',
-            username: 'john doe',
-            email: 'Tania92@yahoo.com',
-            roleId: 3,
-            password: '$2a$08$76j1vujLbWLdS8K3zCgiGes/OP.lxzMyWDRL7dw6.fej5SBlvuVxi',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 3,
-            fullname: 'dede',
-            username: 'dede',
-            email: 'Frederique44@yahoo.com',
-            roleId: 1,
-            password: '$2a$08$xiJEybtOvPA163fka4Ma6.A/5M4TvKskpqy2HMmydl6JS6vx/arAu',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 4,
-            fullname: 'q',
-            username: 'q',
-            email: 'qq1be@email.com',
-            roleId: 1,
-            password: '$2a$08$EyNLxwbvwENfI.yf/zswLOpY2ysC6XKEqEqgYQABNhLMtU9MtHrDq',
-            createdAt: '2017-06-05T11:55:11.608Z',
-            updatedAt: '2017-06-05T11:55:11.608Z',
-          }, {
-            id: 20,
-            fullname: 'Curt Walter',
-            username: 'Kade_Rempel68',
-            email: 'Gabriel.Goldner83@hotmail.com',
-            roleId: 2,
-            password: '$2a$08$vGRhr8ZKerc1jPTW2KHo0uoVFX.rJRP0ZhFFbQIXAa6c0YznWIdY.',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-06T12:44:06.350Z',
-          }],
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [],
       login: {
@@ -620,89 +418,10 @@ describe('Admin Reducers', () => {
 
     // Asertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState3);
   });
 
   it('should handle UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS actions', () => {
-    const expectedState = {
-      flashMessages: [],
-      login: {
-        isAuthenticated: true,
-        user: {
-          id: 4,
-          username: 'q',
-          fullname: 'q',
-          roleId: 1,
-          email: 'qq1be@email.com',
-        },
-        allUsers: {
-          count: 6,
-          page: 1,
-          pageCount: 1,
-          pageSize: 6,
-          totalCount: 6,
-          users: [{
-            id: 21,
-            fullname: 'Alvah Shanahan',
-            username: 'Jacynthe.Will',
-            email: 'Geraldine79@gmail.com',
-            roleId: 2,
-            password: '$2a$08$TMey3z1W6b1pbtD3qvdjauU7686vQlcwFxs15KNwaXp8weB4t8xr2',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 1,
-            fullname: 'Samara Stracke PhD',
-            username: 'Max_Borer',
-            email: 'Reyna.Torphy@hotmail.com',
-            roleId: 3,
-            password: '$2a$08$KPhQp3dHfCaDEoAZ6KmXiukUOwMDsvm9poOJNCI1tpk5sZoYEs4my',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 2,
-            fullname: 'jonathan doe',
-            username: 'john doe',
-            email: 'Tania92@yahoo.com',
-            roleId: 3,
-            password: '$2a$08$76j1vujLbWLdS8K3zCgiGes/OP.lxzMyWDRL7dw6.fej5SBlvuVxi',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 3,
-            fullname: 'dede',
-            username: 'dede',
-            email: 'Frederique44@yahoo.com',
-            roleId: 1,
-            password: '$2a$08$xiJEybtOvPA163fka4Ma6.A/5M4TvKskpqy2HMmydl6JS6vx/arAu',
-            createdAt: '2017-06-05T11:53:33.313Z',
-            updatedAt: '2017-06-05T11:53:33.321Z',
-          }, {
-            id: 4,
-            fullname: 'q',
-            username: 'q',
-            email: 'qq1be@email.com',
-            roleId: 1,
-            password: '$2a$08$EyNLxwbvwENfI.yf/zswLOpY2ysC6XKEqEqgYQABNhLMtU9MtHrDq',
-            createdAt: '2017-06-05T11:55:11.608Z',
-            updatedAt: '2017-06-05T11:55:11.608Z',
-          }, {
-            fullname: 'Curt Walter',
-            username: 'Kade_Rempel68',
-            email: 'Gabriel.Goldner83@hotmail.com',
-            roleId: '2',
-          }],
-        },
-      },
-      documents: {
-        PublicDocuments: [],
-        MyDocuments: [],
-        AuthToViewDocuments: [],
-        allDocuments: [],
-      },
-      user: [],
-      role: [],
-    };
     const state = reducers({
       flashMessages: [],
       login: {
@@ -798,6 +517,6 @@ describe('Admin Reducers', () => {
 
     // Asertion
     expect(state)
-      .toEqual(expectedState);
+      .toEqual(expectedState4);
   });
 });

@@ -1,11 +1,11 @@
-import users from './users';
-import documents from './documents';
-import search from './search';
-import roles from './roles';
+import Users from './Users';
+import Documents from './Documents';
+import Search from './Search';
+import Roles from './Roles';
 
 export default {
-  users,
-  documents,
-  search,
-  roles,
+  Users,
+  Documents,
+  Search,
+  Roles,
 };

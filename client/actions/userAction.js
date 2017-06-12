@@ -279,7 +279,7 @@ export function updateSingleUserAccountByAdmin(updatedUser, userId) {
 }
 
 /**
- * throw error;
+ * This method searches for a user by username
  *
  * @export
  * @param {string} searchQuery

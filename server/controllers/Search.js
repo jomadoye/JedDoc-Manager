@@ -1,5 +1,6 @@
 import models from '../models';
-import paginate from '../helpers/pagination/pagination';
+import handleError from '../../server/helpers/utility/handleError';
+import pagination from '../helpers/pagination/pagination';
 
 const User = models.Users;
 const Document = models.Documents;
@@ -38,24 +39,24 @@ export default {
       .then((user) => {
         if (!user) {
           res.status(404)
-            .json({
+            .send({
               message: 'User not found.',
             });
         } else {
           const users = {
             count: user.count,
-            metaData: paginate(user.count, limit, offset),
+            metaData: pagination(user.count, limit, offset),
             users: user.rows,
           };
           res.status(200)
-            .json({
+            .send({
               message: 'This is your user.',
               users,
             });
         }
       })
       .catch(error => res.status(400)
-        .send(error));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -89,25 +90,25 @@ export default {
       .then((document) => {
         if (!document) {
           return res.status(404)
-            .json({
+            .send({
               message: 'Document Not Found',
             });
         }
         const documents = {
           count: document.count,
-          metaData: paginate(document.count, limit, offset),
+          metaData: pagination(document.count, limit, offset),
           document: document.rows,
         };
         return res.status(200)
-          .json({
+          .send({
             message: 'This is your document.',
             documents,
           });
       })
       .catch(error => res.status(400)
-        .json({
+        .send({
           message: 'Document Not Found',
-          error,
+          error: handleError(error),
         }));
   },
 };

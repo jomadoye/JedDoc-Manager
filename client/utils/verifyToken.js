@@ -11,7 +11,19 @@ import { addFlashMessage } from '../actions/flashMessages';
  * @returns {ReactComponent}
  */
 export default function (ComposedComponent) {
+  /**
+   * This method verifies the token
+   *
+   * @class VerifyToken
+   * @extends {React.Component}
+   */
   class VerifyToken extends React.Component {
+
+    /**
+     * This method runs when the component mounts
+     *
+     * @memberof VerifyToken
+     */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
         this.props.addFlashMessage({
@@ -22,11 +34,26 @@ export default function (ComposedComponent) {
       }
     }
 
+    /**
+     * This method runs when the component updates its props
+     *
+     * @param {any} nextProps
+     *
+     * @memberof VerifyToken
+     */
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
         this.context.router.push('/');
       }
     }
+
+    /**
+     * This method renders the component
+     *
+     * @returns {object} jsx component
+     *
+     * @memberof VerifyToken
+     */
     render() {
       return (
         <ComposedComponent {...this.props} />

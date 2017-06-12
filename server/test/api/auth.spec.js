@@ -65,10 +65,9 @@ describe('User authentication API', () => {
         .get('/api/users')
         .end((err, res) => {
           res.should.have.status(403);
-
           res.body.message.should.eql('No token provided.');
-          done();
         });
+      done();
     });
 
     it('should not auth users with wrong username or email', (done) => {
@@ -107,10 +106,9 @@ describe('User authentication API', () => {
         .get('/api/users/logout')
         .end((err, res) => {
           res.should.have.status(200);
-
           res.body.message.should.eql('User logged out');
-          done();
         });
+      done();
     });
   });
 });

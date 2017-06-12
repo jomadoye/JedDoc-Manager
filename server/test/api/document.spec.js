@@ -37,8 +37,8 @@ describe('Document API', () => {
           .end((err, res) => {
             basicUserData = res.body;
             document1.userId = userData.user.id;
+            done();
           });
-        done();
       });
   });
 
@@ -108,7 +108,6 @@ describe('Document API', () => {
           res.should.have.status(400);
           res.body.message.should
             .eql('An error occured while creating this document.');
-
           done();
         });
     });
@@ -122,7 +121,6 @@ describe('Document API', () => {
           res.should.have.status(400);
           res.body.message.should
             .eql('An error occured while creating this document.');
-
           done();
         });
     });
@@ -136,7 +134,6 @@ describe('Document API', () => {
           res.should.have.status(400);
           res.body.message.should
             .eql('An error occured while creating this document.');
-
           done();
         });
     });
@@ -150,7 +147,6 @@ describe('Document API', () => {
           res.should.have.status(400);
           res.body.message.should
             .eql('An error occured while creating this document.');
-
           done();
         });
     });
@@ -371,7 +367,6 @@ describe('Document API', () => {
         .set('x-access-token', userData.token)
         .send({
           title: 'updateTitle',
-
         })
         .end((err, res) => {
           res.should.have.status(200);

@@ -18,11 +18,17 @@ export default {
   },
 
   fakeUser: {
-    fullname: faker.name.findName(),
-    username: faker.internet.userName(),
-    query: faker.internet.userName(),
-    email: faker.internet.email(),
-    password: faker.internet.password(),
+    fullname: 'queen',
+    username: 'queen',
+    email: 'queen@email.com',
+    password: 'queen',
+  },
+
+  fakeUserModel: {
+    fullname: 'king',
+    username: 'king',
+    email: 'king@email.com',
+    password: 'king',
   },
 
   fakeUser1: {

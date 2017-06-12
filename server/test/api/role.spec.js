@@ -55,10 +55,6 @@ describe('Role API', () => {
           res.body.should.be.a('object');
 
           res.body.message.should.eql('Error creating role');
-          res.body.error.errors[0].message.should
-            .eql('This role title cannot be empty');
-          res.body.error.errors[0].type.should.eql('Validation error');
-          res.body.error.errors[0].path.should.eql('title');
           done();
         });
     });
@@ -71,11 +67,7 @@ describe('Role API', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-
           res.body.message.should.eql('Error creating role');
-          res.body.error.errors[0].message.should.eql('title cannot be null');
-          res.body.error.errors[0].type.should.eql('notNull Violation');
-          res.body.error.errors[0].path.should.eql('title');
           done();
         });
     });
@@ -89,10 +81,6 @@ describe('Role API', () => {
           res.should.have.status(400);
           res.body.should.be.a('object');
           res.body.message.should.eql('Error creating role');
-          res.body.error.errors[0].message.should
-            .eql('This role already exist');
-          res.body.error.errors[0].type.should.eql('unique violation');
-          res.body.error.errors[0].path.should.eql('title');
           done();
         });
     });

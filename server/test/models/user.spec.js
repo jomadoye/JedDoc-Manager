@@ -1,11 +1,10 @@
-import chai from 'chai';
 import model from '../../models';
 import helperUsers from '../../test-utility/helpers/api/helperUsers';
 
 process.env.NODE_ENV = 'test';
 
 const User = model.Users;
-const fakeUser = helperUsers.fakeUser;
+const fakeUser = helperUsers.fakeUserModel;
 const fakeUser1 = helperUsers.fakeUser1;
 const unUniqueEmail = helperUsers.unUniqueEmail;
 const unUniqueUsername1 = helperUsers.unUniqueUsername1;
@@ -14,7 +13,6 @@ const emptyEmail = helperUsers.emptyEmail;
 const emptyPassword = helperUsers.emptyPassword;
 const emptyUsername = helperUsers.emptyUsername;
 const emptyFullname = helperUsers.emptyFullname;
-const should = chai.should();
 const userModelField = [
   'fullname',
   'username',
@@ -34,11 +32,10 @@ describe('Users Model', () => {
   });
   describe('Create User', () => {
     let createdUser;
-    it('should create new user', (done) => {
+    before((done) => {
       User.create(fakeUser)
         .then((user) => {
           createdUser = user;
-          should.exist(user);
           done();
         });
     });

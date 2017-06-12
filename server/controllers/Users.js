@@ -1,7 +1,8 @@
 import models from '../models';
-import UserControllerHelper from '../helpers/controllers/userControllerHelper';
+import handleError from '../../server/helpers/utility/handleError';
+import UserControllerHelper from '../helpers/controllers/UserControllerHelper';
 import commonValidations from '../shared/validations/signup/signupValidation';
-import paginate from '../helpers/pagination/pagination';
+import pagination from '../helpers/pagination/pagination';
 
 require('dotenv')
   .config();
@@ -41,17 +42,17 @@ export default {
               };
               const token = signJwtToken(secureUserDetails);
               res.status(201)
-                .json({
+                .send({
                   message: 'User successfully created',
                   token,
                   user,
                 });
             })
             .catch(error => res.status(400)
-              .send(error));
+              .send({ error: handleError(error) }));
         }
         return res.status(400)
-          .send(errors);
+          .send({ errors });
       });
   },
 
@@ -74,13 +75,13 @@ export default {
         const user = {
           count: users.count,
           rows: users.rows,
-          metaData: paginate(users.count, limit, offset),
+          metaData: pagination(users.count, limit, offset),
         };
         res.status(200)
         .send(user);
       })
       .catch(error => res.status(400)
-        .send(error));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -111,7 +112,7 @@ export default {
         }
       })
       .catch(error => res.status(400)
-        .send(error));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -128,10 +129,10 @@ export default {
         $or: [{ email: req.params.query }, { username: req.params.query }],
       },
     }).then((user) => {
-      res.json({ user });
+      res.send({ user });
     })
       .catch(error => res.status(400)
-        .send(error));
+        .send({ error: handleError(error) }));
   },
 
   /**
@@ -154,8 +155,8 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
-          error,
+        .send({
+          error: handleError(error),
           message: 'Error updating user.',
         }));
   },
@@ -175,9 +176,8 @@ export default {
         return response;
       })
       .catch(error => res.status(400)
-        .json({
-          error,
-
+        .send({
+          error: handleError(error),
           message: 'Error encountered when deleting user',
         }));
   },
@@ -201,10 +201,9 @@ export default {
       return response;
     })
       .catch(error => res.status(400)
-        .json({
-
+        .send({
           message: 'Error logging',
-          error,
+          error: handleError(error),
         }));
   },
 
@@ -217,7 +216,7 @@ export default {
   logout(req, res) {
     res.setHeader['x-access-token'] = ' ';
     res.status(200)
-      .json({
+      .send({
         message: 'User logged out',
       });
   },
