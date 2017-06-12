@@ -2,7 +2,7 @@ import models from '../models';
 import handleError from '../../server/helpers/utility/handleError';
 import UserControllerHelper from '../helpers/controllers/UserControllerHelper';
 import commonValidations from '../shared/validations/signup/signupValidation';
-import paginate from '../helpers/pagination/pagination';
+import pagination from '../helpers/pagination/pagination';
 
 require('dotenv')
   .config();
@@ -75,7 +75,7 @@ export default {
         const user = {
           count: users.count,
           rows: users.rows,
-          metaData: paginate(users.count, limit, offset),
+          metaData: pagination(users.count, limit, offset),
         };
         res.status(200)
         .send(user);

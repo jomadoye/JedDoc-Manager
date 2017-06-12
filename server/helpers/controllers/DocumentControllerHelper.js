@@ -1,5 +1,5 @@
 import models from '../../models';
-import paginate from '../../helpers/pagination/pagination';
+import pagination from '../../helpers/pagination/pagination';
 
 const Document = models.Documents;
 
@@ -75,7 +75,7 @@ class DocumentControllerHelper {
       const documents = {
         count: document.count,
         rows: document.rows,
-        metaData: paginate(document.count, limit, offset),
+        metaData: pagination(document.count, limit, offset),
       };
 
       response = res.status(200)

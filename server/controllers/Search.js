@@ -1,6 +1,6 @@
 import models from '../models';
 import handleError from '../../server/helpers/utility/handleError';
-import paginate from '../helpers/pagination/pagination';
+import pagination from '../helpers/pagination/pagination';
 
 const User = models.Users;
 const Document = models.Documents;
@@ -45,7 +45,7 @@ export default {
         } else {
           const users = {
             count: user.count,
-            metaData: paginate(user.count, limit, offset),
+            metaData: pagination(user.count, limit, offset),
             users: user.rows,
           };
           res.status(200)
@@ -96,7 +96,7 @@ export default {
         }
         const documents = {
           count: document.count,
-          metaData: paginate(document.count, limit, offset),
+          metaData: pagination(document.count, limit, offset),
           document: document.rows,
         };
         return res.status(200)
