@@ -29,18 +29,12 @@ describe('Document API', () => {
       .post('/users')
       .send(fakeUserAdmin)
       .end((err, res) => {
-        console.log('hit1')
-        console.log('fakeUserAdmin')
-        console.log(fakeUserAdmin)
         userData = res.body;
         document1.userId = userData.user.id;
         chai.request(server)
           .post('/users')
           .send(basicUser)
           .end((err, res) => {
-            console.log('hit2')
-            console.log('basicUser')
-            console.log(basicUser)
             basicUserData = res.body;
             document1.userId = userData.user.id;
             done();

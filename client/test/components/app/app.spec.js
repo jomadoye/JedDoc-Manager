@@ -4,7 +4,7 @@ import expect from 'expect';
 import App from '../../../components/App.jsx';
 import Footer from '../../../components/includes/Footer.jsx';
 import FlashMessagesList from
-  '../../../components/includes/flashMessagesList.jsx';
+  '../../../components/includes/FlashMessagesList.jsx';
 import NavigationBar from '../../../components/includes/NavigationBar.jsx';
 
 describe(' Test for App Component', () => {
