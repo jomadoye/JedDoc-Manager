@@ -5,3 +5,4 @@ client/test/helpers/*.js
 client/store/*.js
 server/models/index.js
 server/migrations/*.js
+client/test/helpers/reducerHelpers.js
