@@ -6,7 +6,20 @@ import * as userAction from '../../actions/userAction';
 import * as loginAction from '../../actions/loginActions';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
-class myProfilePage extends React.Component {
+/**
+ * The my profile page
+ *
+ * @class MyProfilePage
+ * @extends {React.Component}
+ */
+class MyProfilePage extends React.Component {
+
+  /**
+   * Creates an instance of MyProfilePage.
+   * @param {object} props
+   *
+   * @memberof MyProfilePage
+   */
   constructor(props) {
     super(props);
     this.props.loadUserProfile(this.props.userId);
@@ -31,7 +44,7 @@ class myProfilePage extends React.Component {
    *
    * @param {object} nextProps
    *
-   * @memberof myProfilePage
+   * @memberof MyProfilePage
    */
   componentWillReceiveProps(nextProps) {
     this.setState({ user: nextProps.user });
@@ -43,7 +56,7 @@ class myProfilePage extends React.Component {
    * @param {object} event
    * @returns
    *
-   * @memberof myProfilePage
+   * @memberof MyProfilePage
    */
   updateUserState(event) {
     const field = event.target.name;
@@ -59,7 +72,7 @@ class myProfilePage extends React.Component {
    *
    * @param {object} event
    *
-   * @memberof myProfilePage
+   * @memberof MyProfilePage
    */
   updateUserProfile(event) {
     event.preventDefault();
@@ -74,7 +87,7 @@ class myProfilePage extends React.Component {
    *
    * @param {object} event
    *
-   * @memberof myProfilePage
+   * @memberof MyProfilePage
    */
   setupUpdateUser(event) {
     event.preventDefault();
@@ -86,7 +99,7 @@ class myProfilePage extends React.Component {
    *
    * @param {object} event
    *
-   * @memberof myProfilePage
+   * @memberof MyProfilePage
    */
   handleDelete(event) {
     event.preventDefault();
@@ -105,6 +118,14 @@ class myProfilePage extends React.Component {
       swal('Deleted!', 'This Account has been deleted.', 'success');
     });
   }
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof MyProfilePage
+   */
   render() {
     const { isUpdateingUser, showSubmitButton } = this.state;
     const disabled = isUpdateingUser;
@@ -182,7 +203,7 @@ class myProfilePage extends React.Component {
   }
 }
 
-myProfilePage.propTypes = {
+MyProfilePage.propTypes = {
   updateUserProfile: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
   loadUserProfile: PropTypes.func.isRequired,
@@ -193,7 +214,7 @@ myProfilePage.propTypes = {
   logout: PropTypes.func.isRequired,
 };
 
-myProfilePage.contextTypes = {
+MyProfilePage.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
@@ -236,4 +257,4 @@ function mapDispatchToProps(dispatch) {
     deleteUserAccount: userId => dispatch(userAction.deleteUserAccount(userId)),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(myProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfilePage);

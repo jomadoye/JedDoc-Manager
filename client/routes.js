@@ -1,23 +1,23 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/App';
-import SignupPage from './components/signup/SignupPage.jsx';
-import LoginPage from './components/login/LoginPage.jsx';
-import Dashboard from './components/Dashboard/Dashboard.jsx';
-import NotFound from './components/General/NotFound.jsx';
+import App from './components/App.jsx';
+import SignupPage from './components/access/SignupPage.jsx';
+import LoginPage from './components/access/LoginPage.jsx';
+import Dashboard from './components/documents/Dashboard.jsx';
+import NotFound from './components/includes/NotFound.jsx';
 import VerifyToken from './utils/verifyToken';
 import CreateDocumentPage from
-    './components/documents/createDocumentsPage/CreateDocumentPage.jsx';
-import WelcomePage from './components/welcome/WelcomePage.jsx';
+    './components/documents/CreateDocumentPage.jsx';
+import WelcomePage from './components/documents/WelcomePage.jsx';
 import MyDocumentsPage from
-    './components/documents/myDocumentsPage/myDocumentsPage.jsx';
-import myProfilePage from './components/users/myProfilePage.jsx';
-import createRolePage from './components/roles/createRolePage.jsx';
-import manageRolesPage from './components/roles/manageRolesPage.jsx';
-import manageUsersPage from './components/users/manageUsersPage.jsx';
-import manageDocumentPage from
-    './components/documents/manageDocumentsPage/manageDocumentsPage.jsx';
+    './components/documents/MyDocumentsPage.jsx';
+import MyProfilePage from './components/users/MyProfilePage.jsx';
+import CreateRolePage from './components/roles/CreateRolePage.jsx';
+import ManageRolesPage from './components/roles/ManageRolesPage.jsx';
+import ManageUsersPage from './components/users/ManageUsersPage.jsx';
+import ManageDocumentPage from
+    './components/documents/ManageDocumentsPage.jsx';
 
 export default (
     <Route path="/" component={App}>
@@ -26,15 +26,15 @@ export default (
         <Route path="login" component={LoginPage}/>
         <Route path="dashboard" component={VerifyToken(Dashboard)}/>
         <Route path="myprofile"
-            component={VerifyToken(myProfilePage)}/>
+            component={VerifyToken(MyProfilePage)}/>
         <Route path="managedocs"
-            component={VerifyToken(manageDocumentPage)}/>
+            component={VerifyToken(ManageDocumentPage)}/>
         <Route path="createrole"
-            component={VerifyToken(createRolePage)}/>
+            component={VerifyToken(CreateRolePage)}/>
         <Route path="manageroles"
-            component={VerifyToken(manageRolesPage)}/>
+            component={VerifyToken(ManageRolesPage)}/>
         <Route path="manageusers"
-            component={VerifyToken(manageUsersPage)}/>
+            component={VerifyToken(ManageUsersPage)}/>
         <Route path="createdoc"
             component={VerifyToken(CreateDocumentPage)}/>
         <Route path="mydocs"

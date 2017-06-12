@@ -3,11 +3,17 @@ import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import * as RoleActions from '../../actions/roleActions';
-import ManageRoleRow from '../roles/manageRoleRow.jsx';
+import ManageRoleRow from './ManageRoleRow.jsx';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 import ManageRoleTableHead from './ManageRoleTableHead.jsx';
 
-class manageRolesPage extends React.Component {
+/**
+ * The manage role page
+ *
+ * @class ManageRolesPage
+ * @extends {React.Component}
+ */
+class ManageRolesPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -17,8 +23,7 @@ class manageRolesPage extends React.Component {
   /**
    * This method runs when the component mounts
    *
-   *
-   * @memberof manageRolesPage
+   * @memberof ManageRolesPage
    */
   componentWillMount() {
     this.props.loadUserRoles();
@@ -29,7 +34,7 @@ class manageRolesPage extends React.Component {
    *
    * @param {number} roleId
    *
-   * @memberof manageRolesPage
+   * @memberof ManageRolesPage
    */
   handleDelete(roleId) {
     event.preventDefault();
@@ -48,6 +53,14 @@ class manageRolesPage extends React.Component {
       swal('Deleted!', 'This document has been deleted.', 'success');
     });
   }
+
+  /**
+   * This method renders the component
+   *
+   * @returns manageRolesPage
+   *
+   * @memberof ManageRolesPage
+   */
   render() {
     const { roles } = this.props;
     return (
@@ -68,7 +81,7 @@ class manageRolesPage extends React.Component {
   }
 }
 
-manageRolesPage.propTypes = {
+ManageRolesPage.propTypes = {
   loadUserRoles: PropTypes.func.isRequired,
   roles: PropTypes.array,
   roleId: PropTypes.number,
@@ -102,4 +115,4 @@ function mapStateToProps(state) {
   };
 }
 export default
-  connect(mapStateToProps, mapDispatchToProps)(manageRolesPage);
+  connect(mapStateToProps, mapDispatchToProps)(ManageRolesPage);

@@ -3,7 +3,7 @@ import React from 'react';
 import {
   shallow,
 } from 'enzyme';
-import LoginForm from '../../../components/login/LoginForm.jsx';
+import LoginForm from '../../../components/access/LoginForm.jsx';
 
 /**
  * This function setup the component

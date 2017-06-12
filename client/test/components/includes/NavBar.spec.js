@@ -5,7 +5,7 @@ import {
 } from 'enzyme';
 import {
   NavigationBar,
-} from '../../../components/General/NavigationBar.jsx';
+} from '../../../components/includes/NavigationBar.jsx';
 
 /**
  * This function setup the component

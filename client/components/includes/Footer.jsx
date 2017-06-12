@@ -1,6 +1,20 @@
 import React from 'react';
 
+/**
+ * The footer component
+ *
+ * @class Footer
+ * @extends {React.Component}
+ */
 class Footer extends React.Component {
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof Footer
+   */
   render() {
     return (
       <footer className="page-footer teal darken-4">

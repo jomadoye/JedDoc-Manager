@@ -3,7 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
+/**
+ * The flash message list
+ *
+ * @class FlashMessageList
+ * @extends {React.Component}
+ */
 class FlashMessageList extends React.Component {
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof FlashMessageList
+   */
   render() {
     const signupToast = this.props.messages.map((message) => {
       const { text } = message;

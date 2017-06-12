@@ -3,7 +3,7 @@ import React from 'react';
 import {
   shallow,
 } from 'enzyme';
-import Footer from '../../../components/General/footer.jsx';
+import Footer from '../../../components/includes/Footer.jsx';
 
 /**
  * This function setup the component

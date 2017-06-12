@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
  * This fucntion renders the user roles for the admin
  *
  * @export
- * @param {function} { handleDelete }
+ * @param {function}  handleDelete The delete function
+ * @param {object}  role The role information
  * @param {object} { role }
  * @returns HTML
  */

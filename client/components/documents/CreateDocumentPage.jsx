@@ -1,12 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createDocument } from '../../../actions/documentAction';
+import { createDocument } from '../../actions/documentAction';
 import { addFlashMessage, deleteFlashMessage }
-  from '../../../actions/flashMessages';
+  from '../../actions/flashMessages';
 import CreateDocumentForm from './CreateDocumentForm.jsx';
 
+/**
+ * The create document page
+ *
+ * @class CreateDocumentPage
+ * @extends {React.Component}
+ */
 class CreateDocumentPage extends React.Component {
+
+  /**
+   * Creates an instance of CreateDocumentPage.
+   * @param {object} props
+   *
+   * @memberof CreateDocumentPage
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -61,6 +74,14 @@ class CreateDocumentPage extends React.Component {
     });
     this.props.deleteFlashMessage(1);
   }
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof CreateDocumentPage
+   */
   render() {
     return (
       <div className="center-align">

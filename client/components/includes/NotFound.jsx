@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * Document Form
+ *
+ * @returns {Object} jsx object
+ */
 const NotFound = () =>
   <div>
     <div className="">

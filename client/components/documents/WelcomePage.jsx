@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import * as DocumentAction from '../../actions/documentAction';
 import CardDocumentView from '../common/CardDocumentView.jsx';
 
+/**
+ * The welcome page
+ *
+ * @class LoadDocuments
+ * @extends {React.Component}
+ */
 class LoadDocuments extends React.Component {
 
   /**
@@ -16,6 +22,13 @@ class LoadDocuments extends React.Component {
     this.props.loadDocuments();
   }
 
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof LoadDocuments
+   */
   render() {
     const { documents } = this.props;
     return (

@@ -1,55 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as DocumentAction from '../../../actions/documentAction';
-import CardDocumentView from '../../common/CardDocumentView.jsx';
-import PaginationNav from '../../common/PaginationNav.jsx';
+import * as DocumentAction from '../../actions/documentAction';
+import CardDocumentView from '../common/CardDocumentView.jsx';
+import PaginationNav from '../common/PaginationNav.jsx';
 
-class MyDocumentPage extends React.Component {
+/**
+ * The Dashboard page
+ *
+ * @export
+ * @class Dashboard
+ * @extends {React.Component}
+ */
+export class Dashboard extends React.Component {
+
+  /**
+   * Creates an instance of Dashboard.
+   * @param {object} props
+   *
+   * @memberof Dashboard
+   */
   constructor(props) {
     super(props);
 
     this.state = {
-      documents: props.documents.MyDocuments.documents,
+      AuthToViewDocuments: props.documents.AuthToViewDocuments.documents,
       selected: 1,
       page: 1,
+      index: 1,
       isPageLoad: false,
       search: '',
+      count: 1,
     };
     this.handlePagination = this.handlePagination.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   /**
    * This method runs when the component mounts
    *
    *
-   * @memberof MyDocumentPage
+   * @memberof Dashboard
    */
-  componentDidMount() {
-    const { UserId } = this.props;
-    this.props.loadUserDocuments(UserId);
+  componentWillMount() {
+    this.props.loadAuthorizedToViewDocument();
   }
 
   /**
-   * This method runs when the component updates it's props
+   * This method runs when the props are updated
    *
    * @param {object} nextProps
    *
-   * @memberof MyDocumentPage
+   * @memberof Dashboard
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ documents: nextProps.documents.MyDocuments.documents });
+    this.setState({ AuthToViewDocuments:
+      nextProps.documents.AuthorizeToViewDocuments.documents });
     if (this.props !== nextProps.props) {
       const { isPageLoad } = this.state;
-      const { MyDocuments } = nextProps.documents;
-      const { UserId } = this.props;
+      const { AuthorizeToViewDocuments } = nextProps.documents;
       if (!isPageLoad) {
-        if (MyDocuments) {
-          const page = Math.ceil(MyDocuments.count / 8);
-          this.props.loadUserDocuments(UserId, 8, 0);
+        if (AuthorizeToViewDocuments) {
+          const page = Math.ceil(AuthorizeToViewDocuments.count / 8);
+          this.props.loadAuthorizedToViewDocument();
           this.setState({ page });
+          this.setState({ count: AuthorizeToViewDocuments.count });
           this.setState({ isPageLoad: true });
         }
       }
@@ -57,18 +73,18 @@ class MyDocumentPage extends React.Component {
   }
 
   /**
-   * This method handles the pagination
+   * This method handles pagination
    *
-   * @param {string} limit
-   * @param {string} offset
+   * @param {object} limit
+   * @param {object} offset
    * @param {object} event
    *
-   * @memberof MyDocumentPage
+   * @memberof Dashboard
    */
-  handlePagination(limit, offset, event) {
-    const { UserId } = this.props;
-    this.props.loadUserDocuments(UserId, limit, offset);
+  handlePagination(limit, offset, event, index) {
+    this.props.loadAuthorizedToViewDocument(limit, offset);
     this.setState({ selected: event.target.innerHTML });
+    this.setState({ index: index + 1 });
   }
 
   /**
@@ -76,33 +92,45 @@ class MyDocumentPage extends React.Component {
    *
    * @param {object} event
    *
-   * @memberof MyDocumentPage
+   * @memberof Dashboard
    */
   onChange(event) {
     event.preventDefault();
-    this.setState({ search: event.target.value });
-    if (event.target.value === ' ' ||
-        event.target.value === '  ') {
-      const { UserId } = this.props;
-      this.props.loadUserDocuments(UserId);
+    if (event.target.value === '' ||
+        event.target.value === '  ' ||
+        event.target.value === ' ') {
+      this.props.loadAuthorizedToViewDocument();
     }
+    this.setState({ search: event.target.value });
   }
 
   /**
-   * This method handles the onSubmit handler
+   * This method handles the onSubmit event
    *
    * @param {object} event
    *
-   * @memberof MyDocumentPage
+   * @memberof Dashboard
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.searchDocumentsByTitle(this.state.search, 5, 0);
+    this.props.searchDocumentsByTitleOnDashboard(this.state.search);
+    const page = 1;
+    this.setState({ count: this.state.count });
+    this.setState({ page });
+    this.setState({ isPageLoad: true });
   }
 
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof Dashboard
+   */
   render() {
-    const MyDocuments = this.state.documents;
-    const { selected, page, search } = this.state;
+    const { AuthToViewDocuments } = this.state;
+    const { selected, page, search, index } = this.state;
+    const { documents } = this.props;
     const selectedDocuments = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -112,6 +140,7 @@ class MyDocumentPage extends React.Component {
     }
     return (
       <div className="container">
+        <br />
         <div className="top horizontal click-to-toggle">
           <ul>
             <form onSubmit={this.onSubmit}>
@@ -130,23 +159,24 @@ class MyDocumentPage extends React.Component {
             </form>
           </ul>
         </div>
-        <br />
         <div className="row">
           <div className="col s12">
-              <ul className="tabs">
-                <li className="tab col s12">
-                  <a href="#test1">My Documents</a></li>
-              </ul>
+            <ul className="tabs">
+              <li className="tab col s12">
+                <a href="#test1">My Dashboard</a>
+              </li>
+            </ul>
           </div>
-           <div id="test1" className="col s12">
-            <br />
-              { MyDocuments && MyDocuments.map(document =>
+          <div id="test1" className="col s12">
+            <br/>
+            { AuthToViewDocuments && AuthToViewDocuments.map(document =>
                 <CardDocumentView
                 document={document}
                 key={document.id}
-                 myDocument/>)}
+                 readOnly/>)}
           </div>
-          <div className="center-align">
+        </div>
+        <div className="center-align">
             <ul className="pagination">
               {
               <div>
@@ -158,20 +188,24 @@ class MyDocumentPage extends React.Component {
                   selected={selectedDocuments}
                   index={index}
                   isActive={isActive}
+                  pageCount={page}
                   notActive={notActive}
                   handlePagination={this.handlePagination}
-                  isSearchDocument
                   />))
                 }
                 <li className="waves-effect"><a href="#!">
                   <i className="material-icons">chevron_right</i></a></li>
+                <div className="center-align">
+                  <h6>page {index} of {page}</h6>
+                  <h6>Showing {AuthToViewDocuments && AuthToViewDocuments.length} of {AuthToViewDocuments && documents.AuthorizeToViewDocuments.count} result</h6>
+                </div>
               </div>
               }
             </ul>
           </div>
           <div className="fixed-action-btn horizontal click-to-toggle">
           <a className="btn-floating btn-large red">
-            <i className="material-icons  teal lighten-3">search</i>
+            <i className="material-icons  teal darken-4">search</i>
           </a>
           <ul>
             <form onSubmit={this.onSubmit}>
@@ -190,33 +224,32 @@ class MyDocumentPage extends React.Component {
             </form>
           </ul>
         </div>
-        </div>
       </div>
     );
   }
 }
 
-MyDocumentPage.propTypes = {
-  loadUserDocuments: PropTypes.func.isRequired,
-  searchDocumentsByTitle: PropTypes.func.isRequired,
+Dashboard.propTypes = {
+  loadAuthorizedToViewDocument: PropTypes.func.isRequired,
+  searchDocumentsByTitleOnDashboard: PropTypes.func.isRequired,
+  AuthToViewDocuments: PropTypes.array,
   documents: PropTypes.object.isRequired,
   props: PropTypes.object,
-  UserId: PropTypes.number.isRequired,
 };
 
 /**
  * mapDispatchToProps
  *
  * @param {function} dispatch
- * @returns dipatch
+ * @returns dispatch
  */
 function mapDispatchToProps(dispatch) {
   return {
-    loadUserDocuments: (userId, limit, offset) =>
-      dispatch(DocumentAction.loadUserDocuments(userId, limit, offset)),
-    searchDocumentsByTitle: (searchQuery, limit, offset) =>
+    loadAuthorizedToViewDocument: (limit, offset) =>
+      dispatch(DocumentAction.loadAuthorizedToViewDocument(limit, offset)),
+    searchDocumentsByTitleOnDashboard: (query, limit, offset) =>
       dispatch(DocumentAction
-        .searchDocumentsByTitle(searchQuery, limit, offset)),
+        .searchDocumentsByTitleOnDashboard(query, limit, offset)),
   };
 }
 
@@ -224,13 +257,13 @@ function mapDispatchToProps(dispatch) {
  * mapStateToProps
  *
  * @param {object} state
- * @returns {object} state
+ * @returns {object}
  */
 function mapStateToProps(state) {
   return {
     documents: state.documents,
-    UserId: state.login.user.id,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyDocumentPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+

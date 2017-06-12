@@ -5,7 +5,20 @@ import { connect } from 'react-redux';
 import * as UserActions from '../../actions/userAction';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
+/**
+ * The manage user page
+ *
+ * @class ManageUsersRow
+ * @extends {React.Component}
+ */
 class ManageUsersRow extends React.Component {
+
+  /**
+   * Creates an instance of ManageUsersRow.
+   * @param {object} props
+   *
+   * @memberof ManageUsersRow
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -127,6 +140,14 @@ class ManageUsersRow extends React.Component {
     }
     return 'User';
   }
+
+  /**
+   * This component renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof ManageUsersRow
+   */
   render() {
     const { user, index } = this.props;
     const { fullname, email, username, roleId } = this.state;

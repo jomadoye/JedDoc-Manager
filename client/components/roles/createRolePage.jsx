@@ -4,7 +4,20 @@ import PropTypes from 'prop-types';
 import * as RoleActions from '../../actions/roleActions';
 import { deleteFlashMessage } from '../../actions/flashMessages';
 
-class createRolePage extends React.Component {
+/**
+ * The create role page
+ *
+ * @class CreateRolePage
+ * @extends {React.Component}
+ */
+class CreateRolePage extends React.Component {
+
+  /**
+   * Creates an instance of CreateRolePage.
+   * @param {object} props
+   *
+   * @memberof CreateRolePage
+   */
   constructor(props) {
     super(props);
 
@@ -37,12 +50,20 @@ class createRolePage extends React.Component {
    *
    * @param {object} event
    *
-   * @memberof createRolePage
+   * @memberof CreateRolePage
    */
   handleChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   }
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof CreateRolePage
+   */
   render() {
     return (
       <div className="container" onSubmit={this.handleSubmit}>
@@ -75,7 +96,7 @@ class createRolePage extends React.Component {
   }
 }
 
-createRolePage.propTypes = {
+CreateRolePage.propTypes = {
   createUserRole: PropTypes.func.isRequired,
   deleteFlashMessage: PropTypes.func.isRequired,
 };
@@ -95,4 +116,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default
-  connect(null, mapDispatchToProps)(createRolePage);
+  connect(null, mapDispatchToProps)(CreateRolePage);

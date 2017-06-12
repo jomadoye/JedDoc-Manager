@@ -4,7 +4,21 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 
+/**
+ * The navigation bar
+ *
+ * @export
+ * @class NavigationBar
+ * @extends {React.Component}
+ */
 export class NavigationBar extends React.Component {
+
+  /**
+   * Creates an instance of NavigationBar.
+   * @param {object} props
+   *
+   * @memberof NavigationBar
+   */
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
@@ -23,6 +37,13 @@ export class NavigationBar extends React.Component {
     this.props.logout();
   }
 
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof NavigationBar
+   */
   render() {
     const { isAuthenticated, user } = this.props.login;
     const userLinks = (
@@ -51,8 +72,7 @@ export class NavigationBar extends React.Component {
         <ul className="nav navbar-nav navbar-right">
           <li>
             <div className="nav-wrapper">
-              <form>
-              </form>
+              <form />
             </div>
           </li>
           <li>

@@ -6,9 +6,9 @@ import TextFieldGroup from '../common/TextFieldGroup.jsx';
  * This function renders the login page
  *
  * @export
- * @param {object} { state }
- * @param {function} { onsubmit }
- * @param {function} { onchange }
+ * @param {object} state
+ * @param {function} onsubmit
+ * @param {function} onchange
  * @returns {HTML}
  */
 export default function LoginForm({ state, onsubmit, onchange }) {

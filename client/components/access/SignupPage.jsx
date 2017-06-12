@@ -5,7 +5,21 @@ import SignupForm from './SignupForm.jsx';
 import * as SignupActions from '../../actions/signupActions';
 import * as FlashMessageActions from '../../actions/flashMessages';
 
+/**
+ * The signup page
+ *
+ * @class SignupPage
+ * @extends {React.Component}
+ */
 class SignupPage extends React.Component {
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof SignupPage
+   */
   render() {
     const { userSignupRequest, addFlashMessage, isUserExists } = this.props;
     return (

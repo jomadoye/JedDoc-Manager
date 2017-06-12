@@ -7,10 +7,11 @@ import PropTypes from 'prop-types';
  * This function renders the form to create a document
  *
  * @export
- * @param {object} { state }
- * @param {function} { onchange }
- * @param {function} { onsubmit }
- * @returns HTML
+ * @param {object}  state The current state
+ * @param {function}  onchange The onchange hnadler
+ * @param {function}  onsubmit The onsubmit hnadler
+ * @param {function}  getContent The getContent handler
+ * @returns {HTML} The html page
  */
 export default function CreateDocumentForm({ state, onchange, onsubmit, getContent }) {
   const { title, body } = state;

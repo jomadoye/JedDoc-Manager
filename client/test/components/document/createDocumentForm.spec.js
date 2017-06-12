@@ -4,7 +4,7 @@ import {
   shallow,
 } from 'enzyme';
 import CreateDocumentForm from
-  '../../../components/documents/createDocumentsPage/CreateDocumentForm.jsx';
+  '../../../components/documents/CreateDocumentForm.jsx';
 
 /**
  * This function setup the component

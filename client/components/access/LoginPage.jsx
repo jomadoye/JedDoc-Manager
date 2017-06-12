@@ -6,7 +6,19 @@ import validateInput
 import { login } from '../../actions/loginActions';
 import LoginForm from './LoginForm.jsx';
 
+/**
+ * The login page
+ *
+ * @class LoginPage
+ * @extends {React.Component}
+ */
 class LoginPage extends React.Component {
+  /**
+   * Creates an instance of LoginPage.
+   * @param {object} props
+   *
+   * @memberof LoginPage
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -65,6 +77,14 @@ class LoginPage extends React.Component {
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof LoginPage
+   */
   render() {
     return (
       <div>

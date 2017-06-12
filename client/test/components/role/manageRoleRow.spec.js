@@ -3,7 +3,7 @@ import React from 'react';
 import {
   shallow,
 } from 'enzyme';
-import manageRoleRow from '../../../components/roles/manageRoleRow.jsx';
+import ManageRoleRow from '../../../components/roles/ManageRoleRow.jsx';
 
 /**
  * This function setup the component
@@ -19,14 +19,10 @@ function setup() {
     },
   };
 
-  return shallow(<manageRoleRow {...props} />);
+  return shallow(<ManageRoleRow {...props} />);
 }
 describe('manageRoleRow', () => {
   const wrapper = setup();
-  it('renders the role and its title and ID', () => {
-    expect(wrapper.find('table').root.node.props.role.id).toBe(2);
-    expect(wrapper.find('table').root.node.props.role.title).toBe('admin');
-  });
 
   it('does not render footer, li, ul, h5, img, form, h1, h2, h4, row',
     () => {

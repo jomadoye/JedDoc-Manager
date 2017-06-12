@@ -5,7 +5,21 @@ import * as UserActions from '../../actions/userAction';
 import ManageUsersRow from '../users/ManageUsersRow.jsx';
 import PaginationNav from '../common/PaginationNav.jsx';
 
+/**
+ * The manage users page
+ *
+ * @class ManageUsersPage
+ * @extends {React.Component}
+ */
 class ManageUsersPage extends React.Component {
+
+  /**
+   * Creates an instance of ManageUsersPage.
+   * 
+   * @param {object} props
+   *
+   * @memberof ManageUsersPage
+   */
   constructor(props) {
     super(props);
 
@@ -103,6 +117,13 @@ class ManageUsersPage extends React.Component {
     }
   }
 
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof ManageUsersPage
+   */
   render() {
     const { allUsers } = this.props;
     const { selected, page, search, index } = this.state;

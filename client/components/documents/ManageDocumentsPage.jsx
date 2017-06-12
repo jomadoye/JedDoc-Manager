@@ -1,11 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as DocumentAction from '../../../actions/documentAction';
-import CardDocumentView from '../../common/CardDocumentView.jsx';
-import PaginationNav from '../../common/PaginationNav.jsx';
+import * as DocumentAction from '../../actions/documentAction';
+import CardDocumentView from '../common/CardDocumentView.jsx';
+import PaginationNav from '../common/PaginationNav.jsx';
 
-class manageUserDocumentsPage extends React.Component {
+/**
+ * The manage user page
+ *
+ * @class ManageUserDocumentsPage
+ * @extends {React.Component}
+ */
+class ManageUserDocumentsPage extends React.Component {
+
+  /**
+   * Creates an instance of ManageUserDocumentsPage.
+   * @param {object} props
+   *
+   * @memberof ManageUserDocumentsPage
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +37,7 @@ class manageUserDocumentsPage extends React.Component {
    * This method runs when the components mount
    *
    *
-   * @memberof manageUserDocumentsPage
+   * @memberof ManageUserDocumentsPage
    */
   componentDidMount() {
     this.props.loadAllDocuments();
@@ -35,7 +48,7 @@ class manageUserDocumentsPage extends React.Component {
    *
    * @param {object} nextProps
    *
-   * @memberof manageUserDocumentsPage
+   * @memberof ManageUserDocumentsPage
    */
   componentWillReceiveProps(nextProps) {
     this.setState({ documents: nextProps.documents.allDocuments });
@@ -70,6 +83,13 @@ class manageUserDocumentsPage extends React.Component {
     this.setState({ index: index + 1 });
   }
 
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof ManageUserDocumentsPage
+   */
   render() {
     const allDocuments = this.state.documents.documents;
     const { selected, page, index } = this.state;
@@ -132,7 +152,7 @@ class manageUserDocumentsPage extends React.Component {
   }
 }
 
-manageUserDocumentsPage.propTypes = {
+ManageUserDocumentsPage.propTypes = {
   loadAllDocuments: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
 };
@@ -162,4 +182,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(manageUserDocumentsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageUserDocumentsPage);

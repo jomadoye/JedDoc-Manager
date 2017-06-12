@@ -4,8 +4,20 @@ import signupValidation
   from '../../../server/shared/validations/signup/signupValidation';
 import TextFieldGroup from '../common/TextFieldGroup.jsx';
 
-
+/**
+ * The signup page
+ *
+ * @class SignupForm
+ * @extends {React.Component}
+ */
 class SignupForm extends React.Component {
+
+  /**
+   * Creates an instance of SignupForm.
+   * @param {object} props
+   *
+   * @memberof SignupForm
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -100,6 +112,14 @@ class SignupForm extends React.Component {
         });
     }
   }
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof SignupForm
+   */
   render() {
     const { errors } = this.state;
     return (

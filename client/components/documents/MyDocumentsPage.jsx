@@ -5,53 +5,63 @@ import * as DocumentAction from '../../actions/documentAction';
 import CardDocumentView from '../common/CardDocumentView.jsx';
 import PaginationNav from '../common/PaginationNav.jsx';
 
-export class Dashboard extends React.Component {
+/**
+ * The my document page
+ *
+ * @class MyDocumentPage
+ * @extends {React.Component}
+ */
+class MyDocumentPage extends React.Component {
+
+  /**
+   * Creates an instance of MyDocumentPage.
+   * @param {object} props
+   *
+   * @memberof MyDocumentPage
+   */
   constructor(props) {
     super(props);
 
     this.state = {
-      AuthToViewDocuments: props.documents.AuthToViewDocuments.documents,
+      documents: props.documents.MyDocuments.documents,
       selected: 1,
       page: 1,
-      index: 1,
       isPageLoad: false,
       search: '',
-      count: 1,
     };
     this.handlePagination = this.handlePagination.bind(this);
-    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   /**
    * This method runs when the component mounts
    *
-   *
-   * @memberof Dashboard
+   * @memberof MyDocumentPage
    */
-  componentWillMount() {
-    this.props.loadAuthorizedToViewDocument();
+  componentDidMount() {
+    const { UserId } = this.props;
+    this.props.loadUserDocuments(UserId);
   }
 
   /**
-   * This method runs when the props are updated
+   * This method runs when the component updates it's props
    *
    * @param {object} nextProps
    *
-   * @memberof Dashboard
+   * @memberof MyDocumentPage
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ AuthToViewDocuments:
-      nextProps.documents.AuthorizeToViewDocuments.documents });
+    this.setState({ documents: nextProps.documents.MyDocuments.documents });
     if (this.props !== nextProps.props) {
       const { isPageLoad } = this.state;
-      const { AuthorizeToViewDocuments } = nextProps.documents;
+      const { MyDocuments } = nextProps.documents;
+      const { UserId } = this.props;
       if (!isPageLoad) {
-        if (AuthorizeToViewDocuments) {
-          const page = Math.ceil(AuthorizeToViewDocuments.count / 8);
-          this.props.loadAuthorizedToViewDocument();
+        if (MyDocuments) {
+          const page = Math.ceil(MyDocuments.count / 8);
+          this.props.loadUserDocuments(UserId, 8, 0);
           this.setState({ page });
-          this.setState({ count: AuthorizeToViewDocuments.count });
           this.setState({ isPageLoad: true });
         }
       }
@@ -59,18 +69,18 @@ export class Dashboard extends React.Component {
   }
 
   /**
-   * This method handles pagination
+   * This method handles the pagination
    *
-   * @param {object} limit
-   * @param {object} offset
+   * @param {string} limit
+   * @param {string} offset
    * @param {object} event
    *
-   * @memberof Dashboard
+   * @memberof MyDocumentPage
    */
-  handlePagination(limit, offset, event, index) {
-    this.props.loadAuthorizedToViewDocument(limit, offset);
+  handlePagination(limit, offset, event) {
+    const { UserId } = this.props;
+    this.props.loadUserDocuments(UserId, limit, offset);
     this.setState({ selected: event.target.innerHTML });
-    this.setState({ index: index + 1 });
   }
 
   /**
@@ -78,37 +88,40 @@ export class Dashboard extends React.Component {
    *
    * @param {object} event
    *
-   * @memberof Dashboard
+   * @memberof MyDocumentPage
    */
   onChange(event) {
     event.preventDefault();
-    if (event.target.value === '' ||
-        event.target.value === '  ' ||
-        event.target.value === ' ') {
-      this.props.loadAuthorizedToViewDocument();
-    }
     this.setState({ search: event.target.value });
+    if (event.target.value === ' ' ||
+        event.target.value === '  ') {
+      const { UserId } = this.props;
+      this.props.loadUserDocuments(UserId);
+    }
   }
 
   /**
-   * This method handles the onSubmit event
+   * This method handles the onSubmit handler
    *
    * @param {object} event
    *
-   * @memberof Dashboard
+   * @memberof MyDocumentPage
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.searchDocumentsByTitleOnDashboard(this.state.search);
-    const page = 1;
-    this.setState({ count: this.state.count });
-    this.setState({ page });
-    this.setState({ isPageLoad: true });
+    this.props.searchDocumentsByTitle(this.state.search, 5, 0);
   }
+
+  /**
+   * This method renders the component
+   *
+   * @returns {Object} jsx component
+   *
+   * @memberof MyDocumentPage
+   */
   render() {
-    const { AuthToViewDocuments } = this.state;
-    const { selected, page, search, index } = this.state;
-    const { documents } = this.props;
+    const MyDocuments = this.state.documents;
+    const { selected, page, search } = this.state;
     const selectedDocuments = selected.toString();
     const isActive = 'active';
     const notActive = 'waves-effect';
@@ -118,7 +131,6 @@ export class Dashboard extends React.Component {
     }
     return (
       <div className="container">
-        <br />
         <div className="top horizontal click-to-toggle">
           <ul>
             <form onSubmit={this.onSubmit}>
@@ -137,24 +149,23 @@ export class Dashboard extends React.Component {
             </form>
           </ul>
         </div>
+        <br />
         <div className="row">
           <div className="col s12">
-            <ul className="tabs">
-              <li className="tab col s12">
-                <a href="#test1">My Dashboard</a>
-              </li>
-            </ul>
+              <ul className="tabs">
+                <li className="tab col s12">
+                  <a href="#test1">My Documents</a></li>
+              </ul>
           </div>
-          <div id="test1" className="col s12">
-            <br/>
-            { AuthToViewDocuments && AuthToViewDocuments.map(document =>
+           <div id="test1" className="col s12">
+            <br />
+              { MyDocuments && MyDocuments.map(document =>
                 <CardDocumentView
                 document={document}
                 key={document.id}
-                 readOnly/>)}
+                 myDocument/>)}
           </div>
-        </div>
-        <div className="center-align">
+          <div className="center-align">
             <ul className="pagination">
               {
               <div>
@@ -166,24 +177,20 @@ export class Dashboard extends React.Component {
                   selected={selectedDocuments}
                   index={index}
                   isActive={isActive}
-                  pageCount={page}
                   notActive={notActive}
                   handlePagination={this.handlePagination}
+                  isSearchDocument
                   />))
                 }
                 <li className="waves-effect"><a href="#!">
                   <i className="material-icons">chevron_right</i></a></li>
-                <div className="center-align">
-                  <h6>page {index} of {page}</h6>
-                  <h6>Showing {AuthToViewDocuments && AuthToViewDocuments.length} of {AuthToViewDocuments && documents.AuthorizeToViewDocuments.count} result</h6>
-                </div>
               </div>
               }
             </ul>
           </div>
           <div className="fixed-action-btn horizontal click-to-toggle">
           <a className="btn-floating btn-large red">
-            <i className="material-icons  teal darken-4">search</i>
+            <i className="material-icons  teal lighten-3">search</i>
           </a>
           <ul>
             <form onSubmit={this.onSubmit}>
@@ -202,32 +209,33 @@ export class Dashboard extends React.Component {
             </form>
           </ul>
         </div>
+        </div>
       </div>
     );
   }
 }
 
-Dashboard.propTypes = {
-  loadAuthorizedToViewDocument: PropTypes.func.isRequired,
-  searchDocumentsByTitleOnDashboard: PropTypes.func.isRequired,
-  AuthToViewDocuments: PropTypes.array,
+MyDocumentPage.propTypes = {
+  loadUserDocuments: PropTypes.func.isRequired,
+  searchDocumentsByTitle: PropTypes.func.isRequired,
   documents: PropTypes.object.isRequired,
   props: PropTypes.object,
+  UserId: PropTypes.number.isRequired,
 };
 
 /**
  * mapDispatchToProps
  *
  * @param {function} dispatch
- * @returns dispatch
+ * @returns dipatch
  */
 function mapDispatchToProps(dispatch) {
   return {
-    loadAuthorizedToViewDocument: (limit, offset) =>
-      dispatch(DocumentAction.loadAuthorizedToViewDocument(limit, offset)),
-    searchDocumentsByTitleOnDashboard: (query, limit, offset) =>
+    loadUserDocuments: (userId, limit, offset) =>
+      dispatch(DocumentAction.loadUserDocuments(userId, limit, offset)),
+    searchDocumentsByTitle: (searchQuery, limit, offset) =>
       dispatch(DocumentAction
-        .searchDocumentsByTitleOnDashboard(query, limit, offset)),
+        .searchDocumentsByTitle(searchQuery, limit, offset)),
   };
 }
 
@@ -235,13 +243,13 @@ function mapDispatchToProps(dispatch) {
  * mapStateToProps
  *
  * @param {object} state
- * @returns {object}
+ * @returns {object} state
  */
 function mapStateToProps(state) {
   return {
     documents: state.documents,
+    UserId: state.login.user.id,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
-
+export default connect(mapStateToProps, mapDispatchToProps)(MyDocumentPage);

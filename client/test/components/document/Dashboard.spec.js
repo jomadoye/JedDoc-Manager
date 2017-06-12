@@ -3,7 +3,7 @@ import React from 'react';
 import {
   shallow,
 } from 'enzyme';
-import { Dashboard } from '../../../components/Dashboard/Dashboard.jsx';
+import { Dashboard } from '../../../components/documents/Dashboard.jsx';
 
 /**
  * This function setup the component

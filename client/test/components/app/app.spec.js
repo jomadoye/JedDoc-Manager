@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
-import App from '../../../components/App';
-import Footer from '../../../components/General/footer.jsx';
-import flashMessagesList from
-  '../../../components/flashMessages/flashMessagesList.jsx';
-import NavigationBar from '../../../components/General/NavigationBar.jsx';
+import App from '../../../components/App.jsx';
+import Footer from '../../../components/includes/Footer.jsx';
+import FlashMessagesList from
+  '../../../components/includes/flashMessagesList.jsx';
+import NavigationBar from '../../../components/includes/NavigationBar.jsx';
 
 describe(' Test for App Component', () => {
   it('renders the root component', () => {
@@ -24,10 +24,10 @@ describe(' Test for App Component', () => {
   it('renders the props children of flashMessagesList', () => {
     const wrapper = shallow(
       <App>
-        <flashMessagesList />
+        <FlashMessagesList />
       </App>,
     );
-    expect(wrapper.contains(<flashMessagesList />)).toEqual(true);
+    expect(wrapper.contains(<FlashMessagesList />)).toEqual(true);
   });
   it('renders the props children of navigationBar', () => {
     const wrapper = shallow(

@@ -3,7 +3,7 @@ import React from 'react';
 import {
   shallow,
 } from 'enzyme';
-import NotFound from '../../../components/General/NotFound.jsx';
+import NotFound from '../../../components/includes/NotFound.jsx';
 
 /**
  * This function setup the component
