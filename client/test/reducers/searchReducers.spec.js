@@ -1,9 +1,9 @@
 import expect from 'expect';
 import reducers from '../../reducers/';
-import helperReducers from '../helpers/reducerHelpers';
+import reducerHelpers from '../helpers/reducerHelpers';
 
-let expectedState1 = helperReducers.SEARCH_USER_BY_USERNAME;
-let expectedState2 = helperReducers.SEARCH_DOCUMENTS_BY_TITLE_SUCCESS;
+let expectedState1 = reducerHelpers.SEARCH_USER_BY_USERNAME;
+let expectedState2 = reducerHelpers.SEARCH_DOCUMENTS_BY_TITLE_SUCCESS;
 
 describe('Reducers', () => {
   it('should handle SEARCH_USER_BY_USERNAME actions', () => {

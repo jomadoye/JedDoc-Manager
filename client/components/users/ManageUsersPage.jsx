@@ -257,5 +257,6 @@ function mapStateToProps(state) {
     allUsers: state.login.allUsers,
   };
 }
+
 export default
   connect(mapStateToProps, mapDispatchToProps)(ManageUsersPage);

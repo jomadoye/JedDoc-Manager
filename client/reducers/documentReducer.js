@@ -16,7 +16,7 @@ import {
 export default
 
 /**
-* document reducer
+* The Document reducer
 *
 * @export
 * @param {Object} [state=initialState.documents] initial state

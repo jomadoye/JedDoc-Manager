@@ -1,10 +1,10 @@
 import expect from 'expect';
 import reducers from '../../reducers/';
-import helperReducers from '../helpers/reducerHelpers';
+import reducerHelpers from '../helpers/reducerHelpers';
 
-let expectedState1 = helperReducers.SET_CURRENT_USER;
-let expectedState2 = helperReducers.LOAD_USER_PROFILE_SUCCESS;
-let expectedState3 = helperReducers.UPDATE_USER_PROFILE_SUCCESS;
+let expectedState1 = reducerHelpers.SET_CURRENT_USER;
+let expectedState2 = reducerHelpers.LOAD_USER_PROFILE_SUCCESS;
+let expectedState3 = reducerHelpers.UPDATE_USER_PROFILE_SUCCESS;
 
 describe('User Reducers', () => {
   it('should handle SET_CURRENT_USER actions', () => {

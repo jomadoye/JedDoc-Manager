@@ -1,13 +1,13 @@
 import expect from 'expect';
 import reducers from '../../reducers/';
-import helperReducers from '../helpers/reducerHelpers';
+import reducerHelpers from '../helpers/reducerHelpers';
 
-let expectedState1 = helperReducers.LOAD_USER_DOCUMENT_SUCCESS;
-let expectedState2 = helperReducers.UPDATE_USER_DOCUMENT_SUCCESS;
-let expectedState3 = helperReducers.DELETE_USER_DOCUMENT_SUCCESS;
-let expectedState4 = helperReducers.LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS;
-let expectedState5 = helperReducers.LOAD_AUTHORIZED_TO_VIEW_DOCUMENT_SUCCESS;
-let expectedState6 = helperReducers.CREATE_DOCUMENT_BY_USER_SUCCESS;
+let expectedState1 = reducerHelpers.LOAD_USER_DOCUMENT_SUCCESS;
+let expectedState2 = reducerHelpers.UPDATE_USER_DOCUMENT_SUCCESS;
+let expectedState3 = reducerHelpers.DELETE_USER_DOCUMENT_SUCCESS;
+let expectedState4 = reducerHelpers.LOAD_WELCOME_PAGE_DOCUMENT_SUCCESS;
+let expectedState5 = reducerHelpers.LOAD_AUTHORIZED_TO_VIEW_DOCUMENT_SUCCESS;
+let expectedState6 = reducerHelpers.CREATE_DOCUMENT_BY_USER_SUCCESS;
 
 describe('Document Reducers', () => {
   it('should handle LOAD_USER_DOCUMENT_SUCCESS actions', () => {

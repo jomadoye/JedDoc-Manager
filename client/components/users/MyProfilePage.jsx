@@ -257,4 +257,5 @@ function mapDispatchToProps(dispatch) {
     deleteUserAccount: userId => dispatch(userAction.deleteUserAccount(userId)),
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(MyProfilePage);

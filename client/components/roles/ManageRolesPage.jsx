@@ -114,5 +114,6 @@ function mapStateToProps(state) {
     roles: state.role.allRoles,
   };
 }
+
 export default
   connect(mapStateToProps, mapDispatchToProps)(ManageRolesPage);

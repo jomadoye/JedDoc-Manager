@@ -283,7 +283,6 @@ function mapDispatchToProps(dispatch) {
     updateSingleUserAccountByAdmin: (user, userId) =>
       dispatch(UserActions.updateSingleUserAccountByAdmin(user, userId)),
     deleteFlashMessage: () => dispatch(deleteFlashMessage()),
-
   };
 }
 

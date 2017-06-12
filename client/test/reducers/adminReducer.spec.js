@@ -1,11 +1,11 @@
 import expect from 'expect';
 import reducers from '../../reducers/';
-import helperReducers from '../helpers/reducerHelpers';
+import reducerHelpers from '../helpers/reducerHelpers';
 
-let expectedState1 = helperReducers.DELETE_SINGLE_USER_SUCCESS_EXPECTED_STATE;
-let expectedState2 = helperReducers.LOAD_ALL_DOCUMENTS_SUCCESS;
-let expectedState3 = helperReducers.LOAD_ALL_USERS_SUCCESS;
-let expectedState4 = helperReducers.UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS;
+let expectedState1 = reducerHelpers.DELETE_SINGLE_USER_SUCCESS_EXPECTED_STATE;
+let expectedState2 = reducerHelpers.LOAD_ALL_DOCUMENTS_SUCCESS;
+let expectedState3 = reducerHelpers.LOAD_ALL_USERS_SUCCESS;
+let expectedState4 = reducerHelpers.UPDATE_SINGLE_USER_BY_ADMIN_SUCCESS;
 
 
 describe('Admin Reducers', () => {
