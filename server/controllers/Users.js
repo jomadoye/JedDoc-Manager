@@ -1,5 +1,5 @@
 import models from '../models';
-import UserControllerHelper from '../helpers/controllers/userControllerHelper';
+import UserControllerHelper from '../helpers/controllers/UserControllerHelper';
 import commonValidations from '../shared/validations/signup/signupValidation';
 import paginate from '../helpers/pagination/pagination';
 

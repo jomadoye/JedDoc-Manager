@@ -1,6 +1,6 @@
 import models from '../models';
 import DocumentControllerHelper
-from '../helpers/controllers/documentControllerHelper';
+from '../helpers/controllers/DocumentControllerHelper';
 
 const Document = models.Documents;
 const User = models.Users;
