@@ -2,6 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/andela-jomadoye/JedDoc-Manager/badge.svg?branch=feedback)](https://coveralls.io/github/andela-jomadoye/JedDoc-Manager?branch=feedback) 
 [![Code Climate](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager/badges/gpa.svg)](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager) [![Test Coverage](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager/badges/issue_count.svg)](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager)
 [![CircleCI](https://circleci.com/gh/andela-jomadoye/JedDoc-Manager.svg?style=svg)](https://circleci.com/gh/andela-jomadoye/JedDoc-Manager)
+[![Build Status](https://travis-ci.org/andela-jomadoye/JedDoc-Manager.svg?branch=master)](https://travis-ci.org/andela-jomadoye/JedDoc-Manager)
 
 About the Application
 -------------
