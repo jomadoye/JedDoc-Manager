@@ -1,10 +1,10 @@
 import controller from '../controllers';
 import auth from '../midddlewares';
 
-const usersController = controller.users;
-const documentsController = controller.documents;
-const searchController = controller.search;
-const rolesController = controller.roles;
+const usersController = controller.Users;
+const documentsController = controller.Documents;
+const searchController = controller.Search;
+const rolesController = controller.Roles;
 const authenticate = auth.authenticate;
 const authorization = auth.authorization;
 
