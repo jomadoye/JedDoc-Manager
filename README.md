@@ -3,6 +3,8 @@
 [![Code Climate](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager/badges/gpa.svg)](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager) [![Test Coverage](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager/badges/issue_count.svg)](https://codeclimate.com/github/andela-jomadoye/JedDoc-Manager)
 [![CircleCI](https://circleci.com/gh/andela-jomadoye/JedDoc-Manager.svg?style=svg)](https://circleci.com/gh/andela-jomadoye/JedDoc-Manager)
 [![Build Status](https://travis-ci.org/andela-jomadoye/JedDoc-Manager.svg?branch=develop)](https://travis-ci.org/andela-jomadoye/JedDoc-Manager)
+[![Build Status](https://semaphoreci.com/api/v1/jedidiah/jeddoc-manager/branches/develop/badge.svg)](https://semaphoreci.com/jedidiah/jeddoc-manager)
+
 
 About the Application
 -------------
