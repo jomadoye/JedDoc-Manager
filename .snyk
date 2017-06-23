@@ -6,6 +6,9 @@ ignore:
     - standard > eslint > shelljs:
         reason: I will fix it personally
         expires: '2017-06-13T20:08:44.467Z'
+    - eslint > shelljs:
+        reason: None given
+        expires: '2017-07-23T01:28:35.956Z'
   'npm:ms:20170412':
     - morgan > debug > ms:
         reason: No fix available
@@ -103,4 +106,35 @@ ignore:
     - standard > eslint-plugin-import > eslint-module-utils > debug > ms:
         reason: None given
         expires: '2017-06-15T17:42:06.560Z'
-patch: {}
+  'npm:ejs:20161128':
+    - nightwatch > ejs:
+        reason: None given
+        expires: '2017-07-23T01:28:35.955Z'
+  'npm:ejs:20161130':
+    - nightwatch > ejs:
+        reason: None given
+        expires: '2017-07-23T01:28:35.955Z'
+  'npm:ejs:20161130-1':
+    - nightwatch > ejs:
+        reason: None given
+        expires: '2017-07-23T01:28:35.955Z'
+  'npm:growl:20160721':
+    - mocha > growl:
+        reason: None given
+        expires: '2017-07-23T01:28:35.955Z'
+    - nightwatch > mocha-nightwatch > growl:
+        reason: None given
+        expires: '2017-07-23T01:28:35.956Z'
+  'npm:ip:20170304':
+    - nightwatch > proxy-agent > pac-proxy-agent > pac-resolver > ip:
+        reason: None given
+        expires: '2017-07-23T01:28:35.956Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:ms:20170412':
+    - mocha > debug > ms:
+        patched: '2017-06-23T01:28:35.965Z'
+    - nightwatch > mocha-nightwatch > debug > ms:
+        patched: '2017-06-23T01:28:35.965Z'
+    - bcrypt > node-pre-gyp > tar-pack > debug > ms:
+        patched: '2017-06-23T01:28:35.965Z'
