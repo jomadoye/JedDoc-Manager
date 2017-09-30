@@ -138,3 +138,10 @@ patch:
         patched: '2017-06-23T01:28:35.965Z'
     - bcrypt > node-pre-gyp > tar-pack > debug > ms:
         patched: '2017-06-23T01:28:35.965Z'
+  'npm:debug:20170905':
+    - mocha > debug:
+        patched: '2017-09-30T07:02:23.005Z'
+    - mongoose > mquery > debug:
+        patched: '2017-09-30T07:02:23.005Z'
+    - nightwatch > mocha-nightwatch > debug:
+        patched: '2017-09-30T07:02:23.005Z'
