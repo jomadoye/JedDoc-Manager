@@ -138,3 +138,6 @@ patch:
         patched: '2017-06-23T01:28:35.965Z'
     - bcrypt > node-pre-gyp > tar-pack > debug > ms:
         patched: '2017-06-23T01:28:35.965Z'
+  'npm:debug:20170905':
+    - nightwatch > mocha-nightwatch > debug:
+        patched: '2017-10-15T23:22:21.636Z'
