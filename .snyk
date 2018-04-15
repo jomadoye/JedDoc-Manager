@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.1
+version: v1.10.2
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:shelljs:20140723':
@@ -138,3 +138,6 @@ patch:
         patched: '2017-06-23T01:28:35.965Z'
     - bcrypt > node-pre-gyp > tar-pack > debug > ms:
         patched: '2017-06-23T01:28:35.965Z'
+  'npm:debug:20170905':
+    - nightwatch > mocha-nightwatch > debug:
+        patched: '2018-04-15T23:23:51.182Z'
