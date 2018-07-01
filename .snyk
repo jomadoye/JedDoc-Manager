@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.1
+version: v1.12.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:shelljs:20140723':
@@ -138,3 +138,26 @@ patch:
         patched: '2017-06-23T01:28:35.965Z'
     - bcrypt > node-pre-gyp > tar-pack > debug > ms:
         patched: '2017-06-23T01:28:35.965Z'
+  'npm:debug:20170905':
+    - nightwatch > mocha-nightwatch > debug:
+        patched: '2018-07-01T22:23:42.107Z'
+  'npm:hoek:20180212':
+    - node-sass > request > hawk > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+    - node-sass > request > hawk > boom > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+    - node-sass > request > hawk > sntp > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+    - node-sass > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+    - node-sass > node-gyp > request > hawk > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+    - node-sass > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+    - node-sass > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+    - node-sass > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-07-01T22:23:42.107Z'
+  'npm:tunnel-agent:20170305':
+    - node-sass > request > tunnel-agent:
+        patched: '2018-07-01T22:23:42.107Z'
