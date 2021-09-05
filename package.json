@@ -41,7 +41,7 @@
   "author": "Omadoye Jedidiah",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.21.3",
     "babel-cli": "^6.24.1",
     "babel-istanbul": "^0.12.2",
     "babel-plugin-istanbul": "^4.1.4",
